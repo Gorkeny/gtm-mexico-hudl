@@ -235,10 +235,6 @@
     <button class="filter-btn" onclick="setFilter('active', this)">Con ARR (16)</button>
     <button class="filter-btn" onclick="setFilter('nodata', this)">Sin datos (3)</button>
   </div>
-  <button class="refresh-btn" id="refreshBtn" onclick="forceUpdate()">
-    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M13.5 8A5.5 5.5 0 112.9 5"/><path d="M2 2v3.5h3.5"/></svg>
-    Actualizar datos
-  </button>
 </div>
 
 <div class="cards-grid" id="cards"></div>
@@ -247,7 +243,7 @@
 const SF_BASE = 'https://hudl.lightning.force.com/lightning/r/Account/';
 const MAX_ARR = 167616;
 const MAX_PIPELINE = 236124.39;
-const PIPELINE_DATE = '13 mayo 2026';
+const PIPELINE_DATE = '14 mayo 2026';
 const WYSCOUT_TOTAL = 461743.72;
 const WYSCOUT_PER_CLUB = WYSCOUT_TOTAL / 19; // ~$24,302.30
 
@@ -280,9 +276,6 @@ const pipelineData = {
   ]},
   '0010V00002MwZtQQAV': { total: 46115.85, opps: [
     { name: 'FY 26-27_Rubén Puerta_MX_PACK_OPEN_PRICEBOOK', amount: 46115.85, closeDate: '2026-06-30' }
-  ]},
-  '0013w00002STg1XAAT': { total: 9168, opps: [
-    { name: 'Renewal for 00107073', amount: 9168, closeDate: '2026-06-01' }
   ]},
   '0013w00002Rhlt0AAB': { total: 68783, opps: [
     { name: 'FY 26-27_Luis Palestina_MX_PACK_45', amount: 68783, closeDate: '2026-06-30' }
