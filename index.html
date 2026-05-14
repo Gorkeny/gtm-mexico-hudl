@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<script type="application/json" id="cowork-artifact-meta">
+{
+  "name": "Liga Mx Arr Fy2526",
+  "schemaVersion": 1,
+  "description": "Control GTM 26/27 México — 18 cuentas Liga MX con ARR FY25/26, Open Pipeline FY26/27, ROI real y NARR 26/27."
+}
+</script>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Control GTM 26/27 México</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0/dist/chart.umd.js" integrity="sha384-iU8HYtnGQ8Cy4zl7gbNMOhsDTTKX02BTXptVP/vqAWIaTfM7isw76iyZCsjL2eVi" crossorigin="anonymous"></script>
+<style>
+  :root { color-scheme: light; }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f5f4f0; color: #1a1a1a; padding: 24px; min-height: 100vh; }
+
+  .page-header { margin-bottom: 28px; }
+  .page-header h1 { font-size: 22px; font-weight: 500; color: #1a1a1a; margin-bottom: 4px; }
+  .page-header p { font-size: 14px; color: #888; }
+
+  .contract-banner { display: flex; align-items: center; justify-content: space-between; background: #fff; border: 1px solid #eee; border-radius: 10px; padding: 12px 18px; margin-bottom: 16px; flex-wrap: wrap; gap: 10px; }
+  .contract-banner .cb-label { font-size: 12px; color: #888; margin-bottom: 2px; }
+  .contract-banner .cb-value { font-size: 20px; font-weight: 500; color: #1a1a1a; }
+  .contract-banner .cb-link { font-size: 13px; color: #185FA5; text-decoration: none; display: flex; align-items: center; gap: 5px; white-space: nowrap; }
+  .contract-banner .cb-link:hover { text-decoration: underline; }
+  .contract-banner .cb-link svg { width: 13px; height: 13px; }
+
+  .top-controls { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; }
+  .search-box { flex: 1; min-width: 200px; max-width: 320px; position: relative; }
+  .search-box input { width: 100%; padding: 9px 12px 9px 36px; border: 1px solid #ddd; border-radius: 8px; font-size: 14px; background: #fff; color: #1a1a1a; outline: none; }
+  .search-box input:focus { border-color: #185FA5; box-shadow: 0 0 0 3px rgba(24,95,165,0.12); }
+  .search-icon { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: #aaa; font-size: 16px; pointer-events: none; }
+  .filter-btns { display: flex; gap: 6px; }
+  .filter-btn { padding: 8px 14px; border: 1px solid #ddd; border-radius: 8px; font-size: 13px; background: #fff; color: #555; cursor: pointer; transition: all 0.15s; }
+  .filter-btn:hover { border-color: #185FA5; color: #185FA5; }
+  .filter-btn.active { background: #185FA5; border-color: #185FA5; color: #fff; }
+
+  .metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 28px; }
+  @media (max-width: 900px) { .metrics { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 600px) { .metrics { grid-template-columns: repeat(2, 1fr); } }
+  .metric-pair { background: #fff; border-radius: 10px; border: 1px solid #eee; overflow: hidden; }
+  .metric { padding: 12px 14px; }
+  .metric + .metric { border-top: 1px solid #f0f0f0; background: #fafafa; }
+  .metric .label { font-size: 11px; color: #888; margin-bottom: 4px; }
+  .metric .val { font-size: 20px; font-weight: 600; color: #1a1a1a; }
+  .metric .sub { font-size: 11px; color: #aaa; margin-top: 2px; }
+
+  .cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
+
+  .club-card { background: #fff; border-radius: 12px; border: 1px solid #eee; overflow: hidden; transition: box-shadow 0.2s, transform 0.2s; }
+  .club-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.09); transform: translateY(-2px); }
+
+  .card-header { padding: 12px 14px 10px; display: flex; align-items: center; gap: 10px; border-bottom: 1px solid #f0f0f0; }
+  .club-badge { width: 40px; height: 40px; border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; overflow: hidden; }
+  .club-badge svg { width: 40px; height: 40px; display: block; }
+  .club-info { flex: 1; min-width: 0; }
+  .club-name { font-size: 13px; font-weight: 500; color: #1a1a1a; line-height: 1.25; margin-bottom: 2px; }
+  .club-id { font-size: 10px; color: #aaa; font-family: monospace; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+  .card-body { padding: 10px 14px; }
+  .arr-label { font-size: 10px; color: #888; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 2px; }
+  .arr-value { font-size: 20px; font-weight: 600; color: #1a1a1a; margin-bottom: 6px; }
+  .arr-value.no-data { font-size: 12px; background: #FEF3C7; color: #92400E; padding: 3px 8px; border-radius: 6px; display: inline-block; }
+
+  .arr-bar-wrap { height: 4px; background: #f0f0f0; border-radius: 2px; margin-bottom: 10px; overflow: hidden; }
+  .arr-bar { height: 100%; border-radius: 2px; background: #185FA5; transition: width 0.5s ease; }
+  .arr-bar.no-data-bar { background: #e5e7eb; }
+
+  .pipeline-section { border-top: 1px solid #f0f0f0; padding-top: 8px; margin-top: 2px; }
+  .pipeline-label-row { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 2px; }
+  .pipeline-label { font-size: 10px; color: #888; text-transform: uppercase; letter-spacing: 0.04em; }
+  .pipeline-date { font-size: 9px; color: #bbb; }
+  .pipeline-value { font-size: 20px; font-weight: 600; color: #1a1a1a; margin-bottom: 5px; }
+  .pipeline-value.no-pipeline { font-size: 12px; color: #aaa; font-weight: 400; }
+  .pipeline-bar-wrap { height: 4px; background: #f0f0f0; border-radius: 2px; margin-bottom: 6px; overflow: hidden; }
+  .pipeline-bar { height: 100%; border-radius: 2px; background: #059669; transition: width 0.5s ease; }
+  .pipeline-opps { display: flex; flex-direction: column; gap: 3px; }
+  .pipeline-opp { font-size: 10px; color: #666; display: flex; justify-content: space-between; gap: 6px; }
+  .pipeline-opp .opp-name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; flex: 1; }
+  .pipeline-opp .opp-amount { color: #059669; font-weight: 500; white-space: nowrap; }
+  .pipeline-opp .opp-date { color: #bbb; white-space: nowrap; }
+
+  .roi-section { border-top: 1px solid #f0f0f0; padding-top: 8px; margin-top: 8px; display: flex; gap: 8px; align-items: center; }
+  .roi-block { flex: 1; }
+  .roi-block-label { font-size: 9px; color: #888; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 3px; }
+  .roi-block-value { font-size: 13px; font-weight: 500; color: #1a1a1a; }
+  .roi-badge { display: inline-flex; align-items: center; padding: 2px 7px; border-radius: 20px; font-size: 12px; font-weight: 600; }
+  .roi-badge.positive { background: #D1FAE5; color: #065F46; }
+  .roi-badge.medium   { background: #FEF3C7; color: #92400E; }
+  .roi-badge.low      { background: #FEE2E2; color: #991B1B; }
+  .roi-badge.none     { background: #f0f0f0; color: #aaa; font-weight: 400; font-size: 11px; }
+  .roi-divider { width: 1px; background: #f0f0f0; align-self: stretch; }
+
+  .card-footer { padding: 8px 14px; background: #fafafa; border-top: 1px solid #f0f0f0; display: flex; justify-content: space-between; align-items: center; }
+  .sf-link { font-size: 13px; color: #185FA5; text-decoration: none; display: flex; align-items: center; gap: 5px; }
+  .sf-link:hover { text-decoration: underline; }
+  .sf-link svg { width: 13px; height: 13px; }
+  .arr-rank { font-size: 12px; color: #bbb; }
+
+  .no-results { text-align: center; padding: 60px 20px; color: #aaa; font-size: 15px; grid-column: 1/-1; }
+
+  .refresh-btn { display: inline-flex; align-items: center; gap: 6px; padding: 8px 16px; background: #185FA5; color: #fff; border: none; border-radius: 8px; font-size: 13px; font-weight: 500; cursor: pointer; transition: background 0.15s; }
+  .refresh-btn:hover { background: #134d8a; }
+  .refresh-btn:disabled { background: #aaa; cursor: not-allowed; }
+  .refresh-btn svg { width: 14px; height: 14px; }
+
+  .prob-section { border-top: 1px solid #f0f0f0; padding-top: 8px; margin-top: 8px; }
+  .prob-label { font-size: 9px; color: #888; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 5px; }
+  .prob-btns { display: flex; gap: 4px; }
+  .prob-btn { flex: 1; padding: 5px 0; border: 1px solid #e0e0e0; border-radius: 6px; font-size: 11px; font-weight: 500; cursor: pointer; background: #f5f5f5; color: #999; transition: all 0.15s; }
+  .prob-btn:hover { border-color: #185FA5; color: #185FA5; background: #EFF6FF; }
+  .prob-btn.p-0   { background: #FEE2E2; color: #991B1B; border-color: #FCA5A5; }
+  .prob-btn.p-25  { background: #FEF3C7; color: #92400E; border-color: #FDE68A; }
+  .prob-btn.p-50  { background: #FFF7ED; color: #C2410C; border-color: #FDBA74; }
+  .prob-btn.p-75  { background: #DCFCE7; color: #166534; border-color: #86EFAC; }
+  .prob-btn.p-100 { background: #D1FAE5; color: #065F46; border-color: #6EE7B7; }
+
+  .section-label { font-size: 12px; font-weight: 500; color: #888; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.05em; }
+
+  .forecast-bar { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 16px; }
+  @media (max-width: 600px) { .forecast-bar { grid-template-columns: 1fr; } }
+  .forecast-card { border-radius: 10px; border: 1px solid; padding: 14px 16px; }
+  .fc-best   { background: #F0FDF4; border-color: #86EFAC; }
+  .fc-commit { background: #FFFBEB; border-color: #FDE68A; }
+  .fc-worst  { background: #FEF2F2; border-color: #FECACA; }
+  .fc-title  { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 1px; }
+  .fc-best .fc-title   { color: #065F46; }
+  .fc-commit .fc-title { color: #92400E; }
+  .fc-worst .fc-title  { color: #991B1B; }
+  .fc-subtitle { font-size: 10px; color: #aaa; margin-bottom: 8px; }
+  .fc-val  { font-size: 26px; font-weight: 700; color: #1a1a1a; margin-bottom: 3px; }
+  .fc-pct  { font-size: 11px; color: #888; }
+
+  .chart-section { background: #fff; border-radius: 12px; border: 1px solid #eee; padding: 20px; margin-bottom: 28px; }
+  .chart-title { font-size: 14px; font-weight: 500; color: #1a1a1a; margin-bottom: 16px; }
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <h1>Control GTM 26/27 México</h1>
+  <p>19 cuentas · Cierre fiscal Hudl · Snapshot: 13 de mayo de 2026</p>
+  <p style="margin-top:8px;font-size:12px;color:#aaa;"><strong style="color:#888;">Consideraciones:</strong> El volumen del contrato de Wyscout ha sido dividido solo entre los 18 clubes del Liga MX y SNM, no considerando CITEC, Liga de Expansión ni Comisión arbitral.</p>
+</div>
+
+<div class="forecast-bar">
+  <div class="forecast-card fc-best">
+    <div class="fc-title">Best Case</div>
+    <div class="fc-subtitle">Probabilidad &gt; 24% (25, 50, 75, 100)</div>
+    <div class="fc-val" id="fc-best-val">—</div>
+    <div class="fc-pct" id="fc-best-pct">— vs ARR FY25/26</div>
+  </div>
+  <div class="forecast-card fc-commit">
+    <div class="fc-title">Commit</div>
+    <div class="fc-subtitle">Probabilidad &gt; 49% (50, 75, 100)</div>
+    <div class="fc-val" id="fc-commit-val">—</div>
+    <div class="fc-pct" id="fc-commit-pct">— vs ARR FY25/26</div>
+  </div>
+  <div class="forecast-card fc-worst">
+    <div class="fc-title">Worst Case</div>
+    <div class="fc-subtitle">Probabilidad &gt; 74% (75, 100)</div>
+    <div class="fc-val" id="fc-worst-val">—</div>
+    <div class="fc-pct" id="fc-worst-pct">— vs ARR FY25/26</div>
+  </div>
+</div>
+
+<div class="metrics">
+  <!-- Par 1: ARR total / Open Pipeline -->
+  <div class="metric-pair">
+    <div class="metric">
+      <div class="label">ARR total FY25/26</div>
+      <div class="val">$1,211,067</div>
+      <div class="sub">19 cuentas · 16 con ARR activo</div>
+    </div>
+    <div class="metric">
+      <div class="label">Open Pipeline + CW FY26/27</div>
+      <div class="val" id="metric-pipeline">—</div>
+      <div class="sub" id="metric-pipeline-sub">—</div>
+    </div>
+  </div>
+  <!-- Par 2: Contrato Wyscout / Cuota Wyscout -->
+  <div class="metric-pair">
+    <div class="metric">
+      <div class="label">Contrato Wyscout FMF 2025/26</div>
+      <div class="val">$461,744</div>
+      <div class="sub"><a href="https://hudl.lightning.force.com/lightning/r/Contract/800VY000008cSJdYAM/view" target="_blank" style="color:#185FA5;text-decoration:none;">Ver en Salesforce ↗</a></div>
+    </div>
+    <div class="metric">
+      <div class="label">Cuota Wyscout por club</div>
+      <div class="val" id="metric-wyscout-per-club">—</div>
+      <div class="sub">461,744 ÷ 19 cuentas</div>
+    </div>
+  </div>
+  <!-- Par 3: Incremento ARR / ROI real -->
+  <div class="metric-pair">
+    <div class="metric">
+      <div class="label">Incremento ARR 25/26 → 26/27</div>
+      <div class="val" id="metric-arr-growth">—</div>
+      <div class="sub" id="metric-arr-growth-sub">Pipeline vs ARR actual</div>
+    </div>
+    <div class="metric">
+      <div class="label">ROI real acumulado</div>
+      <div class="val" id="metric-roi">—</div>
+      <div class="sub" id="metric-roi-sub">vs. ARR + Cuota Wyscout</div>
+    </div>
+  </div>
+  <!-- Par 4: Actual CW -->
+  <div class="metric-pair">
+    <div class="metric">
+      <div class="label">Actual CW</div>
+      <div class="val" id="metric-actual-cw">—</div>
+      <div class="sub" id="metric-actual-cw-sub">CW+Invoiced vs ARR FY25/26</div>
+    </div>
+    <div class="metric">
+      <div class="label">Total CW + Invoiced FY26/27</div>
+      <div class="val" id="metric-cw-total">—</div>
+      <div class="sub" id="metric-cw-clubs">—</div>
+    </div>
+  </div>
+</div>
+
+
+<div class="top-controls">
+  <div class="search-box">
+    <span class="search-icon">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" width="16" height="16"><circle cx="6.5" cy="6.5" r="4.5"/><path d="M11 11l3 3"/></svg>
+    </span>
+    <input type="text" id="search" placeholder="Buscar club..." oninput="render()" />
+  </div>
+  <div class="filter-btns">
+    <button class="filter-btn active" onclick="setFilter('all', this)">Todos (19)</button>
+    <button class="filter-btn" onclick="setFilter('active', this)">Con ARR (16)</button>
+    <button class="filter-btn" onclick="setFilter('nodata', this)">Sin datos (3)</button>
+  </div>
+  <button class="refresh-btn" id="refreshBtn" onclick="forceUpdate()">
+    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M13.5 8A5.5 5.5 0 112.9 5"/><path d="M2 2v3.5h3.5"/></svg>
+    Actualizar datos
+  </button>
+</div>
+
+<div class="cards-grid" id="cards"></div>
+
+<script>
+const SF_BASE = 'https://hudl.lightning.force.com/lightning/r/Account/';
+const MAX_ARR = 167616;
+const MAX_PIPELINE = 236124.39;
+const PIPELINE_DATE = '13 mayo 2026';
+const WYSCOUT_TOTAL = 461743.72;
+const WYSCOUT_PER_CLUB = WYSCOUT_TOTAL / 19; // ~$24,302.30
+
+// Open pipeline – Service Start Date 2026-04-01 a 2026-07-01, Account Owner = Gorka Jimenez
+// Fuente: @Dot Salesforce report (29 oportunidades, filtrado 13 mayo 2026)
+const pipelineData = {
+  '001d0000024lgcVAAQ': { total: 236124.39, opps: [
+    { name: 'FY 26-27_Heberto Cabrera_MX_PACK 55', amount: 236124.39, closeDate: '2026-05-31' }
+  ]},
+  '0010V00002Mx9a5QAB': { total: 224315.95, opps: [
+    { name: 'FY 26-27_SNM Services', amount: 224315.95, closeDate: '2026-05-15' }
+  ]},
+  '0013w00002Rhm06AAB': { total: 149713.56, opps: [
+    { name: 'FY 26-27_Juan Chazarra_MX PACK 55', amount: 149713.56, closeDate: '2026-05-31' }
+  ]},
+  '0010V00002KSiJiQAL': { total: 187774, opps: [
+    { name: 'FY 26-27_Andres Payssé_MX PACK 55', amount: 187774, closeDate: '2026-06-30' }
+  ]},
+  '001d000002042v9AAA': { total: 132256.80, opps: [
+    { name: 'FY 26-27_Victor Olguin_PACK 55 MX', amount: 132256.80, closeDate: '2026-05-31' }
+  ]},
+  '001d0000022QA7TAAW': { total: 130388.05, opps: [
+    { name: 'FY 26-27_Enrique Chazaro_MX_PACK 50', amount: 130388.05, closeDate: '2026-05-31' }
+  ]},
+  '001d000001u6YYiAAM': { total: 63822.71, opps: [
+    { name: 'FY 26-27_Arturo León_MX_PACK_45', amount: 63822.71, closeDate: '2026-06-30' }
+  ]},
+  '001d0000022QA82AAG': { total: 79561.01, opps: [
+    { name: 'FY 26-27_Vicente Garcia_MX_PACK_50', amount: 79561.01, closeDate: '2026-06-30' }
+  ]},
+  '0010V00002MwZtQQAV': { total: 46115.85, opps: [
+    { name: 'FY 26-27_Rubén Puerta_MX_PACK_OPEN_PRICEBOOK', amount: 46115.85, closeDate: '2026-06-30' }
+  ]},
+  '0013w00002STg1XAAT': { total: 9168, opps: [
+    { name: 'Renewal for 00107073', amount: 9168, closeDate: '2026-06-01' }
+  ]},
+  '0013w00002Rhlt0AAB': { total: 68783, opps: [
+    { name: 'FY 26-27_Luis Palestina_MX_PACK_45', amount: 68783, closeDate: '2026-06-30' }
+  ]},
+  '0010V00002QIK1BQAX': { total: 141598, opps: [
+    { name: 'FY 26-27_Juan Luis Piñon_MX_PACK_60', amount: 141598, closeDate: '2026-06-30' }
+  ]},
+  '0010V00002MwHlXQAV': { total: 4584, opps: [
+    { name: 'Renewal for 00113281', amount: 4584, closeDate: '2026-06-09' }
+  ]},
+  '001d00000203uM0AAI': { total: 91122.15, opps: [
+    { name: 'FY 26-27_Rodrigo Escutia_MX_PACK_45', amount: 91122.15, closeDate: '2026-06-30' }
+  ]},
+  '001d0000024lxVkAAI': { total: 69012.90, opps: [
+    { name: 'FY 26-27_Cristian Franco_MX_PACK_45', amount: 69012.90, closeDate: '2026-06-30' }
+  ]}
+};
+
+// Closed Won + Invoiced FY26/27 – Service Start Date 2026-04-01 a 2027-04-30
+// Fuente: @Dot Salesforce report (13 mayo 2026)
+const closedWonData = {
+  '0010V00002MwZtaQAF': { total: 22013.09, opps: [
+    { name: 'Year 2 Opportunity for Contract 00104285', amount: 22013.09, closeDate: '2026-03-16', stage: 'Invoiced' }
+  ]}
+};
+
+const clubs = [
+  { id:'0010V00002KSiJiQAL', name:'Club de Futbol Cruz Azul',                arr:167616, abbr:'CAZ', primary:'#1A4DAB', secondary:'#FFFFFF' },
+  { id:'001d0000024lgcVAAQ', name:'CF Monterrey Rayados',                    arr:138059, abbr:'RAY', primary:'#003082', secondary:'#FFFFFF' },
+  { id:'001d000002042v9AAA', name:'Club Tigres UANL',                        arr:131580, abbr:'TIG', primary:'#F5B800', secondary:'#003087' },
+  { id:'0010V00002QIK1BQAX', name:'Chivas de Corazón, S.A. de C.V.',        arr:102943, abbr:'GDL', primary:'#CC0000', secondary:'#FFFFFF' },
+  { id:'001d0000022QA7TAAW', name:'Club de Futbol America',                  arr:100957, abbr:'AME', primary:'#FFD700', secondary:'#003580' },
+  { id:'0013w00002Rhm06AAB', name:'FC Juarez',                               arr:100843, abbr:'JUA', primary:'#CC0000', secondary:'#111111' },
+  { id:'001d0000022QA82AAG', name:'Promotora del Club Pachuca SA de CV',     arr:56782.50, abbr:'PAC', primary:'#1B3A6B', secondary:'#FFFFFF' },
+  { id:'001d000001u6YYiAAM', name:'Toluca F.C.',                             arr:48968,  abbr:'TOL', primary:'#CC0000', secondary:'#FFFFFF' },
+  { id:'0010V00002MwZtaQAF', name:'Club Universidad Nacional, A.C. Pumas',  arr:46079,  abbr:'PUM', primary:'#003087', secondary:'#CBB07A' },
+  { id:'001d00000203uM0AAI', name:'Club Atlético de San Luis',               arr:40123,  abbr:'SLU', primary:'#CC0000', secondary:'#003087' },
+  { id:'001d0000024lxVkAAI', name:'Necaxa',                                  arr:20819,  abbr:'NEC', primary:'#CC0000', secondary:'#FFFFFF' },
+  { id:'0013w00002Rhlt0AAB', name:'Club Leon',                               arr:18796,  abbr:'LEO', primary:'#006633', secondary:'#FFD700' },
+  { id:'0010V00002MwZtQQAV', name:'Club Santos Laguna',                      arr:9103,   abbr:'SAN', primary:'#006633', secondary:'#FFFFFF' },
+  { id:'0013w00002STg1XAAT', name:'Atlas Club de Fútbol Rojinegros',         arr:7282,   abbr:'ATL', primary:'#CC0000', secondary:'#111111' },
+  { id:'0010V00002MwHlXQAV', name:'Equipo de Futbol Mazatlán',               arr:4324,   abbr:'MAZ', primary:'#6B2D8B', secondary:'#FFFFFF' },
+  { id:'001d000001y3RKuAAM', name:'Querétaro FC',                            arr:null,   abbr:'QRO', primary:'#003087', secondary:'#FFFFFF' },
+  { id:'0010V00002MwZtuQAF', name:'Xolos de Tijuana',                        arr:null,   abbr:'TIJ', primary:'#111111', secondary:'#CC0000' },
+  { id:'001d0000022QA74AAG', name:'Club Puebla',                             arr:null,     abbr:'PUE', primary:'#003087', secondary:'#FFFFFF' },
+  { id:'0010V00002Mx9a5QAB', name:'National Teams (SNM)',                   arr:216792.12, abbr:'SNM', primary:'#006847', secondary:'#FFFFFF' },
+];
+
+let currentFilter = 'all';
+
+function setFilter(f, btn) {
+  currentFilter = f;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  render();
+}
+
+function badgeSVG(club) {
+  const p = club.primary, s = club.secondary;
+  return `<svg viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg">
+    <rect width="56" height="56" rx="10" fill="${p}"/>
+    <text x="28" y="33" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif" font-weight="700" font-size="${club.abbr.length > 3 ? '11' : '13'}" fill="${s}">${club.abbr}</text>
+  </svg>`;
+}
+
+function render() {
+  const q = document.getElementById('search').value.toLowerCase();
+  let data = clubs.filter(c => {
+    const matchQ = c.name.toLowerCase().includes(q) || c.id.toLowerCase().includes(q) || c.abbr.toLowerCase().includes(q);
+    const matchF = currentFilter === 'all' || (currentFilter === 'active' && c.arr !== null) || (currentFilter === 'nodata' && c.arr === null);
+    return matchQ && matchF;
+  });
+
+  const ranked = clubs.filter(c => c.arr !== null).sort((a,b) => b.arr - a.arr);
+
+  const container = document.getElementById('cards');
+  if (data.length === 0) {
+    container.innerHTML = '<div class="no-results">No se encontraron cuentas</div>';
+    return;
+  }
+
+  container.innerHTML = data.map(club => {
+    const rank = ranked.findIndex(c => c.id === club.id);
+    const rankLabel = rank >= 0 ? `#${rank + 1} de ${ranked.length}` : '';
+    const barPct = club.arr ? Math.round((club.arr / MAX_ARR) * 100) : 0;
+    const pipeline = pipelineData[club.id] || null;
+    const cwData = closedWonData[club.id] || null;
+    const combinedTotal = (pipeline ? pipeline.total : 0) + (cwData ? cwData.total : 0);
+    const pipePct = combinedTotal > 0 ? Math.round((combinedTotal / MAX_PIPELINE) * 100) : 0;
+
+    // ROI real: % de incremento del pipeline+CW sobre (ARR + Wyscout/18)
+    const arr = club.arr || 0;
+    const baseIngresos = arr + WYSCOUT_PER_CLUB;
+    let roiHtml = '';
+    if (combinedTotal > 0) {
+      const roi = ((combinedTotal - baseIngresos) / baseIngresos) * 100;
+      const sign = roi >= 0 ? '+' : '';
+      const roiStr = sign + roi.toFixed(1) + '%';
+      const roiClass = roi > 20 ? 'positive' : roi >= 0 ? 'medium' : 'low';
+      roiHtml = `<div class="roi-badge ${roiClass}">${roiStr}</div>`;
+    } else {
+      roiHtml = `<div class="roi-badge none">Sin pipeline</div>`;
+    }
+
+    // NARR 26/27: % variación pipeline+CW vs ARR FY25/26
+    let narrHtml = '';
+    if (combinedTotal > 0 && club.arr) {
+      const narr = ((combinedTotal - club.arr) / club.arr) * 100;
+      const sign = narr >= 0 ? '+' : '';
+      const narrStr = sign + narr.toFixed(1) + '%';
+      const narrClass = narr > 20 ? 'positive' : narr >= 0 ? 'medium' : 'low';
+      narrHtml = `<div class="roi-badge ${narrClass}">${narrStr}</div>`;
+    } else if (combinedTotal > 0 && !club.arr) {
+      narrHtml = `<div class="roi-badge none">Sin ARR</div>`;
+    } else {
+      narrHtml = `<div class="roi-badge none">Sin pipeline</div>`;
+    }
+
+    return `
+    <div class="club-card">
+      <div class="card-header">
+        <div class="club-badge">${badgeSVG(club)}</div>
+        <div class="club-info">
+          <div class="club-name">${club.name}</div>
+          <div class="club-id">${club.id}</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="pipeline-label-row">
+          <span class="arr-label">Open Pipeline + CW</span>
+          <span class="pipeline-date">Consultado: ${PIPELINE_DATE}</span>
+        </div>
+        ${combinedTotal > 0
+          ? `<div class="pipeline-value">$${combinedTotal.toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2})}</div>
+             <div class="pipeline-bar-wrap"><div class="pipeline-bar" style="width:${pipePct}%"></div></div>
+             <div class="pipeline-opps">
+               ${pipeline ? pipeline.opps.map(o => `<div class="pipeline-opp">
+                 <span class="opp-name" title="${o.name}">${o.name}</span>
+                 <span class="opp-amount">$${o.amount.toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2})}</span>
+                 <span class="opp-date">${o.closeDate}</span>
+               </div>`).join('') : ''}
+               ${cwData ? cwData.opps.map(o => `<div class="pipeline-opp">
+                 <span class="opp-name" title="${o.name}" style="color:#185FA5;">${o.name}</span>
+                 <span class="opp-amount" style="color:#185FA5;">$${o.amount.toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2})}</span>
+                 <span class="opp-date" style="color:#185FA5;font-weight:500;">${o.stage}</span>
+               </div>`).join('') : ''}
+             </div>`
+          : `<div class="pipeline-value no-pipeline">Sin pipeline abierto</div>
+             <div class="pipeline-bar-wrap"><div class="pipeline-bar" style="width:0%"></div></div>`
+        }
+        <div class="pipeline-section">
+          <div class="arr-label" style="margin-bottom:2px;">ARR FY25/26</div>
+          ${club.arr !== null
+            ? `<div class="arr-value">$${club.arr.toLocaleString('en-US')}</div>
+               <div class="arr-bar-wrap"><div class="arr-bar" style="width:${barPct}%"></div></div>`
+            : `<div class="arr-value no-data">Sin datos de ARR</div>
+               <div class="arr-bar-wrap"><div class="arr-bar no-data-bar" style="width:0%"></div></div>`
+          }
+        </div>
+        <div class="prob-section" data-probid="${club.id}">
+          <div class="prob-label">Probability (%)</div>
+          <div class="prob-btns">
+            ${[0, 25, 50, 75, 100].map(v =>
+              `<button class="prob-btn" data-val="${v}" onclick="saveProb('${club.id}', ${v})">${v}</button>`
+            ).join('')}
+          </div>
+        </div>
+        <div class="roi-section">
+          <div class="roi-block">
+            <div class="roi-block-label">ROI real <span style="font-size:9px;color:#bbb;font-weight:400;text-transform:none;letter-spacing:0;">+ cuota Wyscout</span></div>
+            ${roiHtml}
+          </div>
+          <div class="roi-divider"></div>
+          <div class="roi-block">
+            <div class="roi-block-label">NARR 26/27</div>
+            ${narrHtml}
+          </div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <a class="sf-link" href="${SF_BASE}${club.id}/view" target="_blank">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 3H3a1 1 0 00-1 1v9a1 1 0 001 1h9a1 1 0 001-1V9"/><path d="M10 2h4v4"/><path d="M14 2L8 8"/></svg>
+          Ver en Salesforce
+        </a>
+        <span class="arr-rank">${rankLabel}</span>
+      </div>
+    </div>`;
+  }).join('');
+  restoreProbs();
+}
+
+function initSummaryMetrics() {
+  // Acumular solo sobre clubes del array que tengan pipeline
+  let totalPipeline = 0;
+  let totalBase = 0;
+  let clubsConPipeline = 0;
+
+  clubs.forEach(club => {
+    const pipeline = pipelineData[club.id];
+    const cw = closedWonData[club.id];
+    const combined = (pipeline ? pipeline.total : 0) + (cw ? cw.total : 0);
+    if (combined > 0) {
+      totalPipeline += combined;
+      clubsConPipeline++;
+    }
+  });
+
+  // Incremento ARR: pipeline total vs ARR total FY25/26 completo (todos los clubes activos)
+  const totalArrAll = clubs.reduce((sum, club) => sum + (club.arr || 0), 0);
+  // Base ROI: ARR total FY25/26 + Contrato Wyscout FMF completo
+  totalBase = totalArrAll + WYSCOUT_TOTAL;
+  const arrGrowth = totalArrAll > 0 ? ((totalPipeline - totalArrAll) / totalArrAll) * 100 : 0;
+  const arrGrowthSign = arrGrowth >= 0 ? '+' : '';
+  const arrGrowthColor = arrGrowth >= 0 ? '#065F46' : '#991B1B';
+
+  const roiGlobal = totalBase > 0 ? ((totalPipeline - totalBase) / totalBase) * 100 : 0;
+  const sign = roiGlobal >= 0 ? '+' : '';
+  const roiColor = roiGlobal >= 0 ? '#065F46' : '#991B1B';
+
+  // Actual CW: suma total de closedWonData vs ARR total
+  let totalCW = 0;
+  let cwClubs = 0;
+  Object.values(closedWonData).forEach(cw => { totalCW += cw.total; cwClubs++; });
+  const actualCWpct = totalArrAll > 0 ? (totalCW / totalArrAll) * 100 : 0;
+  const cwPctSign = actualCWpct >= 0 ? '+' : '';
+  const cwColor = actualCWpct > 20 ? '#065F46' : actualCWpct > 0 ? '#92400E' : '#991B1B';
+  const cwEl = document.getElementById('metric-actual-cw');
+  cwEl.textContent = cwPctSign + actualCWpct.toFixed(1) + '%';
+  cwEl.style.color = cwColor;
+  document.getElementById('metric-actual-cw-sub').textContent =
+    '$' + totalCW.toLocaleString('en-US', {minimumFractionDigits:0, maximumFractionDigits:0}) + ' vs $' + totalArrAll.toLocaleString('en-US', {maximumFractionDigits:0});
+  document.getElementById('metric-cw-total').textContent =
+    '$' + totalCW.toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2});
+  document.getElementById('metric-cw-clubs').textContent =
+    cwClubs + (cwClubs === 1 ? ' club · Invoiced/CW' : ' clubes · Invoiced/CW');
+
+  const growthEl = document.getElementById('metric-arr-growth');
+  growthEl.textContent = arrGrowthSign + arrGrowth.toFixed(1) + '%';
+  growthEl.style.color = arrGrowthColor;
+  document.getElementById('metric-arr-growth-sub').textContent =
+    '$' + totalArrAll.toLocaleString('en-US', {maximumFractionDigits:0}) + ' → $' + totalPipeline.toLocaleString('en-US', {maximumFractionDigits:0});
+
+  document.getElementById('metric-wyscout-per-club').textContent =
+    '$' + WYSCOUT_PER_CLUB.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+
+  document.getElementById('metric-pipeline').textContent =
+    '$' + totalPipeline.toLocaleString('en-US', {minimumFractionDigits: 0, maximumFractionDigits: 0});
+  document.getElementById('metric-pipeline-sub').textContent =
+    clubsConPipeline + ' clubes con pipeline abierto';
+
+  const roiEl = document.getElementById('metric-roi');
+  roiEl.textContent = sign + roiGlobal.toFixed(1) + '%';
+  roiEl.style.color = roiColor;
+  document.getElementById('metric-roi-sub').textContent =
+    'Base: ARR + Wyscout = $' + totalBase.toLocaleString('en-US', {maximumFractionDigits: 0});
+}
+
+const PROB_KEY = 'gtm-club-prob';
+
+function loadProbs() {
+  try { return JSON.parse(localStorage.getItem(PROB_KEY) || '{}'); } catch(e) { return {}; }
+}
+
+function saveProb(clubId, val) {
+  const probs = loadProbs();
+  probs[clubId] = val;
+  localStorage.setItem(PROB_KEY, JSON.stringify(probs));
+  applyProb(clubId, val);
+  updateForecastMetrics();
+}
+
+function updateForecastMetrics() {
+  const probs = loadProbs();
+  const totalArrAll = clubs.reduce((sum, c) => sum + (c.arr || 0), 0);
+  let bestCase = 0, commit = 0, worstCase = 0;
+
+  clubs.forEach(club => {
+    const prob = Number(probs[club.id] || 0);
+    const pipeline = pipelineData[club.id];
+    const cw = closedWonData[club.id];
+    const combined = (pipeline ? pipeline.total : 0) + (cw ? cw.total : 0);
+    if (prob > 24) bestCase  += combined;
+    if (prob > 49) commit    += combined;
+    if (prob > 74) worstCase += combined;
+  });
+
+  const fmt = v => '$' + v.toLocaleString('en-US', {minimumFractionDigits: 0, maximumFractionDigits: 0});
+  const pct = v => totalArrAll > 0
+    ? (v / totalArrAll * 100).toFixed(1) + '% vs ARR FY25/26'
+    : '—';
+
+  document.getElementById('fc-best-val').textContent   = fmt(bestCase);
+  document.getElementById('fc-best-pct').textContent   = pct(bestCase);
+  document.getElementById('fc-commit-val').textContent = fmt(commit);
+  document.getElementById('fc-commit-pct').textContent = pct(commit);
+  document.getElementById('fc-worst-val').textContent  = fmt(worstCase);
+  document.getElementById('fc-worst-pct').textContent  = pct(worstCase);
+}
+
+function applyProb(clubId, val) {
+  const section = document.querySelector(`.prob-section[data-probid="${clubId}"]`);
+  if (!section) return;
+  section.querySelectorAll('.prob-btn').forEach(b => {
+    b.classList.remove('p-0','p-25','p-50','p-75','p-100');
+    if (parseInt(b.dataset.val) === val) b.classList.add('p-' + val);
+  });
+}
+
+function restoreProbs() {
+  const probs = loadProbs();
+  Object.entries(probs).forEach(([clubId, val]) => applyProb(clubId, Number(val)));
+}
+
+function forceUpdate() {
+  const btn = document.getElementById('refreshBtn');
+  btn.disabled = true;
+  btn.innerHTML = `<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" style="animation:spin 1s linear infinite"><path d="M13.5 8A5.5 5.5 0 112.9 5"/><path d="M2 2v3.5h3.5"/></svg> Actualizando...`;
+  if (window.cowork && window.cowork.runScheduledTask) {
+    window.cowork.runScheduledTask('gtm-mexico-pipeline-update').then(() => {
+      btn.innerHTML = `<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M13.5 8A5.5 5.5 0 112.9 5"/><path d="M2 2v3.5h3.5"/></svg> Actualizar datos`;
+      btn.disabled = false;
+    }).catch(() => {
+      btn.innerHTML = `<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M13.5 8A5.5 5.5 0 112.9 5"/><path d="M2 2v3.5h3.5"/></svg> Actualizar datos`;
+      btn.disabled = false;
+    });
+  } else {
+    setTimeout(() => {
+      btn.innerHTML = `<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M13.5 8A5.5 5.5 0 112.9 5"/><path d="M2 2v3.5h3.5"/></svg> Actualizar datos`;
+      btn.disabled = false;
+    }, 2000);
+  }
+}
+
+const style = document.createElement('style');
+style.textContent = '@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }';
+document.head.appendChild(style);
+
+initSummaryMetrics();
+render();
+restoreProbs();
+updateForecastMetrics();
+</script>
+</body>
+</html>
