@@ -10,6 +10,20 @@
 
 <html lang="es">
 <head>
+  <script>
+(function() {
+  var PASSWORD = 'latampod2026';
+  var stored = sessionStorage.getItem('gtm_auth');
+  if (stored !== PASSWORD) {
+    var input = prompt('🔒 Introduce la contraseña para acceder:');
+    if (input !== PASSWORD) {
+      document.documentElement.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100vh;font-family:sans-serif;font-size:20px;color:#991B1B;background:#FEF2F2;">❌ Contraseña incorrecta. Recarga la página para intentarlo de nuevo.</div>';
+      return;
+    }
+    sessionStorage.setItem('gtm_auth', PASSWORD);
+  }
+})();
+</script>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Control GTM 26/27 México</title>
