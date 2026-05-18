@@ -2,26 +2,26 @@
 
 <script type="application/json" id="cowork-artifact-meta">
 {
-  "name": "Liga Mx Arr Fy2526",
-  "schemaVersion": 1,
-  "description": "Control GTM 26/27 México — 18 cuentas Liga MX con ARR FY25/26, Open Pipeline FY26/27, ROI real y NARR 26/27."
+"name": "Liga Mx Arr Fy2526",
+"schemaVersion": 1,
+"description": "Control GTM 26/27 México — 18 cuentas Liga MX con ARR FY25/26, Open Pipeline FY26/27, ROI real y NARR 26/27."
 }
 </script>
 
 <html lang="es">
 <head>
-  <script>
+<script>
 (function() {
-  var PASSWORD = 'latampod2026';
-  var stored = sessionStorage.getItem('gtm_auth');
-  if (stored !== PASSWORD) {
-    var input = prompt('🔒 Introduce la contraseña para acceder:');
-    if (input !== PASSWORD) {
-      document.documentElement.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100vh;font-family:sans-serif;font-size:20px;color:#991B1B;background:#FEF2F2;">❌ Contraseña incorrecta. Recarga la página para intentarlo de nuevo.</div>';
-      return;
-    }
-    sessionStorage.setItem('gtm_auth', PASSWORD);
-  }
+var PASSWORD = 'latampod2026';
+var stored = sessionStorage.getItem('gtm_auth');
+if (stored !== PASSWORD) {
+var input = prompt('🔒 Introduce la contraseña para acceder:');
+if (input !== PASSWORD) {
+document.documentElement.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100vh;font-family:sans-serif;font-size:20px;color:#991B1B;background:#FEF2F2;">❌ Contraseña incorrecta. Recarga la página para intentarlo de nuevo.</div>';
+return;
+}
+sessionStorage.setItem('gtm_auth', PASSWORD);
+}
 })();
 </script>
 <meta charset="UTF-8" />
@@ -46,10 +46,13 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
 .search-box input { width: 100%; padding: 9px 12px 9px 36px; border: 1px solid #ddd; border-radius: 8px; font-size: 14px; background: #fff; color: #1a1a1a; outline: none; }
 .search-box input:focus { border-color: #185FA5; box-shadow: 0 0 0 3px rgba(24,95,165,0.12); }
 .search-icon { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: #aaa; font-size: 16px; pointer-events: none; }
-.filter-btns { display: flex; gap: 6px; }
+.filter-btns { display: flex; gap: 6px; flex-wrap: wrap; }
 .filter-btn { padding: 8px 14px; border: 1px solid #ddd; border-radius: 8px; font-size: 13px; background: #fff; color: #555; cursor: pointer; transition: all 0.15s; }
 .filter-btn:hover { border-color: #185FA5; color: #185FA5; }
 .filter-btn.active { background: #185FA5; border-color: #185FA5; color: #fff; }
+.filter-btn.league-btn { border-color: #BFDBFE; color: #1D4ED8; background: #EFF6FF; }
+.filter-btn.league-btn:hover { border-color: #1D4ED8; }
+.filter-btn.league-btn.active { background: #1D4ED8; border-color: #1D4ED8; color: #fff; }
 .metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 28px; }
 @media (max-width: 900px) { .metrics { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 600px) { .metrics { grid-template-columns: repeat(2, 1fr); } }
@@ -66,8 +69,12 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
 .club-badge { width: 40px; height: 40px; border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; overflow: hidden; }
 .club-badge svg { width: 40px; height: 40px; display: block; }
 .club-info { flex: 1; min-width: 0; }
-.club-name { font-size: 13px; font-weight: 500; color: #1a1a1a; line-height: 1.25; margin-bottom: 2px; }
+.club-info-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 6px; margin-bottom: 2px; }
+.club-name { font-size: 13px; font-weight: 500; color: #1a1a1a; line-height: 1.25; flex: 1; min-width: 0; }
 .club-id { font-size: 10px; color: #aaa; font-family: monospace; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.league-badge { display: inline-flex; align-items: center; padding: 2px 6px; border-radius: 4px; font-size: 9px; font-weight: 700; letter-spacing: 0.04em; white-space: nowrap; flex-shrink: 0; margin-top: 1px; }
+.league-badge.liga-mx { background: #EFF6FF; color: #1D4ED8; border: 1px solid #BFDBFE; }
+.league-badge.snm { background: #DCFCE7; color: #166534; border: 1px solid #86EFAC; }
 .card-body { padding: 10px 14px; }
 .arr-label { font-size: 10px; color: #888; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 2px; }
 .arr-value { font-size: 20px; font-weight: 600; color: #1a1a1a; margin-bottom: 6px; }
@@ -136,114 +143,116 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
 .chart-title { font-size: 14px; font-weight: 500; color: #1a1a1a; margin-bottom: 16px; }
 .club-card.signed-contract { position: relative; }
 .signed-stamp-overlay {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) rotate(-20deg);
-  pointer-events: none;
-  z-index: 10;
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%) rotate(-20deg);
+pointer-events: none;
+z-index: 10;
 }
 </style>
 </head>
 <body>
 
 <div class="page-header">
-  <h1>Control GTM 26/27 México</h1>
-  <p>19 cuentas · Cierre fiscal Hudl · Snapshot: 13 de mayo de 2026</p>
-  <p style="margin-top:8px;font-size:12px;color:#aaa;"><strong style="color:#888;">Consideraciones:</strong> El volumen del contrato de Wyscout ha sido dividido solo entre los 18 clubes del Liga MX y SNM, no considerando CITEC, Liga de Expansión ni Comisión arbitral.</p>
+<h1>Control GTM 26/27 México</h1>
+<p>19 cuentas · Cierre fiscal Hudl · Snapshot: 13 de mayo de 2026</p>
+<p style="margin-top:8px;font-size:12px;color:#aaa;"><strong style="color:#888;">Consideraciones:</strong> El volumen del contrato de Wyscout ha sido dividido solo entre los 18 clubes del Liga MX y SNM, no considerando CITEC, Liga de Expansión ni Comisión arbitral.</p>
 </div>
 
 <div class="forecast-bar">
-  <div class="forecast-card fc-best">
-    <div class="fc-title">Best Case</div>
-    <div class="fc-subtitle">Probabilidad &gt; 24% (25, 50, 75, 100)</div>
-    <div class="fc-val" id="fc-best-val">—</div>
-    <div class="fc-pct" id="fc-best-pct">— vs ARR FY25/26</div>
-  </div>
-  <div class="forecast-card fc-commit">
-    <div class="fc-title">Commit</div>
-    <div class="fc-subtitle">Probabilidad &gt; 49% (50, 75, 100)</div>
-    <div class="fc-val" id="fc-commit-val">—</div>
-    <div class="fc-pct" id="fc-commit-pct">— vs ARR FY25/26</div>
-  </div>
-  <div class="forecast-card fc-worst">
-    <div class="fc-title">Worst Case</div>
-    <div class="fc-subtitle">Probabilidad &gt; 74% (75, 100)</div>
-    <div class="fc-val" id="fc-worst-val">—</div>
-    <div class="fc-pct" id="fc-worst-pct">— vs ARR FY25/26</div>
-  </div>
+<div class="forecast-card fc-best">
+<div class="fc-title">Best Case</div>
+<div class="fc-subtitle">Probabilidad &gt; 24% (25, 50, 75, 100)</div>
+<div class="fc-val" id="fc-best-val">—</div>
+<div class="fc-pct" id="fc-best-pct">— vs ARR FY25/26</div>
+</div>
+<div class="forecast-card fc-commit">
+<div class="fc-title">Commit</div>
+<div class="fc-subtitle">Probabilidad &gt; 49% (50, 75, 100)</div>
+<div class="fc-val" id="fc-commit-val">—</div>
+<div class="fc-pct" id="fc-commit-pct">— vs ARR FY25/26</div>
+</div>
+<div class="forecast-card fc-worst">
+<div class="fc-title">Worst Case</div>
+<div class="fc-subtitle">Probabilidad &gt; 74% (75, 100)</div>
+<div class="fc-val" id="fc-worst-val">—</div>
+<div class="fc-pct" id="fc-worst-pct">— vs ARR FY25/26</div>
+</div>
 </div>
 
 <div class="metrics">
-  <!-- Par 1: ARR total / Open Pipeline -->
-  <div class="metric-pair">
-    <div class="metric">
-      <div class="label">ARR total FY25/26</div>
-      <div class="val">$1,211,067</div>
-      <div class="sub">19 cuentas · 16 con ARR activo</div>
-    </div>
-    <div class="metric">
-      <div class="label">Open Pipeline + CW FY26/27</div>
-      <div class="val" id="metric-pipeline">—</div>
-      <div class="sub" id="metric-pipeline-sub">—</div>
-    </div>
-  </div>
-  <!-- Par 2: Contrato Wyscout / Cuota Wyscout -->
-  <div class="metric-pair">
-    <div class="metric">
-      <div class="label">Contrato Wyscout FMF 2025/26</div>
-      <div class="val">$461,744</div>
-      <div class="sub"><a href="https://hudl.lightning.force.com/lightning/r/Contract/800VY000008cSJdYAM/view" target="_blank" style="color:#185FA5;text-decoration:none;">Ver en Salesforce ↗</a></div>
-    </div>
-    <div class="metric">
-      <div class="label">Cuota Wyscout por club</div>
-      <div class="val" id="metric-wyscout-per-club">—</div>
-      <div class="sub">461,744 ÷ 19 cuentas</div>
-    </div>
-  </div>
-  <!-- Par 3: Incremento ARR / ROI real -->
-  <div class="metric-pair">
-    <div class="metric">
-      <div class="label">Incremento ARR 25/26 → 26/27</div>
-      <div class="val" id="metric-arr-growth">—</div>
-      <div class="sub" id="metric-arr-growth-sub">Pipeline vs ARR actual</div>
-    </div>
-    <div class="metric">
-      <div class="label">Real Growth with WS25/26</div>
-      <div class="val" id="metric-roi">—</div>
-      <div class="sub" id="metric-roi-sub">vs. ARR + Cuota Wyscout</div>
-    </div>
-  </div>
-  <!-- Par 4: Actual CW -->
-  <div class="metric-pair">
-    <div class="metric">
-      <div class="label">Actual CW</div>
-      <div class="val" id="metric-actual-cw">—</div>
-      <div class="sub" id="metric-actual-cw-sub">CW+Invoiced vs ARR FY25/26</div>
-    </div>
-    <div class="metric">
-      <div class="label">Total CW + Invoiced FY26/27</div>
-      <div class="val" id="metric-cw-total">—</div>
-      <div class="sub" id="metric-cw-clubs">—</div>
-    </div>
-  </div>
+<!-- Par 1: ARR total / Open Pipeline -->
+<div class="metric-pair">
+<div class="metric">
+<div class="label">ARR total FY25/26</div>
+<div class="val">$1,211,067</div>
+<div class="sub">19 cuentas · 16 con ARR activo</div>
+</div>
+<div class="metric">
+<div class="label">Open Pipeline + CW FY26/27</div>
+<div class="val" id="metric-pipeline">—</div>
+<div class="sub" id="metric-pipeline-sub">—</div>
+</div>
+</div>
+<!-- Par 2: Contrato Wyscout / Cuota Wyscout -->
+<div class="metric-pair">
+<div class="metric">
+<div class="label">Contrato Wyscout FMF 2025/26</div>
+<div class="val">$461,744</div>
+<div class="sub"><a href="https://hudl.lightning.force.com/lightning/r/Contract/800VY000008cSJdYAM/view" target="_blank" style="color:#185FA5;text-decoration:none;">Ver en Salesforce ↗</a></div>
+</div>
+<div class="metric">
+<div class="label">Cuota Wyscout por club</div>
+<div class="val" id="metric-wyscout-per-club">—</div>
+<div class="sub">461,744 ÷ 19 cuentas</div>
+</div>
+</div>
+<!-- Par 3: Incremento ARR / ROI real -->
+<div class="metric-pair">
+<div class="metric">
+<div class="label">Incremento ARR 25/26 → 26/27</div>
+<div class="val" id="metric-arr-growth">—</div>
+<div class="sub" id="metric-arr-growth-sub">Pipeline vs ARR actual</div>
+</div>
+<div class="metric">
+<div class="label">Real Growth with WS25/26</div>
+<div class="val" id="metric-roi">—</div>
+<div class="sub" id="metric-roi-sub">vs. ARR + Cuota Wyscout</div>
+</div>
+</div>
+<!-- Par 4: Actual CW -->
+<div class="metric-pair">
+<div class="metric">
+<div class="label">Actual CW</div>
+<div class="val" id="metric-actual-cw">—</div>
+<div class="sub" id="metric-actual-cw-sub">CW+Invoiced vs ARR FY25/26</div>
+</div>
+<div class="metric">
+<div class="label">Total CW + Invoiced FY26/27</div>
+<div class="val" id="metric-cw-total">—</div>
+<div class="sub" id="metric-cw-clubs">—</div>
+</div>
+</div>
 </div>
 
 <div class="top-controls">
-  <div class="search-box">
-    <span class="search-icon">
-      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" width="16" height="16"><circle cx="6.5" cy="6.5" r="4.5"/><path d="M11 11l3 3"/></svg>
-    </span>
-    <input type="text" id="search" placeholder="Buscar club..." oninput="render()" />
-  </div>
-  <div class="filter-btns">
-    <button class="filter-btn active" onclick="setFilter('all', this)">Todos (19)</button>
-    <button class="filter-btn" onclick="setFilter('active', this)">Con ARR (16)</button>
-    <button class="filter-btn" onclick="setFilter('nodata', this)">Sin datos (3)</button>
-  </div>
-  <button id="shareBtn" onclick="copyShareLink()" style="display:inline-flex;align-items:center;gap:6px;padding:8px 14px;border:1px solid #185FA5;border-radius:8px;font-size:13px;background:#fff;color:#185FA5;cursor:pointer;transition:all 0.15s;white-space:nowrap;">
-    🔗 Copiar enlace
-  </button>
+<div class="search-box">
+<span class="search-icon">
+<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" width="16" height="16"><circle cx="6.5" cy="6.5" r="4.5"/><path d="M11 11l3 3"/></svg>
+</span>
+<input type="text" id="search" placeholder="Buscar club o liga..." oninput="render()" />
+</div>
+<div class="filter-btns">
+<button class="filter-btn active" onclick="setFilter('all', this)">Todos (19)</button>
+<button class="filter-btn" onclick="setFilter('active', this)">Con ARR (16)</button>
+<button class="filter-btn" onclick="setFilter('nodata', this)">Sin datos (3)</button>
+<button class="filter-btn league-btn" onclick="setFilter('liga-mx', this)">Liga MX (18)</button>
+<button class="filter-btn league-btn" onclick="setFilter('snm', this)">SNM (1)</button>
+</div>
+<button id="shareBtn" onclick="copyShareLink()" style="display:inline-flex;align-items:center;gap:6px;padding:8px 14px;border:1px solid #185FA5;border-radius:8px;font-size:13px;background:#fff;color:#185FA5;cursor:pointer;transition:all 0.15s;white-space:nowrap;">
+🔗 Copiar enlace
+</button>
 </div>
 
 <div class="cards-grid" id="cards"></div>
@@ -255,386 +264,397 @@ const WYSCOUT_TOTAL = 461743.72;
 const WYSCOUT_PER_CLUB = WYSCOUT_TOTAL / 19; // ~$24,302.30
 
 const pipelineData = {
-  '001d0000024lgcVAAQ': { total: 188241.75, opps: [
-    { name: 'FY 26-27_Heberto Cabrera_MX_PACK 55', amount: 188241.75, closeDate: '2026-05-31' }
-  ]},
-  '0013w00002Rhm06AAB': { total: 133761.80, opps: [
-    { name: 'FY 26-27_Juan Chazarra_MX PACK 55', amount: 133761.80, closeDate: '2026-05-31' }
-  ]},
-  '0010V00002KSiJiQAL': { total: 187774, opps: [
-    { name: 'FY 26-27_Andres Payssé_MX PACK 55', amount: 187774, closeDate: '2026-06-30' }
-  ]},
-  '001d000002042v9AAA': { total: 132256.80, opps: [
-    { name: 'FY 26-27_Victor Olguin_PACK 55 MX', amount: 132256.80, closeDate: '2026-05-31' }
-  ]},
-  '001d0000022QA7TAAW': { total: 130388.05, opps: [
-    { name: 'FY 26-27_Enrique Chazaro_MX_PACK 50', amount: 130388.05, closeDate: '2026-05-31' }
-  ]},
-  '001d000001u6YYiAAM': { total: 63822.71, opps: [
-    { name: 'FY 26-27_Arturo León_MX_PACK_45', amount: 63822.71, closeDate: '2026-06-30' }
-  ]},
-  '001d0000022QA82AAG': { total: 79561.01, opps: [
-    { name: 'FY 26-27_Vicente Garcia_MX_PACK_50', amount: 79561.01, closeDate: '2026-06-30' }
-  ]},
-  '0010V00002MwZtQQAV': { total: 46115.85, opps: [
-    { name: 'FY 26-27_Rubén Puerta_MX_PACK_OPEN_PRICEBOOK', amount: 46115.85, closeDate: '2026-06-30' }
-  ]},
-  '0013w00002Rhlt0AAB': { total: 68783, opps: [
-    { name: 'FY 26-27_Luis Palestina_MX_PACK_45', amount: 68783, closeDate: '2026-06-30' }
-  ]},
-  '0010V00002QIK1BQAX': { total: 141598, opps: [
-    { name: 'FY 26-27_Juan Luis Piñon_MX_PACK_60', amount: 141598, closeDate: '2026-06-30' }
-  ]},
-  '001d00000203uM0AAI': { total: 91122.15, opps: [
-    { name: 'FY 26-27_Rodrigo Escutia_MX_PACK_45', amount: 91122.15, closeDate: '2026-06-30' }
-  ]},
-  '001d0000024lxVkAAI': { total: 54329.55, opps: [
-    { name: 'FY 26-27_Cristian Franco_MX_PACK_45', amount: 54329.55, closeDate: '2026-06-30' }
-  ]},
-  '001d0000022QA74AAG': { total: 23222.00, opps: [
-    { name: 'FY 26-27_Mariana Lopez_MX_PACK_PRICEBOOK', amount: 23222.00, closeDate: '2026-05-31' }
-  ]}
+'001d0000024lgcVAAQ': { total: 188241.75, opps: [
+{ name: 'FY 26-27_Heberto Cabrera_MX_PACK 55', amount: 188241.75, closeDate: '2026-05-31' }
+]},
+'0013w00002Rhm06AAB': { total: 133761.80, opps: [
+{ name: 'FY 26-27_Juan Chazarra_MX PACK 55', amount: 133761.80, closeDate: '2026-05-31' }
+]},
+'0010V00002KSiJiQAL': { total: 187774, opps: [
+{ name: 'FY 26-27_Andres Payssé_MX PACK 55', amount: 187774, closeDate: '2026-06-30' }
+]},
+'001d000002042v9AAA': { total: 132256.80, opps: [
+{ name: 'FY 26-27_Victor Olguin_PACK 55 MX', amount: 132256.80, closeDate: '2026-05-31' }
+]},
+'001d0000022QA7TAAW': { total: 130388.05, opps: [
+{ name: 'FY 26-27_Enrique Chazaro_MX_PACK 50', amount: 130388.05, closeDate: '2026-05-31' }
+]},
+'001d000001u6YYiAAM': { total: 63822.71, opps: [
+{ name: 'FY 26-27_Arturo León_MX_PACK_45', amount: 63822.71, closeDate: '2026-06-30' }
+]},
+'001d0000022QA82AAG': { total: 79561.01, opps: [
+{ name: 'FY 26-27_Vicente Garcia_MX_PACK_50', amount: 79561.01, closeDate: '2026-06-30' }
+]},
+'0010V00002MwZtQQAV': { total: 46115.85, opps: [
+{ name: 'FY 26-27_Rubén Puerta_MX_PACK_OPEN_PRICEBOOK', amount: 46115.85, closeDate: '2026-06-30' }
+]},
+'0013w00002Rhlt0AAB': { total: 68783, opps: [
+{ name: 'FY 26-27_Luis Palestina_MX_PACK_45', amount: 68783, closeDate: '2026-06-30' }
+]},
+'0010V00002QIK1BQAX': { total: 141598, opps: [
+{ name: 'FY 26-27_Juan Luis Piñon_MX_PACK_60', amount: 141598, closeDate: '2026-06-30' }
+]},
+'001d00000203uM0AAI': { total: 91122.15, opps: [
+{ name: 'FY 26-27_Rodrigo Escutia_MX_PACK_45', amount: 91122.15, closeDate: '2026-06-30' }
+]},
+'001d0000024lxVkAAI': { total: 54329.55, opps: [
+{ name: 'FY 26-27_Cristian Franco_MX_PACK_45', amount: 54329.55, closeDate: '2026-06-30' }
+]},
+'001d0000022QA74AAG': { total: 23222.00, opps: [
+{ name: 'FY 26-27_Mariana Lopez_MX_PACK_PRICEBOOK', amount: 23222.00, closeDate: '2026-05-31' }
+]}
 };
 
 // Closed Won + Invoiced + Signed FY26/27
 const closedWonData = {
-  '0010V00002MwZtaQAF': { total: 22013.09, opps: [
-    { name: 'Year 2 Opportunity for Contract 00104285', amount: 22013.09, closeDate: '2026-03-16', stage: 'Invoiced' }
-  ]},
-  '0010V00002Mx9a5QAB': { total: 224315.95, signed: true, opps: [
-    { name: 'FY 26-27_SNM Services', amount: 224315.95, closeDate: '2026-05-15', stage: 'Signed' }
-  ]}
+'0010V00002MwZtaQAF': { total: 22013.09, opps: [
+{ name: 'Year 2 Opportunity for Contract 00104285', amount: 22013.09, closeDate: '2026-03-16', stage: 'Invoiced' }
+]},
+'0010V00002Mx9a5QAB': { total: 224315.95, signed: true, opps: [
+{ name: 'FY 26-27_SNM Services', amount: 224315.95, closeDate: '2026-05-15', stage: 'Signed' }
+]}
 };
 
 const clubs = [
-  { id:'0010V00002KSiJiQAL', name:'Club de Futbol Cruz Azul', arr:167616, abbr:'CAZ', primary:'#1A4DAB', secondary:'#FFFFFF' },
-  { id:'001d0000024lgcVAAQ', name:'CF Monterrey Rayados', arr:138040.86, abbr:'RAY', primary:'#003082', secondary:'#FFFFFF' },
-  { id:'001d000002042v9AAA', name:'Club Tigres UANL', arr:131580, abbr:'TIG', primary:'#F5B800', secondary:'#003087' },
-  { id:'0010V00002QIK1BQAX', name:'Chivas de Corazón, S.A. de C.V.', arr:102943, abbr:'GDL', primary:'#CC0000', secondary:'#FFFFFF' },
-  { id:'001d0000022QA7TAAW', name:'Club de Futbol America', arr:100957, abbr:'AME', primary:'#FFD700', secondary:'#003580' },
-  { id:'0013w00002Rhm06AAB', name:'FC Juarez', arr:100843, abbr:'JUA', primary:'#CC0000', secondary:'#111111' },
-  { id:'001d0000022QA82AAG', name:'Promotora del Club Pachuca SA de CV', arr:56782.50, abbr:'PAC', primary:'#1B3A6B', secondary:'#FFFFFF' },
-  { id:'001d000001u6YYiAAM', name:'Toluca F.C.', arr:48968, abbr:'TOL', primary:'#CC0000', secondary:'#FFFFFF' },
-  { id:'0010V00002MwZtaQAF', name:'Club Universidad Nacional, A.C. Pumas', arr:46079, abbr:'PUM', primary:'#003087', secondary:'#CBB07A' },
-  { id:'001d00000203uM0AAI', name:'Club Atlético de San Luis', arr:40123, abbr:'SLU', primary:'#CC0000', secondary:'#003087' },
-  { id:'001d0000024lxVkAAI', name:'Necaxa', arr:20819, abbr:'NEC', primary:'#CC0000', secondary:'#FFFFFF' },
-  { id:'0013w00002Rhlt0AAB', name:'Club Leon', arr:18796, abbr:'LEO', primary:'#006633', secondary:'#FFD700' },
-  { id:'0010V00002MwZtQQAV', name:'Club Santos Laguna', arr:9103, abbr:'SAN', primary:'#006633', secondary:'#FFFFFF' },
-  { id:'0013w00002STg1XAAT', name:'Atlas Club de Fútbol Rojinegros', arr:7282, abbr:'ATL', primary:'#CC0000', secondary:'#111111' },
-  { id:'001d000001y3RJQAA2', name:'Atlante F.C.', arr:0, abbr:'ATL', primary:'#003DA5', secondary:'#FFD100' },
-  { id:'001d000001y3RKuAAM', name:'Querétaro FC', arr:null, abbr:'QRO', primary:'#003087', secondary:'#FFFFFF' },
-  { id:'0010V00002MwZtuQAF', name:'Xolos de Tijuana', arr:null, abbr:'TIJ', primary:'#111111', secondary:'#CC0000' },
-  { id:'001d0000022QA74AAG', name:'Club Puebla', arr:null, abbr:'PUE', primary:'#003087', secondary:'#FFFFFF' },
-  { id:'0010V00002Mx9a5QAB', name:'National Teams (SNM)', arr:216792.12, abbr:'SNM', primary:'#006847', secondary:'#FFFFFF' },
+{ id:'0010V00002KSiJiQAL', name:'Club de Futbol Cruz Azul', arr:167616, abbr:'CAZ', primary:'#1A4DAB', secondary:'#FFFFFF', league:'Liga MX' },
+{ id:'001d0000024lgcVAAQ', name:'CF Monterrey Rayados', arr:138040.86, abbr:'RAY', primary:'#003082', secondary:'#FFFFFF', league:'Liga MX' },
+{ id:'001d000002042v9AAA', name:'Club Tigres UANL', arr:131580, abbr:'TIG', primary:'#F5B800', secondary:'#003087', league:'Liga MX' },
+{ id:'0010V00002QIK1BQAX', name:'Chivas de Corazón, S.A. de C.V.', arr:102943, abbr:'GDL', primary:'#CC0000', secondary:'#FFFFFF', league:'Liga MX' },
+{ id:'001d0000022QA7TAAW', name:'Club de Futbol America', arr:100957, abbr:'AME', primary:'#FFD700', secondary:'#003580', league:'Liga MX' },
+{ id:'0013w00002Rhm06AAB', name:'FC Juarez', arr:100843, abbr:'JUA', primary:'#CC0000', secondary:'#111111', league:'Liga MX' },
+{ id:'001d0000022QA82AAG', name:'Promotora del Club Pachuca SA de CV', arr:56782.50, abbr:'PAC', primary:'#1B3A6B', secondary:'#FFFFFF', league:'Liga MX' },
+{ id:'001d000001u6YYiAAM', name:'Toluca F.C.', arr:48968, abbr:'TOL', primary:'#CC0000', secondary:'#FFFFFF', league:'Liga MX' },
+{ id:'0010V00002MwZtaQAF', name:'Club Universidad Nacional, A.C. Pumas', arr:46079, abbr:'PUM', primary:'#003087', secondary:'#CBB07A', league:'Liga MX' },
+{ id:'001d00000203uM0AAI', name:'Club Atlético de San Luis', arr:40123, abbr:'SLU', primary:'#CC0000', secondary:'#003087', league:'Liga MX' },
+{ id:'001d0000024lxVkAAI', name:'Necaxa', arr:20819, abbr:'NEC', primary:'#CC0000', secondary:'#FFFFFF', league:'Liga MX' },
+{ id:'0013w00002Rhlt0AAB', name:'Club Leon', arr:18796, abbr:'LEO', primary:'#006633', secondary:'#FFD700', league:'Liga MX' },
+{ id:'0010V00002MwZtQQAV', name:'Club Santos Laguna', arr:9103, abbr:'SAN', primary:'#006633', secondary:'#FFFFFF', league:'Liga MX' },
+{ id:'0013w00002STg1XAAT', name:'Atlas Club de Fútbol Rojinegros', arr:7282, abbr:'ATL', primary:'#CC0000', secondary:'#111111', league:'Liga MX' },
+{ id:'001d000001y3RJQAA2', name:'Atlante F.C.', arr:0, abbr:'ATL', primary:'#003DA5', secondary:'#FFD100', league:'Liga MX' },
+{ id:'001d000001y3RKuAAM', name:'Querétaro FC', arr:null, abbr:'QRO', primary:'#003087', secondary:'#FFFFFF', league:'Liga MX' },
+{ id:'0010V00002MwZtuQAF', name:'Xolos de Tijuana', arr:null, abbr:'TIJ', primary:'#111111', secondary:'#CC0000', league:'Liga MX' },
+{ id:'001d0000022QA74AAG', name:'Club Puebla', arr:null, abbr:'PUE', primary:'#003087', secondary:'#FFFFFF', league:'Liga MX' },
+{ id:'0010V00002Mx9a5QAB', name:'National Teams (SNM)', arr:216792.12, abbr:'SNM', primary:'#006847', secondary:'#FFFFFF', league:'SNM' },
 ];
 
 // Escala global compartida: máximo entre todos los ARR y todos los pipelines
 const MAX_GLOBAL = Math.max(
-  ...clubs.map(c => c.arr || 0),
-  ...Object.values(pipelineData).map(p => p.total),
-  ...Object.values(closedWonData).map(c => c.total)
+...clubs.map(c => c.arr || 0),
+...Object.values(pipelineData).map(p => p.total),
+...Object.values(closedWonData).map(c => c.total)
 );
 
 let currentFilter = 'all';
 
 function setFilter(f, btn) {
-  currentFilter = f;
-  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  render();
+currentFilter = f;
+document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+btn.classList.add('active');
+render();
 }
 
 function badgeSVG(club) {
-  const p = club.primary, s = club.secondary;
-  return `<svg viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg">
-    <rect width="56" height="56" rx="10" fill="${p}"/>
-    <text x="28" y="33" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif" font-weight="700" font-size="${club.abbr.length > 3 ? '11' : '13'}" fill="${s}">${club.abbr}</text>
-  </svg>`;
+const p = club.primary, s = club.secondary;
+return `<svg viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg">
+<rect width="56" height="56" rx="10" fill="${p}"/>
+<text x="28" y="33" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif" font-weight="700" font-size="${club.abbr.length > 3 ? '11' : '13'}" fill="${s}">${club.abbr}</text>
+</svg>`;
 }
 
 function render() {
-  const q = document.getElementById('search').value.toLowerCase();
-  let data = clubs.filter(c => {
-    const matchQ = c.name.toLowerCase().includes(q) || c.id.toLowerCase().includes(q) || c.abbr.toLowerCase().includes(q);
-    const matchF = currentFilter === 'all' || (currentFilter === 'active' && c.arr !== null) || (currentFilter === 'nodata' && c.arr === null);
-    return matchQ && matchF;
-  });
+const q = document.getElementById('search').value.toLowerCase();
+let data = clubs.filter(c => {
+const matchQ = c.name.toLowerCase().includes(q) || c.id.toLowerCase().includes(q) || c.abbr.toLowerCase().includes(q) || c.league.toLowerCase().includes(q);
+const matchF = currentFilter === 'all' ||
+(currentFilter === 'active' && c.arr !== null) ||
+(currentFilter === 'nodata' && c.arr === null) ||
+(currentFilter === 'liga-mx' && c.league === 'Liga MX') ||
+(currentFilter === 'snm' && c.league === 'SNM');
+return matchQ && matchF;
+});
 
-  const ranked = clubs.filter(c => c.arr !== null).sort((a,b) => b.arr - a.arr);
-  const container = document.getElementById('cards');
+const ranked = clubs.filter(c => c.arr !== null).sort((a,b) => b.arr - a.arr);
+const container = document.getElementById('cards');
 
-  if (data.length === 0) {
-    container.innerHTML = '<div class="no-results">No se encontraron cuentas</div>';
-    return;
-  }
+if (data.length === 0) {
+container.innerHTML = '<div class="no-results">No se encontraron cuentas</div>';
+return;
+}
 
-  container.innerHTML = data.map(club => {
-    const rank = ranked.findIndex(c => c.id === club.id);
-    const rankLabel = rank >= 0 ? `#${rank + 1} de ${ranked.length}` : '';
-    const barPct = club.arr ? Math.min(100, Math.round((club.arr / MAX_GLOBAL) * 100)) : 0;
-    const pipeline = pipelineData[club.id] || null;
-    const cwData = closedWonData[club.id] || null;
-    const isSigned = !!(cwData && cwData.signed);
-    const combinedTotal = (pipeline ? pipeline.total : 0) + (cwData ? cwData.total : 0);
-    const pipePct = combinedTotal > 0 ? Math.min(100, Math.round((combinedTotal / MAX_GLOBAL) * 100)) : 0;
+const leagueBadgeClass = (league) => league === 'Liga MX' ? 'liga-mx' : 'snm';
 
-    const arr = club.arr || 0;
-    const baseIngresos = arr + WYSCOUT_PER_CLUB;
-    let roiHtml = '';
-    if (combinedTotal > 0) {
-      const roi = ((combinedTotal - baseIngresos) / baseIngresos) * 100;
-      const sign = roi >= 0 ? '+' : '';
-      const roiStr = sign + roi.toFixed(1) + '%';
-      const roiClass = roi > 20 ? 'positive' : roi >= 0 ? 'medium' : 'low';
-      roiHtml = `<div class="roi-badge ${roiClass}">${roiStr}</div>`;
-    } else {
-      roiHtml = `<div class="roi-badge none">Sin pipeline</div>`;
-    }
+container.innerHTML = data.map(club => {
+const rank = ranked.findIndex(c => c.id === club.id);
+const rankLabel = rank >= 0 ? `#${rank + 1} de ${ranked.length}` : '';
+const barPct = club.arr ? Math.min(100, Math.round((club.arr / MAX_GLOBAL) * 100)) : 0;
+const pipeline = pipelineData[club.id] || null;
+const cwData = closedWonData[club.id] || null;
+const isSigned = !!(cwData && cwData.signed);
+const combinedTotal = (pipeline ? pipeline.total : 0) + (cwData ? cwData.total : 0);
+const pipePct = combinedTotal > 0 ? Math.min(100, Math.round((combinedTotal / MAX_GLOBAL) * 100)) : 0;
 
-    let narrHtml = '';
-    if (combinedTotal > 0 && club.arr) {
-      const narr = ((combinedTotal - club.arr) / club.arr) * 100;
-      const sign = narr >= 0 ? '+' : '';
-      const narrStr = sign + narr.toFixed(1) + '%';
-      const narrClass = narr > 20 ? 'positive' : narr >= 0 ? 'medium' : 'low';
-      narrHtml = `<div class="roi-badge ${narrClass}">${narrStr}</div>`;
-    } else if (combinedTotal > 0 && !club.arr) {
-      narrHtml = `<div class="roi-badge none">Sin ARR</div>`;
-    } else {
-      narrHtml = `<div class="roi-badge none">Sin pipeline</div>`;
-    }
+const arr = club.arr || 0;
+const baseIngresos = arr + WYSCOUT_PER_CLUB;
+let roiHtml = '';
+if (combinedTotal > 0) {
+const roi = ((combinedTotal - baseIngresos) / baseIngresos) * 100;
+const sign = roi >= 0 ? '+' : '';
+const roiStr = sign + roi.toFixed(1) + '%';
+const roiClass = roi > 20 ? 'positive' : roi >= 0 ? 'medium' : 'low';
+roiHtml = `<div class="roi-badge ${roiClass}">${roiStr}</div>`;
+} else {
+roiHtml = `<div class="roi-badge none">Sin pipeline</div>`;
+}
 
-    const stampHtml = isSigned ? `
-      <div class="signed-stamp-overlay">
-        <svg width="150" height="150" viewBox="0 0 150 150" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="75" cy="75" r="68" fill="none" stroke="#059669" stroke-width="5" opacity="0.55"/>
-          <circle cx="75" cy="75" r="57" fill="none" stroke="#059669" stroke-width="2" opacity="0.35"/>
-          <text x="75" y="84" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif" font-weight="900" font-size="30" fill="#059669" opacity="0.65" letter-spacing="4">SIGNED</text>
-        </svg>
-      </div>` : '';
+let narrHtml = '';
+if (combinedTotal > 0 && club.arr) {
+const narr = ((combinedTotal - club.arr) / club.arr) * 100;
+const sign = narr >= 0 ? '+' : '';
+const narrStr = sign + narr.toFixed(1) + '%';
+const narrClass = narr > 20 ? 'positive' : narr >= 0 ? 'medium' : 'low';
+narrHtml = `<div class="roi-badge ${narrClass}">${narrStr}</div>`;
+} else if (combinedTotal > 0 && !club.arr) {
+narrHtml = `<div class="roi-badge none">Sin ARR</div>`;
+} else {
+narrHtml = `<div class="roi-badge none">Sin pipeline</div>`;
+}
 
-    return `
-    <div class="club-card${isSigned ? ' signed-contract' : ''}">
-      ${stampHtml}
-      <div class="card-header">
-        <div class="club-badge">${badgeSVG(club)}</div>
-        <div class="club-info">
-          <div class="club-name">${club.name}</div>
-          <div class="club-id">${club.id}</div>
-        </div>
-      </div>
-      <div class="card-body">
-        <div class="pipeline-label-row">
-          <span class="arr-label">${isSigned ? 'Signed Contract' : 'Open Pipeline + CW'}</span>
-          <span class="pipeline-date">Consultado: ${PIPELINE_DATE}</span>
-        </div>
-        ${combinedTotal > 0
-          ? `<div class="pipeline-value">$${Math.round(combinedTotal).toLocaleString('en-US')}</div>
-             <div class="pipeline-bar-wrap"><div class="pipeline-bar" style="width:${pipePct}%"></div></div>
-             <div class="pipeline-opps">
-               ${pipeline ? pipeline.opps.map(o => `<div class="pipeline-opp">
-                 <span class="opp-name" title="${o.name}">${o.name}</span>
-                 <span class="opp-amount">$${Math.round(o.amount).toLocaleString('en-US')}</span>
-                 <span class="opp-date">${o.closeDate}</span>
-               </div>`).join('') : ''}
-               ${cwData ? cwData.opps.map(o => `<div class="pipeline-opp">
-                 <span class="opp-name" title="${o.name}" style="color:#185FA5;">${o.name}</span>
-                 <span class="opp-amount" style="color:#185FA5;">$${Math.round(o.amount).toLocaleString('en-US')}</span>
-                 <span class="opp-date" style="color:#185FA5;font-weight:500;">${o.stage}</span>
-               </div>`).join('') : ''}
-             </div>`
-          : `<div class="pipeline-value no-pipeline">Sin pipeline abierto</div>
-             <div class="pipeline-bar-wrap"><div class="pipeline-bar" style="width:0%"></div></div>`
-        }
-        <div class="pipeline-section">
-          <div class="arr-label" style="margin-bottom:2px;">ARR FY25/26</div>
-          ${club.arr !== null
-            ? `<div class="arr-value">$${Math.round(club.arr).toLocaleString('en-US')}</div>
-               <div class="arr-bar-wrap"><div class="arr-bar" style="width:${barPct}%"></div></div>`
-            : `<div class="arr-value no-data">Sin datos de ARR</div>
-               <div class="arr-bar-wrap"><div class="arr-bar no-data-bar" style="width:0%"></div></div>`
-          }
-        </div>
-        <div class="prob-section" data-probid="${club.id}">
-          <div class="prob-label">Probability (%)</div>
-          <div class="prob-btns">
-            ${[0, 25, 50, 75, 100].map(v =>
-              `<button class="prob-btn" data-val="${v}" onclick="saveProb('${club.id}', ${v})">${v}</button>`
-            ).join('')}
-          </div>
-        </div>
-        <div class="roi-section">
-          <div class="roi-block">
-            <div class="roi-block-label">Real Growth with WS25/26</div>
-            ${roiHtml}
-          </div>
-          <div class="roi-divider"></div>
-          <div class="roi-block">
-            <div class="roi-block-label">NARR 26/27</div>
-            ${narrHtml}
-          </div>
-        </div>
-      </div>
-      <div class="card-footer">
-        <a class="sf-link" href="${SF_BASE}${club.id}/view" target="_blank">
-          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 3H3a1 1 0 00-1 1v9a1 1 0 001 1h9a1 1 0 001-1V9"/><path d="M10 2h4v4"/><path d="M14 2L8 8"/></svg>
-          Ver en Salesforce
-        </a>
-        <span class="arr-rank">${rankLabel}</span>
-      </div>
-    </div>`;
-  }).join('');
+const stampHtml = isSigned ? `
+<div class="signed-stamp-overlay">
+<svg width="150" height="150" viewBox="0 0 150 150" xmlns="http://www.w3.org/2000/svg">
+<circle cx="75" cy="75" r="68" fill="none" stroke="#059669" stroke-width="5" opacity="0.55"/>
+<circle cx="75" cy="75" r="57" fill="none" stroke="#059669" stroke-width="2" opacity="0.35"/>
+<text x="75" y="84" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif" font-weight="900" font-size="30" fill="#059669" opacity="0.65" letter-spacing="4">SIGNED</text>
+</svg>
+</div>` : '';
 
-  restoreProbs();
+return `
+<div class="club-card${isSigned ? ' signed-contract' : ''}">
+${stampHtml}
+<div class="card-header">
+<div class="club-badge">${badgeSVG(club)}</div>
+<div class="club-info">
+<div class="club-info-top">
+<div class="club-name">${club.name}</div>
+<span class="league-badge ${leagueBadgeClass(club.league)}">${club.league}</span>
+</div>
+<div class="club-id">${club.id}</div>
+</div>
+</div>
+<div class="card-body">
+<div class="pipeline-label-row">
+<span class="arr-label">${isSigned ? 'Signed Contract' : 'Open Pipeline + CW'}</span>
+<span class="pipeline-date">Consultado: ${PIPELINE_DATE}</span>
+</div>
+${combinedTotal > 0
+? `<div class="pipeline-value">$${Math.round(combinedTotal).toLocaleString('en-US')}</div>
+<div class="pipeline-bar-wrap"><div class="pipeline-bar" style="width:${pipePct}%"></div></div>
+<div class="pipeline-opps">
+${pipeline ? pipeline.opps.map(o => `
+<span class="opp-name" title="${o.name}">${o.name}</span>
+<span class="opp-amount">$${Math.round(o.amount).toLocaleString('en-US')}</span>
+<span class="opp-date">${o.closeDate}</span>
+</div>`).join('') : ''}
+${cwData ? cwData.opps.map(o => `<div class="pipeline-opp">
+<span class="opp-name" title="${o.name}" style="color:#185FA5;">${o.name}</span>
+<span class="opp-amount" style="color:#185FA5>�&>$${Math.round(o.amount).toLocaleString('en-US')}</span>
+<span class="opp-date" style="color:#185FA5;font-weight:500;">${o.stage}</span>
+</div>`).join('') : ''}
+</div>`
+: `<div class="pipeline-value no-pipeline">Sin pipeline abierto</div>
+<div class="pipeline-bar-wrap"><div class="pipeline-bar" style="width:0%"></div></div>`
+}
+<div class="pipeline-section">
+<div class="arr-label" style="margin-bottom:2px;">ARR FY0�0�</div>
+${club.arr !== null
+? `<div class="arr-value">$${Math.round(club.arr).toLocaleString('en-US')}</div>
+<div class="arr-bar-wrap"><div class="arr-bar" style="width:${barPct}%"></div></div>`
+: `<div class="arr-value no-data">Sin datos de ARR</div>
+<div class="arr-bar-wrap"><div class="arr-bar no-data-bar" style="width:0%"></div></div>`
+}
+</div>%"></div></div>`
+}
+</div>
+<div class="prob-section" data-probid="${club.id}">
+<div class="prob-label">Probability (%)</div>
+<div class="prob-btns">
+${[0, 25, 50, 75, 100].map(v =>
+`<button class="prob-btn" data-val="${v}" onclick="saveProb('${club.id}', ${v})">${v}</button>`
+).join('')}
+</div>
+</div>
+<div class="roi-section">
+<div class="roi-block">
+<div class="roi-block-label">Real Growth with WS25/26</div>
+${roiHtml}
+</div>
+<div class="roi-divider"></div>
+<div class="roi-block">
+<div class="roi-block-label">NARR 26/27</div>
+${narrHtml}
+</div>
+</div>
+</div>
+<div class="card-footer">
+<a class="sf-link" href="${SF_BASE}${club.id}/view" target="_blank">
+<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 3H3a1 1 0 00-1 1v9a1 1 0 001 1h9a1 1 0 001-1V9"/><path d="M10 2h4v4"/><path d="M14 2L8 8"/></svg>
+Ver en Salesforce
+</a>
+<span class="arr-rank">${rankLabel}</span>
+</div>
+</div>`;
+}).join('');
+
+restoreProbs();
 }
 
 function initSummaryMetrics() {
-  let totalPipeline = 0;
-  let clubsConPipeline = 0;
+let totalPipeline = 0;
+let clubsConPipeline = 0;
 
-  clubs.forEach(club => {
-    const pipeline = pipelineData[club.id];
-    const cw = closedWonData[club.id];
-    const combined = (pipeline ? pipeline.total : 0) + (cw ? cw.total : 0);
-    if (combined > 0) {
-      totalPipeline += combined;
-      clubsConPipeline++;
-    }
-  });
+clubs.forEach(club => {
+const pipeline = pipelineData[club.id];
+const cw = closedWonData[club.id];
+const combined = (pipeline ? pipeline.total : 0) + (cw ? cw.total : 0);
+if (combined > 0) {
+totalPipeline += combined;
+clubsConPipeline++;
+}
+});
 
-  const totalArrAll = clubs.reduce((sum, club) => sum + (club.arr || 0), 0);
-  const totalBase = totalArrAll + WYSCOUT_TOTAL;
+const totalArrAll = clubs.reduce((sum, club) => sum + (club.arr || 0), 0);
+const totalBase = totalArrAll + WYSCOUT_TOTAL;
 
-  const arrGrowth = totalArrAll > 0 ? ((totalPipeline - totalArrAll) / totalArrAll) * 100 : 0;
-  const arrGrowthSign = arrGrowth >= 0 ? '+' : '';
-  const arrGrowthColor = arrGrowth >= 0 ? '#065F46' : '#991B1B';
+const arrGrowth = totalArrAll > 0 ? ((totalPipeline - totalArrAll) / totalArrAll) * 100 : 0;
+const arrGrowthSign = arrGrowth >= 0 ? '+' : '';
+const arrGrowthColor = arrGrowth >= 0 ? '#065F46' : '#991B1B';
 
-  const roiGlobal = totalBase > 0 ? ((totalPipeline - totalBase) / totalBase) * 100 : 0;
-  const sign = roiGlobal >= 0 ? '+' : '';
-  const roiColor = roiGlobal >= 0 ? '#065F46' : '#991B1B';
+const roiGlobal = totalBase > 0 ? ((totalPipeline - totalBase) / totalBase) * 100 : 0;
+const sign = roiGlobal >= 0 ? '+' : '';
+const roiColor = roiGlobal >= 0 ? '#065F46' : '#991B1B';
 
-  let totalCW = 0;
-  let cwClubs = 0;
-  Object.values(closedWonData).forEach(cw => { totalCW += cw.total; cwClubs++; });
-  const actualCWpct = totalArrAll > 0 ? (totalCW / totalArrAll) * 100 : 0;
-  const cwPctSign = actualCWpct >= 0 ? '+' : '';
-  const cwColor = actualCWpct > 20 ? '#065F46' : actualCWpct > 0 ? '#92400E' : '#991B1B';
+let totalCW = 0;
+let cwClubs = 0;
+Object.values(closedWonData).forEach(cw => { totalCW += cw.total; cwClubs++; });
+const actualCWpct = totalArrAll > 0 ? (totalCW / totalArrAll) * 100 : 0;
+const cwPctSign = actualCWpct >= 0 ? '+' : '';
+const cwColor = actualCWpct > 20 ? '#065F46' : actualCWpct > 0 ? '#92400E' : '#991B1B';
 
-  const cwEl = document.getElementById('metric-actual-cw');
-  cwEl.textContent = cwPctSign + actualCWpct.toFixed(1) + '%';
-  cwEl.style.color = cwColor;
-  document.getElementById('metric-actual-cw-sub').textContent =
-    '$' + totalCW.toLocaleString('en-US', {minimumFractionDigits:0, maximumFractionDigits:0}) + ' vs $' + totalArrAll.toLocaleString('en-US', {maximumFractionDigits:0});
-  document.getElementById('metric-cw-total').textContent =
-    '$' + Math.round(totalCW).toLocaleString('en-US');
-  document.getElementById('metric-cw-clubs').textContent =
-    cwClubs + (cwClubs === 1 ? ' club · Invoiced/CW' : ' clubes · Invoiced/CW');
+const cwEl = document.getElementById('metric-actual-cw');
+cwEl.textContent = cwPctSign + actualCWpct.toFixed(1) + '%';
+cwEl.style.color = cwColor;
+document.getElementById('metric-actual-cw-sub').textContent =
+'$' + totalCW.toLocaleString('en-US', {minimumFractionDigits:0, maximumFractionDigits:0}) + ' vs $' + totalArrAll.toLocaleString('en-US', {maximumFractionDigits:0});
+document.getElementById('metric-cw-total').textContent =
+'$' + Math.round(totalCW).toLocaleString('en-US');
+document.getElementById('metric-cw-clubs').textContent =
+cwClubs + (cwClubs === 1 ? ' club · Invoiced/CW' : ' clubes · Invoiced/CW');
 
-  const growthEl = document.getElementById('metric-arr-growth');
-  growthEl.textContent = arrGrowthSign + arrGrowth.toFixed(1) + '%';
-  growthEl.style.color = arrGrowthColor;
-  document.getElementById('metric-arr-growth-sub').textContent =
-    '$' + totalArrAll.toLocaleString('en-US', {maximumFractionDigits:0}) + ' → $' + totalPipeline.toLocaleString('en-US', {maximumFractionDigits:0});
+const growthEl = document.getElementById('metric-arr-growth');
+growthEl.textContent = arrGrowthSign + arrGrowth.toFixed(1) + '%';
+growthEl.style.color = arrGrowthColor;
+document.getElementById('metric-arr-growth-sub').textContent =
+'$' + totalArrAll.toLocaleString('en-US', {maximumFractionDigits:0}) + ' → $' + totalPipeline.toLocaleString('en-US', {maximumFractionDigits:0});
 
-  document.getElementById('metric-wyscout-per-club').textContent =
-    '$' + WYSCOUT_PER_CLUB.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
-  document.getElementById('metric-pipeline').textContent =
-    '$' + totalPipeline.toLocaleString('en-US', {minimumFractionDigits: 0, maximumFractionDigits: 0});
-  document.getElementById('metric-pipeline-sub').textContent =
-    clubsConPipeline + ' clubes con pipeline abierto';
+document.getElementById('metric-wyscout-per-club').textContent =
+'$' + WYSCOUT_PER_CLUB.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+document.getElementById('metric-pipeline').textContent =
+'$' + totalPipeline.toLocaleString('en-US', {minimumFractionDigits: 0, maximumFractionDigits: 0});
+document.getElementById('metric-pipeline-sub').textContent =
+clubsConPipeline + ' clubes con pipeline abierto';
 
-  const roiEl = document.getElementById('metric-roi');
-  roiEl.textContent = sign + roiGlobal.toFixed(1) + '%';
-  roiEl.style.color = roiColor;
-  document.getElementById('metric-roi-sub').textContent =
-    'Base: ARR + Wyscout = $' + totalBase.toLocaleString('en-US', {maximumFractionDigits: 0});
+const roiEl = document.getElementById('metric-roi');
+roiEl.textContent = sign + roiGlobal.toFixed(1) + '%';
+roiEl.style.color = roiColor;
+document.getElementById('metric-roi-sub').textContent =
+'Base: ARR + Wyscout = $' + totalBase.toLocaleString('en-US', {maximumFractionDigits: 0});
 }
 
 const PROB_KEY = 'gtm-club-prob';
 
 // ── URL hash sync ──────────────────────────────────────────────
 function probsToHash(probs) {
-  const parts = [];
-  clubs.forEach((club, i) => {
-    const v = probs[club.id];
-    if (v !== undefined && v !== 0) parts.push(i + '-' + v);
-  });
-  return parts.length ? '?p=' + parts.join('.') : '';
+const parts = [];
+clubs.forEach((club, i) => {
+const v = probs[club.id];
+if (v !== undefined && v !== 0) parts.push(i + '-' + v);
+});
+return parts.length ? '?p=' + parts.join('.') : '';
 }
 function hashToProbs() {
-  const params = new URLSearchParams(window.location.search);
-  const p = params.get('p');
-  if (!p) return null;
-  const probs = {};
-  p.split('.').forEach(part => {
-    const [idx, val] = part.split('-');
-    const club = clubs[parseInt(idx)];
-    if (club && val !== undefined) probs[club.id] = parseInt(val);
-  });
-  return probs;
+const params = new URLSearchParams(window.location.search);
+const p = params.get('p');
+if (!p) return null;
+const probs = {};
+p.split('.').forEach(part => {
+const [idx, val] = part.split('-');
+const club = clubs[parseInt(idx)];
+if (club && val !== undefined) probs[club.id] = parseInt(val);
+});
+return probs;
 }
 // ──────────────────────────────────────────────────────────────
 
 function loadProbs() {
-  const hashProbs = hashToProbs();
-  if (hashProbs && Object.keys(hashProbs).length > 0) return hashProbs;
-  try { return JSON.parse(localStorage.getItem(PROB_KEY) || '{}'); } catch(e) { return {}; }
+const hashProbs = hashToProbs();
+if (hashProbs && Object.keys(hashProbs).length > 0) return hashProbs;
+try { return JSON.parse(localStorage.getItem(PROB_KEY) || '{}'); } catch(e) { return {}; }
 }
 function saveProb(clubId, val) {
-  const probs = loadProbs();
-  probs[clubId] = val;
-  localStorage.setItem(PROB_KEY, JSON.stringify(probs));
-  const hash = probsToHash(probs);
-  history.replaceState(null, '', window.location.pathname + (hash || ''));
-  applyProb(clubId, val);
-  updateForecastMetrics();
+const probs = loadProbs();
+probs[clubId] = val;
+localStorage.setItem(PROB_KEY, JSON.stringify(probs));
+const hash = probsToHash(probs);
+history.replaceState(null, '', window.location.pathname + (hash || ''));
+applyProb(clubId, val);
+updateForecastMetrics();
 }
 function copyShareLink() {
-  const probs = loadProbs();
-  const hash = probsToHash(probs);
-  const url = window.location.origin + window.location.pathname + (hash || '');
-  navigator.clipboard.writeText(url).then(() => {
-    const btn = document.getElementById('shareBtn');
-    const orig = btn.textContent;
-    btn.textContent = '✅ ¡Copiado!';
-    setTimeout(() => btn.textContent = orig, 2000);
-  });
+const probs = loadProbs();
+const hash = probsToHash(probs);
+const url = window.location.origin + window.location.pathname + (hash || '');
+navigator.clipboard.writeText(url).then(() => {
+const btn = document.getElementById('shareBtn');
+const orig = btn.textContent;
+btn.textContent = '✅ ¡Copiado!';
+setTimeout(() => btn.textContent = orig, 2000);
+});
 }
 function updateForecastMetrics() {
-  const probs = loadProbs();
-  const totalArrAll = clubs.reduce((sum, c) => sum + (c.arr || 0), 0);
-  let bestCase = 0, commit = 0, worstCase = 0;
-  clubs.forEach(club => {
-    const prob = Number(probs[club.id] || 0);
-    const pipeline = pipelineData[club.id];
-    const cw = closedWonData[club.id];
-    const combined = (pipeline ? pipeline.total : 0) + (cw ? cw.total : 0);
-    if (prob > 24) bestCase += combined;
-    if (prob > 49) commit += combined;
-    if (prob > 74) worstCase += combined;
-  });
-  const fmt = v => '$' + v.toLocaleString('en-US', {minimumFractionDigits: 0, maximumFractionDigits: 0});
-  const pct = v => totalArrAll > 0
-    ? (v / totalArrAll * 100).toFixed(1) + '% vs ARR FY25/26'
-    : '—';
-  document.getElementById('fc-best-val').textContent = fmt(bestCase);
-  document.getElementById('fc-best-pct').textContent = pct(bestCase);
-  document.getElementById('fc-commit-val').textContent = fmt(commit);
-  document.getElementById('fc-commit-pct').textContent = pct(commit);
-  document.getElementById('fc-worst-val').textContent = fmt(worstCase);
-  document.getElementById('fc-worst-pct').textContent = pct(worstCase);
+const probs = loadProbs();
+const totalArrAll = clubs.reduce((sum, c) => sum + (c.arr || 0), 0);
+let bestCase = 0, commit = 0, worstCase = 0;
+clubs.forEach(club => {
+const prob = Number(probs[club.id] || 0);
+const pipeline = pipelineData[club.id];
+const cw = closedWonData[club.id];
+const combined = (pipeline ? pipeline.total : 0) + (cw ? cw.total : 0);
+if (prob > 24) bestCase += combined;
+if (prob > 49) commit += combined;
+if (prob > 74) worstCase += combined;
+});
+const fmt = v => '$' + v.toLocaleString('en-US', {minimumFractionDigits: 0, maximumFractionDigits: 0});
+const pct = v => totalArrAll > 0
+? (v / totalArrAll * 100).toFixed(1) + '% vs ARR FY25/26'
+: '—';
+document.getElementById('fc-best-val').textContent = fmt(bestCase);
+document.getElementById('fc-best-pct').textContent = pct(bestCase);
+document.getElementById('fc-commit-val').textContent = fmt(commit);
+document.getElementById('fc-commit-pct').textContent = pct(commit);
+document.getElementById('fc-worst-val').textContent = fmt(worstCase);
+document.getElementById('fc-worst-pct').textContent = pct(worstCase);
 }
 function applyProb(clubId, val) {
-  const section = document.querySelector(`.prob-section[data-probid="${clubId}"]`);
-  if (!section) return;
-  section.querySelectorAll('.prob-btn').forEach(b => {
-    b.classList.remove('p-0','p-25','p-50','p-75','p-100');
-    if (parseInt(b.dataset.val) === val) b.classList.add('p-' + val);
-  });
+const section = document.querySelector(`.prob-section[data-probid="${clubId}"]`);
+if (!section) return;
+section.querySelectorAll('.prob-btn').forEach(b => {
+b.classList.remove('p-0','p-25','p-50','p-75','p-100');
+if (parseInt(b.dataset.val) === val) b.classList.add('p-' + val);
+});
 }
 function restoreProbs() {
-  const probs = loadProbs();
-  Object.entries(probs).forEach(([clubId, val]) => applyProb(clubId, Number(val)));
+const probs = loadProbs();
+Object.entries(probs).forEach(([clubId, val]) => applyProb(clubId, Number(val)));
 }
 
 const style = document.createElement('style');
