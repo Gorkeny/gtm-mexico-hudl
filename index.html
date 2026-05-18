@@ -53,6 +53,9 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
 .filter-btn.league-btn { border-color: #BFDBFE; color: #1D4ED8; background: #EFF6FF; }
 .filter-btn.league-btn:hover { border-color: #1D4ED8; }
 .filter-btn.league-btn.active { background: #1D4ED8; border-color: #1D4ED8; color: #fff; }
+.filter-btn.exp-btn { border-color: #FDBA74; color: #C2410C; background: #FFF7ED; }
+.filter-btn.exp-btn:hover { border-color: #C2410C; }
+.filter-btn.exp-btn.active { background: #C2410C; border-color: #C2410C; color: #fff; }
 .metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 28px; }
 @media (max-width: 900px) { .metrics { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 600px) { .metrics { grid-template-columns: repeat(2, 1fr); } }
@@ -75,6 +78,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
 .league-badge { display: inline-flex; align-items: center; padding: 2px 6px; border-radius: 4px; font-size: 9px; font-weight: 700; letter-spacing: 0.04em; white-space: nowrap; flex-shrink: 0; margin-top: 1px; }
 .league-badge.liga-mx { background: #EFF6FF; color: #1D4ED8; border: 1px solid #BFDBFE; }
 .league-badge.snm { background: #DCFCE7; color: #166534; border: 1px solid #86EFAC; }
+.league-badge.liga-expansion { background: #FFF7ED; color: #C2410C; border: 1px solid #FDBA74; }
 .card-body { padding: 10px 14px; }
 .arr-label { font-size: 10px; color: #888; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 2px; }
 .arr-value { font-size: 20px; font-weight: 600; color: #1a1a1a; margin-bottom: 6px; }
@@ -156,7 +160,7 @@ z-index: 10;
 
 <div class="page-header">
 <h1>Control GTM 26/27 México</h1>
-<p>19 cuentas · Cierre fiscal Hudl · Snapshot: 13 de mayo de 2026</p>
+<p>33 cuentas · Cierre fiscal Hudl · Snapshot: 13 de mayo de 2026</p>
 <p style="margin-top:8px;font-size:12px;color:#aaa;"><strong style="color:#888;">Consideraciones:</strong> El volumen del contrato de Wyscout ha sido dividido solo entre los 18 clubes del Liga MX y SNM, no considerando CITEC, Liga de Expansión ni Comisión arbitral.</p>
 </div>
 
@@ -244,11 +248,12 @@ z-index: 10;
 <input type="text" id="search" placeholder="Buscar club o liga..." oninput="render()" />
 </div>
 <div class="filter-btns">
-<button class="filter-btn active" onclick="setFilter('all', this)">Todos (19)</button>
+<button class="filter-btn active" onclick="setFilter('all', this)">Todos (33)</button>
 <button class="filter-btn" onclick="setFilter('active', this)">Con ARR (16)</button>
-<button class="filter-btn" onclick="setFilter('nodata', this)">Sin datos (3)</button>
-<button class="filter-btn league-btn" onclick="setFilter('liga-mx', this)">Liga MX (18)</button>
+<button class="filter-btn" onclick="setFilter('nodata', this)">Sin datos (17)</button>
+<button class="filter-btn league-btn" onclick="setFilter('liga-mx', this)">Liga MX (17)</button>
 <button class="filter-btn league-btn" onclick="setFilter('snm', this)">SNM (1)</button>
+<button class="filter-btn exp-btn" onclick="setFilter('liga-expansion', this)">Liga Expansión (14)</button>
 </div>
 <button id="shareBtn" onclick="copyShareLink()" style="display:inline-flex;align-items:center;gap:6px;padding:8px 14px;border:1px solid #185FA5;border-radius:8px;font-size:13px;background:#fff;color:#185FA5;cursor:pointer;transition:all 0.15s;white-space:nowrap;">
 🔗 Copiar enlace
@@ -268,7 +273,7 @@ const pipelineData = {
 { name: 'FY 26-27_Heberto Cabrera_MX_PACK 55', amount: 188241.75, closeDate: '2026-05-31' }
 ]},
 '0013w00002Rhm06AAB': { total: 133761.80, opps: [
-{ name: 'FY 26-27_Juan Chazirra_MX PACK 55', amount: 133761.80, closeDate: '2026-05-31' }
+{ name: 'FY 26-27_Juan Chazarra_MX PACK 55', amount: 133761.80, closeDate: '2026-05-31' }
 ]},
 '0010V00002KSiJiQAL': { total: 187774, opps: [
 { name: 'FY 26-27_Andres Payssé_MX PACK 55', amount: 187774, closeDate: '2026-06-30' }
@@ -330,11 +335,24 @@ const clubs = [
 { id:'0013w00002Rhlt0AAB', name:'Club Leon', arr:18796, abbr:'LEO', primary:'#006633', secondary:'#FFD700', league:'Liga MX' },
 { id:'0010V00002MwZtQQAV', name:'Club Santos Laguna', arr:9103, abbr:'SAN', primary:'#006633', secondary:'#FFFFFF', league:'Liga MX' },
 { id:'0013w00002STg1XAAT', name:'Atlas Club de Fútbol Rojinegros', arr:7282, abbr:'ATL', primary:'#CC0000', secondary:'#111111', league:'Liga MX' },
-{ id:'001d000001y3RJQAA2', name:'Atlante F.C.', arr:0, abbr:'ATL', primary:'#003DA5', secondary:'#FFD100', league:'Liga MX' },
+{ id:'001d000001y3RJQAA2', name:'Atlante FC', arr:null, abbr:'ATL', primary:'#003DA5', secondary:'#FFD100', league:'Liga Expansión' },
 { id:'001d000001y3RKuAAM', name:'Querétaro FC', arr:null, abbr:'QRO', primary:'#003087', secondary:'#FFFFFF', league:'Liga MX' },
 { id:'0010V00002MwZtuQAF', name:'Xolos de Tijuana', arr:null, abbr:'TIJ', primary:'#111111', secondary:'#CC0000', league:'Liga MX' },
 { id:'001d0000022QA74AAG', name:'Club Puebla', arr:null, abbr:'PUE', primary:'#003087', secondary:'#FFFFFF', league:'Liga MX' },
 { id:'0010V00002Mx9a5QAB', name:'National Teams (SNM)', arr:216792.12, abbr:'SNM', primary:'#006847', secondary:'#FFFFFF', league:'SNM' },
+{ id:'0018X000030FDLgQAO', name:'Alebrijes de Oaxaca', arr:null, abbr:'OAX', primary:'#2E7D32', secondary:'#FF6B35', league:'Liga Expansión' },
+{ id:'001d0000022QNmjAAG', name:'Atlético Morelia', arr:null, abbr:'MOR', primary:'#6B1A1A', secondary:'#FFD700', league:'Liga Expansión' },
+{ id:'001d000001y3ed1AAA', name:'CD Tepatitlán de Morelos (FA)', arr:null, abbr:'TEP', primary:'#CC0000', secondary:'#FFFFFF', league:'Liga Expansión' },
+{ id:'0011L00002rOHA0QAO', name:'Cancún Fútbol Club', arr:null, abbr:'CUN', primary:'#FF6600', secondary:'#FFFFFF', league:'Liga Expansión' },
+{ id:'001d000001y3RL8AAM', name:'CD Mineros de Zacatecas', arr:null, abbr:'MIN', primary:'#CC0000', secondary:'#FFD700', league:'Liga Expansión' },
+{ id:'0013w00002RhoaqAAB', name:'Club Dorados de Sinaloa', arr:null, abbr:'DOR', primary:'#FFD700', secondary:'#006633', league:'Liga Expansión' },
+{ id:'0011L00002rOKzQQAW', name:'Club Irapuato', arr:null, abbr:'IRA', primary:'#006633', secondary:'#FFFFFF', league:'Liga Expansión' },
+{ id:'0010V00002QHnMKQA1', name:'CF Correcaminos UAT', arr:null, abbr:'COR', primary:'#CC0000', secondary:'#003087', league:'Liga Expansión' },
+{ id:'0011L00002rOHA6QAO', name:'La Paz FC', arr:null, abbr:'PAZ', primary:'#003087', secondary:'#FFFFFF', league:'Liga Expansión' },
+{ id:'0011L00002rOHA4QAO', name:'Tepatitlán FC', arr:null, abbr:'TFC', primary:'#003DA5', secondary:'#FFFFFF', league:'Liga Expansión' },
+{ id:'0011L00002rOHA5QAO', name:'Tlaxcala FC', arr:null, abbr:'TLX', primary:'#CC0000', secondary:'#FFFFFF', league:'Liga Expansión' },
+{ id:'001d00000203uMSAAY', name:'U. de G.', arr:null, abbr:'UDG', primary:'#003DA5', secondary:'#FFD700', league:'Liga Expansión' },
+{ id:'001d000001y3RJAAA2', name:'Venados FC', arr:null, abbr:'VEN', primary:'#800020', secondary:'#FFFFFF', league:'Liga Expansión' },
 ];
 
 // Escala global compartida: máximo entre todos los ARR y todos los pipelines
@@ -369,7 +387,8 @@ const matchF = currentFilter === 'all' ||
 (currentFilter === 'active' && c.arr !== null) ||
 (currentFilter === 'nodata' && c.arr === null) ||
 (currentFilter === 'liga-mx' && c.league === 'Liga MX') ||
-(currentFilter === 'snm' && c.league === 'SNM');
+(currentFilter === 'snm' && c.league === 'SNM') ||
+(currentFilter === 'liga-expansion' && c.league === 'Liga Expansión');
 return matchQ && matchF;
 });
 
@@ -381,7 +400,7 @@ container.innerHTML = '<div class="no-results">No se encontraron cuentas</div>';
 return;
 }
 
-const leagueBadgeClass = (league) => league === 'Liga MX' ? 'liga-mx' : 'snm';
+const leagueBadgeClass = (league) => league === 'Liga MX' ? 'liga-mx' : league === 'SNM' ? 'snm' : 'liga-expansion';
 
 container.innerHTML = data.map(club => {
 const rank = ranked.findIndex(c => c.id === club.id);
