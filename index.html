@@ -152,7 +152,7 @@ top: 50%;
 left: 50%;
 transform: translate(-50%, -50%) rotate(-20deg);
 pointer-events: none;
-z-index: 10;
+{z-index: 10;
 }
 </style>
 </head>
@@ -161,7 +161,7 @@ z-index: 10;
 <div class="page-header">
 <h1>Control GTM 26/27 México</h1>
 <p>33 cuentas · Cierre fiscal Hudl · Snapshot: 13 de mayo de 2026</p>
-<p style="margin-top:8px;font-size:12px;color:#aaa;"><strong style="color:#888;">Consideraciones:</strong> El volumen del contrato de Wyscout ha sido dividido solo entre los 18 clubes del Liga MX y SNM, no considerando CITEC, Liga de Expansión ni Comisión arbitral.</p>
+<p style="margin-top:8px;font-size:12px;color:#aaa;"><strong style="color:#888;">Notes:</strong> Wyscout's 25/26 contract ARR has been divided 80% Liga MX + SNM and 20% Liga Expansion for the calculation of real growth</p>
 </div>
 
 <div class="forecast-bar">
@@ -193,7 +193,7 @@ z-index: 10;
 <div class="val">$1,211,067</div>
 <div class="sub">19 cuentas · 16 con ARR activo</div>
 </div>
-<div class="metric">
+    <div class="metric">
 <div class="label">Open Pipeline + CW FY26/27</div>
 <div class="val" id="metric-pipeline">—</div>
 <div class="sub" id="metric-pipeline-sub">—</div>
@@ -204,12 +204,14 @@ z-index: 10;
 <div class="metric">
 <div class="label">Contrato Wyscout FMF 2025/26</div>
 <div class="val">$461,744</div>
-<div class="sub"><a href="https://hudl.lightning.force.com/lightning/r/Contract/800VY000008cSJdYAM/view" target="_blank" style="color:#185FA5;text-decoration:none;">Ver en Salesforce ↗</a></div>
+<div class="sub"><a href="https://hudl.lightning.force.com/lightning/r/Contract/800VY0cSJdYAM/view" target="_blank" style="color:#185FA5;text-decoration:none;">Ver en Salesforce ↗</a></div>
 </div>
 <div class="metric">
 <div class="label">Cuota Wyscout por club</div>
-<div class="val" id="metric-wyscout-per-club">—</div>
-<div class="sub">461,744 ÷ 19 cuentas</div>
+<div class="val" id="metric-wyscout-ligamx">—</div>
+<div class="sub">Liga MX + SNM (80% · 18 clubs)</div>
+<div class="val" id="metric-wyscout-expansion" style="font-size:15px;margin-top:6px;">—</div>
+<div class="sub">Liga Expansión (20% · 14 clubs)</div>
 </div>
 </div>
 <!-- Par 3: Incremento ARR / ROI real -->
@@ -266,7 +268,8 @@ z-index: 10;
 const SF_BASE = 'https://hudl.lightning.force.com/lightning/r/Account/';
 const PIPELINE_DATE = '13 mayo 2026';
 const WYSCOUT_TOTAL = 461743.72;
-const WYSCOUT_PER_CLUB = WYSCOUT_TOTAL / 19; // ~$24,302.30
+const WYSCOUT_LIGA_MX_SNM = WYSCOUT_TOTAL * 0.8 / 18; // ~$20,521.94 (Liga MX 17 + SNM 1)
+const WYSCOUT_LIGA_EXPANSION = WYSCOUT_TOTAL * 0.2 / 14; // ~$6,596.34 (Liga Expansión 14)
 
 const pipelineData = {
 '001d0000024lgcVAAQ': { total: 188241.75, opps: [
@@ -350,7 +353,7 @@ const clubs = [
 { id:'0010V00002QHnMKQA1', name:'CF Correcaminos UAT', arr:null, abbr:'COR', primary:'#CC0000', secondary:'#003087', league:'Liga Expansión' },
 { id:'0011L00002rOHA6QAO', name:'La Paz FC', arr:null, abbr:'PAZ', primary:'#003087', secondary:'#FFFFFF', league:'Liga Expansión' },
 { id:'0011L00002rOHA4QAO', name:'Tepatitlán FC', arr:null, abbr:'TFC', primary:'#003DA5', secondary:'#FFFFFF', league:'Liga Expansión' },
-{ id:'0011L00002rOHA5QAO', name:'Tlaxcala FC', arr:null, abbr:'TLX', primary:'#CC0000', secondary:'#FFFFFF', league:'Liga Expansión' },
+{ id:'0011L00002rOHA5QAO', name:'Tlaxcala FC', arr:null, abbr:'TLX', primary:'#CC000', secondary:'#FFFFFF', league:'Liga Expansión' },
 { id:'001d00000203uMSAAY', name:'U. de G.', arr:null, abbr:'UDG', primary:'#003DA5', secondary:'#FFD700', league:'Liga Expansión' },
 { id:'001d000001y3RJAAA2', name:'Venados FC', arr:null, abbr:'VEN', primary:'#800020', secondary:'#FFFFFF', league:'Liga Expansión' },
 ];
@@ -375,7 +378,8 @@ function badgeSVG(club) {
 const p = club.primary, s = club.secondary;
 return `<svg viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg">
 <rect width="56" height="56" rx="10" fill="${p}"/>
-<text x="28" y="33" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif" font-weight="700" font-size="${club.abbr.length > 3 ? '11' : '13'}" fill="${s}">${club.abbr}</text>
+<text x="28" y="33" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI*,sans-serif" font-weight="700" font-size="${club.abbr.length > 3 ? '11' : '13'}" fill="${s}">${club.abbr}</text>
+</text>
 </svg>`;
 }
 
@@ -393,9 +397,7 @@ return matchQ && matchF;
 });
 
 const ranked = clubs.filter(c => c.arr !== null).sort((a,b) => b.arr - a.arr);
-const container = document.getElementById('cards');
-
-if (data.length === 0) {
+const container = document.getElementById('cardf (data.length === 0) {
 container.innerHTML = '<div class="no-results">No se encontraron cuentas</div>';
 return;
 }
@@ -413,7 +415,8 @@ const combinedTotal = (pipeline ? pipeline.total : 0) + (cwData ? cwData.total :
 const pipePct = combinedTotal > 0 ? Math.min(100, Math.round((combinedTotal / MAX_GLOBAL) * 100)) : 0;
 
 const arr = club.arr || 0;
-const baseIngresos = arr + WYSCOUT_PER_CLUB;
+const wyscoutShare = (club.league === 'Liga MX' || club.league === 'SNM') ? WYSCOUT_LIGA_MX_SNM : WYSCOUT_LIGA_EXPANSION;
+const baseIngresos = arr + wyscoutShare;
 let roiHtml = '';
 if (combinedTotal > 0) {
 const roi = ((combinedTotal - baseIngresos) / baseIngresos) * 100;
@@ -573,8 +576,10 @@ growthEl.style.color = arrGrowthColor;
 document.getElementById('metric-arr-growth-sub').textContent =
 '$' + totalArrAll.toLocaleString('en-US', {maximumFractionDigits:0}) + ' → $' + totalPipeline.toLocaleString('en-US', {maximumFractionDigits:0});
 
-document.getElementById('metric-wyscout-per-club').textContent =
-'$' + WYSCOUT_PER_CLUB.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+document.getElementById('metric-wyscout-ligamx').textContent =
+'$' + WYSCOUT_LIGA_MX_SNM.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+document.getElementById('metric-wyscout-expansion').textContent =
+'$' + WYSCOUT_LIGA_EXPANSION.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
 document.getElementById('metric-pipeline').textContent =
 '$' + totalPipeline.toLocaleString('en-US', {minimumFractionDigits: 0, maximumFractionDigits: 0});
 document.getElementById('metric-pipeline-sub').textContent =
