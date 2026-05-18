@@ -268,7 +268,7 @@ const pipelineData = {
 { name: 'FY 26-27_Heberto Cabrera_MX_PACK 55', amount: 188241.75, closeDate: '2026-05-31' }
 ]},
 '0013w00002Rhm06AAB': { total: 133761.80, opps: [
-{ name: 'FY 26-27_Juan Chazarra_MX PACK 55', amount: 133761.80, closeDate: '2026-05-31' }
+{ name: 'FY 26-27_Juan Chazirra_MX PACK 55', amount: 133761.80, closeDate: '2026-05-31' }
 ]},
 '0010V00002KSiJiQAL': { total: 187774, opps: [
 { name: 'FY 26-27_Andres Payssé_MX PACK 55', amount: 187774, closeDate: '2026-06-30' }
@@ -450,14 +450,14 @@ ${combinedTotal > 0
 ? `<div class="pipeline-value">$${Math.round(combinedTotal).toLocaleString('en-US')}</div>
 <div class="pipeline-bar-wrap"><div class="pipeline-bar" style="width:${pipePct}%"></div></div>
 <div class="pipeline-opps">
-${pipeline ? pipeline.opps.map(o => `
+${pipeline ? pipeline.opps.map(o => `<div class="pipeline-opp">
 <span class="opp-name" title="${o.name}">${o.name}</span>
 <span class="opp-amount">$${Math.round(o.amount).toLocaleString('en-US')}</span>
 <span class="opp-date">${o.closeDate}</span>
 </div>`).join('') : ''}
 ${cwData ? cwData.opps.map(o => `<div class="pipeline-opp">
 <span class="opp-name" title="${o.name}" style="color:#185FA5;">${o.name}</span>
-<span class="opp-amount" style="color:#185FA5>�&>$${Math.round(o.amount).toLocaleString('en-US')}</span>
+<span class="opp-amount" style="color:#185FA5;">$${Math.round(o.amount).toLocaleString('en-US')}</span>
 <span class="opp-date" style="color:#185FA5;font-weight:500;">${o.stage}</span>
 </div>`).join('') : ''}
 </div>`
@@ -465,14 +465,12 @@ ${cwData ? cwData.opps.map(o => `<div class="pipeline-opp">
 <div class="pipeline-bar-wrap"><div class="pipeline-bar" style="width:0%"></div></div>`
 }
 <div class="pipeline-section">
-<div class="arr-label" style="margin-bottom:2px;">ARR FY0�0�</div>
+<div class="arr-label" style="margin-bottom:2px;">ARR FY25/26</div>
 ${club.arr !== null
 ? `<div class="arr-value">$${Math.round(club.arr).toLocaleString('en-US')}</div>
 <div class="arr-bar-wrap"><div class="arr-bar" style="width:${barPct}%"></div></div>`
 : `<div class="arr-value no-data">Sin datos de ARR</div>
 <div class="arr-bar-wrap"><div class="arr-bar no-data-bar" style="width:0%"></div></div>`
-}
-</div>%"></div></div>`
 }
 </div>
 <div class="prob-section" data-probid="${club.id}">
