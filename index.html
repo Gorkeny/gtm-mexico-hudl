@@ -379,7 +379,6 @@ const p = club.primary, s = club.secondary;
 return `<svg viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg">
 <rect width="56" height="56" rx="10" fill="${p}"/>
 <text x="28" y="33" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI*,sans-serif" font-weight="700" font-size="${club.abbr.length > 3 ? '11' : '13'}" fill="${s}">${club.abbr}</text>
-</text>
 </svg>`;
 }
 
@@ -397,7 +396,9 @@ return matchQ && matchF;
 });
 
 const ranked = clubs.filter(c => c.arr !== null).sort((a,b) => b.arr - a.arr);
-const container = document.getElementById('cardf (data.length === 0) {
+const container = document.getElementById('cards');
+
+if (data.length === 0) {
 container.innerHTML = '<div class="no-results">No se encontraron cuentas</div>';
 return;
 }
