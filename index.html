@@ -619,9 +619,13 @@ return probs;
 // ──────────────────────────────────────────────────────────────
 
 function loadProbs() {
-const hashProbs = hashToProbs();
-if (hashProbs && Object.keys(hashProbs).length > 0) return hashProbs;
-try { return JSON.parse(localStorage.getItem(PROB_KEY) || '{}'); } catch(e) { return {}; }
+    let stored = {};
+    try { stored = JSON.parse(localStorage.getItem(PROB_KEY) || '{}'); } catch(e) {}
+    const hashProbs = hashToProbs();
+    if (hashProbs && Object.keys(hashProbs).length > 0) {
+        return Object.assign({}, stored, hashProbs);
+    }
+    return stored;
 }
 function saveProb(clubId, val) {
 const probs = loadProbs();
