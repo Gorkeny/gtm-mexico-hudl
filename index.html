@@ -716,11 +716,8 @@ const pct = v => totalArrAll > 0
 ? (v / totalArrAll * 100).toFixed(1) + '% vs ARR FY25/26'
 : '—';
 document.getElementById('fc-best-val').textContent = fmt(bestCase);
-document.getElementById('fc-best-pct').textContent = pct(bestCase);
 document.getElementById('fc-commit-val').textContent = fmt(commit);
-document.getElementById('fc-commit-pct').textContent = pct(commit);
 document.getElementById('fc-worst-val').textContent = fmt(worstCase);
-document.getElementById('fc-worst-pct').textContent = pct(worstCase);
 const MEXICO_TARGET = 2191768.80;
 const vsTarget = v => (v / MEXICO_TARGET * 100).toFixed(1) + '%';
 document.getElementById('fc-best-target').textContent = vsTarget(bestCase);
