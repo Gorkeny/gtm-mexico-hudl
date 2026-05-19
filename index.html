@@ -157,6 +157,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
 .fc-subtitle { font-size: 10px; color: #aaa; margin-bottom: 8px; }
 .fc-val { font-size: 26px; font-weight: 700; color: #1a1a1a; margin-bottom: 3px; }
 .fc-pct { font-size: 11px; color: #888; }
+.fc-vs-target { font-size: 11px; color: #185FA5; font-weight: 600; margin-top: 4px; }
 .chart-section { background: #fff; border-radius: 12px; border: 1px solid #eee; padding: 20px; margin-bottom: 28px; }
 .chart-title { font-size: 14px; font-weight: 500; color: #1a1a1a; margin-bottom: 16px; }
 .club-card.signed-contract { position: relative; }
@@ -204,18 +205,21 @@ pointer-events: none;
 <div class="fc-subtitle">Probability &gt; 24% (25, 50, 75, 100)</div>
 <div class="fc-val" id="fc-best-val">—</div>
 <div class="fc-pct" id="fc-best-pct">— vs ARR FY25/26</div>
+<div class="fc-vs-target" id="fc-best-target">&#8212; Vs Target</div>
 </div>
 <div class="forecast-card fc-commit">
 <div class="fc-title">Commit</div>
 <div class="fc-subtitle">Probability &gt; 49% (50, 75, 100)</div>
 <div class="fc-val" id="fc-commit-val">—</div>
 <div class="fc-pct" id="fc-commit-pct">— vs ARR FY25/26</div>
+<div class="fc-vs-target" id="fc-commit-target">&#8212; Vs Target</div>
 </div>
 <div class="forecast-card fc-worst">
 <div class="fc-title">Worst Case</div>
 <div class="fc-subtitle">Probability &gt; 74% (75, 100)</div>
 <div class="fc-val" id="fc-worst-val">—</div>
 <div class="fc-pct" id="fc-worst-pct">— vs ARR FY25/26</div>
+<div class="fc-vs-target" id="fc-worst-target">&#8212; Vs Target</div>
 </div>
 </div>
 
@@ -704,6 +708,11 @@ document.getElementById('fc-commit-val').textContent = fmt(commit);
 document.getElementById('fc-commit-pct').textContent = pct(commit);
 document.getElementById('fc-worst-val').textContent = fmt(worstCase);
 document.getElementById('fc-worst-pct').textContent = pct(worstCase);
+const MEXICO_TARGET = 2191768.80;
+const vsTarget = v => (v / MEXICO_TARGET * 100).toFixed(1) + '% Vs Target';
+document.getElementById('fc-best-target').textContent = vsTarget(bestCase);
+document.getElementById('fc-commit-target').textContent = vsTarget(commit);
+document.getElementById('fc-worst-target').textContent = vsTarget(worstCase);
 }
 function applyProb(clubId, val) {
 const section = document.querySelector(`.prob-section[data-probid="${clubId}"]`);
