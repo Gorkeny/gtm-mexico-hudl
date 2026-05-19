@@ -35,6 +35,20 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
 .page-header { margin-bottom: 28px; }
 .page-header h1 { font-size: 22px; font-weight: 500; color: #1a1a1a; margin-bottom: 4px; }
 .page-header p { font-size: 14px; color: #888; }
+.header-info-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 24px; margin-top: 14px; flex-wrap: wrap; }
+.header-left { flex: 1; min-width: 260px; }
+.si-label { font-size: 10px; color: #aaa; text-transform: uppercase; letter-spacing: 0.06em; display: block; margin-bottom: 3px; }
+.si-value { font-size: 17px; font-weight: 600; color: #1a1a1a; }
+.contracts-lost { margin-top: 8px; }
+.cl-title { font-size: 10px; font-weight: 600; color: #888; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px; }
+.cl-item { font-size: 11px; color: #999; margin-bottom: 2px; }
+.cl-item strong { color: #c0392b; font-weight: 500; }
+.target-indicator { background: linear-gradient(135deg, #185FA5 0%, #1565c0 100%); border-radius: 12px; padding: 14px 22px; text-align: center; color: #fff; min-width: 220px; flex-shrink: 0; }
+.ti-label { font-size: 10px; opacity: 0.82; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 6px; }
+.ti-value { font-size: 22px; font-weight: 700; margin-bottom: 6px; letter-spacing: -0.01em; }
+.ti-breakdown { font-size: 11px; opacity: 0.88; }
+.ti-sep { margin: 0 5px; opacity: 0.6; }
+.header-note { margin-top: 12px; font-size: 11.5px; color: #aaa; line-height: 1.5; }
 .contract-banner { display: flex; align-items: center; justify-content: space-between; background: #fff; border: 1px solid #eee; border-radius: 10px; padding: 12px 18px; margin-bottom: 16px; flex-wrap: wrap; gap: 10px; }
 .contract-banner .cb-label { font-size: 12px; color: #888; margin-bottom: 2px; }
 .contract-banner .cb-value { font-size: 20px; font-weight: 500; color: #1a1a1a; }
@@ -161,8 +175,28 @@ pointer-events: none;
 <div class="page-header">
 <h1>GTM Dashboard 26/27 Mexico</h1>
 <p>33 accounts · Hudl fiscal year · Snapshot: May 13, 2026</p>
-<p style="margin-top:8px;font-size:12px;color:#aaa;"><strong style="color:#888;">Notes:</strong> Wyscout's 25/26 contract ARR has been divided 80% Liga MX + SNM and 20% Liga Expansion for the calculation of real growth</p>
+<div class="header-info-row">
+<div class="header-left">
+<span class="si-label">Starting ARR 25/26</span>
+<span class="si-value">$3,183,664 USD</span>
+<div class="contracts-lost">
+<div class="cl-title">Contracts lost in 2025/26:</div>
+<div class="cl-item">Wimu Collective Agreement: <strong>$1,437,475.20 USD</strong></div>
+<div class="cl-item">Wimu Direct Sales in México: <strong>$198,260 USD</strong></div>
+<div class="cl-item">Wyscout Collective Agreement: <strong>$474,428.87 USD</strong></div>
 </div>
+</div>
+<div class="target-indicator">
+<div class="ti-label">Mexico target 2026/27</div>
+<div class="ti-value">$2,191,768.80 USD</div>
+<div class="ti-breakdown">
+<span>$1,491,768.80 EARR</span><span class="ti-sep">·</span><span>$700,000 NARR</span>
+</div>
+</div>
+</div>
+<p class="header-note"><strong style="color:#888;">Note:</strong> Clubs have asked to keep Wyscout to the league. CITEC received an offer and didn't show interest to close it. Having it said, we considered it on the renewal target and we are approaching club by club.</p>
+</div>
+
 
 <div class="forecast-bar">
 <div class="forecast-card fc-best">
