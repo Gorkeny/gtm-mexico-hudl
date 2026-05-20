@@ -299,56 +299,6 @@ document.getElementById('gtm-pw-input').addEventListener('keydown', function(e) 
 </div>
 </div>
 
-<div class="metrics">
-  <div class="metric-pair">
-    <div class="metric">
-      <div class="label">Open Pipeline + CW FY26/27</div>
-      <div class="val" id="metric-pipeline">—</div>
-      <div class="sub" id="metric-pipeline-sub">—</div>
-    </div>
-    <div class="metric">
-      <div class="label">ARR Growth 25/26 → 26/27</div>
-      <div class="val" id="metric-arr-growth">—</div>
-      <div class="sub" id="metric-arr-growth-sub">—</div>
-    </div>
-  </div>
-  <div class="metric-pair">
-    <div class="metric">
-      <div class="label">Wyscout quota · Liga MX / SNM</div>
-      <div class="val" id="metric-wyscout-ligamx">—</div>
-      <div class="sub">Per club (Liga MX + SNM)</div>
-    </div>
-    <div class="metric">
-      <div class="label">Wyscout quota · Liga Expansión</div>
-      <div class="val" id="metric-wyscout-expansion">—</div>
-      <div class="sub">Per club (Liga Expansión)</div>
-    </div>
-  </div>
-  <div class="metric-pair">
-    <div class="metric">
-      <div class="label">Real Growth with WS25/26</div>
-      <div class="val" id="metric-roi">—</div>
-      <div class="sub" id="metric-roi-sub">—</div>
-    </div>
-    <div class="metric">
-      <div class="label">Actual CW</div>
-      <div class="val" id="metric-actual-cw">—</div>
-      <div class="sub" id="metric-actual-cw-sub">—</div>
-    </div>
-  </div>
-  <div class="metric-pair">
-    <div class="metric">
-      <div class="label">Total CW + Invoiced FY26/27</div>
-      <div class="val" id="metric-cw-total">—</div>
-      <div class="sub" id="metric-cw-clubs">—</div>
-    </div>
-    <div class="metric">
-      <div class="label">Mexico target 2026/27</div>
-      <div class="val" style="color:#185FA5;">$2,191,769</div>
-      <div class="sub">$1,491,769 EARR · $700,000 NARR</div>
-    </div>
-  </div>
-</div>
 
 <div class="top-controls">
 <div class="search-box">
@@ -798,7 +748,7 @@ const style = document.createElement('style');
 style.textContent = '@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }';
 document.head.appendChild(style);
 
-initSummaryMetrics();
+try { initSummaryMetrics(); } catch(e) {}
 render();
 restoreProbs();
 updateForecastMetrics();
