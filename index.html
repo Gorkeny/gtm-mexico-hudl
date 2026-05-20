@@ -258,6 +258,13 @@ document.getElementById('gtm-pw-input').addEventListener('keydown', function(e) 
 <span>$1,491,769 EARR</span><span class="ti-sep">·</span><span>$700,000 NARR</span>
 </div>
 </div>
+<div class="target-indicator" style="background: linear-gradient(135deg, #C2410C 0%, #9A3412 100%);" id="pipeline-coverage-tile">
+<div class="ti-label">Pipeline Coverage Vs Target</div>
+<div class="ti-value" id="metric-pipeline-coverage-val">—</div>
+<div class="ti-breakdown">
+<span style="font-size:15px;font-weight:700;opacity:1;" id="metric-pipeline-coverage-pct">—</span><span class="ti-sep">·</span><span>Open Pipeline + CW</span>
+</div>
+</div>
 <div class="target-indicator" style="background: linear-gradient(135deg, #059669 0%, #047857 100%);">
 <div class="ti-label">Actual Closed Won 2026/27</div>
 <div class="ti-value">$468,200 USD</div>
@@ -757,6 +764,22 @@ style.textContent = '@keyframes spin { from { transform: rotate(0deg); } to { tr
 document.head.appendChild(style);
 
 try { initSummaryMetrics(); } catch(e) {}
+try {
+  (function() {
+    const MEXICO_TARGET = 2191768.80;
+    let totalPipeline = 0;
+    clubs.forEach(club => {
+      const p = pipelineData[club.id];
+      const cw = closedWonData[club.id];
+      totalPipeline += (p ? p.total : 0) + (cw ? cw.total : 0);
+    });
+    const pct = (totalPipeline / MEXICO_TARGET * 100).toFixed(1);
+    const valEl = document.getElementById('metric-pipeline-coverage-val');
+    const pctEl = document.getElementById('metric-pipeline-coverage-pct');
+    if (valEl) valEl.textContent = '$' + Math.round(totalPipeline).toLocaleString('en-US') + ' USD';
+    if (pctEl) pctEl.textContent = pct + '% of target';
+  })();
+} catch(e) {}
 render();
 restoreProbs();
 updateForecastMetrics();
