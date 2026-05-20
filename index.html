@@ -31,9 +31,10 @@
   font-size: 15px; color: #1a1a1a; outline: none; text-align: center;
   letter-spacing: 0.08em; margin-bottom: 12px;
   transition: border-color 0.15s, box-shadow 0.15s;
+  box-sizing: border-box;
 }
 #gtm-login-box input:focus { border-color: #185FA5; box-shadow: 0 0 0 3px rgba(24,95,165,0.12); }
-#gtm-login-box input.error { border-color: #ef4444; box-shadow: 0 0 0 3px rgba(239,68,68,0.12); }
+#gtm-login-box input.gtm-error { border-color: #ef4444; box-shadow: 0 0 0 3px rgba(239,68,68,0.12); }
 #gtm-login-box button {
   width: 100%; padding: 11px; background: #185FA5; color: #fff;
   border: none; border-radius: 8px; font-size: 15px; font-weight: 500;
@@ -42,35 +43,6 @@
 #gtm-login-box button:hover { background: #134d8a; }
 #gtm-login-error { font-size: 12px; color: #ef4444; margin-top: 10px; min-height: 18px; }
 </style>
-<script>
-(function() {
-  var PASSWORD = 'latampod2026';
-  if (sessionStorage.getItem('gtm_auth') === PASSWORD) return;
-  document.addEventListener('DOMContentLoaded', function() {
-    var overlay = document.getElementById('gtm-login-overlay');
-    var input = document.getElementById('gtm-pw-input');
-    var errEl = document.getElementById('gtm-login-error');
-    if (!overlay) return;
-    overlay.style.display = 'flex';
-    input.focus();
-    function tryLogin() {
-      if (input.value === PASSWORD) {
-        sessionStorage.setItem('gtm_auth', PASSWORD);
-        overlay.style.opacity = '0';
-        overlay.style.transition = 'opacity 0.3s';
-        setTimeout(function() { overlay.remove(); }, 300);
-      } else {
-        input.classList.add('error');
-        errEl.textContent = '❌ Contraseña incorrecta. Inténtalo de nuevo.';
-        input.value = '';
-        setTimeout(function() { input.classList.remove('error'); }, 1500);
-      }
-    }
-    document.getElementById('gtm-login-btn').addEventListener('click', tryLogin);
-    input.addEventListener('keydown', function(e) { if (e.key === 'Enter') tryLogin(); });
-  });
-})();
-</script>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>GTM Dashboard 26/27 Mexico</title>
@@ -223,16 +195,47 @@ pointer-events: none;
 </head>
 <body>
 
-<div id="gtm-login-overlay" style="display:none;">
+<div id="gtm-login-overlay">
   <div id="gtm-login-box">
     <div class="login-icon">🔒</div>
     <h2>GTM Dashboard 26/27</h2>
     <p>Acceso restringido · Introduce la contraseña</p>
     <input type="password" id="gtm-pw-input" placeholder="Contraseña" autocomplete="current-password" />
-    <button id="gtm-login-btn">Acceder</button>
+    <button id="gtm-login-btn" onclick="gtmTryLogin()">Acceder</button>
     <div id="gtm-login-error"></div>
   </div>
 </div>
+<script>
+var GTM_PASSWORD = 'latampod2026';
+function gtmTryLogin() {
+  var input = document.getElementById('gtm-pw-input');
+  var errEl = document.getElementById('gtm-login-error');
+  if (input.value === GTM_PASSWORD) {
+    try { sessionStorage.setItem('gtm_auth', GTM_PASSWORD); } catch(e) {}
+    var overlay = document.getElementById('gtm-login-overlay');
+    overlay.style.transition = 'opacity 0.3s';
+    overlay.style.opacity = '0';
+    setTimeout(function() { overlay.style.display = 'none'; }, 320);
+  } else {
+    input.classList.add('gtm-error');
+    errEl.textContent = '❌ Contraseña incorrecta. Inténtalo de nuevo.';
+    input.value = '';
+    input.focus();
+    setTimeout(function() { input.classList.remove('gtm-error'); errEl.textContent = ''; }, 2000);
+  }
+}
+document.getElementById('gtm-pw-input').addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') gtmTryLogin();
+});
+(function() {
+  try {
+    if (sessionStorage.getItem('gtm_auth') === GTM_PASSWORD) {
+      document.getElementById('gtm-login-overlay').style.display = 'none';
+    }
+  } catch(e) {}
+  document.getElementById('gtm-pw-input').focus();
+})();
+</script>
 
 <div class="page-header">
 <h1>GTM Dashboard 26/27 Mexico</h1>
