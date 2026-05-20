@@ -142,12 +142,6 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
 .roi-badge.low { background: #FEE2E2; color: #991B1B; }
 .roi-badge.none { background: #f0f0f0; color: #aaa; font-weight: 400; font-size: 11px; }
 .roi-divider { width: 1px; background: #f0f0f0; align-self: stretch; }
-.card-nextstep { padding: 8px 14px 6px; border-top: 1px solid #f0f0f0; background: #fafafa; }
-.nextstep-label { font-size: 9px; font-weight: 600; color: #bbb; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 3px; }
-.nextstep-opp-ref { font-size: 9px; color: #ccc; font-style: italic; margin-left: 4px; font-weight: 400; text-transform: none; letter-spacing: 0; }
-.nextstep-input { width: 100%; font-size: 11px; color: #555; border: 1px solid #e8e8e8; border-radius: 5px; padding: 4px 7px; resize: none; font-family: inherit; background: #fff; box-sizing: border-box; outline: none; line-height: 1.4; overflow: hidden; }
-.nextstep-input:focus { border-color: #185FA5; box-shadow: 0 0 0 2px rgba(24,95,165,0.08); }
-.nextstep-input::placeholder { color: #d0d0d0; font-style: italic; }
 .card-footer { padding: 8px 14px; background: #fafafa; border-top: 1px solid #f0f0f0; display: flex; justify-content: space-between; align-items: center; }
 .sf-link { font-size: 13px; color: #185FA5; text-decoration: none; display: flex; align-items: center; gap: 5px; }
 .sf-link:hover { text-decoration: underline; }
@@ -622,15 +616,6 @@ ${narrHtml}
 </div>
 </div>
 </div>
-${(function(){
-  if (!pipeline) return '';
-  const topOpp = pipeline.opps.reduce((a,b) => a.amount >= b.amount ? a : b);
-  const shortName = topOpp.name.length > 38 ? topOpp.name.slice(0,36)+'…' : topOpp.name;
-  return `<div class="card-nextstep">
-  <div class="nextstep-label">Next step <span class="nextstep-opp-ref">${shortName}</span></div>
-  <textarea class="nextstep-input" id="ns-${club.id}" rows="2" placeholder="Escribe el siguiente paso…" oninput="autoResizeNS(this);saveNextStep('${club.id}',this.value)"></textarea>
-  </div>`;
-})()}
 <div class="card-footer">
 <a class="sf-link" href="${SF_BASE}${club.id}/view" target="_blank">
 <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 3H3a1 1 0 00-1 1v9a1 1 0 001 1h9a1 1 0 001-1V9"/><path d="M10 2h4v4"/><path d="M14 2L8 8"/></svg>
@@ -642,7 +627,6 @@ View in Salesforce
 }).join('');
 
 restoreProbs();
-restoreNextSteps();
 }
 
 function initSummaryMetrics() {
@@ -825,26 +809,7 @@ try {
 } catch(e) {}
 render();
 restoreProbs();
-restoreNextSteps();
 updateForecastMetrics();
-
-function saveNextStep(clubId, value) {
-  try { localStorage.setItem('ns_' + clubId, value); } catch(e) {}
-}
-function restoreNextSteps() {
-  clubs.forEach(function(club) {
-    var el = document.getElementById('ns-' + club.id);
-    if (!el) return;
-    try {
-      var v = localStorage.getItem('ns_' + club.id);
-      if (v) { el.value = v; autoResizeNS(el); }
-    } catch(e) {}
-  });
-}
-function autoResizeNS(el) {
-  el.style.height = 'auto';
-  el.style.height = el.scrollHeight + 'px';
-}
 
 function toggleCWDeals(e) {
   e.stopPropagation();
