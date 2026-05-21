@@ -257,6 +257,7 @@ document.getElementById('gtm-pw-input').addEventListener('keydown', function(e) 
 <div class="cl-item">Wimu Collective Agreement: <strong>$1,437,475.20 USD</strong></div>
 <div class="cl-item">Wimu Direct Sales in México: <strong>$198,260 USD</strong></div>
 <div class="cl-item">Wyscout Collective Agreement: <strong>$474,428.87 USD</strong></div>
+<div class="cl-item">Direct sales - other products: <strong style="color:#CA8A04;" id="cl-direct-arr">—</strong> <span style="color:#999;">revenue at risk</span></div>
 </div>
 </div>
 <div class="target-indicator">
@@ -790,6 +791,11 @@ const style = document.createElement('style');
 style.textContent = '@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }';
 document.head.appendChild(style);
 
+try {
+  const totalARR = clubs.reduce((sum, c) => sum + (c.arr || 0), 0);
+  const el = document.getElementById('cl-direct-arr');
+  if (el) el.textContent = '$' + Math.round(totalARR).toLocaleString('en-US') + ' USD';
+} catch(e) {}
 try { initSummaryMetrics(); } catch(e) {}
 try {
   (function() {
