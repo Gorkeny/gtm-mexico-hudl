@@ -279,10 +279,10 @@ document.getElementById('gtm-pw-input').addEventListener('keydown', function(e) 
 </div>
 <div class="target-indicator" style="background: linear-gradient(135deg, #059669 0%, #047857 100%);">
 <div class="ti-label">Closed Won YTD 2026/27</div>
-<div class="ti-value">$373,712 USD</div>
+<div class="ti-value">$500,408 USD</div>
 <div class="ti-breakdown">
-<span style="font-size:15px;font-weight:700;opacity:1;">17.1% of target</span><span class="ti-sep">·</span><span style="position:relative;">
-  <button class="cw-deals-btn" onclick="toggleCWDeals(event)" id="cw-deals-toggle">5 deals ▾</button>
+<span style="font-size:15px;font-weight:700;opacity:1;">22.8% of target</span><span class="ti-sep">·</span><span style="position:relative;">
+  <button class="cw-deals-btn" onclick="toggleCWDeals(event)" id="cw-deals-toggle">6 deals ▾</button>
   <div class="cw-deals-popup" id="cw-deals-popup">
     <a class="cw-deal-item" href="https://hudl.lightning.force.com/lightning/r/Opportunity/006UJ00000k03wJYAQ/view" target="_blank" rel="noopener">
       <span class="cw-deal-name">FY 26-27_SNM Services</span><span class="cw-deal-amount">$224,316</span>
@@ -298,6 +298,9 @@ document.getElementById('gtm-pw-input').addEventListener('keydown', function(e) 
     </a>
     <a class="cw-deal-item" href="https://hudl.lightning.force.com/lightning/r/Opportunity/006VY00000G78pHYAR/view" target="_blank" rel="noopener">
       <span class="cw-deal-name">Club Universidad Nacional Pumas</span><span class="cw-deal-amount">$21,140</span>
+    </a>
+    <a class="cw-deal-item" href="JUAREZ_SF_LINK" target="_blank" rel="noopener">
+      <span class="cw-deal-name">FY 26-27_Juan Chazarra_MX PACK 55</span><span class="cw-deal-amount">$126,696</span>
     </a>
   </div>
 </span>
@@ -393,9 +396,6 @@ const pipelineData = {
 '001d0000024lgcVAAQ': { total: 188241.75, opps: [
 { name: 'FY 26-27_Heberto Cabrera_MX_PACK 55', amount: 188241.75, closeDate: '2026-05-31' }
 ]},
-'0013w00002Rhm06AAB': { total: 126695.99, opps: [
-{ name: 'FY 26-27_Juan Chazarra_MX PACK 55', amount: 126695.99, closeDate: '2026-05-31' }
-]},
 '0010V00002KSiJiQAL': { total: 187774, opps: [
 { name: 'FY 26-27_Andres Payssé_MX PACK 55', amount: 187774, closeDate: '2026-06-30' }
 ]},
@@ -438,6 +438,9 @@ const closedWonData = {
 ]},
 '0010V00002Mx9a5QAB': { total: 224315.95, signed: true, opps: [
 { name: 'FY 26-27_SNM Services', amount: 224315.95, closeDate: '2026-05-15', stage: 'Signed' }
+]},
+'0013w00002Rhm06AAB': { total: 126695.99, signed: true, opps: [
+{ name: 'FY 26-27_Juan Chazarra_MX PACK 55', amount: 126695.99, closeDate: '2026-05-31', stage: 'Signed' }
 ]}
 };
 
