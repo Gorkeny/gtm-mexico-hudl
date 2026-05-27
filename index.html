@@ -382,7 +382,7 @@ const PIPELINE_DATES = {
 '0010V00002KSiJiQAL': 'May 13, 2026', // Cruz Azul
 '001d000002042v9AAA': 'May 13, 2026', // Tigres
 '001d0000022QA7TAAW': 'May 13, 2026', // América
-'001d000001u6YYiAAM': 'May 13, 2026', // Toluca
+'001d000001u6YYiAAM': 'May 27, 2026', // Toluca
 '001d0000022QA82AAG': 'May 13, 2026', // Pachuca
 '0010V00002MwZtQQAV': 'May 26, 2026', // Santos
 '0013w00002Rhlt0AAB': 'May 21, 2026', // León
@@ -405,8 +405,8 @@ const pipelineData = {
 '001d0000022QA7TAAW': { total: 130388.05, opps: [
 { name: 'FY 26-27_Enrique Chazaro_MX_PACK 50', amount: 130388.05, closeDate: '2026-05-31' }
 ]},
-'001d000001u6YYiAAM': { total: 63822.71, opps: [
-{ name: 'FY 26-27_Arturo León_MX_PACK_45', amount: 63822.71, closeDate: '2026-06-30' }
+'001d000001u6YYiAAM': { total: 80538.89, opps: [
+{ name: 'FY 26-27_Arturo León_MX_PACK_45', amount: 80538.89, closeDate: '2026-06-30' }
 ]},
 '001d0000022QA82AAG': { total: 79561.01, opps: [
 { name: 'FY 26-27_Vicente Garcia_MX_PACK_50', amount: 79561.01, closeDate: '2026-06-30' }
@@ -718,6 +718,9 @@ document.getElementById('metric-roi-sub').textContent =
 }
 
 const PROB_KEY = 'gtm-club-prob';
+const DEFAULT_PROBS = {
+  '001d000001u6YYiAAM': 75 // Toluca
+};
 
 // ── URL hash sync ──────────────────────────────────────────────
 function probsToHash(probs) {
@@ -747,9 +750,9 @@ function loadProbs() {
     try { stored = JSON.parse(localStorage.getItem(PROB_KEY) || '{}'); } catch(e) {}
     const hashProbs = hashToProbs();
     if (hashProbs && Object.keys(hashProbs).length > 0) {
-        return Object.assign({}, stored, hashProbs);
+        return Object.assign({}, DEFAULT_PROBS, stored, hashProbs);
     }
-    return stored;
+    return Object.assign({}, DEFAULT_PROBS, stored);
 }
 function saveProb(clubId, val) {
 const probs = loadProbs();
