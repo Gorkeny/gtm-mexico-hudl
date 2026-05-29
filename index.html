@@ -279,10 +279,10 @@ document.getElementById('gtm-pw-input').addEventListener('keydown', function(e) 
 </div>
 <div class="target-indicator" style="background: linear-gradient(135deg, #059669 0%, #047857 100%);">
 <div class="ti-label">Closed Won YTD 2026/27</div>
-<div class="ti-value">$647,330 USD</div>
+<div class="ti-value">$835,572 USD</div>
 <div class="ti-breakdown">
-<span style="font-size:15px;font-weight:700;opacity:1;">29.5% of target</span><span class="ti-sep">·</span><span style="position:relative;">
-  <button class="cw-deals-btn" onclick="toggleCWDeals(event)" id="cw-deals-toggle">7 deals ▾</button>
+<span style="font-size:15px;font-weight:700;opacity:1;">38.1% of target</span><span class="ti-sep">·</span><span style="position:relative;">
+  <button class="cw-deals-btn" onclick="toggleCWDeals(event)" id="cw-deals-toggle">8 deals ▾</button>
   <div class="cw-deals-popup" id="cw-deals-popup">
     <a class="cw-deal-item" href="https://hudl.lightning.force.com/lightning/r/Opportunity/006UJ00000k03wJYAQ/view" target="_blank" rel="noopener">
       <span class="cw-deal-name">FY 26-27_SNM Services</span><span class="cw-deal-amount">$224,316</span>
@@ -305,6 +305,9 @@ document.getElementById('gtm-pw-input').addEventListener('keydown', function(e) 
     </a>
     <a class="cw-deal-item" href="https://hudl.lightning.force.com/lightning/r/Opportunity/006UJ00000somARYAY/view" target="_blank" rel="noopener">
       <span class="cw-deal-name">FY 26-27_Arturo León_MX_PACK_45</span><span class="cw-deal-amount">$54,985</span>
+    </a>
+    <a class="cw-deal-item" href="MONTERREY_SF_LINK" target="_blank" rel="noopener">
+      <span class="cw-deal-name">FY 26-27_Heberto Cabrera_MX_PACK 55</span><span class="cw-deal-amount">$188,242</span>
     </a>
   </div>
 </span>
@@ -398,9 +401,6 @@ const WYSCOUT_LIGA_MX_SNM = WYSCOUT_TOTAL * 0.8 / 18; // ~$20,521.94 (Liga MX 17
 const WYSCOUT_LIGA_EXPANSION = WYSCOUT_TOTAL * 0.2 / 14; // ~$6,596.34 (Liga Expansión 14)
 
 const pipelineData = {
-'001d0000024lgcVAAQ': { total: 188241.75, opps: [
-{ name: 'FY 26-27_Heberto Cabrera_MX_PACK 55', amount: 188241.75, closeDate: '2026-05-31' }
-]},
 '0010V00002KSiJiQAL': { total: 187774, opps: [
 { name: 'FY 26-27_Andres Payssé_MX PACK 55', amount: 187774, closeDate: '2026-06-30' }
 ]},
@@ -443,6 +443,9 @@ const closedWonData = {
 ]},
 '001d000002042v9AAA': { total: 132256.80, signed: true, opps: [
 { name: 'FY 26-27_Victor Olguin_PACK 55 MX', amount: 132256.80, closeDate: '2026-05-31', stage: 'Signed' }
+]},
+'001d0000024lgcVAAQ': { total: 188241.75, signed: true, opps: [
+{ name: 'FY 26-27_Heberto Cabrera_MX_PACK 55', amount: 188241.75, closeDate: '2026-05-31', stage: 'Signed' }
 ]},
 '001d000001u6YYiAAM': { total: 54985, signed: true, opps: [
 { name: 'FY 26-27_Arturo León_MX_PACK_45', amount: 54985, closeDate: '2026-06-30', stage: 'Signed' }
