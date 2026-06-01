@@ -541,6 +541,7 @@ const barPct = club.arr ? Math.min(100, Math.round((club.arr / MAX_GLOBAL) * 100
 const pipeline = pipelineData[club.id] || null;
 const cwData = closedWonData[club.id] || null;
 const isSigned = !!(cwData && cwData.signed);
+const isClosedLostCITEC = CLOSED_LOST_CITEC.includes(club.id);
 const combinedTotal = (pipeline ? pipeline.total : 0) + (cwData ? cwData.total : 0);
 const pipePct = combinedTotal > 0 ? Math.min(100, Math.round((combinedTotal / MAX_GLOBAL) * 100)) : 0;
 
@@ -578,10 +579,19 @@ const stampHtml = isSigned ? `
 <circle cx="75" cy="75" r="57" fill="none" stroke="#059669" stroke-width="2" opacity="0.35"/>
 <text x="75" y="84" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif" font-weight="900" font-size="30" fill="#059669" opacity="0.65" letter-spacing="4">SIGNED</text>
 </svg>
+</div>` : isClosedLostCITEC ? `
+<div class="signed-stamp-overlay">
+<svg width="170" height="170" viewBox="0 0 170 170" xmlns="http://www.w3.org/2000/svg">
+<circle cx="85" cy="85" r="78" fill="none" stroke="#DC2626" stroke-width="5" opacity="0.55"/>
+<circle cx="85" cy="85" r="66" fill="none" stroke="#DC2626" stroke-width="2" opacity="0.35"/>
+<text x="85" y="68" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif" font-weight="900" font-size="22" fill="#DC2626" opacity="0.65" letter-spacing="2">CLOSED LOST</text>
+<text x="85" y="91" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif" font-weight="700" font-size="13" fill="#DC2626" opacity="0.55" letter-spacing="1">by CITEC</text>
+<text x="85" y="110" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif" font-weight="700" font-size="13" fill="#DC2626" opacity="0.55" letter-spacing="1">ALTERNATIVE</text>
+</svg>
 </div>` : '';
 
 return `
-<div class="club-card${isSigned ? ' signed-contract' : ''}">
+<div class="club-card${isSigned ? ' signed-contract' : ''}${isClosedLostCITEC ? ' signed-contract' : ''}">
 ${stampHtml}
 <div class="card-header">
 <div class="club-badge">${badgeSVG(club)}</div>
@@ -726,6 +736,7 @@ const PROB_KEY = 'gtm-club-prob';
 const DEFAULT_PROBS = {
   '001d000001u6YYiAAM': 75 // Toluca
 };
+const CLOSED_LOST_CITEC = ['001d0000022QA82AAG']; // Pachuca
 
 // ── URL hash sync ──────────────────────────────────────────────
 function probsToHash(probs) {
