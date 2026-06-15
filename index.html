@@ -114,9 +114,9 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
 .league-badge.liga-expansion { background: #FFF7ED; color: #C2410C; border: 1px solid #FDBA74; }
 .league-badge.citec-pack { background: #F5F3FF; color: #6D28D9; border: 1px solid #DDD6FE; }
 .league-badge.hudl-badge { background: #DCFCE7; color: #166534; border: 1px solid #86EFAC; }
-.league-badge.sics-badge { background: #E0F2FE; color: #0369A1; border: 1px solid #BAE6FD; }
+.league-badge.sics-badge { background: #FEE2E2; color: #991B1B; border: 1px solid #FCA5A5; }
 .club-badges-row { display: flex; flex-wrap: wrap; gap: 3px; margin-top: 3px; }
-.tools-line { font-size: 9px; color: #aaa; text-transform: uppercase; letter-spacing: 0.05em; padding: 6px 0 2px; border-top: 1px solid #f0f0f0; margin-top: 6px; }
+.tools-line { display: flex; align-items: center; flex-wrap: wrap; gap: 3px; font-size: 9px; color: #aaa; text-transform: uppercase; letter-spacing: 0.05em; padding: 6px 0 2px; border-top: 1px solid #f0f0f0; margin-top: 6px; }
 .card-body { padding: 10px 14px; }
 .arr-label { font-size: 10px; color: #888; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 2px; }
 .arr-value { font-size: 20px; font-weight: 600; color: #1a1a1a; margin-bottom: 6px; }
@@ -635,11 +635,6 @@ ${stampHtml}
 <div class="club-name">${club.name}</div>
 <span class="league-badge ${leagueBadgeClass(club.league)}">${club.league}</span>
 </div>
-<div class="club-badges-row">
-<span class="league-badge citec-pack">CITEC Pack</span>
-${isSigned ? `<span class="league-badge hudl-badge">Hudl</span>` : ''}
-${isSICS ? `<span class="league-badge sics-badge">SICS</span>` : ''}
-</div>
 <div class="club-id">${club.id}</div>
 </div>
 </div>
@@ -694,7 +689,11 @@ ${roiHtml}
 ${narrHtml}
 </div>
 </div>
-<div class="tools-line">26/27 tools</div>
+<div class="tools-line">26/27 tools
+<span class="league-badge citec-pack" style="margin-left:6px;">CITEC Pack</span>
+${isSigned ? `<span class="league-badge hudl-badge" style="margin-left:3px;">Hudl</span>` : ''}
+${isSICS ? `<span class="league-badge sics-badge" style="margin-left:3px;">SICS</span>` : ''}
+</div>
 </div>
 <div class="card-footer">
 <a class="sf-link" href="${SF_BASE}${club.id}/view" target="_blank">
