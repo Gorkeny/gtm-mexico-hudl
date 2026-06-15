@@ -566,6 +566,7 @@ const isSigned = !!(cwData && cwData.signed);
 const isClosedLostCITEC = CLOSED_LOST_CITEC.includes(club.id);
 const isCITECContinue = CITEC_CONTINUE.includes(club.id);
 const isSICS = SICS_CLUBS.includes(club.id);
+const showHudlBadge = isSigned || HUDL_EXTRA_CLUBS.includes(club.id);
 const combinedTotal = (pipeline ? pipeline.total : 0) + (cwData ? cwData.total : 0);
 const pipePct = combinedTotal > 0 ? Math.min(100, Math.round((combinedTotal / MAX_GLOBAL) * 100)) : 0;
 
@@ -691,7 +692,7 @@ ${narrHtml}
 </div>
 <div class="tools-line">26/27 tools
 <span class="league-badge citec-pack" style="margin-left:6px;">CITEC Pack</span>
-${isSigned ? `<span class="league-badge hudl-badge" style="margin-left:3px;">Hudl</span>` : ''}
+${showHudlBadge ? `<span class="league-badge hudl-badge" style="margin-left:3px;">Hudl</span>` : ''}
 ${isSICS ? `<span class="league-badge sics-badge" style="margin-left:3px;">SICS</span>` : ''}
 </div>
 </div>
@@ -776,9 +777,10 @@ const PROB_KEY = 'gtm-club-prob';
 const DEFAULT_PROBS = {
   '001d000001u6YYiAAM': 75 // Toluca
 };
-const CLOSED_LOST_CITEC = ['001d0000022QA82AAG', '001d0000022QA74AAG']; // Pachuca, Puebla
+const CLOSED_LOST_CITEC = ['001d0000022QA82AAG', '001d0000022QA74AAG', '0010V00002MwZtQQAV']; // Pachuca, Puebla, Santos
 const CITEC_CONTINUE = ['001d0000024lxVkAAI']; // Necaxa
 const SICS_CLUBS = ['001d0000024lxVkAAI', '001d0000022QA82AAG', '0010V00002MwZtQQAV']; // Necaxa, Pachuca, Santos
+const HUDL_EXTRA_CLUBS = ['0010V00002KSiJiQAL', '0010V00002QIK1BQAX', '001d0000024lxVkAAI']; // Cruz Azul, Chivas, Necaxa
 
 // ── URL hash sync ──────────────────────────────────────────────
 function probsToHash(probs) {
