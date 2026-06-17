@@ -189,7 +189,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
 .chart-title { font-size: 14px; font-weight: 500; color: #1a1a1a; margin-bottom: 16px; }
 .cw-deals-btn { background: none; border: none; color: #fff; font-size: inherit; font-weight: inherit; cursor: pointer; text-decoration: underline; text-underline-offset: 2px; opacity: 0.85; padding: 0; }
 .cw-deals-btn:hover { opacity: 1; }
-.cw-deals-popup { display: none; position: absolute; background: #fff; border-radius: 10px; border: 1px solid #e5e7eb; box-shadow: 0 -8px 28px rgba(0,0,0,0.15); padding: 10px 0; min-width: 300px; z-index: 200; bottom: calc(100% + 6px); left: 0; }
+.cw-deals-popup { display: none; position: fixed; background: #fff; border-radius: 10px; border: 1px solid #e5e7eb; box-shadow: 0 4px 28px rgba(0,0,0,0.18); padding: 10px 0; min-width: 320px; z-index: 9999; max-height: 70vh; overflow-y: auto; }
 .cw-deals-popup.open { display: block; }
 .cw-deal-item { display: flex; align-items: center; padding: 7px 14px; gap: 8px; text-decoration: none; color: #1a1a1a; font-size: 12px; transition: background 0.12s; }
 .cw-deal-item:hover { background: #f5f5f5; }
@@ -903,7 +903,26 @@ updateForecastMetrics();
 function toggleCWDeals(e) {
   e.stopPropagation();
   var popup = document.getElementById('cw-deals-popup');
-  popup.classList.toggle('open');
+  var btn = document.getElementById('cw-deals-toggle');
+  var isOpen = popup.classList.contains('open');
+  popup.classList.remove('open');
+  if (!isOpen) {
+    var rect = btn.getBoundingClientRect();
+    var popupH = 420; // estimated max height
+    var spaceAbove = rect.top;
+    var spaceBelow = window.innerHeight - rect.bottom;
+    if (spaceAbove > spaceBelow) {
+      // open upward
+      popup.style.top = '';
+      popup.style.bottom = (window.innerHeight - rect.top + 6) + 'px';
+    } else {
+      // open downward
+      popup.style.bottom = '';
+      popup.style.top = (rect.bottom + 6) + 'px';
+    }
+    popup.style.left = Math.min(rect.left, window.innerWidth - 330) + 'px';
+    popup.classList.add('open');
+  }
 }
 document.addEventListener('click', function() {
   var popup = document.getElementById('cw-deals-popup');
