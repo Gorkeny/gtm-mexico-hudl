@@ -688,7 +688,7 @@ ${narrHtml}
 </div>
 </div>
 <div class="tools-line">26/27 tools
-<span class="league-badge citec-pack" style="margin-left:6px;">CITEC Pack</span>
+${!CITEC_PACK_EXCLUDE.includes(club.id) ? `<span class="league-badge citec-pack" style="margin-left:6px;">CITEC Pack</span>` : ''}
 ${showHudlBadge ? `<span class="league-badge hudl-badge" style="margin-left:3px;">Hudl</span>` : ''}
 ${isSICS ? `<span class="league-badge sics-badge" style="margin-left:3px;">SICS</span>` : ''}
 </div>
@@ -776,7 +776,8 @@ const DEFAULT_PROBS = {
 };
 const CLOSED_LOST_CITEC = ['001d0000022QA82AAG', '001d0000022QA74AAG', '0010V00002MwZtQQAV']; // Pachuca, Puebla, Santos
 const CITEC_CONTINUE = []; // none
-const SICS_CLUBS = ['001d0000024lxVkAAI', '001d0000022QA82AAG', '0010V00002MwZtQQAV']; // Necaxa, Pachuca, Santos
+const SICS_CLUBS = ['001d0000022QA82AAG', '0010V00002MwZtQQAV']; // Pachuca, Santos
+const CITEC_PACK_EXCLUDE = ['001d0000024lxVkAAI']; // Necaxa
 const HUDL_EXTRA_CLUBS = ['0010V00002KSiJiQAL', '0010V00002QIK1BQAX', '001d0000024lxVkAAI']; // Cruz Azul, Chivas, Necaxa
 
 // ── URL hash sync ──────────────────────────────────────────────
