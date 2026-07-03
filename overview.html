@@ -227,7 +227,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
     <!-- QUARTERLY TRACKING -->
     <div class="card">
       <div class="sec-title">Tracking por Quarter — FY 26/27</div>
-      <div class="sec-sub">EARR + NARR objetivo por quarter vs actuals Q1 · <span style="color:#b45309;font-weight:600">⚠ Targets trimestrales incluyen mercado colombiano</span></div>
+      <div class="sec-sub">Actuals MX Q1 vs targets de referencia (MX + Colombia) · Los % de attainment no se muestran al ser datos de mercados distintos</div>
 
       <div style="display:flex;gap:18px;margin:10px 0 18px;flex-wrap:wrap">
         <div style="display:flex;align-items:center;gap:6px;font-size:11px;color:#4b5563"><div style="width:14px;height:10px;border-radius:2px;background:#003087"></div>Target EARR</div>
@@ -238,8 +238,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 
       <div id="q-chart"></div>
 
-      <div style="margin-top:14px;padding-top:12px;border-top:1px solid #f3f4f6;font-size:11px;color:#b45309;line-height:1.5">
-        ⚠ Los targets anuales totales (EARR $1,640,566 · NARR $995,249 · TARR $2,635,815) incluyen el mercado colombiano. Los actuals del dashboard corresponden únicamente al mercado mexicano (target México: EARR $1,491,769 · NARR $700,000 · TARR $2,191,769).
+      <div style="margin-top:14px;padding-top:12px;border-top:1px solid #f3f4f6;font-size:11px;color:#b45309;line-height:1.6">
+        ⚠ <strong>Nota Colombia:</strong> Los targets de referencia trimestrales incluyen el mercado colombiano y no han sido usados para calcular porcentajes de attainment. La cantidad correspondiente a Colombia no contemplada en los actuals es: <strong>EARR $148,797 · NARR $295,249 · TARR $443,046</strong> (diferencia entre target combinado $2,635,815 y target México $2,191,769).
       </div>
     </div>
 
@@ -444,30 +444,26 @@ function buildARR() {
         '<div title="Real NARR ' + fmt(q.narrA) + '" style="width:' + aN + '%;background:#6ee7b7;min-width:0"></div>' +
         '<div style="flex:1;background:#f1f5f9;border-radius:0 4px 4px 0"></div>' +
       '</div>';
-      var attT = (q.totalA / q.totalT * 100).toFixed(1);
-      var attE = (q.earrA  / q.earrT  * 100).toFixed(1);
-      var attN = (q.narrA  / q.narrT  * 100).toFixed(1);
+      // No attainment % — targets include Colombia, actuals are MX-only
       statsBlock =
-        '<div style="font-size:10px;color:#6b7280;margin-bottom:4px">Target: ' + fmt(q.totalT) + '</div>' +
+        '<div style="font-size:10px;color:#9ca3af;margin-bottom:4px">Target ref. (MX+CO): ' + fmt(q.totalT) + '</div>' +
         '<div style="display:flex;justify-content:space-between;font-size:11px;font-weight:700;color:#7c3aed;margin-bottom:3px">' +
-          '<span>TARR</span><span>' + fmt(q.totalA) + '&nbsp;<span style="font-weight:400;font-size:10px">(' + attT + '%)</span></span>' +
+          '<span>TARR real MX</span><span>' + fmt(q.totalA) + '</span>' +
         '</div>' +
         '<div style="display:flex;justify-content:space-between;font-size:10px;color:#2563eb;margin-bottom:2px">' +
-          '<span>EARR</span><span>' + fmt(q.earrA) + '&nbsp;<span style="opacity:.7">(' + attE + '%)</span></span>' +
+          '<span>EARR real MX</span><span>' + fmt(q.earrA) + '</span>' +
         '</div>' +
         '<div style="display:flex;justify-content:space-between;font-size:10px;color:#059669">' +
-          '<span>NARR</span><span>' + fmt(q.narrA) + '&nbsp;<span style="opacity:.7">(' + attN + '%)</span></span>' +
+          '<span>NARR real MX</span><span>' + fmt(q.narrA) + '</span>' +
         '</div>';
     } else {
-      var earrSh = (q.earrT / q.totalT * 100).toFixed(1);
-      var narrSh = (q.narrT / q.totalT * 100).toFixed(1);
       statsBlock =
-        '<div style="font-size:10px;color:#6b7280;margin-bottom:4px">Target: ' + fmt(q.totalT) + '</div>' +
+        '<div style="font-size:10px;color:#9ca3af;margin-bottom:4px">Target ref. (MX+CO): ' + fmt(q.totalT) + '</div>' +
         '<div style="display:flex;justify-content:space-between;font-size:10px;color:#4b5563;margin-bottom:2px">' +
-          '<span>EARR</span><span>' + fmt(q.earrT) + '&nbsp;<span style="opacity:.6">(' + earrSh + '%)</span></span>' +
+          '<span>EARR</span><span>' + fmt(q.earrT) + '</span>' +
         '</div>' +
         '<div style="display:flex;justify-content:space-between;font-size:10px;color:#4b5563">' +
-          '<span>NARR</span><span>' + fmt(q.narrT) + '&nbsp;<span style="opacity:.6">(' + narrSh + '%)</span></span>' +
+          '<span>NARR</span><span>' + fmt(q.narrT) + '</span>' +
         '</div>';
     }
 
