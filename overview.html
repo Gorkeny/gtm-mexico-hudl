@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GTM México · FY 26/27 Overview</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#eef2f7;color:#1a202c;min-height:100vh}
+
+/* ── AUTH ───────────────────────────────── */
+#auth-overlay{position:fixed;inset:0;background:linear-gradient(135deg,#003087 0%,#001340 100%);display:flex;align-items:center;justify-content:center;z-index:9999}
+.auth-box{background:#fff;border-radius:20px;padding:44px 52px;text-align:center;width:340px;box-shadow:0 24px 60px rgba(0,0,0,.35)}
+.auth-logo{font-size:30px;font-weight:800;color:#003087;letter-spacing:-.03em;margin-bottom:6px}
+.auth-sub{font-size:13px;color:#9ca3af;margin-bottom:32px}
+.auth-box input{width:100%;padding:13px 16px;border:1.5px solid #e5e7eb;border-radius:10px;font-size:15px;margin-bottom:14px;outline:none;transition:border-color .2s}
+.auth-box input:focus{border-color:#003087}
+.auth-box button{width:100%;padding:13px;background:#003087;color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:600;cursor:pointer;transition:background .2s}
+.auth-box button:hover{background:#001a4d}
+.auth-error{color:#dc2626;font-size:12px;margin-top:8px;display:none}
+
+/* ── LAYOUT ─────────────────────────────── */
+#dashboard{display:none}
+
+/* ── HEADER ─────────────────────────────── */
+.page-header{background:linear-gradient(135deg,#003087 0%,#001340 100%);color:#fff;padding:28px 40px;display:flex;align-items:center;justify-content:space-between}
+.ph-title{font-size:26px;font-weight:800;letter-spacing:-.03em}
+.ph-sub{font-size:13px;opacity:.7;margin-top:4px}
+.ph-badge{display:inline-block;background:rgba(255,255,255,.15);color:#fff;font-size:11px;font-weight:700;padding:4px 12px;border-radius:20px;text-transform:uppercase;letter-spacing:.06em;margin-top:10px}
+.ph-link{color:rgba(255,255,255,.7);font-size:13px;text-decoration:none;border:1px solid rgba(255,255,255,.3);padding:9px 18px;border-radius:9px;transition:all .2s;white-space:nowrap}
+.ph-link:hover{background:rgba(255,255,255,.1);color:#fff}
+
+/* ── CONTENT ────────────────────────────── */
+.content{padding:28px 40px 48px;max-width:1420px;margin:0 auto}
+
+/* ── KPI GRID ───────────────────────────── */
+.kpi-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;margin-bottom:24px}
+.kpi-card{background:#fff;border-radius:14px;padding:20px 22px;box-shadow:0 1px 4px rgba(0,0,0,.07);border-top:4px solid #e5e7eb;position:relative;overflow:hidden}
+.kpi-card::after{content:'';position:absolute;top:0;right:0;bottom:0;width:4px;background:transparent}
+.kpi-card.green{border-top-color:#059669}
+.kpi-card.blue{border-top-color:#2563eb}
+.kpi-card.purple{border-top-color:#7c3aed}
+.kpi-card.orange{border-top-color:#d97706}
+.kpi-card.teal{border-top-color:#0891b2}
+.kpi-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:#6b7280;margin-bottom:8px}
+.kpi-value{font-size:22px;font-weight:800;color:#1a202c;letter-spacing:-.02em;line-height:1}
+.kpi-sub{font-size:11px;color:#9ca3af;margin-top:5px}
+.kpi-delta{font-size:12px;font-weight:700;margin-top:8px}
+.kpi-delta.pos{color:#059669}
+.kpi-delta.neg{color:#dc2626}
+.kpi-delta.neu{color:#6b7280}
+
+/* ── MARKET BAR ─────────────────────────── */
+.market-bar-card{background:#fff;border-radius:14px;padding:28px;box-shadow:0 1px 4px rgba(0,0,0,.07);margin-bottom:24px}
+.mb-title{font-size:14px;font-weight:700;color:#374151;margin-bottom:20px}
+.mb-row{display:flex;align-items:center;gap:16px;margin-bottom:14px}
+.mb-label{font-size:12px;color:#4b5563;width:140px;flex-shrink:0;font-weight:600}
+.mb-bar-wrap{flex:1;background:#f3f4f6;border-radius:99px;height:28px;position:relative;overflow:visible}
+.mb-bar{height:100%;border-radius:99px;display:flex;align-items:center;justify-content:flex-end;padding-right:12px;font-size:12px;font-weight:700;color:#fff;transition:width .8s ease;min-width:60px}
+.mb-val{font-size:12px;color:#374151;margin-left:12px;font-weight:600;white-space:nowrap}
+.mb-bar.fy25{background:linear-gradient(90deg,#94a3b8,#64748b)}
+.mb-bar.fy26-cw{background:linear-gradient(90deg,#059669,#047857)}
+.mb-bar.fy26-all{background:linear-gradient(90deg,#2563eb,#1d4ed8)}
+.mb-bar.target{background:linear-gradient(90deg,#7c3aed,#6d28d9)}
+.mb-legend{display:flex;flex-wrap:wrap;gap:16px;margin-top:8px}
+.mb-leg-item{display:flex;align-items:center;gap:7px;font-size:12px;color:#4b5563}
+.mb-leg-dot{width:12px;height:12px;border-radius:3px;flex-shrink:0}
+
+/* ── CHARTS ─────────────────────────────── */
+.charts-row{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:24px}
+.chart-card{background:#fff;border-radius:14px;padding:24px 28px;box-shadow:0 1px 4px rgba(0,0,0,.07)}
+.chart-title{font-size:14px;font-weight:700;color:#374151;margin-bottom:4px}
+.chart-sub{font-size:11px;color:#9ca3af;margin-bottom:18px}
+.chart-wrap{position:relative}
+.legend-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+.legend-item{display:flex;align-items:center;gap:6px;font-size:11px;color:#4b5563}
+.legend-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.legend-sq{width:10px;height:10px;border-radius:2px;flex-shrink:0}
+
+/* ── TOOLS PLACEHOLDER ───────────────────── */
+.tools-card{background:#fff;border-radius:14px;padding:0;box-shadow:0 1px 4px rgba(0,0,0,.07);overflow:hidden;margin-bottom:24px}
+.tools-header{background:#f8fafc;border-bottom:1px solid #e5e7eb;padding:18px 28px;display:flex;align-items:center;justify-content:space-between}
+.tools-header-title{font-size:14px;font-weight:700;color:#374151}
+.tools-badge{background:#fef3c7;color:#92400e;font-size:11px;font-weight:700;padding:3px 10px;border-radius:99px;text-transform:uppercase;letter-spacing:.05em}
+.tools-body{padding:40px;text-align:center}
+.tools-icon{font-size:40px;margin-bottom:16px}
+.tools-desc{font-size:13px;color:#6b7280;max-width:480px;margin:0 auto;line-height:1.6}
+.tools-clubs{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:20px}
+.tools-club-pill{background:#f3f4f6;color:#374151;font-size:11px;font-weight:600;padding:5px 12px;border-radius:99px}
+
+/* ── NOTE ───────────────────────────────── */
+.dash-note{background:#fffbeb;border:1px solid #fcd34d;border-radius:10px;padding:12px 18px;font-size:12px;color:#92400e;margin-bottom:20px;line-height:1.5}
+
+/* ── FOOTER ─────────────────────────────── */
+.dash-footer{text-align:center;font-size:11px;color:#9ca3af;padding-top:12px}
+
+/* ── RESPONSIVE ─────────────────────────── */
+@media(max-width:1100px){
+  .kpi-grid{grid-template-columns:repeat(3,1fr)}
+  .charts-row{grid-template-columns:1fr}
+  .content,.page-header{padding:20px}
+  .page-header{flex-direction:column;align-items:flex-start;gap:14px}
+}
+@media(max-width:640px){
+  .kpi-grid{grid-template-columns:repeat(2,1fr)}
+}
+</style>
+</head>
+<body>
+
+<!-- ── AUTH ───────────────────────────────────────────────────────────── -->
+<div id="auth-overlay">
+  <div class="auth-box">
+    <div class="auth-logo">Hudl México</div>
+    <div class="auth-sub">GTM FY 26/27 — Overview</div>
+    <input type="password" id="pwd-input" placeholder="Contraseña" onkeydown="if(event.key==='Enter')tryAuth()"/>
+    <button onclick="tryAuth()">Acceder</button>
+    <div class="auth-error" id="auth-error">Contraseña incorrecta</div>
+  </div>
+</div>
+
+<!-- ── DASHBOARD ──────────────────────────────────────────────────────── -->
+<div id="dashboard">
+
+  <div class="page-header">
+    <div>
+      <div class="ph-title">GTM México — FY 26/27</div>
+      <div class="ph-sub">Overview de Situación Comercial · Julio 2026</div>
+      <div class="ph-badge">Estado de cierre pre-Q1</div>
+    </div>
+    <a href="index.html" class="ph-link">← Dashboard Completo</a>
+  </div>
+
+  <div class="content">
+
+    <div class="dash-note">
+      <strong>📌 Nota metodológica:</strong> Los valores de <em>Open Pipeline</em> reflejan oportunidades activas aún no cerradas. A efectos del cálculo de NARR, solo se contemplan los contratos con sello <strong>Signed</strong>. Los datos de herramientas por club se añadirán en una segunda fase.
+    </div>
+
+    <!-- ── KPI CARDS ──────────────────────────────────────────────────── -->
+    <div class="kpi-grid">
+      <div class="kpi-card orange">
+        <div class="kpi-label">EARR FY 25/26</div>
+        <div class="kpi-value">$1,491,769</div>
+        <div class="kpi-sub">Base de partida · 18 cuentas</div>
+      </div>
+      <div class="kpi-card purple">
+        <div class="kpi-label">Target FY 26/27</div>
+        <div class="kpi-value">$2,191,769</div>
+        <div class="kpi-sub">+$700K NARR objetivo</div>
+      </div>
+      <div class="kpi-card green">
+        <div class="kpi-label">Closed Won 26/27</div>
+        <div class="kpi-value">$1,212,031</div>
+        <div class="kpi-sub">55.3% del target · 15 deals</div>
+        <div class="kpi-delta pos">↑ +$720,262 vs base 25/26</div>
+      </div>
+      <div class="kpi-card blue">
+        <div class="kpi-label">Open Pipeline</div>
+        <div class="kpi-value">$351,739</div>
+        <div class="kpi-sub">16.1% del target · 5 cuentas</div>
+      </div>
+      <div class="kpi-card teal">
+        <div class="kpi-label">Total Addressable</div>
+        <div class="kpi-value">$1,563,770</div>
+        <div class="kpi-sub">71.3% del target</div>
+        <div class="kpi-delta neg">Gap restante: $627,999</div>
+      </div>
+    </div>
+
+    <!-- ── MARKET COMPARISON BAR ──────────────────────────────────────── -->
+    <div class="market-bar-card">
+      <div class="mb-title">Comparativa Global de Mercado — FY 25/26 vs FY 26/27</div>
+      <div class="mb-row">
+        <div class="mb-label">EARR FY 25/26</div>
+        <div class="mb-bar-wrap"><div class="mb-bar fy25" style="width:68.1%">$1,491,769</div></div>
+        <div class="mb-val">68.1% del target</div>
+      </div>
+      <div class="mb-row">
+        <div class="mb-label">Closed Won 26/27</div>
+        <div class="mb-bar-wrap"><div class="mb-bar fy26-cw" style="width:55.3%">$1,212,031</div></div>
+        <div class="mb-val">55.3% del target</div>
+      </div>
+      <div class="mb-row">
+        <div class="mb-label">CW + Pipeline 26/27</div>
+        <div class="mb-bar-wrap"><div class="mb-bar fy26-all" style="width:71.3%">$1,563,770</div></div>
+        <div class="mb-val">71.3% del target</div>
+      </div>
+      <div class="mb-row">
+        <div class="mb-label">Target FY 26/27</div>
+        <div class="mb-bar-wrap"><div class="mb-bar target" style="width:100%">$2,191,769</div></div>
+        <div class="mb-val">100%</div>
+      </div>
+      <div class="mb-legend">
+        <div class="mb-leg-item"><div class="mb-leg-dot" style="background:#64748b"></div>EARR FY 25/26 (base)</div>
+        <div class="mb-leg-item"><div class="mb-leg-dot" style="background:#059669"></div>Closed Won FY 26/27</div>
+        <div class="mb-leg-item"><div class="mb-leg-dot" style="background:#2563eb"></div>CW + Open Pipeline FY 26/27</div>
+        <div class="mb-leg-item"><div class="mb-leg-dot" style="background:#7c3aed"></div>Target FY 26/27</div>
+      </div>
+    </div>
+
+    <!-- ── CHARTS ROW 1: Progress + Status ───────────────────────────── -->
+    <div class="charts-row">
+      <div class="chart-card">
+        <div class="chart-title">Progreso hacia Target FY 26/27</div>
+        <div class="chart-sub">Distribución del revenue objetivo</div>
+        <div class="chart-wrap" style="height:250px"><canvas id="progressChart"></canvas></div>
+        <div class="legend-row">
+          <div class="legend-item"><div class="legend-dot" style="background:#059669"></div>Closed Won ($1,212,031 · 55.3%)</div>
+          <div class="legend-item"><div class="legend-dot" style="background:#2563eb"></div>Open Pipeline ($351,739 · 16.0%)</div>
+          <div class="legend-item"><div class="legend-dot" style="background:#e5e7eb"></div>Gap ($627,999 · 28.7%)</div>
+        </div>
+      </div>
+      <div class="chart-card">
+        <div class="chart-title">Estado de Cuentas — Liga MX + SNM</div>
+        <div class="chart-sub">18 cuentas gestionadas activamente</div>
+        <div class="chart-wrap" style="height:250px"><canvas id="statusChart"></canvas></div>
+        <div class="legend-row">
+          <div class="legend-item"><div class="legend-dot" style="background:#059669"></div>Signed (11)</div>
+          <div class="legend-item"><div class="legend-dot" style="background:#2563eb"></div>Open Pipeline Hudl (3)</div>
+          <div class="legend-item"><div class="legend-dot" style="background:#f59e0b"></div>Pipeline / CITEC Lost (1)</div>
+          <div class="legend-item"><div class="legend-dot" style="background:#dc2626"></div>Closed Lost CITEC (2)</div>
+          <div class="legend-item"><div class="legend-dot" style="background:#d1d5db"></div>Sin datos (1)</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── CLUB COMPARISON ───────────────────────────────────────────── -->
+    <div class="chart-card" style="margin-bottom:24px">
+      <div class="chart-title">Comparativa por Club — ARR FY 25/26 vs FY 26/27</div>
+      <div class="chart-sub">Ordenado por valor 26/27 · Verde = Signed · Azul = Pipeline activo · Naranja = Pipeline / CITEC Lost · Rojo = Closed Lost</div>
+      <div class="chart-wrap" style="height:520px"><canvas id="comparisonChart"></canvas></div>
+    </div>
+
+    <!-- ── CHARTS ROW 2: League + NARR ──────────────────────────────── -->
+    <div class="charts-row">
+      <div class="chart-card">
+        <div class="chart-title">Closed Won por Liga</div>
+        <div class="chart-sub">Distribución del revenue cerrado FY 26/27</div>
+        <div class="chart-wrap" style="height:240px"><canvas id="leagueChart"></canvas></div>
+      </div>
+      <div class="chart-card">
+        <div class="chart-title">NARR por Club (Signed únicamente)</div>
+        <div class="chart-sub">Variación neta respecto al ARR FY 25/26</div>
+        <div class="chart-wrap" style="height:240px"><canvas id="narrChart"></canvas></div>
+      </div>
+    </div>
+
+    <!-- ── TOOLS PLACEHOLDER ─────────────────────────────────────────── -->
+    <div class="tools-card">
+      <div class="tools-header">
+        <div class="tools-header-title">🔧 Evolución de Herramientas por Club — FY 25/26 → FY 26/27</div>
+        <div class="tools-badge">Próximamente</div>
+      </div>
+      <div class="tools-body">
+        <div class="tools-icon">📊</div>
+        <div class="tools-desc">
+          Esta sección mostrará la comparativa de herramientas contratadas por cada club en FY 25/26 frente a las activas en FY 26/27 (CITEC Pack · Hudl · SICS · Wyscout). En construcción — se completará una vez confirmados los datos de herramientas del ejercicio anterior.
+        </div>
+        <div class="tools-clubs">
+          <span class="tools-club-pill">CITEC Pack</span>
+          <span class="tools-club-pill">Hudl</span>
+          <span class="tools-club-pill">SICS</span>
+          <span class="tools-club-pill">Wyscout</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="dash-footer">GTM México · Hudl · FY 26/27 Overview · Generado Jul 2026</div>
+
+  </div><!-- /content -->
+</div><!-- /dashboard -->
+
+<script>
+/* ── AUTH ──────────────────────────────────────────────────────────── */
+const PASS = 'latampod2026';
+function tryAuth(){
+  if(document.getElementById('pwd-input').value === PASS){
+    document.getElementById('auth-overlay').style.display='none';
+    document.getElementById('dashboard').style.display='block';
+    sessionStorage.setItem('gtm_ov_auth','1');
+    buildCharts();
+  } else {
+    document.getElementById('auth-error').style.display='block';
+  }
+}
+if(sessionStorage.getItem('gtm_ov_auth')==='1'){
+  document.getElementById('auth-overlay').style.display='none';
+  document.getElementById('dashboard').style.display='block';
+}
+
+/* ── DATA ──────────────────────────────────────────────────────────── */
+const TARGET   = 2191769;
+const EARR     = 1491769;
+const CW       = 1212031;
+const PIPELINE = 351739;
+const GAP      = TARGET - CW - PIPELINE; // 627999
+
+// name, arr (25/26), v27 (26/27 value), status, league
+const clubs = [
+  {name:'SNM',       arr:216792, v27:224316, status:'signed',   league:'SNM'},
+  {name:'Monterrey', arr:138041, v27:193335, status:'signed',   league:'Liga MX'},
+  {name:'Tigres',    arr:131580, v27:132381, status:'signed',   league:'Liga MX'},
+  {name:'América',   arr:100957, v27:130388, status:'signed',   league:'Liga MX'},
+  {name:'Juárez',    arr:100843, v27:126696, status:'signed',   league:'Liga MX'},
+  {name:'Chivas',    arr: 85397, v27: 98942, status:'signed',   league:'Liga MX'},
+  {name:'Cancún',    arr: 57681, v27: 92240, status:'pipeline', league:'Liga Expansión'},
+  {name:'Cruz Azul', arr:167616, v27: 89559, status:'pipeline', league:'Liga MX'},
+  {name:'Pachuca',   arr: 56783, v27: 79561, status:'citec',    league:'Liga MX'},
+  {name:'Toluca',    arr: 48968, v27: 68470, status:'signed',   league:'Liga MX'},
+  {name:'San Luis',  arr: 40123, v27: 67465, status:'pipeline', league:'Liga MX'},
+  {name:'Pumas',     arr: 46079, v27: 61591, status:'signed',   league:'Liga MX'},
+  {name:'Necaxa',    arr: 20819, v27: 44304, status:'signed',   league:'Liga MX'},
+  {name:'Querétaro', arr:     0, v27: 36835, status:'signed',   league:'Liga MX'},
+  {name:'Xolos',     arr:     0, v27: 29484, status:'signed',   league:'Liga MX'},
+  {name:'León',      arr: 18796, v27: 22915, status:'pipeline', league:'Liga MX'},
+  {name:'Santos',    arr:  9103, v27:     0, status:'lost',     league:'Liga MX'},
+  {name:'Atlas',     arr:  7282, v27:     0, status:'no_data',  league:'Liga MX'},
+];
+
+const C = {signed:'#059669', pipeline:'#2563eb', citec:'#f59e0b', lost:'#dc2626', no_data:'#d1d5db', arr:'#94a3b8', gap:'#e5e7eb'};
+
+function fmt(v){return '$'+Math.round(v).toLocaleString('en-US')}
+
+/* ── CHARTS ────────────────────────────────────────────────────────── */
+function buildCharts(){
+
+  /* 1. PROGRESS DOUGHNUT ─────────────────────────────────────── */
+  const ctxProg = document.getElementById('progressChart');
+  new Chart(ctxProg,{
+    type:'doughnut',
+    data:{
+      labels:['Closed Won','Open Pipeline','Gap restante'],
+      datasets:[{data:[CW,PIPELINE,GAP],backgroundColor:[C.signed,C.pipeline,C.gap],borderWidth:0,hoverOffset:6}]
+    },
+    options:{
+      cutout:'74%',
+      plugins:{
+        legend:{display:false},
+        tooltip:{callbacks:{label:ctx=>' '+fmt(ctx.parsed)+' ('+((ctx.parsed/TARGET)*100).toFixed(1)+'%)'}}
+      }
+    },
+    plugins:[{
+      id:'centerLabel',
+      afterDraw(chart){
+        const {ctx,chartArea:{width,height,top,left}}=chart;
+        ctx.save();
+        const cx=left+width/2, cy=top+height/2;
+        ctx.textAlign='center'; ctx.textBaseline='middle';
+        ctx.fillStyle='#059669'; ctx.font='bold 30px -apple-system,sans-serif';
+        ctx.fillText('55.3%',cx,cy-12);
+        ctx.fillStyle='#6b7280'; ctx.font='13px -apple-system,sans-serif';
+        ctx.fillText('del target',cx,cy+14);
+        ctx.restore();
+      }
+    }]
+  });
+
+  /* 2. STATUS DOUGHNUT ───────────────────────────────────────── */
+  new Chart(document.getElementById('statusChart'),{
+    type:'doughnut',
+    data:{
+      labels:['Signed (11)','Open Pipeline (3)','Pipeline/CITEC Lost (1)','Closed Lost (2)','Sin datos (1)'],
+      datasets:[{data:[11,3,1,2,1],backgroundColor:[C.signed,C.pipeline,C.citec,C.lost,C.no_data],borderWidth:0,hoverOffset:6}]
+    },
+    options:{
+      cutout:'65%',
+      plugins:{
+        legend:{display:false},
+        tooltip:{callbacks:{label:ctx=>' '+ctx.label}}
+      }
+    },
+    plugins:[{
+      id:'statusLabel',
+      afterDraw(chart){
+        const {ctx,chartArea:{width,height,top,left}}=chart;
+        ctx.save();
+        const cx=left+width/2, cy=top+height/2;
+        ctx.textAlign='center'; ctx.textBaseline='middle';
+        ctx.fillStyle='#1a202c'; ctx.font='bold 28px -apple-system,sans-serif';
+        ctx.fillText('18',cx,cy-10);
+        ctx.fillStyle='#6b7280'; ctx.font='12px -apple-system,sans-serif';
+        ctx.fillText('cuentas',cx,cy+13);
+        ctx.restore();
+      }
+    }]
+  });
+
+  /* 3. CLUB COMPARISON (sorted by v27 desc) ──────────────────── */
+  const sorted=[...clubs].filter(c=>c.v27>0||c.arr>0).sort((a,b)=>b.v27-a.v27);
+  const barColors=sorted.map(c=>C[c.status]||C.no_data);
+
+  new Chart(document.getElementById('comparisonChart'),{
+    type:'bar',
+    data:{
+      labels:sorted.map(c=>c.name),
+      datasets:[
+        {label:'ARR FY 25/26',data:sorted.map(c=>c.arr),backgroundColor:C.arr,borderRadius:3,barPercentage:.75,categoryPercentage:.7},
+        {label:'FY 26/27',    data:sorted.map(c=>c.v27),backgroundColor:barColors,borderRadius:3,barPercentage:.75,categoryPercentage:.7}
+      ]
+    },
+    options:{
+      indexAxis:'y',
+      responsive:true,
+      maintainAspectRatio:false,
+      plugins:{
+        legend:{display:true,position:'top',labels:{font:{size:12},padding:18,usePointStyle:true}},
+        tooltip:{callbacks:{label:ctx=>' '+ctx.dataset.label+': '+fmt(ctx.parsed.x)}}
+      },
+      scales:{
+        x:{grid:{color:'#f3f4f6'},ticks:{callback:v=>'$'+(v/1000).toFixed(0)+'K',font:{size:11}}},
+        y:{grid:{display:false},ticks:{font:{size:11}}}
+      }
+    }
+  });
+
+  /* 4. CW BY LEAGUE ──────────────────────────────────────────── */
+  // Liga MX signed total (from closedWonData, excl. SNM)
+  const lmx = clubs.filter(c=>c.league==='Liga MX'&&c.status==='signed').reduce((s,c)=>s+c.v27,0);
+  const snm = clubs.filter(c=>c.league==='SNM').reduce((s,c)=>s+c.v27,0);
+  const expOld = CW - lmx - snm; // remainder = old Cancún CW deal
+  new Chart(document.getElementById('leagueChart'),{
+    type:'doughnut',
+    data:{
+      labels:['Liga MX','SNM','Liga Expansión (prev.)'],
+      datasets:[{data:[Math.round(lmx),Math.round(snm),Math.max(0,Math.round(expOld))],backgroundColor:['#003087','#059669','#f59e0b'],borderWidth:0,hoverOffset:6}]
+    },
+    options:{
+      plugins:{
+        legend:{position:'bottom',labels:{font:{size:11},padding:12,usePointStyle:true}},
+        tooltip:{callbacks:{label:ctx=>' '+fmt(ctx.parsed)+' ('+((ctx.parsed/CW)*100).toFixed(1)+'%)'}}
+      }
+    }
+  });
+
+  /* 5. NARR BAR (signed clubs only) ──────────────────────────── */
+  const narrData=clubs
+    .filter(c=>c.status==='signed')
+    .map(c=>({name:c.name,narr:c.v27-c.arr}))
+    .sort((a,b)=>b.narr-a.narr);
+
+  new Chart(document.getElementById('narrChart'),{
+    type:'bar',
+    data:{
+      labels:narrData.map(c=>c.name),
+      datasets:[{
+        label:'NARR FY 26/27',
+        data:narrData.map(c=>c.narr),
+        backgroundColor:narrData.map(c=>c.narr>=0?C.signed:C.lost),
+        borderRadius:3
+      }]
+    },
+    options:{
+      indexAxis:'y',
+      responsive:true,
+      maintainAspectRatio:false,
+      plugins:{
+        legend:{display:false},
+        tooltip:{callbacks:{label:ctx=>' NARR: '+fmt(ctx.parsed.x)}}
+      },
+      scales:{
+        x:{grid:{color:'#f3f4f6'},ticks:{callback:v=>'$'+(v/1000).toFixed(0)+'K',font:{size:11}}},
+        y:{grid:{display:false},ticks:{font:{size:11}}}
+      }
+    }
+  });
+}
+
+/* Auto-init si ya autenticado */
+if(sessionStorage.getItem('gtm_ov_auth')==='1'){
+  document.addEventListener('DOMContentLoaded',buildCharts);
+}
+</script>
+</body>
+</html>
