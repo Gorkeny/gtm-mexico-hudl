@@ -139,36 +139,54 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
   </div>
 
   <div class="wrap">
-    <div class="note"><strong>📌 Nota:</strong> Open Pipeline refleja oportunidades activas aún no cerradas. El NARR solo contempla contratos con sello <strong>Signed</strong>. Sección de herramientas pendiente de datos FY 25/26.</div>
+    <div class="note"><strong>📌 Nota:</strong> EARR y NARR se calculan automáticamente de los contratos con sello <strong>Signed</strong> usando la fórmula: renovación = min(ARR25/26, v27) · nuevo = max(0, v27 − ARR25/26). Los targets anuales del dashboard corresponden únicamente al <strong>mercado mexicano</strong> (EARR $1,491,769 · NARR $700,000 · TARR $2,191,769). Los targets trimestrales usados como referencia en el tracking incluyen Colombia.</div>
 
-    <!-- KPI CARDS -->
-    <div class="kpi-row">
-      <div class="kpi o">
-        <div class="kpi-lbl">EARR FY 25/26</div>
-        <div class="kpi-val">$1,491,769</div>
-        <div class="kpi-sub">Base de partida · 18 cuentas</div>
+    <!-- EARR / NARR / TARR -->
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:24px">
+
+      <!-- EARR -->
+      <div class="card" style="padding:22px;margin-bottom:0;border-top:4px solid #2563eb">
+        <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#2563eb;margin-bottom:8px">EARR · Renovaciones</div>
+        <div id="earr-val" style="font-size:30px;font-weight:800;color:#1e293b;line-height:1">—</div>
+        <div style="font-size:11px;color:#9ca3af;margin:5px 0 14px">Actuals Q1 · contratos signed</div>
+        <div style="background:#e5e7eb;border-radius:4px;height:8px;margin-bottom:8px;overflow:hidden">
+          <div id="earr-bar-top" style="height:100%;border-radius:4px;background:linear-gradient(90deg,#2563eb,#1d4ed8);width:0"></div>
+        </div>
+        <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:12px">
+          <span id="earr-pct-top" style="font-weight:700;color:#2563eb">—</span>
+          <span style="color:#6b7280">FY Target: <strong>$1,491,769</strong></span>
+        </div>
+        <div style="font-size:11px;color:#9ca3af;border-top:1px solid #f1f5f9;padding-top:10px">Base ARR FY 25/26 · mercado México</div>
       </div>
-      <div class="kpi p">
-        <div class="kpi-lbl">Target FY 26/27</div>
-        <div class="kpi-val">$2,191,769</div>
-        <div class="kpi-sub">+$700K NARR objetivo</div>
+
+      <!-- NARR -->
+      <div class="card" style="padding:22px;margin-bottom:0;border-top:4px solid #059669">
+        <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#059669;margin-bottom:8px">NARR · Nuevo ARR</div>
+        <div id="narr-val-top" style="font-size:30px;font-weight:800;color:#1e293b;line-height:1">—</div>
+        <div style="font-size:11px;color:#9ca3af;margin:5px 0 14px">Actuals Q1 · expansión neta</div>
+        <div style="background:#e5e7eb;border-radius:4px;height:8px;margin-bottom:8px;overflow:hidden">
+          <div id="narr-bar-top" style="height:100%;border-radius:4px;background:linear-gradient(90deg,#059669,#047857);width:0"></div>
+        </div>
+        <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:12px">
+          <span id="narr-pct-top" style="font-weight:700;color:#059669">—</span>
+          <span style="color:#6b7280">FY Target: <strong>$700,000</strong></span>
+        </div>
+        <div style="font-size:11px;color:#9ca3af;border-top:1px solid #f1f5f9;padding-top:10px">Expansión neta sobre ARR FY 25/26</div>
       </div>
-      <div class="kpi g">
-        <div class="kpi-lbl">Closed Won 26/27</div>
-        <div class="kpi-val">$1,214,484</div>
-        <div class="kpi-sub">55.4% del target · 16 deals</div>
-        <div class="kpi-d pos">↑ +$722,715 vs base</div>
-      </div>
-      <div class="kpi b">
-        <div class="kpi-lbl">Open Pipeline</div>
-        <div class="kpi-val">$351,739</div>
-        <div class="kpi-sub">16.1% del target · 5 cuentas</div>
-      </div>
-      <div class="kpi t">
-        <div class="kpi-lbl">Total Addressable</div>
-        <div class="kpi-val">$1,566,223</div>
-        <div class="kpi-sub">71.5% del target</div>
-        <div class="kpi-d neg">Gap restante: $625,546</div>
+
+      <!-- TARR -->
+      <div class="card" style="padding:22px;margin-bottom:0;border-top:4px solid #7c3aed">
+        <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#7c3aed;margin-bottom:8px">TARR · Total ARR</div>
+        <div style="font-size:30px;font-weight:800;color:#1e293b;line-height:1">$1,214,484</div>
+        <div style="font-size:11px;color:#9ca3af;margin:5px 0 14px">Actuals Q1 · Closed Won total</div>
+        <div style="background:#e5e7eb;border-radius:4px;height:8px;margin-bottom:8px;overflow:hidden">
+          <div style="width:55.4%;height:100%;border-radius:4px;background:linear-gradient(90deg,#7c3aed,#6d28d9)"></div>
+        </div>
+        <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:12px">
+          <span style="font-weight:700;color:#7c3aed">55.4% del FY target</span>
+          <span style="color:#6b7280">FY Target: <strong>$2,191,769</strong></span>
+        </div>
+        <div style="font-size:11px;color:#9ca3af;border-top:1px solid #f1f5f9;padding-top:10px">EARR + NARR · 16 deals · mercado México</div>
       </div>
     </div>
 
@@ -203,6 +221,25 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
         <div class="leg"><div class="leg-dot" style="background:#059669"></div>Closed Won FY 26/27</div>
         <div class="leg"><div class="leg-dot" style="background:#2563eb"></div>CW + Pipeline FY 26/27</div>
         <div class="leg"><div class="leg-dot" style="background:#7c3aed"></div>Target FY 26/27</div>
+      </div>
+    </div>
+
+    <!-- QUARTERLY TRACKING -->
+    <div class="card">
+      <div class="sec-title">Tracking por Quarter — FY 26/27</div>
+      <div class="sec-sub">EARR + NARR objetivo por quarter vs actuals Q1 · <span style="color:#b45309;font-weight:600">⚠ Targets trimestrales incluyen mercado colombiano</span></div>
+
+      <div style="display:flex;gap:18px;margin:10px 0 18px;flex-wrap:wrap">
+        <div style="display:flex;align-items:center;gap:6px;font-size:11px;color:#4b5563"><div style="width:14px;height:10px;border-radius:2px;background:#003087"></div>Target EARR</div>
+        <div style="display:flex;align-items:center;gap:6px;font-size:11px;color:#4b5563"><div style="width:14px;height:10px;border-radius:2px;background:#93c5fd"></div>Target NARR</div>
+        <div style="display:flex;align-items:center;gap:6px;font-size:11px;color:#4b5563"><div style="width:14px;height:10px;border-radius:2px;background:#059669"></div>Real EARR (MX)</div>
+        <div style="display:flex;align-items:center;gap:6px;font-size:11px;color:#4b5563"><div style="width:14px;height:10px;border-radius:2px;background:#6ee7b7"></div>Real NARR (MX)</div>
+      </div>
+
+      <div id="q-chart"></div>
+
+      <div style="margin-top:14px;padding-top:12px;border-top:1px solid #f3f4f6;font-size:11px;color:#b45309;line-height:1.5">
+        ⚠ Los targets anuales totales (EARR $1,640,566 · NARR $995,249 · TARR $2,635,815) incluyen el mercado colombiano. Los actuals del dashboard corresponden únicamente al mercado mexicano (target México: EARR $1,491,769 · NARR $700,000 · TARR $2,191,769).
       </div>
     </div>
 
@@ -345,9 +382,88 @@ function fmt(v) { return '$' + Math.round(v).toLocaleString('en-US'); }
 
 // ── RENDER ────────────────────────────────────────────────
 function render() {
+  buildARR();
   buildComp();
   buildNarr();
   buildLeague();
+}
+
+function buildARR() {
+  // Compute EARR/NARR actuals from signed clubs
+  var earrA = 0, narrA = 0;
+  clubs.forEach(function(c) {
+    if (c.s === 'signed') {
+      earrA += Math.min(c.arr, c.v27);
+      narrA += Math.max(0, c.v27 - c.arr);
+    }
+  });
+  var tarrA = 1214484; // manually maintained Closed Won total (MX)
+
+  // Mexico annual targets
+  var MX_EARR = 1491769, MX_NARR = 700000;
+
+  // Update EARR card
+  document.getElementById('earr-val').textContent = fmt(earrA);
+  var earrPct = (earrA / MX_EARR * 100).toFixed(1);
+  document.getElementById('earr-bar-top').style.width = Math.min(100, earrPct) + '%';
+  document.getElementById('earr-pct-top').textContent = earrPct + '% del FY target';
+
+  // Update NARR card
+  document.getElementById('narr-val-top').textContent = fmt(narrA);
+  var narrPct = (narrA / MX_NARR * 100).toFixed(1);
+  document.getElementById('narr-bar-top').style.width = Math.min(100, narrPct) + '%';
+  document.getElementById('narr-pct-top').textContent = narrPct + '% del FY target';
+
+  // Quarterly chart — scale: Q1 total target = 1,501,313 (largest quarter)
+  var SCALE = 1501313;
+  var quarters = [
+    { label:'Q1', period:'Abr – Jun', earrT:1058008, narrT:443305,  totalT:1501313, done:true,  earrA:earrA, narrA:narrA, totalA:tarrA },
+    { label:'Q2', period:'Jul – Sep', earrT: 189985, narrT:148375,  totalT: 338360, done:false },
+    { label:'Q3', period:'Oct – Dic', earrT:  77528, narrT: 47761,  totalT: 125289, done:false },
+    { label:'Q4', period:'Ene – Mar', earrT: 315046, narrT:355808,  totalT: 670854, done:false }
+  ];
+
+  var html = '';
+  quarters.forEach(function(q) {
+    var tE = (q.earrT / SCALE * 100).toFixed(2);
+    var tN = (q.narrT / SCALE * 100).toFixed(2);
+
+    var targetBar = '<div style="display:flex;height:22px;border-radius:4px;overflow:hidden;margin-bottom:' + (q.done ? '5px' : '0') + '">' +
+      '<div title="Target EARR ' + fmt(q.earrT) + '" style="width:' + tE + '%;background:#003087;min-width:0"></div>' +
+      '<div title="Target NARR ' + fmt(q.narrT) + '" style="width:' + tN + '%;background:#93c5fd;min-width:0"></div>' +
+      '<div style="flex:1;background:#f1f5f9;border-radius:0 4px 4px 0"></div>' +
+    '</div>';
+
+    var actualBar = '';
+    var attainStr = '';
+    if (q.done) {
+      var aE = (q.earrA / SCALE * 100).toFixed(2);
+      var aN = (q.narrA / SCALE * 100).toFixed(2);
+      actualBar = '<div style="display:flex;height:16px;border-radius:4px;overflow:hidden">' +
+        '<div title="Real EARR ' + fmt(q.earrA) + '" style="width:' + aE + '%;background:#059669;min-width:0"></div>' +
+        '<div title="Real NARR ' + fmt(q.narrA) + '" style="width:' + aN + '%;background:#6ee7b7;min-width:0"></div>' +
+        '<div style="flex:1;background:#f1f5f9;border-radius:0 4px 4px 0"></div>' +
+      '</div>';
+      var att = (q.totalA / q.totalT * 100).toFixed(1);
+      attainStr = '<div style="font-size:11px;color:#059669;font-weight:600">Real MX: ' + fmt(q.totalA) + '</div>' +
+        '<div style="font-size:11px;color:#059669">vs target: ' + att + '%</div>';
+    }
+
+    html += '<div style="display:flex;align-items:flex-start;gap:14px;margin-bottom:18px">' +
+      '<div style="width:90px;flex-shrink:0">' +
+        '<div style="font-size:13px;font-weight:700;color:#374151">' + q.label + '</div>' +
+        '<div style="font-size:11px;color:#9ca3af;margin-top:2px">' + q.period + '</div>' +
+        (q.done ? '<div style="font-size:10px;font-weight:700;color:#059669;background:#ecfdf5;border-radius:4px;padding:2px 6px;display:inline-block;margin-top:4px">✓ Q1</div>' : '<div style="font-size:10px;color:#d1d5db;background:#f9fafb;border-radius:4px;padding:2px 6px;display:inline-block;margin-top:4px">Pendiente</div>') +
+      '</div>' +
+      '<div style="flex:1">' + targetBar + actualBar + '</div>' +
+      '<div style="width:140px;flex-shrink:0;text-align:right">' +
+        '<div style="font-size:11px;color:#6b7280;margin-bottom:2px">Target: ' + fmt(q.totalT) + '</div>' +
+        attainStr +
+      '</div>' +
+    '</div>';
+  });
+
+  document.getElementById('q-chart').innerHTML = html;
 }
 
 function buildComp() {
