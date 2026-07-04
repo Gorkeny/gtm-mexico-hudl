@@ -239,7 +239,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
       <div id="q-chart"></div>
 
       <div style="margin-top:14px;padding-top:12px;border-top:1px solid #f3f4f6;font-size:11px;color:#b45309;line-height:1.6">
-        📌 <strong>Nota:</strong> Los targets trimestrales mostrados corresponden únicamente al mercado mexicano. Colombia es un mercado separado con un target propio de <strong>TARR $700,000</strong> (EARR + NARR) que no está incluido en ninguno de los datos de este dashboard.
+        📌 <strong>Targets MX calculados</strong> deduciendo la parte proporcional de Colombia ($700,000 TARR) de la cifra combinada MX+Colombia ($2,635,815). Factor aplicado: ×0.7344 por quarter. Colombia es un mercado con target separado no incluido en los actuals ni en los targets mostrados.
       </div>
     </div>
 
@@ -414,13 +414,29 @@ function buildARR() {
   document.getElementById('narr-bar-top').style.width = Math.min(100, narrPct) + '%';
   document.getElementById('narr-pct-top').textContent = narrPct + '% del FY target';
 
-  // Quarterly chart — scale: Q1 total target = 1,501,313 (largest quarter)
-  var SCALE = 1501313;
+  // Remove Colombia proportionally: combined annual = $2,635,815 · Colombia TARR = $700,000
+  var COL_TARR = 700000, COMB = 2635815;
+  var mxScale = (COMB - COL_TARR) / COMB; // ≈ 0.7344
+
+  // Quarterly targets (MX only) derived from combined by applying mxScale
+  var Q = [
+    { earrC:1058008, narrC:443305,  totalC:1501313 },
+    { earrC: 189985, narrC:148375,  totalC: 338360 },
+    { earrC:  77528, narrC: 47761,  totalC: 125289 },
+    { earrC: 315046, narrC:355808,  totalC: 670854 }
+  ].map(function(q){ return {
+    earrT:  Math.round(q.earrC  * mxScale),
+    narrT:  Math.round(q.narrC  * mxScale),
+    totalT: Math.round(q.totalC * mxScale)
+  };});
+
+  // Quarterly chart — scale relative to Q1 MX target (largest quarter)
+  var SCALE = Q[0].totalT;
   var quarters = [
-    { label:'Q1', period:'Abr – Jun', earrT:1058008, narrT:443305,  totalT:1501313, done:true,  earrA:earrA, narrA:narrA, totalA:tarrA },
-    { label:'Q2', period:'Jul – Sep', earrT: 189985, narrT:148375,  totalT: 338360, done:false },
-    { label:'Q3', period:'Oct – Dic', earrT:  77528, narrT: 47761,  totalT: 125289, done:false },
-    { label:'Q4', period:'Ene – Mar', earrT: 315046, narrT:355808,  totalT: 670854, done:false }
+    { label:'Q1', period:'Abr – Jun', earrT:Q[0].earrT, narrT:Q[0].narrT, totalT:Q[0].totalT, done:true,  earrA:earrA, narrA:narrA, totalA:tarrA },
+    { label:'Q2', period:'Jul – Sep', earrT:Q[1].earrT, narrT:Q[1].narrT, totalT:Q[1].totalT, done:false },
+    { label:'Q3', period:'Oct – Dic', earrT:Q[2].earrT, narrT:Q[2].narrT, totalT:Q[2].totalT, done:false },
+    { label:'Q4', period:'Ene – Mar', earrT:Q[3].earrT, narrT:Q[3].narrT, totalT:Q[3].totalT, done:false }
   ];
 
   var html = '';
