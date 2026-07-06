@@ -173,7 +173,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
         </div>
         <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:5px">
           <span id="narr-pct-top" style="font-weight:700;color:#059669">—</span>
-          <span style="color:#6b7280">FY Target: <strong>$1,387,823</strong></span>
+          <span style="color:#6b7280">FY Target: <strong>$1,040,746</strong></span>
         </div>
         <div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:12px">
           <span id="narr-pct-q1" style="font-weight:600;color:#6b7280">—</span>
@@ -192,7 +192,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
         </div>
         <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:5px">
           <span id="tarr-pct-top" style="font-weight:700;color:#1a1a1a">—</span>
-          <span style="color:#6b7280">FY Target: <strong>$2,982,892</strong></span>
+          <span style="color:#6b7280">FY Target: <strong>$2,635,815</strong></span>
         </div>
         <div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:12px">
           <span id="tarr-pct-q1" style="font-weight:600;color:#6b7280">—</span>
@@ -371,7 +371,7 @@ function buildARR() {
   var tarrA = 1272306; // EARR + NARR
 
   // FY 26/27 annual targets (combined MX + Colombia)
-  var FY_EARR = 1595069, FY_NARR = 1387823, FY_TARR = 2982892;
+  var FY_EARR = 1595069, FY_NARR = 1040746, FY_TARR = 2635815;
 
   // Q1 targets
   var Q1_EARR = 1058008, Q1_NARR = 443305, Q1_TARR = 1501313;
@@ -401,8 +401,8 @@ function buildARR() {
   var quarters = [
     { label:'Q1', period:'Abr – Jun', earrT:1058008, narrT: 443305, totalT:1501313, done:true,  earrA:earrA, narrA:narrA, totalA:tarrA },
     { label:'Q2', period:'Jul – Sep', earrT: 189985, narrT: 148375, totalT: 338360, done:false },
-    { label:'Q3', period:'Oct – Dic', earrT:  77528, narrT: 125289, totalT: 202817, done:false },
-    { label:'Q4', period:'Ene – Mar', earrT: 269548, narrT: 670854, totalT: 940402, done:false }
+    { label:'Q3', period:'Oct – Dic', earrT:  77528, narrT:  47761, totalT: 125289, done:false },
+    { label:'Q4', period:'Ene – Mar', earrT: 269548, narrT: 401306, totalT: 670854, done:false }
   ];
 
   // Quarterly chart — scale relative to Q1 total (largest quarter)
@@ -470,7 +470,7 @@ function buildARR() {
 }
 
 function buildDonuts() {
-  var MX_TARR = 2982892;
+  var MX_TARR = 2635815;
 
   // ── Donut 1: Progreso hacia Target (revenue $) ─────────────────
   var signedAmt  = clubs.filter(function(c){return c.s==='signed';})
