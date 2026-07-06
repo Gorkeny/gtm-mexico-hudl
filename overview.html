@@ -488,6 +488,7 @@ function buildClubPie() {
   var total  = active.reduce(function(s,c){return s + c.v27;}, 0);
 
   // Build SVG donut (r=90, hole r=46, cx=cy=100)
+  // viewBox expanded to -30 -30 260 260 to give room for two-line outer labels
   var cx = 100, cy = 100, R = 90, ri = 46;
   var angle = -Math.PI / 2; // start from 12 o'clock
   var paths = '';
@@ -515,15 +516,19 @@ function buildClubPie() {
       ' A' + ri + ' ' + ri + ' 0 ' + large + ' 0 ' + x2i.toFixed(2) + ' ' + y2i.toFixed(2) +
       ' Z" fill="' + col + '" stroke="white" stroke-width="1.5"/>';
 
-    // Label % at midpoint angle on outer area
+    // Label % + USD at midpoint angle, placed just outside the donut
     var mid = angle + span / 2;
-    var lx  = cx + (R + 12) * Math.cos(mid);
-    var ly  = cy + (R + 12) * Math.sin(mid);
+    var lx  = cx + (R + 16) * Math.cos(mid);
+    var ly  = cy + (R + 16) * Math.sin(mid);
     if (pct > 0.04) { // only label if segment big enough
-      paths += '<text x="' + lx.toFixed(1) + '" y="' + ly.toFixed(1) + '"' +
+      paths += '<text x="' + lx.toFixed(1) + '" y="' + (ly - 5).toFixed(1) + '"' +
         ' text-anchor="middle" dominant-baseline="middle"' +
         ' font-family="-apple-system,sans-serif" font-size="8.5" font-weight="700" fill="' + col + '">' +
         (pct * 100).toFixed(1) + '%</text>';
+      paths += '<text x="' + lx.toFixed(1) + '" y="' + (ly + 5).toFixed(1) + '"' +
+        ' text-anchor="middle" dominant-baseline="middle"' +
+        ' font-family="-apple-system,sans-serif" font-size="7.5" fill="' + col + '">' +
+        fmt(c.v27) + '</text>';
     }
 
     // Legend: split into two columns
@@ -531,7 +536,7 @@ function buildClubPie() {
       '<div style="width:9px;height:9px;border-radius:2px;background:' + col + ';flex-shrink:0"></div>' +
       '<span style="font-size:11px;color:#374151;flex:1;white-space:nowrap">' + c.n + '</span>' +
       '<span style="font-size:11px;font-weight:700;color:' + col + ';margin-left:4px">' + (pct*100).toFixed(1) + '%</span>' +
-      '<span style="font-size:10px;color:#9ca3af;margin-left:5px;min-width:72px;text-align:right">' + fmt(c.v27) + '</span>' +
+      '<span style="font-size:11px;font-weight:600;color:' + col + ';margin-left:5px;min-width:72px;text-align:right">' + fmt(c.v27) + '</span>' +
     '</div>';
     if (i < Math.ceil(active.length / 2)) legendLeft  += item;
     else                                   legendRight += item;
@@ -543,7 +548,7 @@ function buildClubPie() {
   paths += '<text x="' + cx + '" y="' + (cy-7) + '" text-anchor="middle" font-family="-apple-system,sans-serif" font-size="11" font-weight="700" fill="#1e293b">' + fmt(total) + '</text>';
   paths += '<text x="' + cx + '" y="' + (cy+9) + '" text-anchor="middle" font-family="-apple-system,sans-serif" font-size="9" fill="#9ca3af">Total v27</text>';
 
-  var svg = '<svg viewBox="0 0 200 200" width="220" height="220">' + paths + '</svg>';
+  var svg = '<svg viewBox="-30 -30 260 260" width="240" height="240">' + paths + '</svg>';
 
   document.getElementById('club-pie').innerHTML =
     '<div style="display:flex;gap:28px;align-items:center;flex-wrap:wrap">' +
