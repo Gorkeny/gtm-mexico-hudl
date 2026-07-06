@@ -270,7 +270,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
       <div class="comp-legend">
         <div class="leg-item"><div class="leg-circ" style="background:#059669"></div>Signed</div>
         <div class="leg-item"><div class="leg-circ" style="background:#2563eb"></div>Open Pipeline</div>
-        <div class="leg-item"><div class="leg-circ" style="background:#f59e0b"></div>Pipeline / CITEC Lost</div>
+        <div class="leg-item"><div class="leg-circ" style="background:#f97316"></div>Pipeline / Churn</div>
         <div class="leg-item"><div class="leg-circ" style="background:#dc2626"></div>Closed Lost</div>
         <div class="leg-item"><div class="leg-circ" style="background:#94a3b8"></div>ARR FY 25/26</div>
       </div>
@@ -329,7 +329,7 @@ function auth() {
 }
 
 // ── DATA ──────────────────────────────────────────────────
-var CLR = {signed:'#059669',pipeline:'#2563eb',citec:'#f59e0b',lost:'#dc2626',no_data:'#d1d5db',arr:'#94a3b8'};
+var CLR = {signed:'#059669',pipeline:'#2563eb',citec:'#f97316',lost:'#dc2626',no_data:'#d1d5db',arr:'#94a3b8'};
 
 var clubs = [
   {n:'SNM',       arr:216792, v27:224316, s:'signed'},
@@ -493,13 +493,13 @@ function buildDonuts() {
   var grad1 = 'conic-gradient(' +
     '#059669 0% ' + c1.toFixed(1) + '%,' +
     '#2563eb ' + c1.toFixed(1) + '% ' + c2.toFixed(1) + '%,' +
-    '#f59e0b ' + c2.toFixed(1) + '% ' + c3.toFixed(1) + '%,' +
+    '#f97316 ' + c2.toFixed(1) + '% ' + c3.toFixed(1) + '%,' +
     '#e5e7eb ' + c3.toFixed(1) + '% 100%)';
 
   var legItems1 =
     '<div class="leg-item"><div class="leg-circ" style="background:#059669"></div>Closed Won ' + pS.toFixed(1) + '% · ' + fmt(signedAmt) + '</div>' +
     (pipeAmt > 0 ? '<div class="leg-item"><div class="leg-circ" style="background:#2563eb"></div>Pipeline ' + pP.toFixed(1) + '% · ' + fmt(pipeAmt) + '</div>' : '') +
-    (citecAmt > 0 ? '<div class="leg-item"><div class="leg-circ" style="background:#f59e0b"></div>CITEC ' + pC.toFixed(1) + '% · ' + fmt(citecAmt) + '</div>' : '') +
+    (citecAmt > 0 ? '<div class="leg-item"><div class="leg-circ" style="background:#f97316"></div>Churn ' + pC.toFixed(1) + '% · ' + fmt(citecAmt) + '</div>' : '') +
     '<div class="leg-item"><div class="leg-circ" style="background:#e5e7eb"></div>Gap ' + pG.toFixed(1) + '% · ' + fmt(gapAmt) + '</div>' +
     '<div style="margin-top:10px;padding-top:10px;border-top:1px solid #f1f5f9;font-size:10px;color:#9ca3af;line-height:1.6">' +
       'ℹ️ Calculado sobre el <strong style="color:#6b7280">target México: ' + fmt(MX_TARR) + '</strong> ' +
@@ -537,7 +537,7 @@ function buildDonuts() {
 
   var gradStop = '#059669 0% ' + d1.toFixed(1) + '%';
   if(nPipe  > 0) gradStop += ',#2563eb '  + d1.toFixed(1) + '% ' + d2.toFixed(1) + '%';
-  if(nCitec > 0) gradStop += ',#f59e0b '  + d2.toFixed(1) + '% ' + d3.toFixed(1) + '%';
+  if(nCitec > 0) gradStop += ',#f97316 '  + d2.toFixed(1) + '% ' + d3.toFixed(1) + '%';
   if(nLost  > 0) gradStop += ',#dc2626 '  + d3.toFixed(1) + '% ' + d4.toFixed(1) + '%';
   if(nNoData> 0) gradStop += ',#d1d5db '  + d4.toFixed(1) + '% 100%';
   var grad2 = 'conic-gradient(' + gradStop + ')';
@@ -545,7 +545,7 @@ function buildDonuts() {
   var legItems2 =
     '<div class="leg-item"><div class="leg-circ" style="background:#059669"></div>Signed (' + nSigned + ')</div>' +
     (nPipe   > 0 ? '<div class="leg-item"><div class="leg-circ" style="background:#2563eb"></div>Open Pipeline (' + nPipe + ')</div>' : '') +
-    (nCitec  > 0 ? '<div class="leg-item"><div class="leg-circ" style="background:#f59e0b"></div>CITEC (' + nCitec + ')</div>' : '') +
+    (nCitec  > 0 ? '<div class="leg-item"><div class="leg-circ" style="background:#f97316"></div>Churn (' + nCitec + ')</div>' : '') +
     (nLost   > 0 ? '<div class="leg-item"><div class="leg-circ" style="background:#dc2626"></div>Closed Lost (' + nLost + ')</div>' : '') +
     (nNoData > 0 ? '<div class="leg-item"><div class="leg-circ" style="background:#d1d5db"></div>Sin datos (' + nNoData + ')</div>' : '');
 
