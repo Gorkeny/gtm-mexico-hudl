@@ -382,15 +382,10 @@ function render() {
 }
 
 function buildARR() {
-  // Compute EARR/NARR actuals from signed clubs
-  var earrA = 0, narrA = 0;
-  clubs.forEach(function(c) {
-    if (c.s === 'signed') {
-      earrA += Math.min(c.arr, c.v27);
-      narrA += Math.max(0, c.v27 - c.arr);
-    }
-  });
-  var tarrA = 1214484; // manually maintained Closed Won total (MX)
+  // Actuals Q1 — mantenidos manualmente · actualizado Jul 2026
+  var earrA = 942281;
+  var narrA = 330025;
+  var tarrA = 1272306; // EARR + NARR
 
   // Mexico annual targets
   var MX_EARR = 1491769, MX_NARR = 700000;
