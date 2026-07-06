@@ -336,11 +336,16 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 
 <script>
 // ── AUTH ──────────────────────────────────────────────────
+function unlock() {
+  document.getElementById('auth-overlay').style.display = 'none';
+  document.getElementById('dash').style.display = 'block';
+  render();
+}
+
 function auth() {
   if (document.getElementById('pwd').value === 'latampod2026') {
-    document.getElementById('auth-overlay').style.display = 'none';
-    document.getElementById('dash').style.display = 'block';
-    render();
+    localStorage.setItem('gtm_auth', '1');
+    unlock();
   } else {
     document.getElementById('auth-err').style.display = 'block';
   }
@@ -739,6 +744,9 @@ function buildLeague() {
   });
   document.getElementById('league-bars').innerHTML = html;
 }
+
+// Auto-login si la sesión ya estaba autenticada
+if (localStorage.getItem('gtm_auth') === '1') { unlock(); }
 </script>
 </body>
 </html>
