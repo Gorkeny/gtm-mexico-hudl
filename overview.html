@@ -615,8 +615,8 @@ function buildTools() {
   html += '<div style="text-align:right;font-size:9px;font-weight:700;color:#9ca3af">ARR</div>';
   html += '</div>';
 
-  // Clubs
-  clubs.forEach(function(c) {
+  // Clubs — solo signed
+  clubs.filter(function(c){ return c.s === 'signed'; }).forEach(function(c) {
     var p25 = prods25[c.n] || [];
     var p27 = prods27[c.n] || [];
     var no25 = p25.length === 0;
