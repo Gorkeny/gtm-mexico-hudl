@@ -9,21 +9,21 @@
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#eef2f7;color:#1a202c;min-height:100vh}
 
 /* AUTH */
-#auth-overlay{position:fixed;inset:0;background:linear-gradient(135deg,#003087,#001340);display:flex;align-items:center;justify-content:center;z-index:9999}
-.auth-box{background:#fff;border-radius:20px;padding:44px 52px;text-align:center;width:340px;box-shadow:0 24px 60px rgba(0,0,0,.35)}
-.auth-logo{font-size:30px;font-weight:800;color:#003087;margin-bottom:6px}
+#auth-overlay{position:fixed;inset:0;background:linear-gradient(135deg,#1a1a1a,#0a0a0a);display:flex;align-items:center;justify-content:center;z-index:9999}
+.auth-box{background:#fff;border-radius:20px;padding:44px 52px;text-align:center;width:340px;box-shadow:0 24px 60px rgba(0,0,0,.6)}
+.auth-logo{font-size:30px;font-weight:800;color:#FC3A52;margin-bottom:6px}
 .auth-sub{font-size:13px;color:#9ca3af;margin-bottom:32px}
 .auth-input{width:100%;padding:13px 16px;border:1.5px solid #e5e7eb;border-radius:10px;font-size:15px;margin-bottom:14px;outline:none}
-.auth-input:focus{border-color:#003087}
-.auth-btn{width:100%;padding:13px;background:#003087;color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:600;cursor:pointer}
-.auth-btn:hover{background:#001a4d}
+.auth-input:focus{border-color:#FC3A52}
+.auth-btn{width:100%;padding:13px;background:#FC3A52;color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:600;cursor:pointer}
+.auth-btn:hover{background:#d42e45}
 .auth-err{color:#dc2626;font-size:12px;margin-top:8px;display:none}
 
 /* LAYOUT */
 #dash{display:none}
 
 /* HEADER */
-.hdr{background:linear-gradient(135deg,#003087,#001340);color:#fff;padding:28px 40px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px}
+.hdr{background:linear-gradient(135deg,#1a1a1a,#0a0a0a);color:#fff;padding:28px 40px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;border-bottom:3px solid #FC3A52}
 .hdr-title{font-size:24px;font-weight:800}
 .hdr-sub{font-size:13px;opacity:.7;margin-top:4px}
 .hdr-badge{display:inline-block;background:rgba(255,255,255,.15);font-size:11px;font-weight:700;padding:4px 12px;border-radius:20px;text-transform:uppercase;letter-spacing:.06em;margin-top:10px}
@@ -32,7 +32,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 
 /* CONTENT */
 .wrap{padding:28px 40px 48px;max-width:1400px;margin:0 auto}
-.note{background:#fffbeb;border:1px solid #fcd34d;border-radius:10px;padding:12px 18px;font-size:12px;color:#92400e;margin-bottom:20px;line-height:1.5}
+.note{background:#fff5f5;border:1px solid #fca5a5;border-radius:10px;padding:12px 18px;font-size:12px;color:#7f1d1d;margin-bottom:20px;line-height:1.5}
 
 /* KPI */
 .kpi-row{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;margin-bottom:24px}
@@ -145,15 +145,15 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
     <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:24px">
 
       <!-- EARR -->
-      <div class="card" style="padding:22px;margin-bottom:0;border-top:4px solid #2563eb">
-        <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#2563eb;margin-bottom:8px">EARR · Renovaciones</div>
+      <div class="card" style="padding:22px;margin-bottom:0;border-top:4px solid #FC3A52">
+        <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#FC3A52;margin-bottom:8px">EARR · Renovaciones</div>
         <div id="earr-val" style="font-size:30px;font-weight:800;color:#1e293b;line-height:1">—</div>
         <div style="font-size:11px;color:#9ca3af;margin:5px 0 14px">Actuals Q1 · contratos signed</div>
         <div style="background:#e5e7eb;border-radius:4px;height:8px;margin-bottom:8px;overflow:hidden">
-          <div id="earr-bar-top" style="height:100%;border-radius:4px;background:linear-gradient(90deg,#2563eb,#1d4ed8);width:0"></div>
+          <div id="earr-bar-top" style="height:100%;border-radius:4px;background:linear-gradient(90deg,#FC3A52,#d42e45);width:0"></div>
         </div>
         <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:12px">
-          <span id="earr-pct-top" style="font-weight:700;color:#2563eb">—</span>
+          <span id="earr-pct-top" style="font-weight:700;color:#FC3A52">—</span>
           <span style="color:#6b7280">FY Target: <strong>$1,491,769</strong></span>
         </div>
         <div style="font-size:11px;color:#9ca3af;border-top:1px solid #f1f5f9;padding-top:10px">Base ARR FY 25/26 · mercado México</div>
@@ -175,18 +175,18 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
       </div>
 
       <!-- TARR -->
-      <div class="card" style="padding:22px;margin-bottom:0;border-top:4px solid #7c3aed">
-        <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#7c3aed;margin-bottom:8px">TARR · Total ARR</div>
-        <div style="font-size:30px;font-weight:800;color:#1e293b;line-height:1">$1,214,484</div>
+      <div class="card" style="padding:22px;margin-bottom:0;border-top:4px solid #1a1a1a">
+        <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#1a1a1a;margin-bottom:8px">TARR · Total ARR</div>
+        <div id="tarr-val" style="font-size:30px;font-weight:800;color:#1e293b;line-height:1">—</div>
         <div style="font-size:11px;color:#9ca3af;margin:5px 0 14px">Actuals Q1 · Closed Won total</div>
         <div style="background:#e5e7eb;border-radius:4px;height:8px;margin-bottom:8px;overflow:hidden">
-          <div style="width:55.4%;height:100%;border-radius:4px;background:linear-gradient(90deg,#7c3aed,#6d28d9)"></div>
+          <div id="tarr-bar-top" style="height:100%;border-radius:4px;background:linear-gradient(90deg,#1a1a1a,#374151);width:0"></div>
         </div>
         <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:12px">
-          <span style="font-weight:700;color:#7c3aed">55.4% del FY target</span>
+          <span id="tarr-pct-top" style="font-weight:700;color:#1a1a1a">—</span>
           <span style="color:#6b7280">FY Target: <strong>$2,191,769</strong></span>
         </div>
-        <div style="font-size:11px;color:#9ca3af;border-top:1px solid #f1f5f9;padding-top:10px">EARR + NARR · 16 deals · mercado México</div>
+        <div style="font-size:11px;color:#9ca3af;border-top:1px solid #f1f5f9;padding-top:10px">EARR + NARR · mercado México</div>
       </div>
     </div>
 
@@ -202,8 +202,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
       </div>
       <div class="mb-row">
         <div class="mb-lbl">Closed Won 26/27</div>
-        <div class="mb-track"><div class="mb-fill" style="width:55.4%;background:linear-gradient(90deg,#059669,#047857)">$1,214,484</div></div>
-        <div class="mb-pct">55.4% del target</div>
+        <div class="mb-track"><div class="mb-fill" style="width:58.1%;background:linear-gradient(90deg,#FC3A52,#d42e45)">$1,272,306</div></div>
+        <div class="mb-pct">58.1% del target</div>
       </div>
       <div class="mb-row">
         <div class="mb-lbl">CW + Pipeline 26/27</div>
@@ -218,7 +218,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 
       <div class="mb-legend">
         <div class="leg"><div class="leg-dot" style="background:#64748b"></div>EARR FY 25/26</div>
-        <div class="leg"><div class="leg-dot" style="background:#059669"></div>Closed Won FY 26/27</div>
+        <div class="leg"><div class="leg-dot" style="background:#FC3A52"></div>Closed Won FY 26/27</div>
         <div class="leg"><div class="leg-dot" style="background:#2563eb"></div>CW + Pipeline FY 26/27</div>
         <div class="leg"><div class="leg-dot" style="background:#7c3aed"></div>Target FY 26/27</div>
       </div>
@@ -402,6 +402,13 @@ function buildARR() {
   document.getElementById('narr-bar-top').style.width = Math.min(100, narrPct) + '%';
   document.getElementById('narr-pct-top').textContent = narrPct + '% del FY target';
 
+  // Update TARR card
+  var MX_TARR = 2191769;
+  document.getElementById('tarr-val').textContent = fmt(tarrA);
+  var tarrPct = (tarrA / MX_TARR * 100).toFixed(1);
+  document.getElementById('tarr-bar-top').style.width = Math.min(100, tarrPct) + '%';
+  document.getElementById('tarr-pct-top').textContent = tarrPct + '% del FY target';
+
   // Remove Colombia proportionally: combined annual = $2,635,815 · Colombia TARR = $700,000
   var COL_TARR = 700000, COMB = 2635815;
   var mxScale = (COMB - COL_TARR) / COMB; // ≈ 0.7344
@@ -433,7 +440,7 @@ function buildARR() {
     var tN = (q.narrT / SCALE * 100).toFixed(2);
 
     var targetBar = '<div style="display:flex;height:22px;border-radius:4px;overflow:hidden;margin-bottom:' + (q.done ? '5px' : '0') + '">' +
-      '<div title="Target EARR ' + fmt(q.earrT) + '" style="width:' + tE + '%;background:#003087;min-width:0"></div>' +
+      '<div title="Target EARR ' + fmt(q.earrT) + '" style="width:' + tE + '%;background:#1a1a1a;min-width:0"></div>' +
       '<div title="Target NARR ' + fmt(q.narrT) + '" style="width:' + tN + '%;background:#93c5fd;min-width:0"></div>' +
       '<div style="flex:1;background:#f1f5f9;border-radius:0 4px 4px 0"></div>' +
     '</div>';
@@ -444,7 +451,7 @@ function buildARR() {
       var aE = (q.earrA / SCALE * 100).toFixed(2);
       var aN = (q.narrA / SCALE * 100).toFixed(2);
       actualBar = '<div style="display:flex;height:16px;border-radius:4px;overflow:hidden">' +
-        '<div title="Real EARR ' + fmt(q.earrA) + '" style="width:' + aE + '%;background:#059669;min-width:0"></div>' +
+        '<div title="Real EARR ' + fmt(q.earrA) + '" style="width:' + aE + '%;background:#FC3A52;min-width:0"></div>' +
         '<div title="Real NARR ' + fmt(q.narrA) + '" style="width:' + aN + '%;background:#6ee7b7;min-width:0"></div>' +
         '<div style="flex:1;background:#f1f5f9;border-radius:0 4px 4px 0"></div>' +
       '</div>';
@@ -541,24 +548,26 @@ function buildNarr() {
 
 function buildTools() {
   var families = [
-    {key:'Sportscode',  label:'Sportscode',   col:'#7c3aed', abbr:'SC'},
-    {key:'Wyscout',     label:'Wyscout',      col:'#0284c7', abbr:'WY'},
-    {key:'Statsbomb',   label:'Hudl IQ',      col:'#0891b2', abbr:'IQ'},
-    {key:'Replay',      label:'Replay HW',    col:'#059669', abbr:'RP'},
-    {key:'Wimu',        label:'WIMU GPS',     col:'#dc2626', abbr:'WM'},
-    {key:'Hudl Focus',  label:'Hudl Focus',   col:'#ea580c', abbr:'HF'},
-    {key:'Hudl',        label:'Hudl Core',    col:'#d97706', abbr:'HL'}
+    {key:'Sportscode',           label:'Sportscode',     col:'#7c3aed', abbr:'SC'},
+    {key:'Wyscout',              label:'Wyscout',        col:'#0284c7', abbr:'WY'},
+    {key:'Statsbomb',            label:'Hudl IQ',        col:'#0891b2', abbr:'IQ'},
+    {key:'Replay',               label:'Replay HW',      col:'#059669', abbr:'RP'},
+    {key:'Wimu',                 label:'WIMU GPS',       col:'#dc2626', abbr:'WM'},
+    {key:'Hudl Focus',           label:'Hudl Focus',     col:'#ea580c', abbr:'HF'},
+    {key:'Hudl',                 label:'Hudl Core',      col:'#d97706', abbr:'HL'},
+    {key:'ADI',                  label:'ADI',            col:'#4f46e5', abbr:'AD'},
+    {key:'Professional Services',label:'Prof. Srv',      col:'#6b7280', abbr:'PS'}
   ];
 
-  // Product families per club (FY 25/26 · Abr 2025 – Mar 2026 · Salesforce vía Dot)
-  var prods = {
+  // FY 25/26 product families per club (Salesforce vía Dot · Abr 2025 – Mar 2026)
+  var prods25 = {
     'SNM':       ['Hudl','Hudl Focus','Replay','Sportscode','Statsbomb','Wimu','Wyscout'],
     'Monterrey': ['Replay','Sportscode','Wyscout'],
     'Tigres':    ['Hudl Focus','Replay','Sportscode','Statsbomb','Wimu','Wyscout'],
     'América':   ['Sportscode','Statsbomb'],
     'Juárez':    ['Replay','Sportscode','Statsbomb','Wyscout'],
     'Chivas':    ['Replay','Sportscode','Statsbomb','Wimu'],
-    'Cancún':    [],
+    'Cancún':    ['Wyscout'],
     'Cruz Azul': [],
     'Pachuca':   ['Sportscode','Wimu','Wyscout'],
     'Toluca':    ['Wyscout'],
@@ -572,59 +581,137 @@ function buildTools() {
     'Atlas':     ['Wyscout']
   };
 
-  var COLS = families.length;
-  // Grid: club label + N family columns
-  var gridStyle = 'display:grid;grid-template-columns:88px repeat(' + COLS + ',1fr);align-items:center;gap:3px 6px';
+  // FY 26/27 product families per club (Salesforce vía Dot · contratos activos Jul 2026)
+  var prods27 = {
+    'SNM':       ['Hudl','Hudl Focus','Replay','Sportscode','Statsbomb','Wimu','Wyscout'],
+    'Monterrey': ['ADI','Hudl','Professional Services','Replay','Sportscode','Statsbomb','Wyscout'],
+    'Tigres':    ['ADI','Hudl','Hudl Focus','Professional Services','Replay','Sportscode','Statsbomb','Wyscout'],
+    'América':   ['ADI','Hudl','Professional Services','Sportscode','Statsbomb','Wyscout'],
+    'Juárez':    ['ADI','Hudl','Professional Services','Replay','Sportscode','Statsbomb','Wyscout'],
+    'Chivas':    ['ADI','Hudl','Hudl Focus','Professional Services','Replay','Sportscode','Statsbomb','Wyscout'],
+    'Cancún':    [],
+    'Cruz Azul': [],
+    'Pachuca':   [],
+    'Toluca':    ['Statsbomb','Wyscout'],
+    'San Luis':  [],
+    'Pumas':     ['Replay','Sportscode','Statsbomb','Wyscout'],
+    'Necaxa':    ['Sportscode','Statsbomb','Wyscout'],
+    'Querétaro': ['Statsbomb','Wyscout'],
+    'Xolos':     ['Statsbomb','Wyscout'],
+    'León':      [],
+    'Santos':    [],
+    'Atlas':     []
+  };
 
-  var html = '<div style="' + gridStyle + ';margin-bottom:6px">';
-  html += '<div style="font-size:10px;color:#9ca3af;text-align:right;padding-right:6px">Club</div>';
+  var NFAM = families.length;
+  var gridCols = '100px 28px repeat(' + NFAM + ',1fr) 120px';
+
+  // Header row
+  var html = '<div style="display:grid;grid-template-columns:' + gridCols + ';gap:2px 5px;align-items:center;margin-bottom:8px;padding-bottom:8px;border-bottom:2px solid #f1f5f9">';
+  html += '<div></div><div></div>';
   families.forEach(function(f) {
-    html += '<div style="text-align:center;font-size:10px;font-weight:700;color:' + f.col + '">' + f.abbr + '</div>';
+    html += '<div style="text-align:center;font-size:9px;font-weight:700;color:' + f.col + ';line-height:1.2">' + f.abbr + '</div>';
   });
+  html += '<div style="text-align:right;font-size:9px;font-weight:700;color:#9ca3af">ARR</div>';
   html += '</div>';
 
-  html += '<div style="' + gridStyle + '">';
+  // Clubs
   clubs.forEach(function(c) {
-    var p = prods[c.n] || [];
-    var noData = p.length === 0;
+    var p25 = prods25[c.n] || [];
+    var p27 = prods27[c.n] || [];
+    var no25 = p25.length === 0;
+    var no27 = p27.length === 0;
     var dotCol = CLR[c.s] || CLR.no_data;
+    var delta = c.v27 - c.arr;
+    var deltaCol = delta >= 0 ? '#16a34a' : '#dc2626';
+    var deltaSign = delta >= 0 ? '+' : '';
+    var deltaPct = c.arr > 0 ? ' (' + deltaSign + Math.round(delta/c.arr*100) + '%)' : '';
 
-    html += '<div style="display:flex;align-items:center;justify-content:flex-end;gap:5px;padding-right:6px">' +
+    // Row FY25/26
+    html += '<div style="display:grid;grid-template-columns:' + gridCols + ';gap:2px 5px;align-items:center;margin-bottom:1px">';
+    // Club name (rowspan simulated: shown in 25/26 row only)
+    html += '<div style="display:flex;align-items:center;gap:5px">' +
       '<div style="width:7px;height:7px;border-radius:50%;background:' + dotCol + ';flex-shrink:0"></div>' +
-      '<span style="font-size:11px;font-weight:600;color:#374151;white-space:nowrap">' + c.n + '</span>' +
+      '<span style="font-size:11px;font-weight:700;color:#1a1a1a;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">' + c.n + '</span>' +
     '</div>';
-
+    html += '<div style="font-size:8px;font-weight:600;color:#9ca3af;text-align:center;white-space:nowrap">25/26</div>';
     families.forEach(function(f) {
-      var has = p.indexOf(f.key) !== -1;
+      var has = p25.indexOf(f.key) !== -1;
       if (has) {
-        html += '<div style="display:flex;align-items:center;justify-content:center">' +
-          '<div style="width:22px;height:22px;border-radius:5px;background:' + f.col + ';opacity:0.85"></div>' +
-        '</div>';
-      } else if (noData) {
-        html += '<div style="display:flex;align-items:center;justify-content:center">' +
-          '<div style="width:22px;height:22px;border-radius:5px;border:1.5px dashed #d1d5db;background:#f9fafb"></div>' +
-        '</div>';
+        html += '<div style="display:flex;justify-content:center">' +
+          '<div style="width:18px;height:18px;border-radius:4px;background:' + f.col + ';opacity:0.45"></div></div>';
       } else {
-        html += '<div style="display:flex;align-items:center;justify-content:center">' +
-          '<div style="width:22px;height:22px;border-radius:5px;background:#f1f5f9"></div>' +
-        '</div>';
+        html += '<div style="display:flex;justify-content:center">' +
+          (no25 ? '<div style="width:18px;height:18px;border-radius:4px;border:1px dashed #e5e7eb"></div>'
+                : '<div style="width:18px;height:18px;border-radius:4px;background:#f3f4f6"></div>') +
+          '</div>';
       }
     });
+    html += '<div style="text-align:right;font-size:10px;color:#9ca3af">' + (c.arr ? fmt(c.arr) : '—') + '</div>';
+    html += '</div>';
+
+    // Row FY26/27
+    html += '<div style="display:grid;grid-template-columns:' + gridCols + ';gap:2px 5px;align-items:center;margin-bottom:1px">';
+    html += '<div></div>';
+    html += '<div style="font-size:8px;font-weight:700;color:#FC3A52;text-align:center;white-space:nowrap">26/27</div>';
+    families.forEach(function(f) {
+      var has25 = p25.indexOf(f.key) !== -1;
+      var has27 = p27.indexOf(f.key) !== -1;
+      if (has27) {
+        var isNew = !has25;
+        html += '<div style="display:flex;justify-content:center;position:relative">' +
+          '<div style="width:18px;height:18px;border-radius:4px;background:' + f.col + ';' + (isNew ? 'box-shadow:0 0 0 2px #16a34a' : '') + '"></div>' +
+          (isNew ? '<div style="position:absolute;top:-4px;right:-2px;font-size:7px;font-weight:800;color:#16a34a;line-height:1">+</div>' : '') +
+        '</div>';
+      } else if (has25) {
+        // Lost
+        html += '<div style="display:flex;justify-content:center">' +
+          '<div style="width:18px;height:18px;border-radius:4px;border:1.5px solid #dc2626;opacity:0.4;position:relative">' +
+            '<div style="position:absolute;top:50%;left:0;right:0;height:1.5px;background:#dc2626;transform:rotate(-45deg)"></div>' +
+          '</div></div>';
+      } else {
+        html += '<div style="display:flex;justify-content:center">' +
+          (no27 ? '<div style="width:18px;height:18px;border-radius:4px;border:1px dashed #e5e7eb"></div>'
+                : '<div style="width:18px;height:18px;border-radius:4px;background:#f3f4f6"></div>') +
+          '</div>';
+      }
+    });
+    html += '<div style="text-align:right;font-size:10px;font-weight:700;color:#1a1a1a">' + (c.v27 ? fmt(c.v27) : '—') + '</div>';
+    html += '</div>';
+
+    // Delta row
+    html += '<div style="display:grid;grid-template-columns:100px 1fr;gap:0 5px;align-items:center;margin-bottom:10px;padding-bottom:10px;border-bottom:1px solid #f3f4f6">';
+    html += '<div></div>';
+    html += '<div style="display:flex;align-items:center;gap:8px;padding:3px 0">';
+    if (c.arr > 0 || c.v27 > 0) {
+      var maxDelta = 250000;
+      var barW = Math.min(100, Math.abs(delta) / maxDelta * 100).toFixed(1);
+      html += '<div style="flex:1;height:5px;background:#f3f4f6;border-radius:3px;overflow:hidden">' +
+        '<div style="width:' + barW + '%;height:100%;background:' + deltaCol + ';border-radius:3px"></div>' +
+      '</div>';
+      html += '<span style="font-size:10px;font-weight:700;color:' + deltaCol + ';white-space:nowrap;min-width:100px;text-align:right">' +
+        deltaSign + fmt(delta) + deltaPct +
+      '</span>';
+    } else {
+      html += '<span style="font-size:10px;color:#d1d5db">Sin datos en ambos ejercicios</span>';
+    }
+    html += '</div></div>';
   });
-  html += '</div>';
 
   // Legend
-  html += '<div style="display:flex;flex-wrap:wrap;gap:14px;margin-top:18px;padding-top:14px;border-top:1px solid #f1f5f9">';
+  html += '<div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:4px;padding-top:14px;border-top:1px solid #f1f5f9">';
   families.forEach(function(f) {
-    html += '<div style="display:flex;align-items:center;gap:6px">' +
-      '<div style="width:14px;height:14px;border-radius:3px;background:' + f.col + ';opacity:0.85"></div>' +
-      '<span style="font-size:11px;color:#4b5563;font-weight:600">' + f.abbr + ' = ' + f.label + '</span>' +
+    html += '<div style="display:flex;align-items:center;gap:5px">' +
+      '<div style="width:12px;height:12px;border-radius:3px;background:' + f.col + '"></div>' +
+      '<span style="font-size:10px;color:#4b5563;font-weight:600">' + f.abbr + ' = ' + f.label + '</span>' +
     '</div>';
   });
-  html += '<div style="display:flex;align-items:center;gap:6px">' +
-    '<div style="width:14px;height:14px;border-radius:3px;border:1.5px dashed #d1d5db;background:#f9fafb"></div>' +
-    '<span style="font-size:11px;color:#9ca3af">Sin registro FY 25/26</span>' +
-  '</div>';
+  html += '<div style="display:flex;align-items:center;gap:5px;margin-left:8px">' +
+    '<div style="width:12px;height:12px;border-radius:3px;border:1.5px solid #16a34a"></div>' +
+    '<span style="font-size:10px;color:#16a34a;font-weight:600">+ Nuevo en 26/27</span></div>';
+  html += '<div style="display:flex;align-items:center;gap:5px">' +
+    '<div style="width:12px;height:12px;border-radius:3px;border:1.5px solid #dc2626;opacity:0.5"></div>' +
+    '<span style="font-size:10px;color:#dc2626;font-weight:600">✕ No renovado</span></div>';
   html += '</div>';
 
   document.getElementById('tools-matrix').innerHTML = html;
