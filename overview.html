@@ -348,7 +348,7 @@ var clubs = [
   {n:'Juárez',    arr:100843, v27:126696, s:'signed'},
   {n:'Chivas',    arr: 85397, v27: 98942, s:'signed'},
   {n:'Cancún',    arr: 57681, v27: 92240, s:'pipeline'},
-  {n:'Cruz Azul', arr:167616, v27: 89559, s:'pipeline'},
+  {n:'Cruz Azul', arr:167616, v27: 89559, s:'signed'},
   {n:'Pachuca',   arr: 56783, v27:     0, s:'lost'},
   {n:'Toluca',    arr: 48968, v27: 68470, s:'signed'},
   {n:'San Luis',  arr: 40123, v27: 67465, s:'pipeline'},
@@ -697,13 +697,17 @@ function buildComp() {
 }
 
 function buildNarr() {
-  var signed = clubs.filter(function(c){return c.s==='signed';})
+  var allSigned = clubs.filter(function(c){return c.s==='signed';});
+  // NARR = expansión real (v27 > arr). Clubs con v27 < arr son contracciones, no NARR.
+  var expansion = allSigned.filter(function(c){return c.v27 > c.arr;})
     .map(function(c){return {n:c.n, narr:c.v27-c.arr};})
     .sort(function(a,b){return b.narr-a.narr;});
-  var MAX = Math.max.apply(null, signed.map(function(c){return c.narr;}));
-  var total = signed.reduce(function(s,c){return s+c.narr;},0);
+  var contraction = allSigned.filter(function(c){return c.v27 < c.arr && c.v27 > 0;})
+    .map(function(c){return {n:c.n, delta:c.v27-c.arr};});
+  var MAX = Math.max.apply(null, expansion.map(function(c){return c.narr;}));
+  var total = expansion.reduce(function(s,c){return s+c.narr;},0);
   var html = '';
-  signed.forEach(function(c){
+  expansion.forEach(function(c){
     var w = Math.max(2, Math.round(c.narr / MAX * 100));
     html += '<div class="narr-row">' +
       '<div class="narr-name">' + c.n + '</div>' +
@@ -716,6 +720,10 @@ function buildNarr() {
     '<span style="color:#374151">Total NARR (Signed)</span>' +
     '<span style="color:#059669">' + fmt(total) + '</span>' +
   '</div>';
+  if (contraction.length) {
+    var cStr = contraction.map(function(c){return c.n + ' (' + fmt(c.delta) + ')';}).join(', ');
+    html += '<div style="margin-top:8px;font-size:10px;color:#dc2626">⚠ Contracción (firmada, valor inferior al FY25/26): ' + cStr + '</div>';
+  }
   document.getElementById('narr-bars').innerHTML = html;
 }
 
