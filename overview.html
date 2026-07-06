@@ -154,7 +154,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
         </div>
         <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:5px">
           <span id="earr-pct-top" style="font-weight:700;color:#FC3A52">—</span>
-          <span style="color:#6b7280">FY Target: <strong>$1,491,769</strong></span>
+          <span style="color:#6b7280">FY Target: <strong>$1,595,069</strong></span>
         </div>
         <div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:12px">
           <span id="earr-pct-q1" style="font-weight:600;color:#6b7280">—</span>
@@ -173,7 +173,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
         </div>
         <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:5px">
           <span id="narr-pct-top" style="font-weight:700;color:#059669">—</span>
-          <span style="color:#6b7280">FY Target: <strong>$700,000</strong></span>
+          <span style="color:#6b7280">FY Target: <strong>$1,387,823</strong></span>
         </div>
         <div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:12px">
           <span id="narr-pct-q1" style="font-weight:600;color:#6b7280">—</span>
@@ -192,7 +192,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
         </div>
         <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:5px">
           <span id="tarr-pct-top" style="font-weight:700;color:#1a1a1a">—</span>
-          <span style="color:#6b7280">FY Target: <strong>$2,191,769</strong></span>
+          <span style="color:#6b7280">FY Target: <strong>$2,982,892</strong></span>
         </div>
         <div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:12px">
           <span id="tarr-pct-q1" style="font-weight:600;color:#6b7280">—</span>
@@ -239,7 +239,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
     <!-- QUARTERLY TRACKING -->
     <div class="card">
       <div class="sec-title">Tracking por Quarter — FY 26/27</div>
-      <div class="sec-sub">Actuals Q1 México vs targets México por quarter · Q2–Q4 pendientes</div>
+      <div class="sec-sub">Actuals Q1 vs targets FY 26/27 por quarter · Q2–Q4 pendientes</div>
 
       <div style="display:flex;gap:18px;margin:10px 0 18px;flex-wrap:wrap">
         <div style="display:flex;align-items:center;gap:6px;font-size:11px;color:#4b5563"><div style="width:14px;height:10px;border-radius:2px;background:#fca5a5"></div>Target EARR</div>
@@ -250,8 +250,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 
       <div id="q-chart"></div>
 
-      <div style="margin-top:14px;padding-top:12px;border-top:1px solid #f3f4f6;font-size:11px;color:#b45309;line-height:1.6">
-        📌 <strong>Targets MX calculados</strong> deduciendo la parte proporcional de Colombia ($700,000 TARR) de la cifra combinada MX+Colombia ($2,635,815). Factor aplicado: ×0.7344 por quarter. Colombia es un mercado con target separado no incluido en los actuals ni en los targets mostrados.
+      <div style="margin-top:14px;padding-top:12px;border-top:1px solid #f3f4f6;font-size:11px;color:#6b7280;line-height:1.6">
+        ℹ️ Targets combinados MX + Colombia. Actuals Q1 corresponden a cierre México.
       </div>
     </div>
 
@@ -370,58 +370,43 @@ function buildARR() {
   var narrA = 330025;
   var tarrA = 1272306; // EARR + NARR
 
-  // Mexico annual targets
-  var MX_EARR = 1491769, MX_NARR = 700000;
+  // FY 26/27 annual targets (combined MX + Colombia)
+  var FY_EARR = 1595069, FY_NARR = 1387823, FY_TARR = 2982892;
 
-  // Q1 combined targets (MX + Colombia)
+  // Q1 targets
   var Q1_EARR = 1058008, Q1_NARR = 443305, Q1_TARR = 1501313;
 
   // Update EARR card
   document.getElementById('earr-val').textContent = fmt(earrA);
-  var earrPct = (earrA / MX_EARR * 100).toFixed(1);
+  var earrPct = (earrA / FY_EARR * 100).toFixed(1);
   document.getElementById('earr-bar-top').style.width = Math.min(100, earrPct) + '%';
   document.getElementById('earr-pct-top').textContent = earrPct + '% del FY target';
   document.getElementById('earr-pct-q1').textContent = (earrA / Q1_EARR * 100).toFixed(1) + '% del Q1 target';
 
   // Update NARR card
   document.getElementById('narr-val-top').textContent = fmt(narrA);
-  var narrPct = (narrA / MX_NARR * 100).toFixed(1);
+  var narrPct = (narrA / FY_NARR * 100).toFixed(1);
   document.getElementById('narr-bar-top').style.width = Math.min(100, narrPct) + '%';
   document.getElementById('narr-pct-top').textContent = narrPct + '% del FY target';
   document.getElementById('narr-pct-q1').textContent = (narrA / Q1_NARR * 100).toFixed(1) + '% del Q1 target';
 
   // Update TARR card
-  var MX_TARR = 2191769;
   document.getElementById('tarr-val').textContent = fmt(tarrA);
-  var tarrPct = (tarrA / MX_TARR * 100).toFixed(1);
+  var tarrPct = (tarrA / FY_TARR * 100).toFixed(1);
   document.getElementById('tarr-bar-top').style.width = Math.min(100, tarrPct) + '%';
   document.getElementById('tarr-pct-top').textContent = tarrPct + '% del FY target';
   document.getElementById('tarr-pct-q1').textContent = (tarrA / Q1_TARR * 100).toFixed(1) + '% del Q1 target';
 
-  // Remove Colombia proportionally: combined annual = $2,635,815 · Colombia TARR = $700,000
-  var COL_TARR = 700000, COMB = 2635815;
-  var mxScale = (COMB - COL_TARR) / COMB; // ≈ 0.7344
-
-  // Quarterly targets (MX only) derived from combined by applying mxScale
-  var Q = [
-    { earrC:1058008, narrC:443305,  totalC:1501313 },
-    { earrC: 189985, narrC:148375,  totalC: 338360 },
-    { earrC:  77528, narrC: 47761,  totalC: 125289 },
-    { earrC: 315046, narrC:355808,  totalC: 670854 }
-  ].map(function(q){ return {
-    earrT:  Math.round(q.earrC  * mxScale),
-    narrT:  Math.round(q.narrC  * mxScale),
-    totalT: Math.round(q.totalC * mxScale)
-  };});
-
-  // Quarterly chart — scale relative to Q1 MX target (largest quarter)
-  var SCALE = Q[0].totalT;
+  // Quarterly targets (combined MX + Colombia) — targets FY 26/27
   var quarters = [
-    { label:'Q1', period:'Abr – Jun', earrT:Q[0].earrT, narrT:Q[0].narrT, totalT:Q[0].totalT, done:true,  earrA:earrA, narrA:narrA, totalA:tarrA },
-    { label:'Q2', period:'Jul – Sep', earrT:Q[1].earrT, narrT:Q[1].narrT, totalT:Q[1].totalT, done:false },
-    { label:'Q3', period:'Oct – Dic', earrT:Q[2].earrT, narrT:Q[2].narrT, totalT:Q[2].totalT, done:false },
-    { label:'Q4', period:'Ene – Mar', earrT:Q[3].earrT, narrT:Q[3].narrT, totalT:Q[3].totalT, done:false }
+    { label:'Q1', period:'Abr – Jun', earrT:1058008, narrT: 443305, totalT:1501313, done:true,  earrA:earrA, narrA:narrA, totalA:tarrA },
+    { label:'Q2', period:'Jul – Sep', earrT: 189985, narrT: 148375, totalT: 338360, done:false },
+    { label:'Q3', period:'Oct – Dic', earrT:  77528, narrT: 125289, totalT: 202817, done:false },
+    { label:'Q4', period:'Ene – Mar', earrT: 269548, narrT: 670854, totalT: 940402, done:false }
   ];
+
+  // Quarterly chart — scale relative to Q1 total (largest quarter)
+  var SCALE = quarters[0].totalT;
 
   var html = '';
   quarters.forEach(function(q) {
@@ -444,13 +429,12 @@ function buildARR() {
         '<div title="Real NARR ' + fmt(q.narrA) + '" style="width:' + aN + '%;background:#059669;min-width:0"></div>' +
         '<div style="flex:1;background:#f1f5f9;border-radius:0 4px 4px 0"></div>' +
       '</div>';
-      // Attainment % vs MX-scaled quarterly target
       var pctE = (q.earrA / q.earrT * 100).toFixed(1);
       var pctN = (q.narrA / q.narrT * 100).toFixed(1);
       var pctT = (q.totalA / q.totalT * 100).toFixed(1);
       statsBlock =
         '<div style="display:flex;justify-content:space-between;font-size:11px;font-weight:700;color:#1a1a1a;margin-bottom:4px">' +
-          '<span>TARR real MX</span><span>' + fmt(q.totalA) + ' <span style="font-weight:400;color:#9ca3af;font-size:10px">(' + pctT + '%)</span></span>' +
+          '<span>TARR real</span><span>' + fmt(q.totalA) + ' <span style="font-weight:400;color:#9ca3af;font-size:10px">(' + pctT + '%)</span></span>' +
         '</div>' +
         '<div style="display:flex;justify-content:space-between;font-size:10px;color:#FC3A52;margin-bottom:2px">' +
           '<span>EARR real</span><span>' + fmt(q.earrA) + ' <span style="color:#9ca3af">(' + pctE + '%)</span></span>' +
@@ -460,7 +444,7 @@ function buildARR() {
         '</div>';
     } else {
       statsBlock =
-        '<div style="font-size:10px;font-weight:700;color:#9ca3af;margin-bottom:4px">Target MX: ' + fmt(q.totalT) + '</div>' +
+        '<div style="font-size:10px;font-weight:700;color:#9ca3af;margin-bottom:4px">Target: ' + fmt(q.totalT) + '</div>' +
         '<div style="display:flex;justify-content:space-between;font-size:10px;color:#FC3A52;margin-bottom:2px">' +
           '<span>EARR target</span><span>' + fmt(q.earrT) + '</span>' +
         '</div>' +
@@ -486,7 +470,7 @@ function buildARR() {
 }
 
 function buildDonuts() {
-  var MX_TARR = 2191769;
+  var MX_TARR = 2982892;
 
   // ── Donut 1: Progreso hacia Target (revenue $) ─────────────────
   var signedAmt  = clubs.filter(function(c){return c.s==='signed';})
@@ -517,7 +501,7 @@ function buildDonuts() {
 
   document.getElementById('donut-progress').innerHTML =
     '<div class="sec-title">Progreso hacia Target FY 26/27</div>' +
-    '<div class="sec-sub">Distribución del revenue objetivo · ' + fmt(MX_TARR) + '</div>' +
+    '<div class="sec-sub">TARR FY 26/27 · target combinado MX + Colombia · ' + fmt(MX_TARR) + '</div>' +
     '<div class="donut-wrap">' +
       '<div class="donut-disc" style="background:' + grad1 + '"></div>' +
       '<div class="donut-ctr">' +
