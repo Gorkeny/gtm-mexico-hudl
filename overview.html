@@ -480,16 +480,17 @@ function buildDonuts() {
                         .reduce(function(s,c){return s+c.v27;},0);
   var pipeAmt    = clubs.filter(function(c){return c.s==='pipeline';})
                         .reduce(function(s,c){return s+c.v27;},0);
-  var citecAmt   = clubs.filter(function(c){return c.s==='citec';})
-                        .reduce(function(s,c){return s+c.v27;},0);
-  var gapAmt     = Math.max(0, MX_TARR - signedAmt - pipeAmt - citecAmt);
+  // Churn = ARR FY25/26 que no se renueva (Pachuca + Santos Laguna)
+  var churnAmt   = clubs.filter(function(c){return c.s==='citec'||c.s==='lost';})
+                        .reduce(function(s,c){return s+c.arr;},0);
+  var gapAmt     = Math.max(0, MX_TARR - signedAmt - pipeAmt - churnAmt);
 
   var pS = (signedAmt / MX_TARR * 100);
   var pP = (pipeAmt   / MX_TARR * 100);
-  var pC = (citecAmt  / MX_TARR * 100);
+  var pC = (churnAmt  / MX_TARR * 100);
   var pG = (gapAmt    / MX_TARR * 100);
 
-  var c0 = 0, c1 = pS, c2 = c1+pP, c3 = c2+pC;
+  var c1 = pS, c2 = c1+pP, c3 = c2+pC;
   var grad1 = 'conic-gradient(' +
     '#059669 0% ' + c1.toFixed(1) + '%,' +
     '#2563eb ' + c1.toFixed(1) + '% ' + c2.toFixed(1) + '%,' +
@@ -498,13 +499,14 @@ function buildDonuts() {
 
   var legItems1 =
     '<div class="leg-item"><div class="leg-circ" style="background:#059669"></div>Closed Won ' + pS.toFixed(1) + '% · ' + fmt(signedAmt) + '</div>' +
-    (pipeAmt > 0 ? '<div class="leg-item"><div class="leg-circ" style="background:#2563eb"></div>Pipeline ' + pP.toFixed(1) + '% · ' + fmt(pipeAmt) + '</div>' : '') +
-    (citecAmt > 0 ? '<div class="leg-item"><div class="leg-circ" style="background:#f97316"></div>Churn ' + pC.toFixed(1) + '% · ' + fmt(citecAmt) + '</div>' : '') +
+    (pipeAmt  > 0 ? '<div class="leg-item"><div class="leg-circ" style="background:#2563eb"></div>Pipeline ' + pP.toFixed(1) + '% · ' + fmt(pipeAmt) + '</div>' : '') +
+    (churnAmt > 0 ? '<div class="leg-item"><div class="leg-circ" style="background:#f97316"></div>Churn EARR ' + pC.toFixed(1) + '% · ' + fmt(churnAmt) + '</div>' : '') +
     '<div class="leg-item"><div class="leg-circ" style="background:#e5e7eb"></div>Gap ' + pG.toFixed(1) + '% · ' + fmt(gapAmt) + '</div>' +
     '<div style="margin-top:10px;padding-top:10px;border-top:1px solid #f1f5f9;font-size:10px;color:#9ca3af;line-height:1.6">' +
       'ℹ️ Calculado sobre el <strong style="color:#6b7280">target México: ' + fmt(MX_TARR) + '</strong> ' +
       '(EARR $1,491,769 + NARR $700,000). ' +
-      'Colombia ($' + fmt(COMB_TARR - MX_TARR) + ') no está incluida en el array de cuentas. ' +
+      'Churn = ARR FY25/26 no renovado: Pachuca $56,783 + Santos $9,103. ' +
+      'Colombia (' + fmt(COMB_TARR - MX_TARR) + ') no incluida en cuentas. ' +
       'TARR combinado MX+Colombia: <strong style="color:#6b7280">' + fmt(COMB_TARR) + '</strong>.' +
     '</div>';
 
