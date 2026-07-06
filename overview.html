@@ -797,12 +797,10 @@ function buildTools() {
 
 function buildLeague() {
   var lmx = clubs.filter(function(c){return c.n!=='SNM'&&c.s==='signed';}).reduce(function(s,c){return s+c.v27;},0);
-  var snm = 224316;
-  var exp = Math.max(0, 1212031 - lmx - snm);
+  var snm = clubs.filter(function(c){return c.n==='SNM';}).reduce(function(s,c){return s+c.v27;},0);
   var rows = [
     {n:'Liga MX', v:lmx, col:'#003087'},
-    {n:'SNM',     v:snm, col:'#059669'},
-    {n:'Liga Expansión (prev.)', v:exp, col:'#f59e0b'}
+    {n:'SNM',     v:snm, col:'#059669'}
   ];
   var MAX = Math.max.apply(null, rows.map(function(r){return r.v;}));
   var html = '';
