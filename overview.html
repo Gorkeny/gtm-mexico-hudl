@@ -242,10 +242,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
       <div class="sec-sub">Actuals Q1 México vs targets México por quarter · Q2–Q4 pendientes</div>
 
       <div style="display:flex;gap:18px;margin:10px 0 18px;flex-wrap:wrap">
-        <div style="display:flex;align-items:center;gap:6px;font-size:11px;color:#4b5563"><div style="width:14px;height:10px;border-radius:2px;background:#003087"></div>Target EARR</div>
-        <div style="display:flex;align-items:center;gap:6px;font-size:11px;color:#4b5563"><div style="width:14px;height:10px;border-radius:2px;background:#93c5fd"></div>Target NARR</div>
-        <div style="display:flex;align-items:center;gap:6px;font-size:11px;color:#4b5563"><div style="width:14px;height:10px;border-radius:2px;background:#059669"></div>Real EARR (MX)</div>
-        <div style="display:flex;align-items:center;gap:6px;font-size:11px;color:#4b5563"><div style="width:14px;height:10px;border-radius:2px;background:#6ee7b7"></div>Real NARR (MX)</div>
+        <div style="display:flex;align-items:center;gap:6px;font-size:11px;color:#4b5563"><div style="width:14px;height:10px;border-radius:2px;background:#fca5a5"></div>Target EARR</div>
+        <div style="display:flex;align-items:center;gap:6px;font-size:11px;color:#4b5563"><div style="width:14px;height:10px;border-radius:2px;background:#6ee7b7"></div>Target NARR</div>
+        <div style="display:flex;align-items:center;gap:6px;font-size:11px;color:#4b5563"><div style="width:14px;height:10px;border-radius:2px;background:#FC3A52"></div>Real EARR (MX)</div>
+        <div style="display:flex;align-items:center;gap:6px;font-size:11px;color:#4b5563"><div style="width:14px;height:10px;border-radius:2px;background:#059669"></div>Real NARR (MX)</div>
       </div>
 
       <div id="q-chart"></div>
@@ -462,9 +462,9 @@ function buildARR() {
     var tE = (q.earrT / SCALE * 100).toFixed(2);
     var tN = (q.narrT / SCALE * 100).toFixed(2);
 
-    var targetBar = '<div style="display:flex;height:22px;border-radius:4px;overflow:hidden;margin-bottom:' + (q.done ? '5px' : '0') + '">' +
-      '<div title="Target EARR ' + fmt(q.earrT) + '" style="width:' + tE + '%;background:#1a1a1a;min-width:0"></div>' +
-      '<div title="Target NARR ' + fmt(q.narrT) + '" style="width:' + tN + '%;background:#93c5fd;min-width:0"></div>' +
+    var targetBar = '<div style="display:flex;height:20px;border-radius:4px;overflow:hidden;margin-bottom:' + (q.done ? '4px' : '0') + '">' +
+      '<div title="Target EARR ' + fmt(q.earrT) + '" style="width:' + tE + '%;background:#fca5a5;min-width:0"></div>' +
+      '<div title="Target NARR ' + fmt(q.narrT) + '" style="width:' + tN + '%;background:#6ee7b7;min-width:0"></div>' +
       '<div style="flex:1;background:#f1f5f9;border-radius:0 4px 4px 0"></div>' +
     '</div>';
 
@@ -473,31 +473,33 @@ function buildARR() {
     if (q.done) {
       var aE = (q.earrA / SCALE * 100).toFixed(2);
       var aN = (q.narrA / SCALE * 100).toFixed(2);
-      actualBar = '<div style="display:flex;height:16px;border-radius:4px;overflow:hidden">' +
+      actualBar = '<div style="display:flex;height:14px;border-radius:4px;overflow:hidden">' +
         '<div title="Real EARR ' + fmt(q.earrA) + '" style="width:' + aE + '%;background:#FC3A52;min-width:0"></div>' +
-        '<div title="Real NARR ' + fmt(q.narrA) + '" style="width:' + aN + '%;background:#6ee7b7;min-width:0"></div>' +
+        '<div title="Real NARR ' + fmt(q.narrA) + '" style="width:' + aN + '%;background:#059669;min-width:0"></div>' +
         '<div style="flex:1;background:#f1f5f9;border-radius:0 4px 4px 0"></div>' +
       '</div>';
-      // No attainment % — targets include Colombia, actuals are MX-only
+      // Attainment % vs MX-scaled quarterly target
+      var pctE = (q.earrA / q.earrT * 100).toFixed(1);
+      var pctN = (q.narrA / q.narrT * 100).toFixed(1);
+      var pctT = (q.totalA / q.totalT * 100).toFixed(1);
       statsBlock =
-        '<div style="font-size:10px;color:#9ca3af;margin-bottom:4px">Target MX:' + fmt(q.totalT) + '</div>' +
-        '<div style="display:flex;justify-content:space-between;font-size:11px;font-weight:700;color:#7c3aed;margin-bottom:3px">' +
-          '<span>TARR real MX</span><span>' + fmt(q.totalA) + '</span>' +
+        '<div style="display:flex;justify-content:space-between;font-size:11px;font-weight:700;color:#1a1a1a;margin-bottom:4px">' +
+          '<span>TARR real MX</span><span>' + fmt(q.totalA) + ' <span style="font-weight:400;color:#9ca3af;font-size:10px">(' + pctT + '%)</span></span>' +
         '</div>' +
-        '<div style="display:flex;justify-content:space-between;font-size:10px;color:#2563eb;margin-bottom:2px">' +
-          '<span>EARR real MX</span><span>' + fmt(q.earrA) + '</span>' +
+        '<div style="display:flex;justify-content:space-between;font-size:10px;color:#FC3A52;margin-bottom:2px">' +
+          '<span>EARR real</span><span>' + fmt(q.earrA) + ' <span style="color:#9ca3af">(' + pctE + '%)</span></span>' +
         '</div>' +
         '<div style="display:flex;justify-content:space-between;font-size:10px;color:#059669">' +
-          '<span>NARR real MX</span><span>' + fmt(q.narrA) + '</span>' +
+          '<span>NARR real</span><span>' + fmt(q.narrA) + ' <span style="color:#9ca3af">(' + pctN + '%)</span></span>' +
         '</div>';
     } else {
       statsBlock =
-        '<div style="font-size:10px;color:#9ca3af;margin-bottom:4px">Target MX:' + fmt(q.totalT) + '</div>' +
-        '<div style="display:flex;justify-content:space-between;font-size:10px;color:#4b5563;margin-bottom:2px">' +
-          '<span>EARR</span><span>' + fmt(q.earrT) + '</span>' +
+        '<div style="font-size:10px;font-weight:700;color:#9ca3af;margin-bottom:4px">Target MX: ' + fmt(q.totalT) + '</div>' +
+        '<div style="display:flex;justify-content:space-between;font-size:10px;color:#FC3A52;margin-bottom:2px">' +
+          '<span>EARR target</span><span>' + fmt(q.earrT) + '</span>' +
         '</div>' +
-        '<div style="display:flex;justify-content:space-between;font-size:10px;color:#4b5563">' +
-          '<span>NARR</span><span>' + fmt(q.narrT) + '</span>' +
+        '<div style="display:flex;justify-content:space-between;font-size:10px;color:#059669">' +
+          '<span>NARR target</span><span>' + fmt(q.narrT) + '</span>' +
         '</div>';
     }
 
