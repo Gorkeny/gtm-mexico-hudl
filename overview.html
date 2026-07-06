@@ -697,33 +697,36 @@ function buildComp() {
 }
 
 function buildNarr() {
+  // Q1 actuals total (Salesforce) — usado como total de referencia
+  var narrActual = 330025;
+
   var allSigned = clubs.filter(function(c){return c.s==='signed';});
-  // NARR = expansión real (v27 > arr). Clubs con v27 < arr son contracciones, no NARR.
+  // Expansión: v27 > arr (NARR neto positivo)
   var expansion = allSigned.filter(function(c){return c.v27 > c.arr;})
-    .map(function(c){return {n:c.n, narr:c.v27-c.arr};})
+    .map(function(c){return {n:c.n, narr:c.v27-c.arr, type:'expansion'};})
     .sort(function(a,b){return b.narr-a.narr;});
-  var contraction = allSigned.filter(function(c){return c.v27 < c.arr && c.v27 > 0;})
-    .map(function(c){return {n:c.n, delta:c.v27-c.arr};});
-  var MAX = Math.max.apply(null, expansion.map(function(c){return c.narr;}));
-  var total = expansion.reduce(function(s,c){return s+c.narr;},0);
+  // Renovación a la baja: signed con v27 < arr y v27 > 0 → mostramos su v27 como ARR comprometido
+  var renewalDown = allSigned.filter(function(c){return c.v27 > 0 && c.v27 < c.arr;})
+    .map(function(c){return {n:c.n, narr:c.v27, type:'renewal'};});
+  var allBars = expansion.concat(renewalDown);
+  var MAX = Math.max.apply(null, allBars.map(function(c){return c.narr;}));
   var html = '';
-  expansion.forEach(function(c){
+  allBars.forEach(function(c){
     var w = Math.max(2, Math.round(c.narr / MAX * 100));
+    var col = c.type === 'renewal' ? '#d97706' : '#059669';
+    var label = c.type === 'renewal' ? c.n + ' ↓' : c.n;
     html += '<div class="narr-row">' +
-      '<div class="narr-name">' + c.n + '</div>' +
+      '<div class="narr-name" style="' + (c.type==='renewal'?'color:#d97706':'') + '">' + label + '</div>' +
       '<div class="narr-track">' +
-        '<div class="narr-fill" style="width:' + w + '%;background:#059669">' + fmt(c.narr) + '</div>' +
+        '<div class="narr-fill" style="width:' + w + '%;background:' + col + '">' + fmt(c.narr) + '</div>' +
       '</div>' +
     '</div>';
   });
   html += '<div style="margin-top:12px;padding-top:10px;border-top:2px solid #059669;display:flex;justify-content:space-between;font-size:12px;font-weight:700">' +
-    '<span style="color:#374151">Total NARR (Signed)</span>' +
-    '<span style="color:#059669">' + fmt(total) + '</span>' +
+    '<span style="color:#374151">Total NARR (Actuals Q1)</span>' +
+    '<span style="color:#059669">' + fmt(narrActual) + '</span>' +
   '</div>';
-  if (contraction.length) {
-    var cStr = contraction.map(function(c){return c.n + ' (' + fmt(c.delta) + ')';}).join(', ');
-    html += '<div style="margin-top:8px;font-size:10px;color:#dc2626">⚠ Contracción (firmada, valor inferior al FY25/26): ' + cStr + '</div>';
-  }
+  html += '<div style="margin-top:4px;font-size:10px;color:#9ca3af">↓ Renovación a la baja: ARR FY 26/27 firmado (valor inferior al FY 25/26)</div>';
   document.getElementById('narr-bars').innerHTML = html;
 }
 
