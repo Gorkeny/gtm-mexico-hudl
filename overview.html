@@ -258,43 +258,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
     <!-- DONUTS -->
     <div class="donut-pair" style="margin-bottom:24px">
 
-      <!-- Progreso -->
-      <div class="donut-card">
-        <div class="sec-title">Progreso hacia Target FY 26/27</div>
-        <div class="sec-sub">Distribución del revenue objetivo · $2,191,769</div>
-        <div class="donut-wrap">
-          <div class="donut-disc" style="background:conic-gradient(#059669 0% 55.4%,#2563eb 55.4% 71.5%,#e5e7eb 71.5% 100%)"></div>
-          <div class="donut-ctr">
-            <div class="dc-big" style="color:#059669">55.4%</div>
-            <div class="dc-sm">del target</div>
-          </div>
-        </div>
-        <div class="leg-row">
-          <div class="leg-item"><div class="leg-circ" style="background:#059669"></div>Closed Won 55.4%</div>
-          <div class="leg-item"><div class="leg-circ" style="background:#2563eb"></div>Pipeline 16.0%</div>
-          <div class="leg-item"><div class="leg-circ" style="background:#e5e7eb"></div>Gap 28.7%</div>
-        </div>
-      </div>
-
-      <!-- Estado cuentas -->
-      <div class="donut-card">
-        <div class="sec-title">Estado de Cuentas — Liga MX + SNM</div>
-        <div class="sec-sub">18 cuentas gestionadas activamente</div>
-        <div class="donut-wrap">
-          <div class="donut-disc" style="background:conic-gradient(#059669 0% 61.1%,#2563eb 61.1% 77.8%,#f59e0b 77.8% 83.4%,#dc2626 83.4% 94.5%,#d1d5db 94.5% 100%)"></div>
-          <div class="donut-ctr">
-            <div class="dc-big" style="color:#1a202c">18</div>
-            <div class="dc-sm">cuentas</div>
-          </div>
-        </div>
-        <div class="leg-row">
-          <div class="leg-item"><div class="leg-circ" style="background:#059669"></div>Signed (11)</div>
-          <div class="leg-item"><div class="leg-circ" style="background:#2563eb"></div>Open Pipeline (3)</div>
-          <div class="leg-item"><div class="leg-circ" style="background:#f59e0b"></div>Pipeline / CITEC Lost (1)</div>
-          <div class="leg-item"><div class="leg-circ" style="background:#dc2626"></div>Closed Lost (2)</div>
-          <div class="leg-item"><div class="leg-circ" style="background:#d1d5db"></div>Sin datos (1)</div>
-        </div>
-      </div>
+      <div id="donut-progress" class="donut-card"></div>
+      <div id="donut-status" class="donut-card"></div>
     </div>
 
     <!-- CLUB COMPARISON -->
@@ -392,6 +357,7 @@ function fmt(v) { return '$' + Math.round(v).toLocaleString('en-US'); }
 // ── RENDER ────────────────────────────────────────────────
 function render() {
   buildARR();
+  buildDonuts();
   buildComp();
   buildNarr();
   buildLeague();
@@ -517,6 +483,90 @@ function buildARR() {
   });
 
   document.getElementById('q-chart').innerHTML = html;
+}
+
+function buildDonuts() {
+  var MX_TARR = 2191769;
+
+  // ── Donut 1: Progreso hacia Target (revenue $) ─────────────────
+  var signedAmt  = clubs.filter(function(c){return c.s==='signed';})
+                        .reduce(function(s,c){return s+c.v27;},0);
+  var pipeAmt    = clubs.filter(function(c){return c.s==='pipeline';})
+                        .reduce(function(s,c){return s+c.v27;},0);
+  var citecAmt   = clubs.filter(function(c){return c.s==='citec';})
+                        .reduce(function(s,c){return s+c.v27;},0);
+  var gapAmt     = Math.max(0, MX_TARR - signedAmt - pipeAmt - citecAmt);
+
+  var pS = (signedAmt / MX_TARR * 100);
+  var pP = (pipeAmt   / MX_TARR * 100);
+  var pC = (citecAmt  / MX_TARR * 100);
+  var pG = (gapAmt    / MX_TARR * 100);
+
+  var c0 = 0, c1 = pS, c2 = c1+pP, c3 = c2+pC;
+  var grad1 = 'conic-gradient(' +
+    '#059669 0% ' + c1.toFixed(1) + '%,' +
+    '#2563eb ' + c1.toFixed(1) + '% ' + c2.toFixed(1) + '%,' +
+    '#f59e0b ' + c2.toFixed(1) + '% ' + c3.toFixed(1) + '%,' +
+    '#e5e7eb ' + c3.toFixed(1) + '% 100%)';
+
+  var legItems1 =
+    '<div class="leg-item"><div class="leg-circ" style="background:#059669"></div>Closed Won ' + pS.toFixed(1) + '% · ' + fmt(signedAmt) + '</div>' +
+    (pipeAmt > 0 ? '<div class="leg-item"><div class="leg-circ" style="background:#2563eb"></div>Pipeline ' + pP.toFixed(1) + '% · ' + fmt(pipeAmt) + '</div>' : '') +
+    (citecAmt > 0 ? '<div class="leg-item"><div class="leg-circ" style="background:#f59e0b"></div>CITEC ' + pC.toFixed(1) + '% · ' + fmt(citecAmt) + '</div>' : '') +
+    '<div class="leg-item"><div class="leg-circ" style="background:#e5e7eb"></div>Gap ' + pG.toFixed(1) + '% · ' + fmt(gapAmt) + '</div>';
+
+  document.getElementById('donut-progress').innerHTML =
+    '<div class="sec-title">Progreso hacia Target FY 26/27</div>' +
+    '<div class="sec-sub">Distribución del revenue objetivo · ' + fmt(MX_TARR) + '</div>' +
+    '<div class="donut-wrap">' +
+      '<div class="donut-disc" style="background:' + grad1 + '"></div>' +
+      '<div class="donut-ctr">' +
+        '<div class="dc-big" style="color:#059669">' + pS.toFixed(1) + '%</div>' +
+        '<div class="dc-sm">del target</div>' +
+      '</div>' +
+    '</div>' +
+    '<div class="leg-row">' + legItems1 + '</div>';
+
+  // ── Donut 2: Estado de Cuentas (conteo) ────────────────────────
+  var total   = clubs.length;
+  var nSigned = clubs.filter(function(c){return c.s==='signed';}).length;
+  var nPipe   = clubs.filter(function(c){return c.s==='pipeline';}).length;
+  var nCitec  = clubs.filter(function(c){return c.s==='citec';}).length;
+  var nLost   = clubs.filter(function(c){return c.s==='lost';}).length;
+  var nNoData = clubs.filter(function(c){return c.s==='no_data';}).length;
+
+  var d0 = 0;
+  var d1 = nSigned  / total * 100;
+  var d2 = d1 + nPipe  / total * 100;
+  var d3 = d2 + nCitec / total * 100;
+  var d4 = d3 + nLost  / total * 100;
+  // nNoData fills to 100%
+
+  var gradStop = '#059669 0% ' + d1.toFixed(1) + '%';
+  if(nPipe  > 0) gradStop += ',#2563eb '  + d1.toFixed(1) + '% ' + d2.toFixed(1) + '%';
+  if(nCitec > 0) gradStop += ',#f59e0b '  + d2.toFixed(1) + '% ' + d3.toFixed(1) + '%';
+  if(nLost  > 0) gradStop += ',#dc2626 '  + d3.toFixed(1) + '% ' + d4.toFixed(1) + '%';
+  if(nNoData> 0) gradStop += ',#d1d5db '  + d4.toFixed(1) + '% 100%';
+  var grad2 = 'conic-gradient(' + gradStop + ')';
+
+  var legItems2 =
+    '<div class="leg-item"><div class="leg-circ" style="background:#059669"></div>Signed (' + nSigned + ')</div>' +
+    (nPipe   > 0 ? '<div class="leg-item"><div class="leg-circ" style="background:#2563eb"></div>Open Pipeline (' + nPipe + ')</div>' : '') +
+    (nCitec  > 0 ? '<div class="leg-item"><div class="leg-circ" style="background:#f59e0b"></div>CITEC (' + nCitec + ')</div>' : '') +
+    (nLost   > 0 ? '<div class="leg-item"><div class="leg-circ" style="background:#dc2626"></div>Closed Lost (' + nLost + ')</div>' : '') +
+    (nNoData > 0 ? '<div class="leg-item"><div class="leg-circ" style="background:#d1d5db"></div>Sin datos (' + nNoData + ')</div>' : '');
+
+  document.getElementById('donut-status').innerHTML =
+    '<div class="sec-title">Estado de Cuentas — Liga MX + SNM</div>' +
+    '<div class="sec-sub">' + total + ' cuentas gestionadas activamente</div>' +
+    '<div class="donut-wrap">' +
+      '<div class="donut-disc" style="background:' + grad2 + '"></div>' +
+      '<div class="donut-ctr">' +
+        '<div class="dc-big" style="color:#1a202c">' + total + '</div>' +
+        '<div class="dc-sm">cuentas</div>' +
+      '</div>' +
+    '</div>' +
+    '<div class="leg-row">' + legItems2 + '</div>';
 }
 
 function buildComp() {
