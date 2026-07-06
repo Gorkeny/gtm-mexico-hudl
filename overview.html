@@ -152,9 +152,13 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
         <div style="background:#e5e7eb;border-radius:4px;height:8px;margin-bottom:8px;overflow:hidden">
           <div id="earr-bar-top" style="height:100%;border-radius:4px;background:linear-gradient(90deg,#FC3A52,#d42e45);width:0"></div>
         </div>
-        <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:12px">
+        <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:5px">
           <span id="earr-pct-top" style="font-weight:700;color:#FC3A52">—</span>
           <span style="color:#6b7280">FY Target: <strong>$1,491,769</strong></span>
+        </div>
+        <div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:12px">
+          <span id="earr-pct-q1" style="font-weight:600;color:#6b7280">—</span>
+          <span style="color:#9ca3af">Q1 Target: <strong style="color:#6b7280">$1,058,008</strong></span>
         </div>
         <div style="font-size:11px;color:#9ca3af;border-top:1px solid #f1f5f9;padding-top:10px">Base ARR FY 25/26 · mercado México</div>
       </div>
@@ -167,9 +171,13 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
         <div style="background:#e5e7eb;border-radius:4px;height:8px;margin-bottom:8px;overflow:hidden">
           <div id="narr-bar-top" style="height:100%;border-radius:4px;background:linear-gradient(90deg,#059669,#047857);width:0"></div>
         </div>
-        <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:12px">
+        <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:5px">
           <span id="narr-pct-top" style="font-weight:700;color:#059669">—</span>
           <span style="color:#6b7280">FY Target: <strong>$700,000</strong></span>
+        </div>
+        <div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:12px">
+          <span id="narr-pct-q1" style="font-weight:600;color:#6b7280">—</span>
+          <span style="color:#9ca3af">Q1 Target: <strong style="color:#6b7280">$443,305</strong></span>
         </div>
         <div style="font-size:11px;color:#9ca3af;border-top:1px solid #f1f5f9;padding-top:10px">Expansión neta sobre ARR FY 25/26</div>
       </div>
@@ -182,9 +190,13 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
         <div style="background:#e5e7eb;border-radius:4px;height:8px;margin-bottom:8px;overflow:hidden">
           <div id="tarr-bar-top" style="height:100%;border-radius:4px;background:linear-gradient(90deg,#1a1a1a,#374151);width:0"></div>
         </div>
-        <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:12px">
+        <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:5px">
           <span id="tarr-pct-top" style="font-weight:700;color:#1a1a1a">—</span>
           <span style="color:#6b7280">FY Target: <strong>$2,191,769</strong></span>
+        </div>
+        <div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:12px">
+          <span id="tarr-pct-q1" style="font-weight:600;color:#6b7280">—</span>
+          <span style="color:#9ca3af">Q1 Target: <strong style="color:#6b7280">$1,501,313</strong></span>
         </div>
         <div style="font-size:11px;color:#9ca3af;border-top:1px solid #f1f5f9;padding-top:10px">EARR + NARR · mercado México</div>
       </div>
@@ -395,17 +407,22 @@ function buildARR() {
   // Mexico annual targets
   var MX_EARR = 1491769, MX_NARR = 700000;
 
+  // Q1 combined targets (MX + Colombia)
+  var Q1_EARR = 1058008, Q1_NARR = 443305, Q1_TARR = 1501313;
+
   // Update EARR card
   document.getElementById('earr-val').textContent = fmt(earrA);
   var earrPct = (earrA / MX_EARR * 100).toFixed(1);
   document.getElementById('earr-bar-top').style.width = Math.min(100, earrPct) + '%';
   document.getElementById('earr-pct-top').textContent = earrPct + '% del FY target';
+  document.getElementById('earr-pct-q1').textContent = (earrA / Q1_EARR * 100).toFixed(1) + '% del Q1 target';
 
   // Update NARR card
   document.getElementById('narr-val-top').textContent = fmt(narrA);
   var narrPct = (narrA / MX_NARR * 100).toFixed(1);
   document.getElementById('narr-bar-top').style.width = Math.min(100, narrPct) + '%';
   document.getElementById('narr-pct-top').textContent = narrPct + '% del FY target';
+  document.getElementById('narr-pct-q1').textContent = (narrA / Q1_NARR * 100).toFixed(1) + '% del Q1 target';
 
   // Update TARR card
   var MX_TARR = 2191769;
@@ -413,6 +430,7 @@ function buildARR() {
   var tarrPct = (tarrA / MX_TARR * 100).toFixed(1);
   document.getElementById('tarr-bar-top').style.width = Math.min(100, tarrPct) + '%';
   document.getElementById('tarr-pct-top').textContent = tarrPct + '% del FY target';
+  document.getElementById('tarr-pct-q1').textContent = (tarrA / Q1_TARR * 100).toFixed(1) + '% del Q1 target';
 
   // Remove Colombia proportionally: combined annual = $2,635,815 · Colombia TARR = $700,000
   var COL_TARR = 700000, COMB = 2635815;
