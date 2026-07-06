@@ -470,7 +470,10 @@ function buildARR() {
 }
 
 function buildDonuts() {
-  var MX_TARR = 2635815;
+  // Donut uses Mexico-only TARR target (EARR $1,491,769 + NARR $700,000)
+  // Colombia target ($443,956) is excluded — clubs array contains MX accounts only
+  var MX_TARR = 2191769;
+  var COMB_TARR = 2635815;
 
   // ── Donut 1: Progreso hacia Target (revenue $) ─────────────────
   var signedAmt  = clubs.filter(function(c){return c.s==='signed';})
@@ -497,16 +500,22 @@ function buildDonuts() {
     '<div class="leg-item"><div class="leg-circ" style="background:#059669"></div>Closed Won ' + pS.toFixed(1) + '% · ' + fmt(signedAmt) + '</div>' +
     (pipeAmt > 0 ? '<div class="leg-item"><div class="leg-circ" style="background:#2563eb"></div>Pipeline ' + pP.toFixed(1) + '% · ' + fmt(pipeAmt) + '</div>' : '') +
     (citecAmt > 0 ? '<div class="leg-item"><div class="leg-circ" style="background:#f59e0b"></div>CITEC ' + pC.toFixed(1) + '% · ' + fmt(citecAmt) + '</div>' : '') +
-    '<div class="leg-item"><div class="leg-circ" style="background:#e5e7eb"></div>Gap ' + pG.toFixed(1) + '% · ' + fmt(gapAmt) + '</div>';
+    '<div class="leg-item"><div class="leg-circ" style="background:#e5e7eb"></div>Gap ' + pG.toFixed(1) + '% · ' + fmt(gapAmt) + '</div>' +
+    '<div style="margin-top:10px;padding-top:10px;border-top:1px solid #f1f5f9;font-size:10px;color:#9ca3af;line-height:1.6">' +
+      'ℹ️ Calculado sobre el <strong style="color:#6b7280">target México: ' + fmt(MX_TARR) + '</strong> ' +
+      '(EARR $1,491,769 + NARR $700,000). ' +
+      'Colombia ($' + fmt(COMB_TARR - MX_TARR) + ') no está incluida en el array de cuentas. ' +
+      'TARR combinado MX+Colombia: <strong style="color:#6b7280">' + fmt(COMB_TARR) + '</strong>.' +
+    '</div>';
 
   document.getElementById('donut-progress').innerHTML =
     '<div class="sec-title">Progreso hacia Target FY 26/27</div>' +
-    '<div class="sec-sub">TARR FY 26/27 · target combinado MX + Colombia · ' + fmt(MX_TARR) + '</div>' +
+    '<div class="sec-sub">Cuentas México · target MX ' + fmt(MX_TARR) + '</div>' +
     '<div class="donut-wrap">' +
       '<div class="donut-disc" style="background:' + grad1 + '"></div>' +
       '<div class="donut-ctr">' +
         '<div class="dc-big" style="color:#059669">' + pS.toFixed(1) + '%</div>' +
-        '<div class="dc-sm">del target</div>' +
+        '<div class="dc-sm">del target MX</div>' +
       '</div>' +
     '</div>' +
     '<div class="leg-row">' + legItems1 + '</div>';
