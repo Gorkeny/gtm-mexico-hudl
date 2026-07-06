@@ -705,20 +705,14 @@ function buildNarr() {
   var expansion = allSigned.filter(function(c){return c.v27 > c.arr;})
     .map(function(c){return {n:c.n, narr:c.v27-c.arr, type:'expansion'};})
     .sort(function(a,b){return b.narr-a.narr;});
-  // Renovación a la baja: signed con v27 < arr y v27 > 0 → mostramos su v27 como ARR comprometido
-  var renewalDown = allSigned.filter(function(c){return c.v27 > 0 && c.v27 < c.arr;})
-    .map(function(c){return {n:c.n, narr:c.v27, type:'renewal'};});
-  var allBars = expansion.concat(renewalDown);
-  var MAX = Math.max.apply(null, allBars.map(function(c){return c.narr;}));
+  var MAX = Math.max.apply(null, expansion.map(function(c){return c.narr;}));
   var html = '';
-  allBars.forEach(function(c){
+  expansion.forEach(function(c){
     var w = Math.max(2, Math.round(c.narr / MAX * 100));
-    var col = c.type === 'renewal' ? '#d97706' : '#059669';
-    var label = c.type === 'renewal' ? c.n + ' ↓' : c.n;
     html += '<div class="narr-row">' +
-      '<div class="narr-name" style="' + (c.type==='renewal'?'color:#d97706':'') + '">' + label + '</div>' +
+      '<div class="narr-name">' + c.n + '</div>' +
       '<div class="narr-track">' +
-        '<div class="narr-fill" style="width:' + w + '%;background:' + col + '">' + fmt(c.narr) + '</div>' +
+        '<div class="narr-fill" style="width:' + w + '%;background:#059669">' + fmt(c.narr) + '</div>' +
       '</div>' +
     '</div>';
   });
@@ -726,7 +720,6 @@ function buildNarr() {
     '<span style="color:#374151">Total NARR (Actuals Q1)</span>' +
     '<span style="color:#059669">' + fmt(narrActual) + '</span>' +
   '</div>';
-  html += '<div style="margin-top:4px;font-size:10px;color:#9ca3af">↓ Renovación a la baja: ARR FY 26/27 firmado (valor inferior al FY 25/26)</div>';
   document.getElementById('narr-bars').innerHTML = html;
 }
 
