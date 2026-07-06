@@ -262,6 +262,13 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
       <div id="donut-status" class="donut-card"></div>
     </div>
 
+    <!-- CLUB PIE -->
+    <div class="card" style="margin-bottom:24px">
+      <div class="sec-title">Distribución de Inversión por Club — FY 26/27</div>
+      <div class="sec-sub">% sobre el total contratado y en pipeline · clubes con valor > 0</div>
+      <div id="club-pie"></div>
+    </div>
+
     <!-- CLUB COMPARISON -->
     <div class="card">
       <div class="sec-title">Comparativa por Club — ARR FY 25/26 vs FY 26/27</div>
@@ -357,6 +364,7 @@ function fmt(v) { return '$' + Math.round(v).toLocaleString('en-US'); }
 function render() {
   buildARR();
   buildDonuts();
+  buildClubPie();
   buildComp();
   buildNarr();
   buildLeague();
@@ -466,6 +474,85 @@ function buildARR() {
   });
 
   document.getElementById('q-chart').innerHTML = html;
+}
+
+function buildClubPie() {
+  var palette = [
+    '#FC3A52','#1e40af','#d97706','#059669','#7c3aed',
+    '#0891b2','#be123c','#0ea5e9','#b45309','#6d28d9',
+    '#065f46','#374151','#0f766e','#92400e','#c2410c'
+  ];
+
+  var active = clubs.filter(function(c){return c.v27 > 0;})
+                    .slice().sort(function(a,b){return b.v27 - a.v27;});
+  var total  = active.reduce(function(s,c){return s + c.v27;}, 0);
+
+  // Build SVG donut (r=90, hole r=46, cx=cy=100)
+  var cx = 100, cy = 100, R = 90, ri = 46;
+  var angle = -Math.PI / 2; // start from 12 o'clock
+  var paths = '';
+  var legendLeft  = '';
+  var legendRight = '';
+
+  active.forEach(function(c, i) {
+    var col  = palette[i % palette.length];
+    var pct  = c.v27 / total;
+    var span = pct * 2 * Math.PI;
+    var end  = angle + span;
+
+    // Outer arc
+    var x1o = cx + R  * Math.cos(angle), y1o = cy + R  * Math.sin(angle);
+    var x2o = cx + R  * Math.cos(end),   y2o = cy + R  * Math.sin(end);
+    // Inner arc (reverse)
+    var x1i = cx + ri * Math.cos(end),   y1i = cy + ri * Math.sin(end);
+    var x2i = cx + ri * Math.cos(angle), y2i = cy + ri * Math.sin(angle);
+    var large = span > Math.PI ? 1 : 0;
+
+    paths += '<path d="' +
+      'M' + x1o.toFixed(2) + ' ' + y1o.toFixed(2) +
+      ' A' + R  + ' ' + R  + ' 0 ' + large + ' 1 ' + x2o.toFixed(2) + ' ' + y2o.toFixed(2) +
+      ' L' + x1i.toFixed(2) + ' ' + y1i.toFixed(2) +
+      ' A' + ri + ' ' + ri + ' 0 ' + large + ' 0 ' + x2i.toFixed(2) + ' ' + y2i.toFixed(2) +
+      ' Z" fill="' + col + '" stroke="white" stroke-width="1.5"/>';
+
+    // Label % at midpoint angle on outer area
+    var mid = angle + span / 2;
+    var lx  = cx + (R + 12) * Math.cos(mid);
+    var ly  = cy + (R + 12) * Math.sin(mid);
+    if (pct > 0.04) { // only label if segment big enough
+      paths += '<text x="' + lx.toFixed(1) + '" y="' + ly.toFixed(1) + '"' +
+        ' text-anchor="middle" dominant-baseline="middle"' +
+        ' font-family="-apple-system,sans-serif" font-size="8.5" font-weight="700" fill="' + col + '">' +
+        (pct * 100).toFixed(1) + '%</text>';
+    }
+
+    // Legend: split into two columns
+    var item = '<div style="display:flex;align-items:center;gap:5px;margin-bottom:6px">' +
+      '<div style="width:9px;height:9px;border-radius:2px;background:' + col + ';flex-shrink:0"></div>' +
+      '<span style="font-size:11px;color:#374151;flex:1;white-space:nowrap">' + c.n + '</span>' +
+      '<span style="font-size:11px;font-weight:700;color:' + col + ';margin-left:4px">' + (pct*100).toFixed(1) + '%</span>' +
+      '<span style="font-size:10px;color:#9ca3af;margin-left:5px;min-width:72px;text-align:right">' + fmt(c.v27) + '</span>' +
+    '</div>';
+    if (i < Math.ceil(active.length / 2)) legendLeft  += item;
+    else                                   legendRight += item;
+
+    angle = end;
+  });
+
+  // Center label
+  paths += '<text x="' + cx + '" y="' + (cy-7) + '" text-anchor="middle" font-family="-apple-system,sans-serif" font-size="11" font-weight="700" fill="#1e293b">' + fmt(total) + '</text>';
+  paths += '<text x="' + cx + '" y="' + (cy+9) + '" text-anchor="middle" font-family="-apple-system,sans-serif" font-size="9" fill="#9ca3af">Total v27</text>';
+
+  var svg = '<svg viewBox="0 0 200 200" width="220" height="220">' + paths + '</svg>';
+
+  document.getElementById('club-pie').innerHTML =
+    '<div style="display:flex;gap:28px;align-items:center;flex-wrap:wrap">' +
+      '<div style="flex-shrink:0">' + svg + '</div>' +
+      '<div style="display:grid;grid-template-columns:1fr 1fr;gap:0 24px;flex:1;min-width:260px">' +
+        '<div>' + legendLeft  + '</div>' +
+        '<div>' + legendRight + '</div>' +
+      '</div>' +
+    '</div>';
 }
 
 function buildDonuts() {
