@@ -606,6 +606,7 @@ function buildNarr() {
     .map(function(c){return {n:c.n, narr:c.v27-c.arr};})
     .sort(function(a,b){return b.narr-a.narr;});
   var MAX = Math.max.apply(null, signed.map(function(c){return c.narr;}));
+  var total = signed.reduce(function(s,c){return s+c.narr;},0);
   var html = '';
   signed.forEach(function(c){
     var w = Math.max(2, Math.round(c.narr / MAX * 100));
@@ -616,6 +617,10 @@ function buildNarr() {
       '</div>' +
     '</div>';
   });
+  html += '<div style="margin-top:12px;padding-top:10px;border-top:2px solid #059669;display:flex;justify-content:space-between;font-size:12px;font-weight:700">' +
+    '<span style="color:#374151">Total NARR (Signed)</span>' +
+    '<span style="color:#059669">' + fmt(total) + '</span>' +
+  '</div>';
   document.getElementById('narr-bars').innerHTML = html;
 }
 
