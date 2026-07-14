@@ -284,10 +284,10 @@ document.getElementById('gtm-pw-input').addEventListener('keydown', function(e) 
 </div>
 <div class="target-indicator" style="background: linear-gradient(135deg, #059669 0%, #047857 100%);">
 <div class="ti-label">Closed Won YTD 2026/27</div>
-<div class="ti-value">$1,218,181 USD</div>
+<div class="ti-value">$1,223,204 USD</div>
 <div class="ti-breakdown">
-<span style="font-size:15px;font-weight:700;opacity:1;">55.6% of target</span><span class="ti-sep">·</span><span style="position:relative;">
-  <button class="cw-deals-btn" onclick="toggleCWDeals(event)" id="cw-deals-toggle">17 deals ▾</button>
+<span style="font-size:15px;font-weight:700;opacity:1;">55.8% of target</span><span class="ti-sep">·</span><span style="position:relative;">
+  <button class="cw-deals-btn" onclick="toggleCWDeals(event)" id="cw-deals-toggle">18 deals ▾</button>
   <div class="cw-deals-popup" id="cw-deals-popup">
     <a class="cw-deal-item" href="https://hudl.lightning.force.com/lightning/r/Opportunity/006UJ00000k03wJYAQ/view" target="_blank" rel="noopener">
       <span class="cw-deal-name">FY 26-27_SNM Services</span><span class="cw-deal-amount">$224,316</span>
@@ -341,6 +341,10 @@ document.getElementById('gtm-pw-input').addEventListener('keydown', function(e) 
     </a>
     <a class="cw-deal-item" href="https://hudl.lightning.force.com/lightning/r/Opportunity/006UJ00000uAlzuYAC/view" target="_blank" rel="noopener">
       <span class="cw-deal-name">FY 26-27_Miguel Angel Montiel Aguilar_MX_PRICEBOOK</span><span class="cw-deal-amount">$61,591</span>
+    </a>
+
+    <a class="cw-deal-item" href="https://hudl.lightning.force.com/lightning/r/Opportunity/006UJ00000w0UXlYAM/view" target="_blank" rel="noopener">
+      <span class="cw-deal-name">FY 26-27_Pedro Beltran_Wyscout Expansion</span><span class="cw-deal-amount">$5,023</span>
     </a>
   </div>
 </span>
@@ -451,9 +455,7 @@ const pipelineData = {
 { name: 'FY 26-27_Kevin Lacki_GTM_MX_PRICEBOOK', amount: 48094.60, closeDate: '2026-06-30', sfLink: 'https://hudl.lightning.force.com/lightning/r/Opportunity/006UJ00000vrsZJYAY/view' },
 { name: 'Contract 00100678', amount: 44145.20, closeDate: '2026-06-30', sfLink: 'https://hudl.lightning.force.com/lightning/r/Contract/800VY00000GuK66YAF/view' }
 ]},
-'0018X00003FyHWUQA3': { total: 5023, opps: [
-{ name: 'FY 26-27_};', amount: 5023, closeDate: '2026-07-31', sfLink: 'https://hudl.lightning.force.com/lightning/r/Opportunity/006UJ00000w0UXlYAM/view' }
-]},
+'
 };
 
 // Closed Won + Invoiced + Signed FY26/27
@@ -495,7 +497,10 @@ const closedWonData = {
 { name: 'FY 26-27_Arturo León_MX_PACK_45', amount: 54985, closeDate: '2026-06-30', stage: 'Signed' },
 { name: 'Amendment for contract #00165420', amount: 13485.39, closeDate: '2026-06-30', stage: 'Signed' }
 ]}
-};
+,
+'0018X00003FyHWUQA3': { total: 5023, signed: true, opps: [
+{ name: 'FY 26-27_Pedro Beltran_Wyscout Expansion', amount: 5023, closeDate: '2026-07-31', stage: 'Signed' }
+]}};
 
 const clubs = [
 { id:'0010V00002KSiJiQAL', name:'Club de Futbol Cruz Azul', arr:167616, abbr:'CAZ', primary:'#1A4DAB', secondary:'#FFFFFF', league:'Liga MX' },
