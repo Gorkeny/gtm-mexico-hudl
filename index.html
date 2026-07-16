@@ -284,10 +284,10 @@ document.getElementById('gtm-pw-input').addEventListener('keydown', function(e) 
 </div>
 <div class="target-indicator" style="background: linear-gradient(135deg, #059669 0%, #047857 100%);">
 <div class="ti-label">Closed Won YTD 2026/27</div>
-<div class="ti-value">$1,223,204 USD</div>
+<div class="ti-value">$1,312,763 USD</div>
 <div class="ti-breakdown">
-<span style="font-size:15px;font-weight:700;opacity:1;">55.8% of target</span><span class="ti-sep">·</span><span style="position:relative;">
-  <button class="cw-deals-btn" onclick="toggleCWDeals(event)" id="cw-deals-toggle">18 deals ▾</button>
+<span style="font-size:15px;font-weight:700;opacity:1;">59.9% of target</span><span class="ti-sep">·</span><span style="position:relative;">
+  <button class="cw-deals-btn" onclick="toggleCWDeals(event)" id="cw-deals-toggle">19 deals ▾</button>
   <div class="cw-deals-popup" id="cw-deals-popup">
     <a class="cw-deal-item" href="https://hudl.lightning.force.com/lightning/r/Opportunity/006UJ00000k03wJYAQ/view" target="_blank" rel="noopener">
       <span class="cw-deal-name">FY 26-27_SNM Services</span><span class="cw-deal-amount">$224,316</span>
@@ -343,8 +343,11 @@ document.getElementById('gtm-pw-input').addEventListener('keydown', function(e) 
       <span class="cw-deal-name">FY 26-27_Miguel Angel Montiel Aguilar_MX_PRICEBOOK</span><span class="cw-deal-amount">$61,591</span>
     </a>
 
+    <a class="cw-deal-item" href="https://hudl.lightning.force.com/lightning/r/Account/0010V00002KSiJiQAL/view" target="_blank" rel="noopener">
+      <span class="cw-deal-name">Renewal for 00064145 (Cruz Azul)</span><span class="cw-deal-amount">$89,559</span>
+    </a>
     <a class="cw-deal-item" href="https://hudl.lightning.force.com/lightning/r/Opportunity/006UJ00000w0UXlYAM/view" target="_blank" rel="noopener">
-      <span class="cw-deal-name">FY 26-27_Pedro Beltran_Wyscout Expansion</span><span class="cw-deal-amount">$5,023</span>
+      <span class="cw-deal-name">FY 26-27_Pedro Beltran_Wyscout Expansion (Jaiva Brava)</span><span class="cw-deal-amount">$5,023</span>
     </a>
   </div>
 </span>
@@ -439,9 +442,6 @@ const WYSCOUT_LIGA_MX_SNM = WYSCOUT_TOTAL * 0.8 / 18; // ~$20,521.94 (Liga MX 17
 const WYSCOUT_LIGA_EXPANSION = WYSCOUT_TOTAL * 0.2 / 15; // ~$6,156.58 (Liga Expansión 15)
 
 const pipelineData = {
-'0010V00002KSiJiQAL': { total: 89558.70, opps: [
-{ name: 'Renewal for 00064145', amount: 89558.70, closeDate: '2026-06-30' }
-]},
 '001d0000022QA82AAG': { total: 79561.01, opps: [
 { name: 'FY 26-27_Vicente Garcia_MX_PACK_50', amount: 79561.01, closeDate: '2026-06-30' }
 ]},
@@ -495,11 +495,14 @@ const closedWonData = {
 '001d000001u6YYiAAM': { total: 68470.39, signed: true, opps: [
 { name: 'FY 26-27_Arturo León_MX_PACK_45', amount: 54985, closeDate: '2026-06-30', stage: 'Signed' },
 { name: 'Amendment for contract #00165420', amount: 13485.39, closeDate: '2026-06-30', stage: 'Signed' }
-]}
-,
+]},
+'0010V00002KSiJiQAL': { total: 89558.70, signed: true, opps: [
+{ name: 'Renewal for 00064145', amount: 89558.70, closeDate: '2026-06-30', stage: 'Signed' }
+]},
 '0018X00003FyHWUQA3': { total: 5023, signed: true, opps: [
-{ name: 'FY 26-27_Pedro Beltran_Wyscout Expansion', amount: 5023, closeDate: '2026-07-31', stage: 'Signed' }
-]}};
+{ name: 'FY 26-27_Pedro Beltran_Wyscout Expansion', amount: 5023, closeDate: '2026-07-31', stage: 'Signed', sfLink: 'https://hudl.lightning.force.com/lightning/r/Opportunity/006UJ00000w0UXlYAM/view' }
+]}
+};
 
 const clubs = [
 { id:'0010V00002KSiJiQAL', name:'Club de Futbol Cruz Azul', arr:167616, abbr:'CAZ', primary:'#1A4DAB', secondary:'#FFFFFF', league:'Liga MX' },
