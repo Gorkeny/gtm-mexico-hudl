@@ -133,7 +133,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
     <div>
       <div class="hdr-title">GTM México — FY 26/27</div>
       <div class="hdr-sub">Overview de Situación Comercial · Julio 2026</div>
-      <div class="hdr-badge">Estado de cierre pre-Q1</div>
+      <div class="hdr-badge">YTD · Jul 2026</div>
     </div>
     <a href="index.html" class="hdr-link">← Dashboard Completo</a>
   </div>
@@ -147,7 +147,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
         <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#FC3A52;margin-bottom:4px">EARR · Renovaciones</div>
         <div style="font-size:9px;color:#9ca3af;margin-bottom:8px;text-transform:uppercase;letter-spacing:.06em">FY 26/27</div>
         <div id="earr-val" style="font-size:30px;font-weight:800;color:#1e293b;line-height:1">—</div>
-        <div style="font-size:11px;color:#9ca3af;margin:5px 0 14px">Actuals Q1 · contratos signed</div>
+        <div style="font-size:11px;color:#9ca3af;margin:5px 0 14px">Actuals YTD · contratos signed</div>
         <div style="background:#e5e7eb;border-radius:4px;height:8px;margin-bottom:8px;overflow:hidden">
           <div id="earr-bar-top" style="height:100%;border-radius:4px;background:linear-gradient(90deg,#FC3A52,#d42e45);width:0"></div>
         </div>
@@ -167,7 +167,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
         <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#059669;margin-bottom:4px">NARR · Nuevo ARR</div>
         <div style="font-size:9px;color:#9ca3af;margin-bottom:8px;text-transform:uppercase;letter-spacing:.06em">FY 26/27</div>
         <div id="narr-val-top" style="font-size:30px;font-weight:800;color:#1e293b;line-height:1">—</div>
-        <div style="font-size:11px;color:#9ca3af;margin:5px 0 14px">Actuals Q1 · expansión neta</div>
+        <div style="font-size:11px;color:#9ca3af;margin:5px 0 14px">Actuals YTD · expansión neta</div>
         <div style="background:#e5e7eb;border-radius:4px;height:8px;margin-bottom:8px;overflow:hidden">
           <div id="narr-bar-top" style="height:100%;border-radius:4px;background:linear-gradient(90deg,#059669,#047857);width:0"></div>
         </div>
@@ -187,7 +187,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
         <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#1a1a1a;margin-bottom:4px">TARR · Total ARR</div>
         <div style="font-size:9px;color:#9ca3af;margin-bottom:8px;text-transform:uppercase;letter-spacing:.06em">FY 26/27</div>
         <div id="tarr-val" style="font-size:30px;font-weight:800;color:#1e293b;line-height:1">—</div>
-        <div style="font-size:11px;color:#9ca3af;margin:5px 0 14px">Actuals Q1 · Closed Won total</div>
+        <div style="font-size:11px;color:#9ca3af;margin:5px 0 14px">Actuals YTD · Closed Won total</div>
         <div style="background:#e5e7eb;border-radius:4px;height:8px;margin-bottom:8px;overflow:hidden">
           <div id="tarr-bar-top" style="height:100%;border-radius:4px;background:linear-gradient(90deg,#1a1a1a,#374151);width:0"></div>
         </div>
@@ -240,7 +240,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
     <!-- QUARTERLY TRACKING -->
     <div class="card">
       <div class="sec-title">Tracking por Quarter — FY 26/27</div>
-      <div class="sec-sub">Actuals Q1 vs targets FY 26/27 por quarter · Q2–Q4 pendientes</div>
+      <div class="sec-sub">YTD vs targets FY 26/27 por quarter · Q2 en progreso · Q3–Q4 pendientes</div>
 
       <div style="display:flex;gap:18px;margin:10px 0 18px;flex-wrap:wrap">
         <div style="display:flex;align-items:center;gap:6px;font-size:11px;color:#4b5563"><div style="width:14px;height:10px;border-radius:2px;background:#fca5a5"></div>Target EARR</div>
@@ -252,7 +252,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
       <div id="q-chart"></div>
 
       <div style="margin-top:14px;padding-top:12px;border-top:1px solid #f3f4f6;font-size:11px;color:#6b7280;line-height:1.6">
-        ℹ️ Targets combinados MX + Colombia. Actuals Q1 corresponden a cierre México.
+        ℹ️ Targets combinados MX + Colombia. Actuals YTD corresponden a cierre México (EARR Q1; NARR inc. Q2 Jul). Cruz Azul contabilizado en Q2.
       </div>
     </div>
 
@@ -374,10 +374,13 @@ function render() {
 }
 
 function buildARR() {
-  // Actuals Q1 — mantenidos manualmente · actualizado Jul 2026
-  var earrA = 942281;
-  var narrA = 330025;
-  var tarrA = 1272306; // EARR + NARR
+  // Actuals YTD — mantenidos manualmente · actualizado Jul 2026
+  // Q1: EARR=852722 (sin Cruz Azul) + Q2: Cruz Azul EARR=89559 → total EARR=942281
+  // Q1: NARR=330025 + Q2: NARR=40457 → total NARR=370482
+  // Cruz Azul ($89,559) contabilizado en Q2 (cierre confirmado post snapshot Q1)
+  var earrA = 942281;   // YTD EARR
+  var narrA = 370482;   // YTD NARR (Q1 330025 + Q2 Jul 40457)
+  var tarrA = 1312763;  // YTD TARR = earrA + narrA
 
   // FY 26/27 annual targets (combined MX + Colombia)
   var FY_EARR = 1595069, FY_NARR = 1040746, FY_TARR = 2635815;
@@ -390,26 +393,28 @@ function buildARR() {
   var earrPct = (earrA / FY_EARR * 100).toFixed(1);
   document.getElementById('earr-bar-top').style.width = Math.min(100, earrPct) + '%';
   document.getElementById('earr-pct-top').textContent = earrPct + '% del FY target';
-  document.getElementById('earr-pct-q1').textContent = (earrA / Q1_EARR * 100).toFixed(1) + '% del Q1 target';
+  document.getElementById('earr-pct-q1').textContent = (earrA / Q1_EARR * 100).toFixed(1) + '% del target Q1';
 
   // Update NARR card
   document.getElementById('narr-val-top').textContent = fmt(narrA);
   var narrPct = (narrA / FY_NARR * 100).toFixed(1);
   document.getElementById('narr-bar-top').style.width = Math.min(100, narrPct) + '%';
   document.getElementById('narr-pct-top').textContent = narrPct + '% del FY target';
-  document.getElementById('narr-pct-q1').textContent = (narrA / Q1_NARR * 100).toFixed(1) + '% del Q1 target';
+  document.getElementById('narr-pct-q1').textContent = (narrA / Q1_NARR * 100).toFixed(1) + '% del target Q1';
 
   // Update TARR card
   document.getElementById('tarr-val').textContent = fmt(tarrA);
   var tarrPct = (tarrA / FY_TARR * 100).toFixed(1);
   document.getElementById('tarr-bar-top').style.width = Math.min(100, tarrPct) + '%';
   document.getElementById('tarr-pct-top').textContent = tarrPct + '% del FY target';
-  document.getElementById('tarr-pct-q1').textContent = (tarrA / Q1_TARR * 100).toFixed(1) + '% del Q1 target';
+  document.getElementById('tarr-pct-q1').textContent = (tarrA / Q1_TARR * 100).toFixed(1) + '% del target Q1';
 
   // Quarterly targets (combined MX + Colombia) — targets FY 26/27
+  // Q1 actuals: Cruz Azul excluido (contabilizado en Q2 post snapshot) → EARR=852722, NARR=330025, TARR=1182747
+  // Q2 actuals (Jul, parcial): Cruz Azul EARR=89559 + otros NARR=40457 → TARR=130016
   var quarters = [
-    { label:'Q1', period:'Abr – Jun', earrT:1058008, narrT: 443305, totalT:1501313, done:true,  earrA:earrA, narrA:narrA, totalA:tarrA },
-    { label:'Q2', period:'Jul – Sep', earrT: 189985, narrT: 148375, totalT: 338360, done:false },
+    { label:'Q1', period:'Abr – Jun', earrT:1058008, narrT: 443305, totalT:1501313, done:true,              earrA:852722, narrA:330025, totalA:1182747 },
+    { label:'Q2', period:'Jul – Sep', earrT: 189985, narrT: 148375, totalT: 338360, done:true, partial:true, earrA: 89559, narrA: 40457, totalA: 130016 },
     { label:'Q3', period:'Oct – Dic', earrT:  77528, narrT:  47761, totalT: 125289, done:false },
     { label:'Q4', period:'Ene – Mar', earrT: 269548, narrT: 401306, totalT: 670854, done:false }
   ];
@@ -441,15 +446,18 @@ function buildARR() {
       var pctE = (q.earrA / q.earrT * 100).toFixed(1);
       var pctN = (q.narrA / q.narrT * 100).toFixed(1);
       var pctT = (q.totalA / q.totalT * 100).toFixed(1);
+      var labelReal = q.partial ? 'TARR real (Jul)' : 'TARR real';
+      var labelEARR = q.partial ? 'EARR real (Jul)' : 'EARR real';
+      var labelNARR = q.partial ? 'NARR real (Jul)' : 'NARR real';
       statsBlock =
         '<div style="display:flex;justify-content:space-between;font-size:11px;font-weight:700;color:#1a1a1a;margin-bottom:4px">' +
-          '<span>TARR real</span><span>' + fmt(q.totalA) + ' <span style="font-weight:400;color:#9ca3af;font-size:10px">(' + pctT + '%)</span></span>' +
+          '<span>' + labelReal + '</span><span>' + fmt(q.totalA) + ' <span style="font-weight:400;color:#9ca3af;font-size:10px">(' + pctT + '%)</span></span>' +
         '</div>' +
         '<div style="display:flex;justify-content:space-between;font-size:10px;color:#FC3A52;margin-bottom:2px">' +
-          '<span>EARR real</span><span>' + fmt(q.earrA) + ' <span style="color:#9ca3af">(' + pctE + '%)</span></span>' +
+          '<span>' + labelEARR + '</span><span>' + fmt(q.earrA) + ' <span style="color:#9ca3af">(' + pctE + '%)</span></span>' +
         '</div>' +
         '<div style="display:flex;justify-content:space-between;font-size:10px;color:#059669">' +
-          '<span>NARR real</span><span>' + fmt(q.narrA) + ' <span style="color:#9ca3af">(' + pctN + '%)</span></span>' +
+          '<span>' + labelNARR + '</span><span>' + fmt(q.narrA) + ' <span style="color:#9ca3af">(' + pctN + '%)</span></span>' +
         '</div>';
     } else {
       statsBlock =
@@ -466,9 +474,11 @@ function buildARR() {
       '<div style="width:90px;flex-shrink:0">' +
         '<div style="font-size:13px;font-weight:700;color:#374151">' + q.label + '</div>' +
         '<div style="font-size:11px;color:#9ca3af;margin-top:2px">' + q.period + '</div>' +
-        (q.done
+        (q.done && !q.partial
           ? '<div style="font-size:10px;font-weight:700;color:#059669;background:#ecfdf5;border-radius:4px;padding:2px 6px;display:inline-block;margin-top:4px">✓ Completado</div>'
-          : '<div style="font-size:10px;color:#9ca3af;background:#f9fafb;border-radius:4px;padding:2px 6px;display:inline-block;margin-top:4px">Pendiente</div>') +
+          : q.partial
+            ? '<div style="font-size:10px;font-weight:700;color:#d97706;background:#fef3c7;border-radius:4px;padding:2px 6px;display:inline-block;margin-top:4px">⏳ En progreso</div>'
+            : '<div style="font-size:10px;color:#9ca3af;background:#f9fafb;border-radius:4px;padding:2px 6px;display:inline-block;margin-top:4px">Pendiente</div>') +
       '</div>' +
       '<div style="flex:1">' + targetBar + actualBar + '</div>' +
       '<div style="width:190px;flex-shrink:0;text-align:right">' + statsBlock + '</div>' +
@@ -716,7 +726,7 @@ function buildNarr() {
     '</div>';
   });
   html += '<div style="margin-top:12px;padding-top:10px;border-top:2px solid #059669;display:flex;justify-content:space-between;font-size:12px;font-weight:700">' +
-    '<span style="color:#374151">Total NARR (Actuals Q1)</span>' +
+    '<span style="color:#374151">Total NARR (Actuals Q1 · Salesforce)</span>' +
     '<span style="color:#059669">' + fmt(narrActual) + '</span>' +
   '</div>';
   document.getElementById('narr-bars').innerHTML = html;
