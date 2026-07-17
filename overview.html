@@ -348,7 +348,7 @@ var clubs = [
   {n:'Cancún',    arr: 57681, v27: 92240, s:'pipeline'},
   {n:'Cruz Azul', arr:167616, v27: 89559, s:'signed'},
   {n:'Pachuca',   arr: 56783, v27:     0, s:'lost'},
-  {n:'Toluca',    arr: 48968, v27: 68470, s:'signed'},
+  {n:'Toluca',    arr: 48968, v27: 71800, s:'signed'},
   {n:'San Luis',  arr: 40123, v27: 67465, s:'pipeline'},
   {n:'Pumas',     arr: 46079, v27: 61591, s:'signed'},
   {n:'Necaxa',    arr: 20819, v27: 44304, s:'signed'},
@@ -379,8 +379,8 @@ function buildARR() {
   // Q1: NARR=330025 + Q2: NARR=40457 → total NARR=370482
   // Cruz Azul ($89,559) contabilizado en Q2 (cierre confirmado post snapshot Q1)
   var earrA = 942281;   // YTD EARR
-  var narrA = 370482;   // YTD NARR (Q1 330025 + Q2 Jul 40457)
-  var tarrA = 1312763;  // YTD TARR = earrA + narrA
+  var narrA = 373812;   // YTD NARR (Q1 330025 + Q2 Jul 43787)
+  var tarrA = 1316093;  // YTD TARR = earrA + narrA
 
   // FY 26/27 annual targets (combined MX + Colombia)
   var FY_EARR = 1595069, FY_NARR = 1040746, FY_TARR = 2635815;
@@ -414,7 +414,7 @@ function buildARR() {
   // Q2 actuals (Jul, parcial): Cruz Azul EARR=89559 + otros NARR=40457 → TARR=130016
   var quarters = [
     { label:'Q1', period:'Abr – Jun', earrT:1058008, narrT: 443305, totalT:1501313, done:true,              earrA:852722, narrA:330025, totalA:1182747 },
-    { label:'Q2', period:'Jul – Sep', earrT: 189985, narrT: 148375, totalT: 338360, done:true, partial:true, earrA: 89559, narrA: 40457, totalA: 130016 },
+    { label:'Q2', period:'Jul – Sep', earrT: 189985, narrT: 148375, totalT: 338360, done:true, partial:true, earrA: 89559, narrA: 43787, totalA: 133346 },
     { label:'Q3', period:'Oct – Dic', earrT:  77528, narrT:  47761, totalT: 125289, done:false },
     { label:'Q4', period:'Ene – Mar', earrT: 269548, narrT: 401306, totalT: 670854, done:false }
   ];
