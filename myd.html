@@ -3,8 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MYD Impact Calculator — MX & CO</title>
-<title>MYD Impact Calculator — MX & CO</title>
+
+
+<title>MYD Impact Calculator — GTM México</title>
 <style>
   :root {
     --bg: #f8f9fa; --surface: #fff; --border: #e2e8f0;
@@ -37,7 +38,16 @@
   .formula{font-family:monospace;background:var(--surface);padding:2px 6px;border-radius:4px;font-size:12px}
 
   /* controls */
-  .controls{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px 18px;margin-bottom:18px;display:flex;gap:24px;align-items:flex-end;flex-wrap:wrap}
+  .controls{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px 18px;margin-bottom:18px;display:flex;gap:12px;align-items:stretch;flex-wrap:wrap}
+  .scenario-block{display:flex;flex-direction:column;gap:8px;border-radius:8px;padding:10px 14px;flex:1;min-width:280px}
+  .scenario-ctrls{display:flex;gap:16px;align-items:flex-end;flex-wrap:wrap}
+  .scenario-label{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.06em}
+  .s1{background:var(--blue-soft);border:1px solid #93c5fd}
+  .s1-label{color:var(--blue)}
+  .s2{background:var(--green-soft);border:1px solid #86efac}
+  .s2-label{color:var(--green)}
+  .s3{background:var(--purple-soft);border:1px solid #c4b5fd}
+  .s3-label{color:var(--purple)}
   .ctrl{display:flex;flex-direction:column;gap:3px}
   .ctrl label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
   .ctrl input[type=number]{width:90px;padding:6px 10px;border:1px solid var(--border);border-radius:6px;background:var(--bg);color:var(--text);font-size:14px;font-weight:700}
@@ -71,8 +81,6 @@
   td{padding:9px 10px;border-bottom:1px solid var(--border);text-align:right;vertical-align:middle}
   tr:last-child td{border-bottom:none}
   tr.tot td{font-weight:800;background:var(--bg);border-top:2px solid var(--border)}
-  tr:hover:not(.tot) td{background:var(--hudl-soft)}
-
   .acc{font-weight:700;font-size:13px}
   .opp-name{font-size:10px;color:var(--muted);font-weight:400;margin-top:1px}
   .tag{display:inline-block;padding:1px 6px;border-radius:4px;font-size:10px;font-weight:700;margin-left:4px}
@@ -87,6 +95,27 @@
   .dn{color:var(--red)}
   .neutral{color:var(--muted)}
 
+  /* cap sub-rows */
+  .cap-row td{background:var(--green-soft);padding:9px 10px;border-bottom:2px solid var(--border)}
+  tr.cap-row:hover td{background:var(--green-soft) !important}
+  .t3-row td{background:var(--purple-soft);padding:9px 10px;border-bottom:2px solid var(--border)}
+  tr.t3-row:hover td{background:var(--purple-soft) !important}
+  tr:hover:not(.tot):not(.cap-row):not(.t3-row) td{background:var(--hudl-soft)}
+  tr:hover:not(.tot) td{background:initial}
+  .tot.cap-tot td{background:var(--green-soft)}
+  .tot.t3-tot td{background:var(--purple-soft)}
+  .cap-label{font-size:11px;font-weight:700;color:var(--green)}
+  .t3-label{font-size:11px;font-weight:700;color:var(--purple)}
+
+  /* kpi option groups */
+  .kpi-group{margin-bottom:16px}
+  .kpi-group-label{font-size:13px;font-weight:800;margin-bottom:8px;display:flex;align-items:center;gap:10px;padding:8px 14px;border-radius:8px}
+  .kpi-group-label.std{background:var(--blue-soft);border-left:4px solid var(--blue);color:var(--blue)}
+  .kpi-group-label.cap{background:var(--green-soft);border-left:4px solid var(--green);color:var(--green)}
+  .kpi-group-label.t3{background:var(--purple-soft);border-left:4px solid var(--purple);color:var(--purple)}
+  .kpi-group-label .opt-num{font-size:16px;font-weight:900}
+  .kpi-group-label .opt-desc{font-size:12px;font-weight:500;opacity:.85}
+
   .add-form{padding:10px 16px;border-top:1px solid var(--border);background:var(--bg);display:flex;gap:8px;align-items:center;flex-wrap:wrap}
   .add-form input,.add-form select{padding:5px 9px;border:1px solid var(--border);border-radius:6px;background:var(--surface);color:var(--text);font-size:12px}
   .add-form input[name=acc]{width:180px}
@@ -95,6 +124,18 @@
   .btn-add{padding:5px 12px;background:var(--hudl);color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:12px;font-weight:700}
   .btn-add:hover{opacity:.9}
   .note{font-size:11px;color:var(--muted);padding:6px 18px 10px;font-style:italic}
+
+  .cap-pill{padding:4px 10px;border-radius:6px;font-size:12px;font-weight:700;background:var(--surface);color:var(--green);border:1px solid #86efac}
+  .tier-grid{display:grid;grid-template-columns:auto repeat(3,72px);gap:4px 6px;align-items:center;margin-top:4px}
+  .tier-grid .tg-hdr{font-size:9.5px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);text-align:center}
+  .tier-grid .tg-tier{font-size:11px;padding-right:4px}
+  .tier-grid input[type=number]{width:72px;padding:4px 7px;border:1px solid var(--border);border-radius:6px;background:var(--bg);color:var(--text);font-size:13px;font-weight:700;text-align:center}
+
+  /* comparative table */
+  .comp-std-hdr{background:var(--blue-soft);color:var(--blue);text-align:center}
+  .comp-cap-hdr{background:var(--green-soft);color:var(--green);text-align:center}
+  .comp-capped td.capped{color:var(--green);font-weight:700}
+  .bolt{font-size:9px;vertical-align:super;color:var(--green);margin-left:1px}
 
   /* strategy */
   .strat{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:18px}
@@ -109,31 +150,76 @@
 <div class="header">
   <div>
     <h1>Calculadora de impacto MYD — 3 años</h1>
-    <div class="subtitle">🇲🇽 México · 🇨🇴 Colombia · GTM FY26/27 · Datos reales de Salesforce</div>
+    <div class="subtitle">🇲🇽 México · GTM FY26/27 · Datos reales de Salesforce</div>
   </div>
 </div>
 
-<div class="banner">
-  <strong>Lógica corregida:</strong> los descuentos MYD se aplican sobre la <strong>tarifa base (list price)</strong>, no sobre el precio actual.<br>
-  <span class="formula">List price = ARR actual ÷ (1 − descuento actual)</span> &nbsp;·&nbsp;
-  <span class="formula">MYD Yₙ = List × (1 − Dₙ%)</span><br>
-  Para cuentas con descuentos altos (PACK 55/60), el MYD supone una <strong>subida de precio real</strong> que Hudl recupera con el compromiso de 3 años.
-</div>
 
 <!-- Controls -->
 <div class="controls">
-  <div class="ctrl"><label>Y1 desc. (% sobre list)</label><input type="number" id="d1" value="30" step="1" oninput="recalc()"></div>
-  <div class="ctrl"><label>Y2 desc. (% sobre list)</label><input type="number" id="d2" value="5" step="1" oninput="recalc()"></div>
-  <div class="ctrl"><label>Y3 desc. (% sobre list, neg=incremento)</label><input type="number" id="d3" value="-5" step="1" oninput="recalc()"></div>
-  <div class="pill-row">
-    <div class="pill p-y1">Y1 → paga <span id="pp1">70%</span> list</div>
-    <div class="pill p-y2">Y2 → paga <span id="pp2">95%</span> list</div>
-    <div class="pill p-y3">Y3 → paga <span id="pp3">105%</span> list</div>
+  <div class="scenario-block s1">
+    <div class="scenario-label s1-label">Opción 1 — MYD descuentos fijos</div>
+    <div class="scenario-ctrls">
+      <div class="ctrl"><label>Y1 desc. (% sobre list)</label><input type="number" id="d1" value="30" step="1" oninput="recalc()"></div>
+      <div class="ctrl"><label>Y2 desc. (% sobre list)</label><input type="number" id="d2" value="5" step="1" oninput="recalc()"></div>
+      <div class="ctrl"><label>Y3 desc. (% sobre list)</label><input type="number" id="d3" value="-5" step="1" oninput="recalc()"></div>
+      <div class="pill-row" style="align-self:flex-end">
+        <div class="pill p-y1">Y1 <span id="pp1">70%</span></div>
+        <div class="pill p-y2">Y2 <span id="pp2">95%</span></div>
+        <div class="pill p-y3">Y3 <span id="pp3">105%</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="scenario-block s2">
+    <div class="scenario-label s2-label">Opción 2 — Crec. interanual fijo</div>
+    <div class="scenario-ctrls">
+      <div class="ctrl"><label>Crec. Y1 (%)</label><input type="number" id="cap1" value="15" step="1" min="0" max="200" oninput="recalc()"></div>
+      <div class="ctrl"><label>Crec. Y2 (%)</label><input type="number" id="cap2" value="15" step="1" min="0" max="200" oninput="recalc()"></div>
+      <div class="ctrl"><label>Crec. Y3 (%)</label><input type="number" id="cap3" value="15" step="1" min="0" max="200" oninput="recalc()"></div>
+      <div class="cap-pill" style="align-self:flex-end">⚡ <span id="cap-display">+15% / +15% / +15%</span></div>
+    </div>
+  </div>
+  <div class="scenario-block s3" style="min-width:340px">
+    <div class="scenario-label s3-label">Opción 3 — MYD descuentos por tier de pack</div>
+    <div class="tier-grid">
+      <div class="tg-hdr">Tier</div>
+      <div class="tg-hdr">Y1 % desc.</div>
+      <div class="tg-hdr">Y2 % desc.</div>
+      <div class="tg-hdr">Y3 % desc.</div>
+      <div class="tg-tier"><span class="tag t-pb">PRICEBOOK 5%</span></div>
+      <input type="number" id="t3_pb_1" value="10" step="1" oninput="recalc()">
+      <input type="number" id="t3_pb_2" value="5" step="1" oninput="recalc()">
+      <input type="number" id="t3_pb_3" value="-5" step="1" oninput="recalc()">
+      <div class="tg-tier"><span class="tag t-snm">SNM / 10%</span></div>
+      <input type="number" id="t3_t10_1" value="20" step="1" oninput="recalc()">
+      <input type="number" id="t3_t10_2" value="5" step="1" oninput="recalc()">
+      <input type="number" id="t3_t10_3" value="-5" step="1" oninput="recalc()">
+      <div class="tg-tier"><span class="tag t-snm">~24% (Pumas)</span></div>
+      <input type="number" id="t3_t24_1" value="24" step="1" oninput="recalc()">
+      <input type="number" id="t3_t24_2" value="5" step="1" oninput="recalc()">
+      <input type="number" id="t3_t24_3" value="-5" step="1" oninput="recalc()">
+      <div class="tg-tier"><span class="tag t-45">PACK_45</span></div>
+      <input type="number" id="t3_t45_1" value="35" step="1" oninput="recalc()">
+      <input type="number" id="t3_t45_2" value="5" step="1" oninput="recalc()">
+      <input type="number" id="t3_t45_3" value="-5" step="1" oninput="recalc()">
+      <div class="tg-tier"><span class="tag t-50">PACK_50</span></div>
+      <input type="number" id="t3_t50_1" value="40" step="1" oninput="recalc()">
+      <input type="number" id="t3_t50_2" value="5" step="1" oninput="recalc()">
+      <input type="number" id="t3_t50_3" value="-5" step="1" oninput="recalc()">
+      <div class="tg-tier"><span class="tag t-55">PACK_55</span></div>
+      <input type="number" id="t3_t55_1" value="45" step="1" oninput="recalc()">
+      <input type="number" id="t3_t55_2" value="5" step="1" oninput="recalc()">
+      <input type="number" id="t3_t55_3" value="-5" step="1" oninput="recalc()">
+      <div class="tg-tier"><span class="tag t-60">PACK_60</span></div>
+      <input type="number" id="t3_t60_1" value="50" step="1" oninput="recalc()">
+      <input type="number" id="t3_t60_2" value="5" step="1" oninput="recalc()">
+      <input type="number" id="t3_t60_3" value="-5" step="1" oninput="recalc()">
+    </div>
   </div>
 </div>
 
 <!-- KPIs -->
-<div class="kpis" id="kpis"></div>
+<div id="kpis"></div>
 
 <!-- Mexico -->
 <div class="section">
@@ -176,49 +262,7 @@
     </select>
     <button class="btn-add" onclick="addRow('mx')">+ Añadir cuenta</button>
   </div>
-  <div class="note">* Valor ARR de Salesforce (Dot/May-Jul 2026). Los deals marcados como "negociación" pueden no estar firmados aún — verificar en SF. Churns (Pachuca, Mazatlán, Santos) excluidos.</div>
-</div>
-
-<!-- Colombia -->
-<div class="section">
-  <div class="sec-hdr">
-    <h2>🇨🇴 Colombia — Contratos activos</h2>
-    <div class="sec-meta" id="co-meta">—</div>
-  </div>
-  <div class="tw">
-    <table>
-      <thead>
-        <tr>
-          <th class="left" style="min-width:200px">Cuenta · Deal name</th>
-          <th>Desc. actual</th>
-          <th>ARR actual</th>
-          <th>List price</th>
-          <th>MYD Y1</th>
-          <th>Δ vs actual Y1</th>
-          <th>MYD Y2</th>
-          <th>Δ vs actual Y2</th>
-          <th>MYD Y3</th>
-          <th>Δ vs actual Y3</th>
-          <th>Total 3y MYD</th>
-          <th>Δ vs 3× actual</th>
-        </tr>
-      </thead>
-      <tbody id="co-body"></tbody>
-    </table>
-  </div>
-  <div class="add-form">
-    <input type="text" name="acc" id="co-acc" placeholder="Nombre cuenta" />
-    <input type="number" name="arr" id="co-arr" placeholder="ARR actual (USD)" />
-    <select id="co-disc">
-      <option value="5">PRICEBOOK (5%)</option>
-      <option value="10">10%</option>
-      <option value="20">20%</option>
-      <option value="45">PACK_45 (45%)</option>
-      <option value="50">PACK_50 (50%)</option>
-    </select>
-    <button class="btn-add" onclick="addRow('co')">+ Añadir cuenta</button>
-  </div>
-  <div class="note">* ARR Colombia ~$148k activo (Dot, Aug 2026). Descuentos Colombia estimados — confirmar deal names en SF para precisión exacta.</div>
+  <div class="note">* Valor ARR de Salesforce (Dot/May-Jul 2026). Los deals marcados como "negociación" pueden no estar firmados aún — verificar en SF. Churns (Pachuca, Mezatlán, Santos) excluidos.</div>
 </div>
 
 <!-- Strategy -->
@@ -275,13 +319,6 @@ const DATA = {
     {name:'Club Puebla', opp:'FY 26-27_Mariana Lopez_MX_PACK_PRICEBOOK', arr:23222, disc:5, signed:false},
     {name:'Cancún Futbol Club', opp:'FY 26-27_Kevin Lacki_GTM_MX_PRICEBOOK', arr:48684, disc:5, signed:false},
   ],
-  co: [
-    {name:'FCF (Fed. Colombiana Fútbol)', opp:'Renovación Upsell 006VY00000KagV5YAJ', arr:29635, disc:10, signed:false},
-    {name:'Tigres FC (Colombia)', opp:'FY26-27 Statsbomb IQ Soccer', arr:30684, disc:5, signed:false},
-    {name:'Once Caldas', opp:'FY26-27 Wyscout Upsell', arr:5023, disc:5, signed:false},
-    {name:'DIM (Dep. Indep. Medellín)', opp:'Amendment 00154793', arr:3270, disc:5, signed:false},
-    {name:'Resto cuentas activas Colombia (9 ctas. — Dot)', opp:'Contratos Wyscout activos Liga Betplay', arr:79742, disc:10, signed:true},
-  ]
 };
 
 function tagClass(disc) {
@@ -306,6 +343,16 @@ function tagLabel(disc) {
   return disc + '%';
 }
 
+function getTierKey(disc) {
+  if (disc <= 5)  return 'pb';
+  if (disc <= 10) return 't10';
+  if (disc < 30)  return 't24';
+  if (disc <= 45) return 't45';
+  if (disc <= 50) return 't50';
+  if (disc <= 55) return 't55';
+  return 't60';
+}
+
 function getMults() {
   const d1 = parseFloat(document.getElementById('d1').value)||0;
   const d2 = parseFloat(document.getElementById('d2').value)||0;
@@ -315,8 +362,18 @@ function getMults() {
 
 function buildTable(mkt) {
   const [m1,m2,m3] = getMults();
+  const d1 = parseFloat(document.getElementById('d1').value)||0;
+  const d2 = parseFloat(document.getElementById('d2').value)||0;
+  const d3 = parseFloat(document.getElementById('d3').value)||0;
+  const cap1pct = parseFloat(document.getElementById('cap1').value) ?? 15;
+  const cap2pct = parseFloat(document.getElementById('cap2').value) ?? 15;
+  const cap3pct = parseFloat(document.getElementById('cap3').value) ?? 15;
+  const cap1 = cap1pct / 100, cap2 = cap2pct / 100, cap3r = cap3pct / 100;
+  const capLabel = `+${cap1pct}% / +${cap2pct}% / +${cap3pct}%`;
   const rows = DATA[mkt];
   let totalArr=0, totalList=0, totY1=0, totY2=0, totY3=0;
+  let totCY1=0, totCY2=0, totCY3=0;
+  let totTY1=0, totTY2=0, totTY3=0;
   let html = '';
 
   rows.forEach(r => {
@@ -327,17 +384,46 @@ function buildTable(mkt) {
     const d3y = myd3 - r.arr * 3;
     const d1p = d1v/r.arr*100, d2p = d2v/r.arr*100, d3p = d3v/r.arr*100;
 
+    // capped option
+    const cy1 = r.arr * (1 + cap1);
+    const cy2 = cy1 * (1 + cap2);
+    const cy3 = cy2 * (1 + cap3r);
+    const capTotal = cy1 + cy2 + cy3;
+    const deltaVsStd = capTotal - myd3;
+    const cd1v = cy1 - r.arr, cd2v = cy2 - r.arr, cd3v = cy3 - r.arr;
+    const cd1p = cd1v/r.arr*100, cd2p = cd2v/r.arr*100, cd3p = cd3v/r.arr*100;
+
+    // Opción 3 — tier-based discounts
+    const tk = getTierKey(r.disc);
+    const t3d1 = parseFloat(document.getElementById(`t3_${tk}_1`).value)||0;
+    const t3d2 = parseFloat(document.getElementById(`t3_${tk}_2`).value)||0;
+    const t3d3 = parseFloat(document.getElementById(`t3_${tk}_3`).value)||0;
+    const ty1 = list * (1 - t3d1/100);
+    const ty2 = list * (1 - t3d2/100);
+    const ty3 = list * (1 - t3d3/100);
+    const t3Total = ty1 + ty2 + ty3;
+    const t3DeltaVsOp1 = t3Total - myd3;
+    const td1v = ty1 - r.arr, td2v = ty2 - r.arr, td3v = ty3 - r.arr;
+    const td1p = td1v/r.arr*100, td2p = td2v/r.arr*100, td3p = td3v/r.arr*100;
+
     totalArr += r.arr; totalList += list;
     totY1 += y1; totY2 += y2; totY3 += y3;
+    totCY1 += cy1; totCY2 += cy2; totCY3 += cy3;
+    totTY1 += ty1; totTY2 += ty2; totTY3 += ty3;
 
     const signedFlag = r.signed ? '' : '<span class="tag" style="background:var(--amber-soft);color:var(--amber)">negoc.</span>';
     const dl = tagLabel(r.disc);
     const dc = tagClass(r.disc);
 
-    html += `<tr>
+    // Opción 1 — standard
+    html += `<tr class="std-row">
       <td class="left">
         <div class="acc">${r.name} ${signedFlag}</div>
         <div class="opp-name">${r.opp}</div>
+        <div style="font-size:10px;font-weight:700;color:var(--blue);margin-bottom:3px;margin-top:2px">Opción 1 — Descuentos interanuales</div>
+        <span class="tag" style="background:var(--blue-soft);color:var(--blue);border:1px solid #93c5fd">Y1 ${d1>0?'−':''}${Math.abs(d1)}%</span>
+        <span class="tag" style="background:var(--blue-soft);color:var(--blue);border:1px solid #93c5fd">Y2 ${d2>0?'−':''}${Math.abs(d2)}%</span>
+        <span class="tag" style="background:var(--blue-soft);color:var(--blue);border:1px solid #93c5fd">Y3 ${d3<0?'+':'−'}${Math.abs(d3)}%</span>
       </td>
       <td><span class="tag ${dc}">${dl} (${r.disc}%)</span></td>
       <td>${FMT(r.arr)}</td>
@@ -351,80 +437,257 @@ function buildTable(mkt) {
       <td style="font-weight:800">${FMT(myd3)}</td>
       <td class="${d3y>=0?'up':'dn'}" style="font-weight:700">${SIGN(d3y)}</td>
     </tr>`;
+
+    // Opción 2 — cap sub-row
+    html += `<tr class="cap-row">
+      <td class="left" colspan="4">
+        <div style="font-size:10px;font-weight:700;color:var(--green);margin-bottom:3px">Opción 2 — Incremento interanual</div>
+        <span class="tag" style="background:var(--green-soft);color:var(--green);border:1px solid #86efac">Y1 +${cap1pct}%</span>
+        <span class="tag" style="background:var(--green-soft);color:var(--green);border:1px solid #86efac">Y2 +${cap2pct}%</span>
+        <span class="tag" style="background:var(--green-soft);color:var(--green);border:1px solid #86efac">Y3 +${cap3pct}%</span>
+      </td>
+      <td style="color:var(--green);font-weight:700">${FMT(cy1)}</td>
+      <td class="${cd1v>=0?'up':'dn'}">${SIGN(cd1v)}<br><small>${PCT(cd1p)}</small></td>
+      <td style="color:var(--green);font-weight:700">${FMT(cy2)}</td>
+      <td class="${cd2v>=0?'up':'dn'}">${SIGN(cd2v)}<br><small>${PCT(cd2p)}</small></td>
+      <td style="color:var(--green);font-weight:700">${FMT(cy3)}</td>
+      <td class="${cd3v>=0?'up':'dn'}">${SIGN(cd3v)}<br><small>${PCT(cd3p)}</small></td>
+      <td style="color:var(--green);font-weight:800">${FMT(capTotal)}</td>
+      <td class="${deltaVsStd>=0?'up':'dn'}" style="font-weight:700">${SIGN(deltaVsStd)}<br><small style="color:var(--muted)">vs Op.1</small></td>
+    </tr>`;
+
+    // Opción 3 — tier sub-row
+    html += `<tr class="t3-row">
+      <td class="left" colspan="4">
+        <div style="font-size:10px;font-weight:700;color:var(--purple);margin-bottom:3px">Opción 3 — Tier ${dl} (${r.disc}%)</div>
+        <span class="tag" style="background:var(--purple-soft);color:var(--purple);border:1px solid #c4b5fd">Y1 ${t3d1>0?'−':t3d1<0?'+':''}${Math.abs(t3d1)}%</span>
+        <span class="tag" style="background:var(--purple-soft);color:var(--purple);border:1px solid #c4b5fd">Y2 ${t3d2>0?'−':t3d2<0?'+':''}${Math.abs(t3d2)}%</span>
+        <span class="tag" style="background:var(--purple-soft);color:var(--purple);border:1px solid #c4b5fd">Y3 ${t3d3>0?'−':t3d3<0?'+':''}${Math.abs(t3d3)}%</span>
+      </td>
+      <td style="color:var(--purple);font-weight:700">${FMT(ty1)}</td>
+      <td class="${td1v>=0?'up':'dn'}">${SIGN(td1v)}<br><small>${PCT(td1p)}</small></td>
+      <td style="color:var(--purple);font-weight:700">${FMT(ty2)}</td>
+      <td class="${td2v>=0?'up':'dn'}">${SIGN(td2v)}<br><small>${PCT(td2p)}</small></td>
+      <td style="color:var(--purple);font-weight:700">${FMT(ty3)}</td>
+      <td class="${td3v>=0?'up':'dn'}">${SIGN(td3v)}<br><small>${PCT(td3p)}</small></td>
+      <td style="color:var(--purple);font-weight:800">${FMT(t3Total)}</td>
+      <td class="${t3DeltaVsOp1>=0?'up':'dn'}" style="font-weight:700">${SIGN(t3DeltaVsOp1)}<br><small style="color:var(--muted)">${PCT(t3DeltaVsOp1/myd3*100)} vs Op.1</small></td>
+    </tr>`;
   });
 
   const totMyd = totY1+totY2+totY3;
+  const totCapMyd = totCY1+totCY2+totCY3;
+  const totT3Myd = totTY1+totTY2+totTY3;
   const totDelta = totMyd - totalArr*3;
-  const totD1 = totY1 - totalArr, totD2 = totY2 - totalArr, totD3 = totY3 - totalArr;
+  const totCapDeltaVsStd = totCapMyd - totMyd;
+  const totT3DeltaVsOp1 = totT3Myd - totMyd;
+  const totD1=totY1-totalArr, totD2=totY2-totalArr, totD3=totY3-totalArr;
+  const totD1p=totD1/totalArr*100, totD2p=totD2/totalArr*100, totD3p=totD3/totalArr*100;
+  const totCD1=totCY1-totalArr, totCD2=totCY2-totalArr, totCD3=totCY3-totalArr;
+  const totCD1p=totCD1/totalArr*100, totCD2p=totCD2/totalArr*100, totCD3p=totCD3/totalArr*100;
+  const totTD1=totTY1-totalArr, totTD2=totTY2-totalArr, totTD3=totTY3-totalArr;
+  const totTD1p=totTD1/totalArr*100, totTD2p=totTD2/totalArr*100, totTD3p=totTD3/totalArr*100;
 
   html += `<tr class="tot">
-    <td class="left" colspan="2">TOTAL</td>
+    <td class="left" colspan="2">
+      <div style="font-weight:800;margin-bottom:4px">TOTAL — Opción 1</div>
+      <div style="font-size:9.5px;font-weight:700;color:var(--blue);margin-bottom:3px">Descuentos interanuales</div>
+      <span class="tag" style="background:var(--blue-soft);color:var(--blue);border:1px solid #93c5fd">Y1 ${d1>0?'−':''}${Math.abs(d1)}%</span>
+      <span class="tag" style="background:var(--blue-soft);color:var(--blue);border:1px solid #93c5fd">Y2 ${d2>0?'−':''}${Math.abs(d2)}%</span>
+      <span class="tag" style="background:var(--blue-soft);color:var(--blue);border:1px solid #93c5fd">Y3 ${d3<0?'+':'−'}${Math.abs(d3)}%</span>
+    </td>
     <td>${FMT(totalArr)}</td>
     <td style="color:var(--muted)">${FMT(totalList)}</td>
     <td>${FMT(totY1)}</td>
-    <td class="${totD1>=0?'up':'dn'}">${SIGN(totD1)}</td>
+    <td class="${totD1>=0?'up':'dn'}">${SIGN(totD1)}<br><small>${PCT(totD1p)}</small></td>
     <td>${FMT(totY2)}</td>
-    <td class="${totD2>=0?'up':'dn'}">${SIGN(totD2)}</td>
+    <td class="${totD2>=0?'up':'dn'}">${SIGN(totD2)}<br><small>${PCT(totD2p)}</small></td>
     <td>${FMT(totY3)}</td>
-    <td class="${totD3>=0?'up':'dn'}">${SIGN(totD3)}</td>
+    <td class="${totD3>=0?'up':'dn'}">${SIGN(totD3)}<br><small>${PCT(totD3p)}</small></td>
     <td>${FMT(totMyd)}</td>
-    <td class="${totDelta>=0?'up':'dn'}">${SIGN(totDelta)}</td>
+    <td class="${totDelta>=0?'up':'dn'}">${SIGN(totDelta)}<br><small>${PCT(totDelta/(totalArr*3)*100)}</small></td>
+  </tr>`;
+
+  html += `<tr class="tot cap-tot">
+    <td class="left cap-label" colspan="4">
+      <div style="font-weight:800;margin-bottom:4px">TOTAL — Opción 2</div>
+      <div style="font-size:9.5px;font-weight:700;color:var(--green);margin-bottom:3px">Incrementos interanuales</div>
+      <span class="tag" style="background:var(--green-soft);color:var(--green);border:1px solid #86efac">Y1 +${cap1pct}%</span>
+      <span class="tag" style="background:var(--green-soft);color:var(--green);border:1px solid #86efac">Y2 +${cap2pct}%</span>
+      <span class="tag" style="background:var(--green-soft);color:var(--green);border:1px solid #86efac">Y3 +${cap3pct}%</span>
+    </td>
+    <td style="color:var(--green)">${FMT(totCY1)}</td>
+    <td class="${totCD1>=0?'up':'dn'}">${SIGN(totCD1)}<br><small>${PCT(totCD1p)}</small></td>
+    <td style="color:var(--green)">${FMT(totCY2)}</td>
+    <td class="${totCD2>=0?'up':'dn'}">${SIGN(totCD2)}<br><small>${PCT(totCD2p)}</small></td>
+    <td style="color:var(--green)">${FMT(totCY3)}</td>
+    <td class="${totCD3>=0?'up':'dn'}">${SIGN(totCD3)}<br><small>${PCT(totCD3p)}</small></td>
+    <td style="color:var(--green);font-weight:800">${FMT(totCapMyd)}</td>
+    <td class="${totCapDeltaVsStd>=0?'up':'dn'}" style="font-weight:700">${SIGN(totCapDeltaVsStd)}<br><small style="color:var(--muted)">${PCT(totCapDeltaVsStd/totMyd*100)} vs Op.1</small></td>
+  </tr>`;
+
+  html += `<tr class="tot t3-tot">
+    <td class="left t3-label" colspan="4">
+      <div style="font-weight:800;margin-bottom:4px">TOTAL — Opción 3</div>
+      <div style="font-size:9.5px;font-weight:700;color:var(--purple);margin-bottom:3px">Descuentos por tier de pack</div>
+      <span class="tag" style="background:var(--purple-soft);color:var(--purple);border:1px solid #c4b5fd">PB: Y1 −${document.getElementById('t3_pb_1').value}%</span>
+      <span class="tag" style="background:var(--purple-soft);color:var(--purple);border:1px solid #c4b5fd">45: Y1 −${document.getElementById('t3_t45_1').value}%</span>
+      <span class="tag" style="background:var(--purple-soft);color:var(--purple);border:1px solid #c4b5fd">55: Y1 −${document.getElementById('t3_t55_1').value}%</span>
+    </td>
+    <td style="color:var(--purple)">${FMT(totTY1)}</td>
+    <td class="${totTD1>=0?'up':'dn'}">${SIGN(totTD1)}<br><small>${PCT(totTD1p)}</small></td>
+    <td style="color:var(--purple)">${FMT(totTY2)}</td>
+    <td class="${totTD2>=0?'up':'dn'}">${SIGN(totTD2)}<br><small>${PCT(totTD2p)}</small></td>
+    <td style="color:var(--purple)">${FMT(totTY3)}</td>
+    <td class="${totTD3>=0?'up':'dn'}">${SIGN(totTD3)}<br><small>${PCT(totTD3p)}</small></td>
+    <td style="color:var(--purple);font-weight:800">${FMT(totT3Myd)}</td>
+    <td class="${totT3DeltaVsOp1>=0?'up':'dn'}" style="font-weight:700">${SIGN(totT3DeltaVsOp1)}<br><small style="color:var(--muted)">${PCT(totT3DeltaVsOp1/totMyd*100)} vs Op.1</small></td>
   </tr>`;
 
   document.getElementById(mkt+'-body').innerHTML = html;
   document.getElementById(mkt+'-meta').textContent =
-    `ARR base: ${FMT(totalArr)} · List total: ${FMT(totalList)}`;
+    `ARR base: ${FMT(totalArr)} · Op.1: ${FMT(totMyd)} · Op.2: ${FMT(totCapMyd)} · Op.3: ${FMT(totT3Myd)}`;
 
-  return {totalArr, totalList, totY1, totY2, totY3, totMyd, totDelta};
+  return {totalArr, totalList, totY1, totY2, totY3, totMyd, totDelta,
+          totCY1, totCY2, totCY3, totCapMyd, totCapDeltaVsStd,
+          totTY1, totTY2, totTY3, totT3Myd, totT3DeltaVsOp1};
 }
 
-function buildKPIs(mx, co) {
+function buildKPIs(mx) {
   const [m1,m2,m3] = getMults();
   document.getElementById('pp1').textContent = Math.round(m1*100)+'%';
   document.getElementById('pp2').textContent = Math.round(m2*100)+'%';
   document.getElementById('pp3').textContent = Math.round(m3*100)+'%';
 
-  const arr = mx.totalArr + co.totalArr;
-  const list = mx.totalList + co.totalList;
-  const myd = mx.totMyd + co.totMyd;
-  const y1 = mx.totY1 + co.totY1;
+  const c1 = parseFloat(document.getElementById('cap1').value) ?? 15;
+  const c2 = parseFloat(document.getElementById('cap2').value) ?? 15;
+  const c3 = parseFloat(document.getElementById('cap3').value) ?? 15;
+  const capLabel = `+${c1}% / +${c2}% / +${c3}%`;
+  const arr = mx.totalArr;
+  const list = mx.totalList;
+
+  // Opción 1 — descuentos fijos
+  const myd1 = mx.totMyd;
+  const y1 = mx.totY1;
   const y1delta = y1 - arr;
-  const totDelta = myd - arr*3;
-  const arrY3 = mx.totY3 + co.totY3;
+  const delta1 = myd1 - arr*3;
+  const arrY3 = mx.totY3;
+
+  // Opción 2 — crecimiento interanual limitado
+  const myd2 = mx.totCapMyd;
+  const cy1 = mx.totCY1;
+  const cy1delta = cy1 - arr;
+  const delta2 = myd2 - arr*3;
+  const diffOp = myd2 - myd1;
+
+  // Opción 3 — tier-based discounts
+  const myd3kpi = mx.totT3Myd;
+  const ty1kpi = mx.totTY1;
+  const ty1delta = ty1kpi - arr;
+  const delta3 = myd3kpi - arr*3;
+  const diffOp3 = myd3kpi - myd1;
 
   document.getElementById('kpis').innerHTML = `
-    <div class="kpi">
-      <div class="kpi-lbl">ARR base total</div>
-      <div class="kpi-val">${FMT(arr)}</div>
-      <div class="kpi-sub">List: ${FMT(list)}</div>
+    <div class="kpi-group">
+      <div class="kpi-group-label std"><span class="opt-num">Opción 1</span><span class="opt-desc">MYD con descuentos fijos</span></div>
+      <div class="kpis" style="margin-bottom:0">
+        <div class="kpi">
+          <div class="kpi-lbl">ARR base total</div>
+          <div class="kpi-val">${FMT(arr)}</div>
+          <div class="kpi-sub">List: ${FMT(list)}</div>
+        </div>
+        <div class="kpi ${y1delta>=0?'up':'dn'}">
+          <div class="kpi-lbl">Impacto Y1 vs actual</div>
+          <div class="kpi-val">${SIGN(y1delta)}</div>
+          <div class="kpi-sub">Flujo de caja año 1</div>
+        </div>
+        <div class="kpi ${delta1>=0?'up':'dn'}">
+          <div class="kpi-lbl">Delta 3 años</div>
+          <div class="kpi-val">${SIGN(delta1)}</div>
+          <div class="kpi-sub">vs 3× renovación estándar</div>
+        </div>
+        <div class="kpi bl">
+          <div class="kpi-lbl">Compromiso 3 años</div>
+          <div class="kpi-val">${FMT(myd1)}</div>
+          <div class="kpi-sub">ARR total comprometido</div>
+        </div>
+        <div class="kpi hl">
+          <div class="kpi-lbl">ARR Y3 (recuperado)</div>
+          <div class="kpi-val">${FMT(arrY3)}</div>
+          <div class="kpi-sub">${PCT((m3-1)*100)} sobre list price</div>
+        </div>
+      </div>
     </div>
-    <div class="kpi ${y1delta>=0?'up':'dn'}">
-      <div class="kpi-lbl">Impacto Y1 vs actual</div>
-      <div class="kpi-val">${SIGN(y1delta)}</div>
-      <div class="kpi-sub">Flujo de caja año 1</div>
+    <div class="kpi-group">
+      <div class="kpi-group-label cap"><span class="opt-num">Opción 2</span><span class="opt-desc">MYD con incrementos interanuales fijos — ${capLabel}</span></div>
+      <div class="kpis" style="margin-bottom:0">
+        <div class="kpi">
+          <div class="kpi-lbl">ARR base total</div>
+          <div class="kpi-val">${FMT(arr)}</div>
+          <div class="kpi-sub">List: ${FMT(list)}</div>
+        </div>
+        <div class="kpi ${cy1delta>=0?'up':'dn'}">
+          <div class="kpi-lbl">Impacto Y1 vs actual</div>
+          <div class="kpi-val">${SIGN(cy1delta)}</div>
+          <div class="kpi-sub">Flujo de caja año 1</div>
+        </div>
+        <div class="kpi ${delta2>=0?'up':'dn'}">
+          <div class="kpi-lbl">Delta 3 años</div>
+          <div class="kpi-val">${SIGN(delta2)}</div>
+          <div class="kpi-sub">vs 3× renovación estándar</div>
+        </div>
+        <div class="kpi" style="border-color:var(--green)">
+          <div class="kpi-lbl">Compromiso 3 años</div>
+          <div class="kpi-val" style="color:var(--green)">${FMT(myd2)}</div>
+          <div class="kpi-sub">ARR total comprometido</div>
+        </div>
+        <div class="kpi ${diffOp>=0?'up':'dn'}">
+          <div class="kpi-lbl">Diferencia vs Op.1</div>
+          <div class="kpi-val">${SIGN(diffOp)}</div>
+          <div class="kpi-sub">${PCT(diffOp/myd1*100)} sobre Op.1</div>
+        </div>
+      </div>
     </div>
-    <div class="kpi ${totDelta>=0?'up':'dn'}">
-      <div class="kpi-lbl">Delta 3 años total</div>
-      <div class="kpi-val">${SIGN(totDelta)}</div>
-      <div class="kpi-sub">vs 3× renovación estándar</div>
-    </div>
-    <div class="kpi bl">
-      <div class="kpi-lbl">Compromiso MYD 3 años</div>
-      <div class="kpi-val">${FMT(myd)}</div>
-      <div class="kpi-sub">ARR total comprometido</div>
-    </div>
-    <div class="kpi hl">
-      <div class="kpi-lbl">ARR Y3 (recuperado)</div>
-      <div class="kpi-val">${FMT(arrY3)}</div>
-      <div class="kpi-sub">${PCT((m3-1)*100)} sobre list price</div>
+    <div class="kpi-group" style="margin-bottom:20px">
+      <div class="kpi-group-label t3"><span class="opt-num">Opción 3</span><span class="opt-desc">MYD con descuentos por tier de pack</span></div>
+      <div class="kpis" style="margin-bottom:0">
+        <div class="kpi">
+          <div class="kpi-lbl">ARR base total</div>
+          <div class="kpi-val">${FMT(arr)}</div>
+          <div class="kpi-sub">List: ${FMT(list)}</div>
+        </div>
+        <div class="kpi ${ty1delta>=0?'up':'dn'}">
+          <div class="kpi-lbl">Impacto Y1 vs actual</div>
+          <div class="kpi-val">${SIGN(ty1delta)}</div>
+          <div class="kpi-sub">Flujo de caja año 1</div>
+        </div>
+        <div class="kpi ${delta3>=0?'up':'dn'}">
+          <div class="kpi-lbl">Delta 3 años</div>
+          <div class="kpi-val">${SIGN(delta3)}</div>
+          <div class="kpi-sub">vs 3× renovación estándar</div>
+        </div>
+        <div class="kpi" style="border-color:var(--purple)">
+          <div class="kpi-lbl">Compromiso 3 años</div>
+          <div class="kpi-val" style="color:var(--purple)">${FMT(myd3kpi)}</div>
+          <div class="kpi-sub">ARR total comprometido</div>
+        </div>
+        <div class="kpi ${diffOp3>=0?'up':'dn'}">
+          <div class="kpi-lbl">Diferencia vs Op.1</div>
+          <div class="kpi-val">${SIGN(diffOp3)}</div>
+          <div class="kpi-sub">${PCT(diffOp3/myd1*100)} sobre Op.1</div>
+        </div>
+      </div>
     </div>
   `;
 }
 
 function recalc() {
+  const c1 = parseFloat(document.getElementById('cap1').value) ?? 15;
+  const c2 = parseFloat(document.getElementById('cap2').value) ?? 15;
+  const c3 = parseFloat(document.getElementById('cap3').value) ?? 15;
+  document.getElementById('cap-display').textContent = `+${c1}% / +${c2}% / +${c3}%`;
   const mx = buildTable('mx');
-  const co = buildTable('co');
-  buildKPIs(mx, co);
+  buildKPIs(mx);
 }
 
 function addRow(mkt) {
@@ -440,4 +703,6 @@ function addRow(mkt) {
 
 recalc();
 </script>
-</body></html>
+
+</body>
+</html>
