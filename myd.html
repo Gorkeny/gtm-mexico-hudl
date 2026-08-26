@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MYD Impact Calculator — MX & CO</title>
+<title>MYD Impact Calculator — MX & CO</title>
+<style>
+  :root {
+    --bg: #f8f9fa; --surface: #fff; --border: #e2e8f0;
+    --text: #1a202c; --muted: #64748b;
+    --hudl: #e85d27; --hudl-soft: #fff3ee;
+    --green: #16a34a; --green-soft: #f0fdf4;
+    --amber: #b45309; --amber-soft: #fffbeb;
+    --red: #dc2626; --red-soft: #fef2f2;
+    --blue: #2563eb; --blue-soft: #eff6ff;
+    --purple: #7c3aed; --purple-soft: #f5f3ff;
+  }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+    --bg:#0f172a; --surface:#1e293b; --border:#334155; --text:#f1f5f9; --muted:#94a3b8;
+    --hudl-soft:#1c1007; --green-soft:#052e16; --amber-soft:#1c1407; --red-soft:#1c0a0a; --blue-soft:#0a1628; --purple-soft:#180f2e;
+  }}
+  :root[data-theme="dark"] {
+    --bg:#0f172a; --surface:#1e293b; --border:#334155; --text:#f1f5f9; --muted:#94a3b8;
+    --hudl-soft:#1c1007; --green-soft:#052e16; --amber-soft:#1c1407; --red-soft:#1c0a0a; --blue-soft:#0a1628; --purple-soft:#180f2e;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);font-size:14px;line-height:1.5;padding:20px}
+
+  h1{font-size:20px;font-weight:700}
+  .subtitle{color:var(--muted);font-size:13px;margin-top:3px}
+  .header{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:12px;margin-bottom:20px}
+
+  /* explanation banner */
+  .banner{background:var(--blue-soft);border:1px solid #93c5fd;border-radius:10px;padding:12px 16px;margin-bottom:20px;font-size:13px;line-height:1.7;color:var(--text)}
+  .banner strong{color:var(--blue)}
+  .formula{font-family:monospace;background:var(--surface);padding:2px 6px;border-radius:4px;font-size:12px}
+
+  /* controls */
+  .controls{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px 18px;margin-bottom:18px;display:flex;gap:24px;align-items:flex-end;flex-wrap:wrap}
+  .ctrl{display:flex;flex-direction:column;gap:3px}
+  .ctrl label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+  .ctrl input[type=number]{width:90px;padding:6px 10px;border:1px solid var(--border);border-radius:6px;background:var(--bg);color:var(--text);font-size:14px;font-weight:700}
+  .ctrl input:focus{outline:2px solid var(--hudl)}
+  .pill-row{display:flex;gap:8px;align-items:center;flex-wrap:wrap;padding-bottom:2px}
+  .pill{padding:4px 10px;border-radius:6px;font-size:12px;font-weight:700}
+  .p-y1{background:var(--amber-soft);color:var(--amber)}
+  .p-y2{background:var(--blue-soft);color:var(--blue)}
+  .p-y3{background:var(--purple-soft);color:var(--purple)}
+
+  /* KPIs */
+  .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(165px,1fr));gap:12px;margin-bottom:20px}
+  .kpi{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px 16px}
+  .kpi-lbl{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-bottom:5px}
+  .kpi-val{font-size:21px;font-weight:800}
+  .kpi-sub{font-size:11px;color:var(--muted);margin-top:2px}
+  .kpi.up .kpi-val{color:var(--green)}
+  .kpi.dn .kpi-val{color:var(--red)}
+  .kpi.hl .kpi-val{color:var(--hudl)}
+  .kpi.bl .kpi-val{color:var(--blue)}
+
+  /* section */
+  .section{background:var(--surface);border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:18px}
+  .sec-hdr{display:flex;align-items:center;justify-content:space-between;padding:12px 18px;background:var(--bg);border-bottom:1px solid var(--border)}
+  .sec-hdr h2{font-size:14px;font-weight:700}
+  .sec-meta{font-size:12px;color:var(--muted)}
+  .tw{overflow-x:auto}
+  table{width:100%;border-collapse:collapse}
+  th{padding:8px 10px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);background:var(--bg);border-bottom:1px solid var(--border);white-space:nowrap;text-align:right}
+  th.left,td.left{text-align:left}
+  td{padding:9px 10px;border-bottom:1px solid var(--border);text-align:right;vertical-align:middle}
+  tr:last-child td{border-bottom:none}
+  tr.tot td{font-weight:800;background:var(--bg);border-top:2px solid var(--border)}
+  tr:hover:not(.tot) td{background:var(--hudl-soft)}
+
+  .acc{font-weight:700;font-size:13px}
+  .opp-name{font-size:10px;color:var(--muted);font-weight:400;margin-top:1px}
+  .tag{display:inline-block;padding:1px 6px;border-radius:4px;font-size:10px;font-weight:700;margin-left:4px}
+  .t-pb{background:var(--blue-soft);color:var(--blue)}
+  .t-45{background:var(--amber-soft);color:var(--amber)}
+  .t-50{background:var(--hudl-soft);color:var(--hudl)}
+  .t-55{background:var(--red-soft);color:var(--red)}
+  .t-60{background:var(--purple-soft);color:var(--purple)}
+  .t-snm{background:var(--green-soft);color:var(--green)}
+
+  .up{color:var(--green)}
+  .dn{color:var(--red)}
+  .neutral{color:var(--muted)}
+
+  .add-form{padding:10px 16px;border-top:1px solid var(--border);background:var(--bg);display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+  .add-form input,.add-form select{padding:5px 9px;border:1px solid var(--border);border-radius:6px;background:var(--surface);color:var(--text);font-size:12px}
+  .add-form input[name=acc]{width:180px}
+  .add-form input[name=arr]{width:100px}
+  .add-form select{width:130px}
+  .btn-add{padding:5px 12px;background:var(--hudl);color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:12px;font-weight:700}
+  .btn-add:hover{opacity:.9}
+  .note{font-size:11px;color:var(--muted);padding:6px 18px 10px;font-style:italic}
+
+  /* strategy */
+  .strat{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:18px}
+  .strat h2{font-size:14px;font-weight:700;margin-bottom:14px}
+  .strat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}
+  .sc{border:1px solid var(--border);border-radius:8px;padding:14px}
+  .sc h4{font-size:13px;font-weight:700;margin-bottom:5px}
+  .sc p{font-size:12px;color:var(--muted);line-height:1.65}
+  .sc.hi{border-color:var(--hudl);background:var(--hudl-soft)}
+</style>
+
+<div class="header">
+  <div>
+    <h1>Calculadora de impacto MYD — 3 años</h1>
+    <div class="subtitle">🇲🇽 México · 🇨🇴 Colombia · GTM FY26/27 · Datos reales de Salesforce</div>
+  </div>
+</div>
+
+<div class="banner">
+  <strong>Lógica corregida:</strong> los descuentos MYD se aplican sobre la <strong>tarifa base (list price)</strong>, no sobre el precio actual.<br>
+  <span class="formula">List price = ARR actual ÷ (1 − descuento actual)</span> &nbsp;·&nbsp;
+  <span class="formula">MYD Yₙ = List × (1 − Dₙ%)</span><br>
+  Para cuentas con descuentos altos (PACK 55/60), el MYD supone una <strong>subida de precio real</strong> que Hudl recupera con el compromiso de 3 años.
+</div>
+
+<!-- Controls -->
+<div class="controls">
+  <div class="ctrl"><label>Y1 desc. (% sobre list)</label><input type="number" id="d1" value="30" step="1" oninput="recalc()"></div>
+  <div class="ctrl"><label>Y2 desc. (% sobre list)</label><input type="number" id="d2" value="5" step="1" oninput="recalc()"></div>
+  <div class="ctrl"><label>Y3 desc. (% sobre list, neg=incremento)</label><input type="number" id="d3" value="-5" step="1" oninput="recalc()"></div>
+  <div class="pill-row">
+    <div class="pill p-y1">Y1 → paga <span id="pp1">70%</span> list</div>
+    <div class="pill p-y2">Y2 → paga <span id="pp2">95%</span> list</div>
+    <div class="pill p-y3">Y3 → paga <span id="pp3">105%</span> list</div>
+  </div>
+</div>
+
+<!-- KPIs -->
+<div class="kpis" id="kpis"></div>
+
+<!-- Mexico -->
+<div class="section">
+  <div class="sec-hdr">
+    <h2>🇲🇽 México — Contratos FY26/27 (fuente: Salesforce vía Dot)</h2>
+    <div class="sec-meta" id="mx-meta">—</div>
+  </div>
+  <div class="tw">
+    <table>
+      <thead>
+        <tr>
+          <th class="left" style="min-width:200px">Cuenta · Deal name</th>
+          <th>Desc. actual</th>
+          <th>ARR actual</th>
+          <th>List price</th>
+          <th>MYD Y1</th>
+          <th>Δ vs actual Y1</th>
+          <th>MYD Y2</th>
+          <th>Δ vs actual Y2</th>
+          <th>MYD Y3</th>
+          <th>Δ vs actual Y3</th>
+          <th>Total 3y MYD</th>
+          <th>Δ vs 3× actual</th>
+        </tr>
+      </thead>
+      <tbody id="mx-body"></tbody>
+    </table>
+  </div>
+  <div class="add-form">
+    <input type="text" name="acc" id="mx-acc" placeholder="Nombre cuenta" />
+    <input type="number" name="arr" id="mx-arr" placeholder="ARR actual (USD)" />
+    <select id="mx-disc">
+      <option value="5">PRICEBOOK (5%)</option>
+      <option value="10">SNM/10%</option>
+      <option value="20">SP_PACK_20 (20%)</option>
+      <option value="45">PACK_45 (45%)</option>
+      <option value="50">PACK_50 (50%)</option>
+      <option value="55" selected>PACK_55 (55%)</option>
+      <option value="60">PACK_60 (60%)</option>
+    </select>
+    <button class="btn-add" onclick="addRow('mx')">+ Añadir cuenta</button>
+  </div>
+  <div class="note">* Valor ARR de Salesforce (Dot/May-Jul 2026). Los deals marcados como "negociación" pueden no estar firmados aún — verificar en SF. Churns (Pachuca, Mazatlán, Santos) excluidos.</div>
+</div>
+
+<!-- Colombia -->
+<div class="section">
+  <div class="sec-hdr">
+    <h2>🇨🇴 Colombia — Contratos activos</h2>
+    <div class="sec-meta" id="co-meta">—</div>
+  </div>
+  <div class="tw">
+    <table>
+      <thead>
+        <tr>
+          <th class="left" style="min-width:200px">Cuenta · Deal name</th>
+          <th>Desc. actual</th>
+          <th>ARR actual</th>
+          <th>List price</th>
+          <th>MYD Y1</th>
+          <th>Δ vs actual Y1</th>
+          <th>MYD Y2</th>
+          <th>Δ vs actual Y2</th>
+          <th>MYD Y3</th>
+          <th>Δ vs actual Y3</th>
+          <th>Total 3y MYD</th>
+          <th>Δ vs 3× actual</th>
+        </tr>
+      </thead>
+      <tbody id="co-body"></tbody>
+    </table>
+  </div>
+  <div class="add-form">
+    <input type="text" name="acc" id="co-acc" placeholder="Nombre cuenta" />
+    <input type="number" name="arr" id="co-arr" placeholder="ARR actual (USD)" />
+    <select id="co-disc">
+      <option value="5">PRICEBOOK (5%)</option>
+      <option value="10">10%</option>
+      <option value="20">20%</option>
+      <option value="45">PACK_45 (45%)</option>
+      <option value="50">PACK_50 (50%)</option>
+    </select>
+    <button class="btn-add" onclick="addRow('co')">+ Añadir cuenta</button>
+  </div>
+  <div class="note">* ARR Colombia ~$148k activo (Dot, Aug 2026). Descuentos Colombia estimados — confirmar deal names en SF para precisión exacta.</div>
+</div>
+
+<!-- Strategy -->
+<div class="strat">
+  <h2>💡 Implicaciones estratégicas de esta estructura MYD</h2>
+  <div class="strat-grid">
+    <div class="sc hi">
+      <h4>🔴 Cuentas con PACK 55–60 (Monterrey, Tigres, Juárez, Chivas, Cruz Azul, Atlas)</h4>
+      <p>El MYD supone una <strong>subida de precio real en Y1</strong>. La palanca comercial es el compromiso de 3 años y la certidumbre presupuestaria. Conviene combinar con upsell de nuevos módulos para justificar el incremento.</p>
+    </div>
+    <div class="sc">
+      <h4>🟡 Cuentas con PACK 45–50 (San Luis, León, Toluca, Necaxa, América, Tijuana)</h4>
+      <p>Subida moderada en Y1. Más fácil de vender si se asocia a expansión de productos. Toluca y Necaxa son buenos candidatos por su ARR actual y margen de crecimiento.</p>
+    </div>
+    <div class="sc">
+      <h4>🟢 FMF (SNM, 10% dto.)</h4>
+      <p>Única cuenta donde el MYD baja el precio en Y1 (30% off list vs 10% off actual → cliente ahorra). Caso de uso ideal para introducir el MYD: ganancia para el cliente en Y1, con recuperación gradual en Y2/Y3.</p>
+    </div>
+    <div class="sc">
+      <h4>📅 Timing: ventana óptima</h4>
+      <p>La mayoría de renovaciones vencen en Mayo–Junio 2027. <strong>Presentar el MYD entre Dic 2026 y Feb 2027</strong> da margen para negociar antes del deadline. Arrancar ahora por Monterrey ($188k) y Chivas ($141k) por impacto.</p>
+    </div>
+    <div class="sc">
+      <h4>🇨🇴 Colombia — estrategia diferida</h4>
+      <p>ARR base $148k con 9 cuentas activas. Cerrar primero el pipeline activo (FCF + Tigres CO + Once Caldas ~$65k) y después convertir a MYD en FY27/28. El MYD en Colombia aplica en el ciclo siguiente.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+const FMT = v => '$' + Math.round(Math.abs(v)).toLocaleString('en-US');
+const SIGN = v => (v >= 0 ? '+' : '−') + '$' + Math.round(Math.abs(v)).toLocaleString('en-US');
+const PCT = v => (v >= 0 ? '+' : '') + v.toFixed(1) + '%';
+
+// Mexico data — from Salesforce/Dot deal names
+// {name, opp, arr, disc, signed}  disc = current discount %, signed = is closed won
+const DATA = {
+  mx: [
+    {name:'FMF / SNM Services', opp:'FY 26-27_SNM Services', arr:224316, disc:10, signed:true},
+    {name:'CF Monterrey Rayados', opp:'FY 26-27_Heberto Cabrera_MX_PACK 55', arr:188242, disc:55, signed:true},
+    {name:'Club Tigres UANL', opp:'FY 26-27_Victor Olguin_PACK 55 MX', arr:132257, disc:55, signed:true},
+    {name:'FC Juárez', opp:'FY 26-27_Juan Chazarra_MX PACK 55', arr:133762, disc:55, signed:true},
+    {name:'Chivas de Corazón', opp:'FY 26-27_Juan Luis Piñon_MX_PACK_60', arr:141140, disc:60, signed:true},
+    {name:'Club de Fútbol América', opp:'FY 26-27_Enrique Chazaro_MX_PACK 50', arr:130388, disc:50, signed:true},
+    {name:'Club de Fútbol Cruz Azul', opp:'FY 26-27_Andres Paysse_MX PACK 55', arr:89559, disc:55, signed:true},
+    {name:'Club Universidad Nacional Pumas', opp:'Renewal 00168551', arr:61591, disc:23.9, signed:true},
+    {name:'Deportivo Toluca', opp:'FY 26-27_Arturo León_MX_PACK_45', arr:63896, disc:45, signed:false},
+    {name:'Club Atlético de San Luis', opp:'Amendment for contract #00159615 (NARR 0)', arr:91226, disc:45, signed:true},
+    {name:'Club León', opp:'FY 26-27_Luis Palestina_MX_PACK_45', arr:68783, disc:45, signed:false},
+    {name:'Necaxa', opp:'FY 26-27_Cristian Franco_MX_PACK_45', arr:54330, disc:45, signed:false},
+    {name:'Querétaro FC', opp:'Renewal 00164881 (PRICEBOOK)', arr:37346, disc:5, signed:false},
+    {name:'Atlas FC', opp:'FY 26-27_Jonathan Rangel_PACK_55 MX', arr:112166, disc:55, signed:false},
+    {name:'Club Tijuana / Xolos', opp:'FY 26-27_Jesús Trejo_PACK_50 MX', arr:76234, disc:50, signed:false},
+    {name:'Club Puebla', opp:'FY 26-27_Mariana Lopez_MX_PACK_PRICEBOOK', arr:23222, disc:5, signed:false},
+    {name:'Cancún Futbol Club', opp:'FY 26-27_Kevin Lacki_GTM_MX_PRICEBOOK', arr:48684, disc:5, signed:false},
+  ],
+  co: [
+    {name:'FCF (Fed. Colombiana Fútbol)', opp:'Renovación Upsell 006VY00000KagV5YAJ', arr:29635, disc:10, signed:false},
+    {name:'Tigres FC (Colombia)', opp:'FY26-27 Statsbomb IQ Soccer', arr:30684, disc:5, signed:false},
+    {name:'Once Caldas', opp:'FY26-27 Wyscout Upsell', arr:5023, disc:5, signed:false},
+    {name:'DIM (Dep. Indep. Medellín)', opp:'Amendment 00154793', arr:3270, disc:5, signed:false},
+    {name:'Resto cuentas activas Colombia (9 ctas. — Dot)', opp:'Contratos Wyscout activos Liga Betplay', arr:79742, disc:10, signed:true},
+  ]
+};
+
+function tagClass(disc) {
+  if (disc <= 5) return 't-pb';
+  if (disc <= 10) return 't-snm';
+  if (disc < 30) return 't-snm';
+  if (disc <= 45) return 't-45';
+  if (disc <= 50) return 't-50';
+  if (disc <= 55) return 't-55';
+  return 't-60';
+}
+function tagLabel(disc) {
+  if (disc <= 5) return 'PRICEBOOK (5%)';
+  if (disc === 10) return disc + '%';
+  if (disc === 20) return 'PACK 20';
+  if (disc === 23.9) return '23.9%';
+  if (disc === 40) return disc + '%';
+  if (disc === 45) return 'PACK 45';
+  if (disc === 50) return 'PACK 50';
+  if (disc === 55) return 'PACK 55';
+  if (disc >= 60) return 'PACK 60';
+  return disc + '%';
+}
+
+function getMults() {
+  const d1 = parseFloat(document.getElementById('d1').value)||0;
+  const d2 = parseFloat(document.getElementById('d2').value)||0;
+  const d3 = parseFloat(document.getElementById('d3').value)||0;
+  return [1 - d1/100, 1 - d2/100, 1 - d3/100];
+}
+
+function buildTable(mkt) {
+  const [m1,m2,m3] = getMults();
+  const rows = DATA[mkt];
+  let totalArr=0, totalList=0, totY1=0, totY2=0, totY3=0;
+  let html = '';
+
+  rows.forEach(r => {
+    const list = r.arr / (1 - r.disc/100);
+    const y1 = list * m1, y2 = list * m2, y3 = list * m3;
+    const myd3 = y1 + y2 + y3;
+    const d1v = y1 - r.arr, d2v = y2 - r.arr, d3v = y3 - r.arr;
+    const d3y = myd3 - r.arr * 3;
+    const d1p = d1v/r.arr*100, d2p = d2v/r.arr*100, d3p = d3v/r.arr*100;
+
+    totalArr += r.arr; totalList += list;
+    totY1 += y1; totY2 += y2; totY3 += y3;
+
+    const signedFlag = r.signed ? '' : '<span class="tag" style="background:var(--amber-soft);color:var(--amber)">negoc.</span>';
+    const dl = tagLabel(r.disc);
+    const dc = tagClass(r.disc);
+
+    html += `<tr>
+      <td class="left">
+        <div class="acc">${r.name} ${signedFlag}</div>
+        <div class="opp-name">${r.opp}</div>
+      </td>
+      <td><span class="tag ${dc}">${dl} (${r.disc}%)</span></td>
+      <td>${FMT(r.arr)}</td>
+      <td style="color:var(--muted)">${FMT(list)}</td>
+      <td><strong>${FMT(y1)}</strong></td>
+      <td class="${d1v>=0?'up':'dn'}">${SIGN(d1v)}<br><small>${PCT(d1p)}</small></td>
+      <td><strong>${FMT(y2)}</strong></td>
+      <td class="${d2v>=0?'up':'dn'}">${SIGN(d2v)}<br><small>${PCT(d2p)}</small></td>
+      <td><strong>${FMT(y3)}</strong></td>
+      <td class="${d3v>=0?'up':'dn'}">${SIGN(d3v)}<br><small>${PCT(d3p)}</small></td>
+      <td style="font-weight:800">${FMT(myd3)}</td>
+      <td class="${d3y>=0?'up':'dn'}" style="font-weight:700">${SIGN(d3y)}</td>
+    </tr>`;
+  });
+
+  const totMyd = totY1+totY2+totY3;
+  const totDelta = totMyd - totalArr*3;
+  const totD1 = totY1 - totalArr, totD2 = totY2 - totalArr, totD3 = totY3 - totalArr;
+
+  html += `<tr class="tot">
+    <td class="left" colspan="2">TOTAL</td>
+    <td>${FMT(totalArr)}</td>
+    <td style="color:var(--muted)">${FMT(totalList)}</td>
+    <td>${FMT(totY1)}</td>
+    <td class="${totD1>=0?'up':'dn'}">${SIGN(totD1)}</td>
+    <td>${FMT(totY2)}</td>
+    <td class="${totD2>=0?'up':'dn'}">${SIGN(totD2)}</td>
+    <td>${FMT(totY3)}</td>
+    <td class="${totD3>=0?'up':'dn'}">${SIGN(totD3)}</td>
+    <td>${FMT(totMyd)}</td>
+    <td class="${totDelta>=0?'up':'dn'}">${SIGN(totDelta)}</td>
+  </tr>`;
+
+  document.getElementById(mkt+'-body').innerHTML = html;
+  document.getElementById(mkt+'-meta').textContent =
+    `ARR base: ${FMT(totalArr)} · List total: ${FMT(totalList)}`;
+
+  return {totalArr, totalList, totY1, totY2, totY3, totMyd, totDelta};
+}
+
+function buildKPIs(mx, co) {
+  const [m1,m2,m3] = getMults();
+  document.getElementById('pp1').textContent = Math.round(m1*100)+'%';
+  document.getElementById('pp2').textContent = Math.round(m2*100)+'%';
+  document.getElementById('pp3').textContent = Math.round(m3*100)+'%';
+
+  const arr = mx.totalArr + co.totalArr;
+  const list = mx.totalList + co.totalList;
+  const myd = mx.totMyd + co.totMyd;
+  const y1 = mx.totY1 + co.totY1;
+  const y1delta = y1 - arr;
+  const totDelta = myd - arr*3;
+  const arrY3 = mx.totY3 + co.totY3;
+
+  document.getElementById('kpis').innerHTML = `
+    <div class="kpi">
+      <div class="kpi-lbl">ARR base total</div>
+      <div class="kpi-val">${FMT(arr)}</div>
+      <div class="kpi-sub">List: ${FMT(list)}</div>
+    </div>
+    <div class="kpi ${y1delta>=0?'up':'dn'}">
+      <div class="kpi-lbl">Impacto Y1 vs actual</div>
+      <div class="kpi-val">${SIGN(y1delta)}</div>
+      <div class="kpi-sub">Flujo de caja año 1</div>
+    </div>
+    <div class="kpi ${totDelta>=0?'up':'dn'}">
+      <div class="kpi-lbl">Delta 3 años total</div>
+      <div class="kpi-val">${SIGN(totDelta)}</div>
+      <div class="kpi-sub">vs 3× renovación estándar</div>
+    </div>
+    <div class="kpi bl">
+      <div class="kpi-lbl">Compromiso MYD 3 años</div>
+      <div class="kpi-val">${FMT(myd)}</div>
+      <div class="kpi-sub">ARR total comprometido</div>
+    </div>
+    <div class="kpi hl">
+      <div class="kpi-lbl">ARR Y3 (recuperado)</div>
+      <div class="kpi-val">${FMT(arrY3)}</div>
+      <div class="kpi-sub">${PCT((m3-1)*100)} sobre list price</div>
+    </div>
+  `;
+}
+
+function recalc() {
+  const mx = buildTable('mx');
+  const co = buildTable('co');
+  buildKPIs(mx, co);
+}
+
+function addRow(mkt) {
+  const name = document.getElementById(mkt+'-acc').value.trim();
+  const arr = parseFloat(document.getElementById(mkt+'-arr').value);
+  const disc = parseInt(document.getElementById(mkt+'-disc').value);
+  if (!name || !arr) return;
+  DATA[mkt].push({name, opp:'Manual', arr, disc, signed:false});
+  document.getElementById(mkt+'-acc').value = '';
+  document.getElementById(mkt+'-arr').value = '';
+  recalc();
+}
+
+recalc();
+</script>
+</body></html>
