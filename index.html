@@ -418,6 +418,7 @@ document.getElementById('gtm-pw-input').addEventListener('keydown', function(e) 
 <button class="filter-btn league-btn" onclick="setFilter('liga-mx', this)">Liga MX (17)</button>
 <button class="filter-btn league-btn" onclick="setFilter('snm', this)">SNM (1)</button>
 <button class="filter-btn exp-btn" onclick="setFilter('liga-expansion', this)">Liga Expansión (14)</button>
+<button class="filter-btn league-btn" onclick="setFilter('liga-premier', this)">Liga Premier (2)</button>
 </div>
 <button id="shareBtn" onclick="copyShareLink()" style="display:inline-flex;align-items:center;gap:6px;padding:8px 14px;border:1px solid #185FA5;border-radius:8px;font-size:13px;background:#fff;color:#185FA5;cursor:pointer;transition:all 0.15s;white-space:nowrap;">
 🔗 Copy link
@@ -603,7 +604,8 @@ const matchF = currentFilter === 'all' ||
 (currentFilter === 'nodata' && c.arr === null) ||
 (currentFilter === 'liga-mx' && c.league === 'Liga MX') ||
 (currentFilter === 'snm' && c.league === 'SNM') ||
-(currentFilter === 'liga-expansion' && c.league === 'Liga Expansión');
+(currentFilter === 'liga-expansion' && c.league === 'Liga Expansión') ||
+(currentFilter === 'liga-premier' && c.league === 'Liga Premier');
 return matchQ && matchF;
 });
 
