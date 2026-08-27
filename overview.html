@@ -358,7 +358,9 @@ var clubs = [
   {n:'Santos',    arr:  9103, v27:     0, s:'lost'},
   {n:'Atlas',     arr:  7282, v27:     0, s:'pipeline'},
   {n:'Puebla',    arr:     0, v27: 25654, s:'pipeline'},
-  {n:'Jaiva Brava', arr:     0, v27:  5023, s:'signed'}
+  {n:'Jaiva Brava', arr:     0, v27:  5023, s:'signed'},
+  {n:'Liga Premier', arr:     0, v27:231962, s:'pipeline'},
+  {n:'Cordobés FC',  arr:     0, v27:  4355, s:'signed'}
 ];
 
 function fmt(v) { return '$' + Math.round(v).toLocaleString('en-US'); }
@@ -378,10 +380,10 @@ function buildARR() {
   // Actuals YTD — actualizados desde Salesforce vía @Dot 27-ago-2026
   // Q1 EARR=852722 (sin Cruz Azul) + Q2 EARR=92533 (Cruz Azul 89559+amend 2177 + Monterrey amends 2746+4202) → total EARR=945255
   // Q1 NARR=334935 (incl. correcciones Toluca +515, Necaxa +3884, Querétaro +511) + Q2 NARR=44253 → total NARR=379188
-  // San Luis: Closed Lost (ag-19-2026). Jaiva Brava: Closed Won (jul-14-2026).
+  // San Luis: Closed Lost (ag-19-2026). Jaiva Brava: CW (jul-14). Cordobés FC: CW (jul-27, \$4,355 NARR).
   var earrA = 945255;   // YTD EARR
-  var narrA = 379188;   // YTD NARR (Q1 334935 + Q2 44253)
-  var tarrA = 1324443;  // YTD TARR = earrA + narrA
+  var narrA = 383543;   // YTD NARR (Q1 334935 + Q2 48608)
+  var tarrA = 1328798;  // YTD TARR = earrA + narrA
 
   // FY 26/27 annual targets (combined MX + Colombia)
   var FY_EARR = 1595069, FY_NARR = 1040746, FY_TARR = 2635815;
@@ -415,7 +417,7 @@ function buildARR() {
   // Q2 actuals (parcial, datos SF 27-ago-2026): Cruz Azul EARR=91736 + Monterrey amends + otros NARR=44253 → EARR=92533, TARR=136786
   var quarters = [
     { label:'Q1', period:'Abr – Jun', earrT:1058008, narrT: 443305, totalT:1501313, done:true,              earrA:852722, narrA:334935, totalA:1187657 },
-    { label:'Q2', period:'Jul – Sep', earrT: 189985, narrT: 148375, totalT: 338360, done:true, partial:true, earrA: 92533, narrA: 44253, totalA: 136786 },
+    { label:'Q2', period:'Jul – Sep', earrT: 189985, narrT: 148375, totalT: 338360, done:true, partial:true, earrA: 92533, narrA: 48608, totalA: 141141 },
     { label:'Q3', period:'Oct – Dic', earrT:  77528, narrT:  47761, totalT: 125289, done:false },
     { label:'Q4', period:'Ene – Mar', earrT: 269548, narrT: 401306, totalT: 670854, done:false }
   ];

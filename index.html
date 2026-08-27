@@ -284,10 +284,10 @@ document.getElementById('gtm-pw-input').addEventListener('keydown', function(e) 
 </div>
 <div class="target-indicator" style="background: linear-gradient(135deg, #059669 0%, #047857 100%);">
 <div class="ti-label">Closed Won YTD 2026/27</div>
-<div class="ti-value">$1,324,443 USD</div>
+<div class="ti-value">$1,328,798 USD</div>
 <div class="ti-breakdown">
-<span style="font-size:15px;font-weight:700;opacity:1;">60.4% of target</span><span class="ti-sep">·</span><span style="position:relative;">
-  <button class="cw-deals-btn" onclick="toggleCWDeals(event)" id="cw-deals-toggle">21 deals ▾</button>
+<span style="font-size:15px;font-weight:700;opacity:1;">60.6% of target</span><span class="ti-sep">·</span><span style="position:relative;">
+  <button class="cw-deals-btn" onclick="toggleCWDeals(event)" id="cw-deals-toggle">22 deals ▾</button>
   <div class="cw-deals-popup" id="cw-deals-popup">
     <a class="cw-deal-item" href="https://hudl.lightning.force.com/lightning/r/Opportunity/006UJ00000k03wJYAQ/view" target="_blank" rel="noopener">
       <span class="cw-deal-name">FY 26-27_SNM Services</span><span class="cw-deal-amount">$224,316</span>
@@ -353,6 +353,9 @@ document.getElementById('gtm-pw-input').addEventListener('keydown', function(e) 
     </a>
     <a class="cw-deal-item" href="https://hudl.lightning.force.com/lightning/r/Opportunity/006UJ00000w0UXlYAM/view" target="_blank" rel="noopener">
       <span class="cw-deal-name">FY 26-27_Pedro Beltran_Wyscout Expansion (Jaiva Brava)</span><span class="cw-deal-amount">$5,023</span>
+    </a>
+    <a class="cw-deal-item" href="https://hudl.lightning.force.com/lightning/r/Opportunity/006UJ00000yTcfFYAS/view" target="_blank" rel="noopener">
+      <span class="cw-deal-name">FY 26-27_Juan Manuel Chong Noriega (Cordobés FC)</span><span class="cw-deal-amount">$4,355</span>
     </a>
   </div>
 </span>
@@ -472,6 +475,9 @@ const pipelineData = {
 '001d00000203uMSAAY': { total: 3014.25, opps: [
 { name: 'FY 26-27_Guillermo De Alba Quezada_GTM 26/27 MX', amount: 3014.25, closeDate: '2026-08-31', sfLink: 'https://hudl.lightning.force.com/lightning/r/Opportunity/006UJ00000viykQYAQ/view' }
 ]},
+'0011L00002rO3PHQA0': { total: 231961.77, opps: [
+{ name: 'FY 25-26_Jose Vazquez_2026', amount: 231961.77, closeDate: '2026-09-15', sfLink: 'https://hudl.lightning.force.com/lightning/r/Opportunity/006UJ00000mQlFlYAK/view' }
+]},
 };
 
 // Closed Won + Invoiced + Signed FY26/27
@@ -520,6 +526,9 @@ const closedWonData = {
 ]},
 '0018X00003FyHWUQA3': { total: 5023, signed: true, opps: [
 { name: 'FY 26-27_Pedro Beltran_Wyscout Expansion', amount: 5023, closeDate: '2026-07-31', stage: 'Signed', sfLink: 'https://hudl.lightning.force.com/lightning/r/Opportunity/006UJ00000w0UXlYAM/view' }
+]},
+'001UJ00001MrqD0YAJ': { total: 4354.80, signed: true, opps: [
+{ name: 'FY 26-27_Juan Manuel Chong Noriega', amount: 4354.80, closeDate: '2026-07-27', stage: 'Signed', sfLink: 'https://hudl.lightning.force.com/lightning/r/Opportunity/006UJ00000yTcfFYAS/view' }
 ]}
 };
 
@@ -557,6 +566,8 @@ const clubs = [
 { id:'001d00000203uMSAAY', name:'U. de G.', arr:null, abbr:'UDG', primary:'#003DA5', secondary:'#FFD700', league:'Liga Expansión' },
 { id:'001d000001y3RJAAA2', name:'Venados FC', arr:null, abbr:'VEN', primary:'#800020', secondary:'#FFFFFF', league:'Liga Expansión' },
 { id:'0018X00003FyHWUQA3', name:'Jaiva Brava Tampico', arr:null, abbr:'JBR', primary:'#006B8F', secondary:'#FFFFFF', league:'Liga Expansión' },
+{ id:'0011L00002rO3PHQA0', name:'Liga Premier México', arr:null, abbr:'LPM', primary:'#00843D', secondary:'#FFFFFF', league:'Liga Premier' },
+{ id:'001UJ00001MrqD0YAJ', name:'Cordobés FC', arr:null, abbr:'CDB', primary:'#1A1A6E', secondary:'#E8C84A', league:'Liga Premier' },
 ];
 
 // Escala global compartida: máximo entre todos los ARR y todos los pipelines
