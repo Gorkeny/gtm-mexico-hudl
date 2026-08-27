@@ -89,6 +89,9 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
 .filter-btn.exp-btn { border-color: #FDBA74; color: #C2410C; background: #FFF7ED; }
 .filter-btn.exp-btn:hover { border-color: #C2410C; }
 .filter-btn.exp-btn.active { background: #C2410C; border-color: #C2410C; color: #fff; }
+.filter-btn.premier-btn { border-color: #6EE7B7; color: #065F46; background: #ECFDF5; }
+.filter-btn.premier-btn:hover { border-color: #065F46; }
+.filter-btn.premier-btn.active { background: #065F46; border-color: #065F46; color: #fff; }
 .metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 28px; }
 @media (max-width: 900px) { .metrics { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 600px) { .metrics { grid-template-columns: repeat(2, 1fr); } }
@@ -418,7 +421,7 @@ document.getElementById('gtm-pw-input').addEventListener('keydown', function(e) 
 <button class="filter-btn league-btn" onclick="setFilter('liga-mx', this)">Liga MX (17)</button>
 <button class="filter-btn league-btn" onclick="setFilter('snm', this)">SNM (1)</button>
 <button class="filter-btn exp-btn" onclick="setFilter('liga-expansion', this)">Liga Expansión (14)</button>
-<button class="filter-btn league-btn" onclick="setFilter('liga-premier', this)">Liga Premier (2)</button>
+<button class="filter-btn premier-btn" onclick="setFilter('liga-premier', this)">Liga Premier (2)</button>
 </div>
 <button id="shareBtn" onclick="copyShareLink()" style="display:inline-flex;align-items:center;gap:6px;padding:8px 14px;border:1px solid #185FA5;border-radius:8px;font-size:13px;background:#fff;color:#185FA5;cursor:pointer;transition:all 0.15s;white-space:nowrap;">
 🔗 Copy link
