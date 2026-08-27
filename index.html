@@ -446,17 +446,31 @@ const WYSCOUT_TOTAL = 461743.72;
 const WYSCOUT_LIGA_MX_SNM = WYSCOUT_TOTAL * 0.8 / 18; // ~$20,521.94 (Liga MX 17 + SNM 1)
 const WYSCOUT_LIGA_EXPANSION = WYSCOUT_TOTAL * 0.2 / 15; // ~$6,156.58 (Liga Expansión 15)
 
+// pipelineData — actualizado desde Salesforce vía @Dot 27-ago-2026
+// Pachuca: deal $79,561 muerto en SF (solo Initial Interest $0) — removido
+// León: deal $22,915 stale en SF (solo Initial Interest $0) — removido
+// San Luis: Closed Lost (confirmed SF Aug 19 2026) — removido
 const pipelineData = {
-'001d0000022QA82AAG': { total: 79561.01, opps: [
-{ name: 'FY 26-27_Vicente Garcia_MX_PACK_50', amount: 79561.01, closeDate: '2026-06-30' }
+'0011L00002rOHA0QAO': { total: 43623.01, opps: [
+{ name: 'FY 26-27_Kevin Lacki_GTM_MX_PRICEBOOK', amount: 43623.01, closeDate: '2026-08-31', sfLink: 'https://hudl.lightning.force.com/lightning/r/Opportunity/006UJ00000vrsZJYAY/view' }
 ]},
-'0013w00002Rhlt0AAB': { total: 22915, opps: [
-{ name: 'FY 26-27_Luis Palestina_MX_PACK_45', amount: 22915, closeDate: '2026-06-30' }
+'001d000002042v9AAA': { total: 17172, opps: [
+{ name: 'Amendment for contract #00166194 (Tigres)', amount: 17172, closeDate: '2026-08-15', sfLink: 'https://hudl.lightning.force.com/lightning/r/Opportunity/006UJ00000wlg7FYAQ/view' }
 ]},
-// San Luis: Closed Lost (confirmed SF Aug 19 2026) — removed from pipeline
-'0011L00002rOHA0QAO': { total: 92239.80, opps: [
-{ name: 'FY 26-27_Kevin Lacki_GTM_MX_PRICEBOOK', amount: 48094.60, closeDate: '2026-06-30', sfLink: 'https://hudl.lightning.force.com/lightning/r/Opportunity/006UJ00000vrsZJYAY/view' },
-{ name: 'Contract 00100678', amount: 44145.20, closeDate: '2026-06-30', sfLink: 'https://hudl.lightning.force.com/lightning/r/Contract/800VY00000GuK66YAF/view' }
+'001d0000022QA74AAG': { total: 25654.30, opps: [
+{ name: 'FY 26-27_Juan Carlos Arellano', amount: 25654.30, closeDate: '2026-09-30', sfLink: 'https://hudl.lightning.force.com/lightning/r/Opportunity/006UJ000012U8xlYAC/view' }
+]},
+'0010V00002QHnMKQA1': { total: 19236.70, opps: [
+{ name: 'FY 26-27_Jorge Luis Tonche Pérez_GTM 26/27', amount: 19236.70, closeDate: '2026-09-30', sfLink: 'https://hudl.lightning.force.com/lightning/r/Opportunity/006UJ000012qZ9hYAE/view' }
+]},
+'001d000001y3RL8AAM': { total: 10567.70, opps: [
+{ name: 'FY 26-27_Luis Gil_PRICEBOOK', amount: 10567.70, closeDate: '2026-08-31', sfLink: 'https://hudl.lightning.force.com/lightning/r/Opportunity/006UJ000010WjxaYAC/view' }
+]},
+'0011L00002rOHA6QAO': { total: 22445.50, opps: [
+{ name: 'FY26/27_La Paz-Daniel Vargas GTM26/27', amount: 22445.50, closeDate: '2026-09-30', sfLink: 'https://hudl.lightning.force.com/lightning/r/Opportunity/006UJ000012weQ1YAI/view' }
+]},
+'001d00000203uMSAAY': { total: 3014.25, opps: [
+{ name: 'FY 26-27_Guillermo De Alba Quezada_GTM 26/27 MX', amount: 3014.25, closeDate: '2026-08-31', sfLink: 'https://hudl.lightning.force.com/lightning/r/Opportunity/006UJ00000viykQYAQ/view' }
 ]},
 };
 
