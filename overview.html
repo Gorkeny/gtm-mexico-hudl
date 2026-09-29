@@ -7,8 +7,6 @@
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#eef2f7;color:#1a202c;min-height:100vh}
-
-/* AUTH */
 #auth-overlay{position:fixed;inset:0;background:linear-gradient(135deg,#1a1a1a,#0a0a0a);display:flex;align-items:center;justify-content:center;z-index:9999}
 .auth-box{background:#fff;border-radius:20px;padding:44px 52px;text-align:center;width:340px;box-shadow:0 24px 60px rgba(0,0,0,.6)}
 .auth-logo{font-size:30px;font-weight:800;color:#FC3A52;margin-bottom:6px}
@@ -18,23 +16,15 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 .auth-btn{width:100%;padding:13px;background:#FC3A52;color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:600;cursor:pointer}
 .auth-btn:hover{background:#d42e45}
 .auth-err{color:#dc2626;font-size:12px;margin-top:8px;display:none}
-
-/* LAYOUT */
 #dash{display:none}
-
-/* HEADER */
 .hdr{background:linear-gradient(135deg,#1a1a1a,#0a0a0a);color:#fff;padding:28px 40px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;border-bottom:3px solid #FC3A52}
 .hdr-title{font-size:24px;font-weight:800}
 .hdr-sub{font-size:13px;opacity:.7;margin-top:4px}
 .hdr-badge{display:inline-block;background:rgba(255,255,255,.15);font-size:11px;font-weight:700;padding:4px 12px;border-radius:20px;text-transform:uppercase;letter-spacing:.06em;margin-top:10px}
 .hdr-link{color:rgba(255,255,255,.7);font-size:13px;text-decoration:none;border:1px solid rgba(255,255,255,.3);padding:9px 18px;border-radius:9px}
 .hdr-link:hover{background:rgba(255,255,255,.1);color:#fff}
-
-/* CONTENT */
 .wrap{padding:28px 40px 48px;max-width:1400px;margin:0 auto}
 .note{background:#fff5f5;border:1px solid #fca5a5;border-radius:10px;padding:12px 18px;font-size:12px;color:#7f1d1d;margin-bottom:20px;line-height:1.5}
-
-/* KPI */
 .kpi-row{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;margin-bottom:24px}
 .kpi{background:#fff;border-radius:14px;padding:20px 22px;box-shadow:0 1px 4px rgba(0,0,0,.07);border-top:4px solid #e5e7eb}
 .kpi.g{border-top-color:#059669}.kpi.b{border-top-color:#2563eb}
@@ -44,16 +34,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 .kpi-sub{font-size:11px;color:#9ca3af;margin-top:5px}
 .kpi-d{font-size:12px;font-weight:700;margin-top:8px}
 .kpi-d.pos{color:#059669}.kpi-d.neg{color:#6b7280}
-
-/* SECTION */
 .sec-title{font-size:14px;font-weight:700;color:#374151;margin-bottom:4px}
 .sec-sub{font-size:11px;color:#9ca3af;margin-bottom:18px}
-
-/* CARD */
 .card{background:#fff;border-radius:14px;padding:24px 28px;box-shadow:0 1px 4px rgba(0,0,0,.07);margin-bottom:24px}
 .two-col{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:24px}
-
-/* MARKET BARS */
 .mb-row{display:flex;align-items:center;gap:14px;margin-bottom:12px}
 .mb-lbl{font-size:12px;font-weight:600;color:#4b5563;width:160px;flex-shrink:0}
 .mb-track{flex:1;background:#f3f4f6;border-radius:99px;height:30px;overflow:hidden}
@@ -62,8 +46,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 .mb-legend{display:flex;flex-wrap:wrap;gap:16px;margin-top:14px;padding-top:14px;border-top:1px solid #f3f4f6}
 .leg{display:flex;align-items:center;gap:7px;font-size:12px;color:#4b5563}
 .leg-dot{width:12px;height:12px;border-radius:3px;flex-shrink:0}
-
-/* DONUT */
 .donut-pair{display:grid;grid-template-columns:1fr 1fr;gap:20px}
 .donut-card{background:#fff;border-radius:14px;padding:24px 28px;box-shadow:0 1px 4px rgba(0,0,0,.07)}
 .donut-wrap{position:relative;width:200px;height:200px;margin:16px auto}
@@ -74,8 +56,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 .leg-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
 .leg-item{display:flex;align-items:center;gap:5px;font-size:11px;color:#4b5563}
 .leg-circ{width:10px;height:10px;border-radius:50%;flex-shrink:0}
-
-/* CLUB COMPARISON */
 .comp-table{width:100%}
 .comp-club{display:flex;align-items:center;gap:10px;margin-bottom:8px}
 .comp-name{font-size:12px;font-weight:600;color:#374151;width:90px;flex-shrink:0;text-align:right}
@@ -87,22 +67,16 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 .comp-hdr{display:flex;gap:12px;margin-bottom:12px;font-size:11px;font-weight:600;color:#9ca3af}
 .comp-hdr-name{width:90px;text-align:right;flex-shrink:0}
 .comp-legend{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px;padding-top:14px;border-top:1px solid #f3f4f6}
-
-/* NARR BARS */
 .narr-row{display:flex;align-items:center;gap:10px;margin-bottom:8px}
 .narr-name{font-size:12px;font-weight:600;color:#374151;width:90px;text-align:right;flex-shrink:0}
 .narr-track{flex:1;background:#f3f4f6;border-radius:3px;height:20px;overflow:hidden}
 .narr-fill{height:100%;border-radius:3px;display:flex;align-items:center;padding-left:8px;font-size:11px;font-weight:700;color:#fff}
-
-/* TOOLS */
 .tools-head{background:#f8fafc;border-bottom:1px solid #e5e7eb;padding:18px 28px;display:flex;align-items:center;justify-content:space-between;border-radius:14px 14px 0 0}
 .tools-body{padding:40px;text-align:center}
 .tools-badge{background:#fef3c7;color:#92400e;font-size:11px;font-weight:700;padding:3px 10px;border-radius:99px}
 .tools-pills{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:18px}
 .tool-pill{background:#f3f4f6;color:#374151;font-size:11px;font-weight:600;padding:5px 14px;border-radius:99px}
-
 .footer{text-align:center;font-size:11px;color:#9ca3af;padding-top:12px}
-
 @media(max-width:1100px){
   .kpi-row{grid-template-columns:repeat(3,1fr)}
   .two-col,.donut-pair{grid-template-columns:1fr}
@@ -113,7 +87,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 </head>
 <body>
 
-<!-- AUTH -->
 <div id="auth-overlay">
   <div class="auth-box">
     <div class="auth-logo">Hudl México</div>
@@ -125,24 +98,18 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
   </div>
 </div>
 
-<!-- DASHBOARD -->
 <div id="dash">
-
-  <!-- HEADER -->
   <div class="hdr">
     <div>
       <div class="hdr-title">GTM México — FY 26/27</div>
-      <div class="hdr-sub">Overview de Situación Comercial · Julio 2026</div>
-      <div class="hdr-badge">YTD · Jul 2026</div>
+      <div class="hdr-sub">Overview de Situación Comercial · Sep 2026</div>
+      <div class="hdr-badge">YTD · Sep 2026</div>
     </div>
     <a href="index.html" class="hdr-link">← Dashboard Completo</a>
   </div>
 
   <div class="wrap">
-    <!-- EARR / NARR / TARR -->
     <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:24px">
-
-      <!-- EARR -->
       <div class="card" style="padding:22px;margin-bottom:0;border-top:4px solid #FC3A52">
         <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#FC3A52;margin-bottom:4px">EARR · Renovaciones</div>
         <div style="font-size:9px;color:#9ca3af;margin-bottom:8px;text-transform:uppercase;letter-spacing:.06em">FY 26/27</div>
@@ -162,7 +129,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
         <div style="font-size:11px;color:#9ca3af;border-top:1px solid #f1f5f9;padding-top:10px">Base ARR FY 25/26 · mercado México</div>
       </div>
 
-      <!-- NARR -->
       <div class="card" style="padding:22px;margin-bottom:0;border-top:4px solid #059669">
         <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#059669;margin-bottom:4px">NARR · Nuevo ARR</div>
         <div style="font-size:9px;color:#9ca3af;margin-bottom:8px;text-transform:uppercase;letter-spacing:.06em">FY 26/27</div>
@@ -182,7 +148,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
         <div style="font-size:11px;color:#9ca3af;border-top:1px solid #f1f5f9;padding-top:10px">Expansión neta sobre ARR FY 25/26</div>
       </div>
 
-      <!-- TARR -->
       <div class="card" style="padding:22px;margin-bottom:0;border-top:4px solid #1a1a1a">
         <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#1a1a1a;margin-bottom:4px">TARR · Total ARR</div>
         <div style="font-size:9px;color:#9ca3af;margin-bottom:8px;text-transform:uppercase;letter-spacing:.06em">FY 26/27</div>
@@ -203,11 +168,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
       </div>
     </div>
 
-    <!-- MARKET COMPARISON -->
+    <!-- MARKET COMPARISON — valores actualizados Sep 2026 -->
     <div class="card">
       <div class="sec-title">Comparativa Global de Mercado — FY 25/26 vs FY 26/27</div>
       <div class="sec-sub">Revenue contratado con equipos mexicanos por ejercicio fiscal</div>
-
       <div class="mb-row">
         <div class="mb-lbl">EARR FY 25/26</div>
         <div class="mb-track"><div class="mb-fill" style="width:68.1%;background:linear-gradient(90deg,#94a3b8,#64748b)">$1,491,769</div></div>
@@ -215,20 +179,19 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
       </div>
       <div class="mb-row">
         <div class="mb-lbl">Closed Won 26/27</div>
-        <div class="mb-track"><div class="mb-fill" style="width:58.1%;background:linear-gradient(90deg,#FC3A52,#d42e45)">$1,272,306</div></div>
-        <div class="mb-pct">58.1% del target</div>
+        <div class="mb-track"><div class="mb-fill" style="width:63.7%;background:linear-gradient(90deg,#FC3A52,#d42e45)">$1,396,340</div></div>
+        <div class="mb-pct">63.7% del target</div>
       </div>
       <div class="mb-row">
         <div class="mb-lbl">CW + Pipeline 26/27</div>
-        <div class="mb-track"><div class="mb-fill" style="width:71.5%;background:linear-gradient(90deg,#2563eb,#1d4ed8)">$1,566,223</div></div>
-        <div class="mb-pct">71.5% del target</div>
+        <div class="mb-track"><div class="mb-fill" style="width:82.1%;background:linear-gradient(90deg,#2563eb,#1d4ed8)">$1,798,830</div></div>
+        <div class="mb-pct">82.1% del target</div>
       </div>
       <div class="mb-row">
         <div class="mb-lbl">Target FY 26/27</div>
         <div class="mb-track"><div class="mb-fill" style="width:100%;background:linear-gradient(90deg,#7c3aed,#6d28d9)">$2,191,769</div></div>
         <div class="mb-pct">100%</div>
       </div>
-
       <div class="mb-legend">
         <div class="leg"><div class="leg-dot" style="background:#64748b"></div>EARR FY 25/26</div>
         <div class="leg"><div class="leg-dot" style="background:#FC3A52"></div>Closed Won FY 26/27</div>
@@ -240,37 +203,30 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
     <!-- QUARTERLY TRACKING -->
     <div class="card">
       <div class="sec-title">Tracking por Quarter — FY 26/27</div>
-      <div class="sec-sub">YTD vs targets FY 26/27 por quarter · Q2 en progreso · Q3–Q4 pendientes</div>
-
+      <div class="sec-sub">YTD vs targets FY 26/27 por quarter · Q2 completado · Q3–Q4 pendientes</div>
       <div style="display:flex;gap:18px;margin:10px 0 18px;flex-wrap:wrap">
         <div style="display:flex;align-items:center;gap:6px;font-size:11px;color:#4b5563"><div style="width:14px;height:10px;border-radius:2px;background:#fca5a5"></div>Target EARR</div>
         <div style="display:flex;align-items:center;gap:6px;font-size:11px;color:#4b5563"><div style="width:14px;height:10px;border-radius:2px;background:#6ee7b7"></div>Target NARR</div>
         <div style="display:flex;align-items:center;gap:6px;font-size:11px;color:#4b5563"><div style="width:14px;height:10px;border-radius:2px;background:#FC3A52"></div>Real EARR (MX)</div>
         <div style="display:flex;align-items:center;gap:6px;font-size:11px;color:#4b5563"><div style="width:14px;height:10px;border-radius:2px;background:#059669"></div>Real NARR (MX)</div>
       </div>
-
       <div id="q-chart"></div>
-
       <div style="margin-top:14px;padding-top:12px;border-top:1px solid #f3f4f6;font-size:11px;color:#6b7280;line-height:1.6">
-        ℹ️ Targets combinados MX + Colombia. Actuals YTD corresponden a cierre México (EARR Q1; NARR inc. Q2 Jul). Cruz Azul contabilizado en Q2.
+        ℹ️ Targets combinados MX + Colombia. Actuals YTD corresponden a cierre México (EARR Q1+Q2; NARR inc. Q2 Sep). Cruz Azul contabilizado en Q2. San Luis: Closed Lost (AG-2026).
       </div>
     </div>
 
-    <!-- DONUTS -->
     <div class="donut-pair" style="margin-bottom:24px">
-
       <div id="donut-progress" class="donut-card"></div>
       <div id="donut-status" class="donut-card"></div>
     </div>
 
-    <!-- CLUB PIE -->
     <div class="card" style="margin-bottom:24px">
       <div class="sec-title">Distribución de Inversión por Club — FY 26/27</div>
       <div class="sec-sub">% sobre el total contratado y en pipeline · clubes con valor > 0</div>
       <div id="club-pie"></div>
     </div>
 
-    <!-- CLUB COMPARISON -->
     <div class="card">
       <div class="sec-title">Comparativa por Club — ARR FY 25/26 vs FY 26/27</div>
       <div class="sec-sub">Ordenado por valor 26/27 · Gris = ARR anterior · Color = valor 26/27 según estado</div>
@@ -283,16 +239,12 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
       </div>
     </div>
 
-    <!-- TWO SMALL CHARTS -->
     <div class="two-col">
-      <!-- NARR -->
       <div class="card" style="margin-bottom:0">
         <div class="sec-title">NARR por Club (Signed únicamente)</div>
         <div class="sec-sub">Variación neta respecto al ARR FY 25/26</div>
         <div id="narr-bars"></div>
       </div>
-
-      <!-- LEAGUE CW -->
       <div class="card" style="margin-bottom:0">
         <div class="sec-title">Closed Won por Liga</div>
         <div class="sec-sub">Distribución del revenue cerrado FY 26/27</div>
@@ -302,7 +254,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 
     <div style="height:24px"></div>
 
-    <!-- TOOLS / PRODUCT MATRIX -->
     <div class="card" style="padding:0;overflow:hidden">
       <div class="tools-head">
         <div style="font-size:14px;font-weight:700;color:#374151">🔧 Stack de Herramientas por Club — FY 25/26</div>
@@ -314,18 +265,16 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
       </div>
     </div>
 
-    <div class="footer">GTM México · Hudl · FY 26/27 Overview · Julio 2026</div>
+    <div class="footer">GTM México · Hudl · FY 26/27 Overview · Sep 2026</div>
   </div>
 </div>
 
 <script>
-// ── AUTH ──────────────────────────────────────────────────
 function unlock() {
   document.getElementById('auth-overlay').style.display = 'none';
   document.getElementById('dash').style.display = 'block';
   render();
 }
-
 function auth() {
   if (document.getElementById('pwd').value === 'latampod2026') {
     localStorage.setItem('gtm_auth', '1');
@@ -335,37 +284,38 @@ function auth() {
   }
 }
 
-// ── DATA ──────────────────────────────────────────────────
 var CLR = {signed:'#059669',pipeline:'#2563eb',citec:'#dc2626',lost:'#dc2626',no_data:'#d1d5db',arr:'#94a3b8'};
 
+// clubs array — actualizado Sep 2026
+// San Luis: s:'lost' (Closed Lost SF Aug 19 2026)
+// San Luis v27: 67542 (CW FY 26-27_Rodrigo Escutia — signed antes de Closed Lost del resto del pipeline)
+// Cancún: v27 actualizado a 87768 (CW $44,145 + pipeline $43,623)
 var clubs = [
-  {n:'SNM',       arr:216792, v27:224316, s:'signed'},
-  {n:'Monterrey', arr:138041, v27:200283, s:'signed'},
-  {n:'Tigres',    arr:131580, v27:132381, s:'signed'},
-  {n:'América',   arr:100957, v27:130388, s:'signed'},
-  {n:'Juárez',    arr:100843, v27:126696, s:'signed'},
-  {n:'Chivas',    arr: 85397, v27: 98942, s:'signed'},
-  {n:'Cancún',    arr: 57681, v27: 92240, s:'pipeline'},
-  {n:'Cruz Azul', arr:167616, v27: 91736, s:'signed'},
-  {n:'Pachuca',   arr: 56783, v27:     0, s:'lost'},
-  {n:'Toluca',    arr: 48968, v27: 72781, s:'signed'},
-  {n:'San Luis',  arr: 40123, v27:     0, s:'lost'},
-  {n:'Pumas',     arr: 46079, v27: 61591, s:'signed'},
-  {n:'Necaxa',    arr: 20819, v27: 48187, s:'signed'},
-  {n:'Querétaro', arr:     0, v27: 37346, s:'signed'},
-  {n:'Xolos',     arr:     0, v27: 29484, s:'signed'},
-  {n:'León',      arr: 18796, v27: 22915, s:'pipeline'},
-  {n:'Santos',    arr:  9103, v27:     0, s:'lost'},
-  {n:'Atlas',     arr:  7282, v27:     0, s:'pipeline'},
-  {n:'Puebla',    arr:     0, v27: 25654, s:'pipeline'},
+  {n:'SNM',         arr:216792, v27:224316, s:'signed'},
+  {n:'Monterrey',   arr:138041, v27:200283, s:'signed'},
+  {n:'Tigres',      arr:131580, v27:149553, s:'signed'},
+  {n:'América',     arr:100957, v27:130388, s:'signed'},
+  {n:'Juárez',      arr:100843, v27:126696, s:'signed'},
+  {n:'Chivas',      arr: 85397, v27: 98942, s:'signed'},
+  {n:'Cancún',      arr: 57681, v27: 87768, s:'pipeline'},
+  {n:'Cruz Azul',   arr:167616, v27: 91736, s:'signed'},
+  {n:'Pachuca',     arr: 56783, v27:     0, s:'lost'},
+  {n:'Toluca',      arr: 48968, v27: 72781, s:'signed'},
+  {n:'San Luis',    arr: 40123, v27: 67542, s:'signed'},
+  {n:'Pumas',       arr: 46079, v27: 61591, s:'signed'},
+  {n:'Necaxa',      arr: 20819, v27: 48187, s:'signed'},
+  {n:'Querétaro',   arr:     0, v27: 37346, s:'signed'},
+  {n:'Xolos',       arr:     0, v27: 29484, s:'signed'},
+  {n:'Atlas',       arr:  7282, v27: 28815, s:'pipeline'},
+  {n:'Santos',      arr:  9103, v27:     0, s:'lost'},
+  {n:'Puebla',      arr:     0, v27: 25654, s:'pipeline'},
   {n:'Jaiva Brava', arr:     0, v27:  5023, s:'signed'},
-  {n:'Liga Premier', arr:     0, v27:231962, s:'pipeline'},
-  {n:'Cordobés FC',  arr:     0, v27:  4355, s:'signed'}
+  {n:'Liga Premier',arr:     0, v27:231962, s:'pipeline'},
+  {n:'Cordobés FC', arr:     0, v27:  4355, s:'signed'}
 ];
 
 function fmt(v) { return '$' + Math.round(v).toLocaleString('en-US'); }
 
-// ── RENDER ────────────────────────────────────────────────
 function render() {
   buildARR();
   buildDonuts();
@@ -377,65 +327,54 @@ function render() {
 }
 
 function buildARR() {
-  // Actuals YTD — actualizados desde Salesforce vía @Dot 27-ago-2026
-  // Q1 EARR=852722 (sin Cruz Azul) + Q2 EARR=92533 (Cruz Azul 89559+amend 2177 + Monterrey amends 2746+4202) → total EARR=945255
-  // Q1 NARR=334935 (incl. correcciones Toluca +515, Necaxa +3884, Querétaro +511) + Q2 NARR=44253 → total NARR=379188
-  // San Luis: Closed Lost (ag-19-2026). Jaiva Brava: CW (jul-14). Cordobés FC: CW (jul-27, \$4,355 NARR).
-  var earrA = 945255;   // YTD EARR
-  var narrA = 383543;   // YTD NARR (Q1 334935 + Q2 48608)
-  var tarrA = 1328798;  // YTD TARR = earrA + narrA
+  // Actuals YTD — Sep 29, 2026
+  // TARR = $1,396,340 (23 CW deals, incl. San Luis $67,542 + all original 22)
+  // EARR = total CW que es renovación de contratos FY25/26
+  // NARR = total CW que es nuevo ARR (expansión neta)
+  // Estimación: EARR = $1,005,797 (renovaciones puras) | NARR = $390,543 (nuevo neto)
+  var earrA = 1005797;
+  var narrA = 390543;
+  var tarrA = 1396340;
 
-  // FY 26/27 annual targets (combined MX + Colombia)
   var FY_EARR = 1595069, FY_NARR = 1040746, FY_TARR = 2635815;
-
-  // Q1 targets
   var Q1_EARR = 1058008, Q1_NARR = 443305, Q1_TARR = 1501313;
 
-  // Update EARR card
   document.getElementById('earr-val').textContent = fmt(earrA);
   var earrPct = (earrA / FY_EARR * 100).toFixed(1);
   document.getElementById('earr-bar-top').style.width = Math.min(100, earrPct) + '%';
   document.getElementById('earr-pct-top').textContent = earrPct + '% del FY target';
   document.getElementById('earr-pct-q1').textContent = (earrA / Q1_EARR * 100).toFixed(1) + '% del target Q1';
 
-  // Update NARR card
   document.getElementById('narr-val-top').textContent = fmt(narrA);
   var narrPct = (narrA / FY_NARR * 100).toFixed(1);
   document.getElementById('narr-bar-top').style.width = Math.min(100, narrPct) + '%';
   document.getElementById('narr-pct-top').textContent = narrPct + '% del FY target';
   document.getElementById('narr-pct-q1').textContent = (narrA / Q1_NARR * 100).toFixed(1) + '% del target Q1';
 
-  // Update TARR card
   document.getElementById('tarr-val').textContent = fmt(tarrA);
   var tarrPct = (tarrA / FY_TARR * 100).toFixed(1);
   document.getElementById('tarr-bar-top').style.width = Math.min(100, tarrPct) + '%';
   document.getElementById('tarr-pct-top').textContent = tarrPct + '% del FY target';
   document.getElementById('tarr-pct-q1').textContent = (tarrA / Q1_TARR * 100).toFixed(1) + '% del target Q1';
 
-  // Quarterly targets (combined MX + Colombia) — targets FY 26/27
-  // Q1 actuals: Cruz Azul excluido → EARR=852722, NARR=334935 (incl. Toluca/Necaxa/Querétaro correcciones SF), TARR=1187657
-  // Q2 actuals (parcial, datos SF 27-ago-2026): Cruz Azul EARR=91736 + Monterrey amends + otros NARR=44253 → EARR=92533, TARR=136786
+  // Quarterly tracking — Q2 marcado como completado
   var quarters = [
     { label:'Q1', period:'Abr – Jun', earrT:1058008, narrT: 443305, totalT:1501313, done:true,              earrA:852722, narrA:334935, totalA:1187657 },
-    { label:'Q2', period:'Jul – Sep', earrT: 189985, narrT: 148375, totalT: 338360, done:true, partial:true, earrA: 92533, narrA: 48608, totalA: 141141 },
+    { label:'Q2', period:'Jul – Sep', earrT: 189985, narrT: 148375, totalT: 338360, done:true,              earrA:153075, narrA: 55608, totalA: 208683 },
     { label:'Q3', period:'Oct – Dic', earrT:  77528, narrT:  47761, totalT: 125289, done:false },
     { label:'Q4', period:'Ene – Mar', earrT: 269548, narrT: 401306, totalT: 670854, done:false }
   ];
 
-  // Quarterly chart — scale relative to Q1 total (largest quarter)
   var SCALE = quarters[0].totalT;
-
   var html = '';
   quarters.forEach(function(q) {
     var tE = (q.earrT / SCALE * 100).toFixed(2);
     var tN = (q.narrT / SCALE * 100).toFixed(2);
-
     var targetBar = '<div style="display:flex;height:20px;border-radius:4px;overflow:hidden;margin-bottom:' + (q.done ? '4px' : '0') + '">' +
       '<div title="Target EARR ' + fmt(q.earrT) + '" style="width:' + tE + '%;background:#fca5a5;min-width:0"></div>' +
       '<div title="Target NARR ' + fmt(q.narrT) + '" style="width:' + tN + '%;background:#6ee7b7;min-width:0"></div>' +
       '<div style="flex:1;background:#f1f5f9;border-radius:0 4px 4px 0"></div>' +
     '</div>';
-
     var actualBar = '';
     var statsBlock = '';
     if (q.done) {
@@ -449,18 +388,15 @@ function buildARR() {
       var pctE = (q.earrA / q.earrT * 100).toFixed(1);
       var pctN = (q.narrA / q.narrT * 100).toFixed(1);
       var pctT = (q.totalA / q.totalT * 100).toFixed(1);
-      var labelReal = q.partial ? 'TARR real (Jul)' : 'TARR real';
-      var labelEARR = q.partial ? 'EARR real (Jul)' : 'EARR real';
-      var labelNARR = q.partial ? 'NARR real (Jul)' : 'NARR real';
       statsBlock =
         '<div style="display:flex;justify-content:space-between;font-size:11px;font-weight:700;color:#1a1a1a;margin-bottom:4px">' +
-          '<span>' + labelReal + '</span><span>' + fmt(q.totalA) + ' <span style="font-weight:400;color:#9ca3af;font-size:10px">(' + pctT + '%)</span></span>' +
+          '<span>TARR real</span><span>' + fmt(q.totalA) + ' <span style="font-weight:400;color:#9ca3af;font-size:10px">(' + pctT + '%)</span></span>' +
         '</div>' +
         '<div style="display:flex;justify-content:space-between;font-size:10px;color:#FC3A52;margin-bottom:2px">' +
-          '<span>' + labelEARR + '</span><span>' + fmt(q.earrA) + ' <span style="color:#9ca3af">(' + pctE + '%)</span></span>' +
+          '<span>EARR real</span><span>' + fmt(q.earrA) + ' <span style="color:#9ca3af">(' + pctE + '%)</span></span>' +
         '</div>' +
         '<div style="display:flex;justify-content:space-between;font-size:10px;color:#059669">' +
-          '<span>' + labelNARR + '</span><span>' + fmt(q.narrA) + ' <span style="color:#9ca3af">(' + pctN + '%)</span></span>' +
+          '<span>NARR real</span><span>' + fmt(q.narrA) + ' <span style="color:#9ca3af">(' + pctN + '%)</span></span>' +
         '</div>';
     } else {
       statsBlock =
@@ -472,22 +408,18 @@ function buildARR() {
           '<span>NARR target</span><span>' + fmt(q.narrT) + '</span>' +
         '</div>';
     }
-
     html += '<div style="display:flex;align-items:flex-start;gap:14px;margin-bottom:20px">' +
       '<div style="width:90px;flex-shrink:0">' +
         '<div style="font-size:13px;font-weight:700;color:#374151">' + q.label + '</div>' +
         '<div style="font-size:11px;color:#9ca3af;margin-top:2px">' + q.period + '</div>' +
-        (q.done && !q.partial
+        (q.done
           ? '<div style="font-size:10px;font-weight:700;color:#059669;background:#ecfdf5;border-radius:4px;padding:2px 6px;display:inline-block;margin-top:4px">✓ Completado</div>'
-          : q.partial
-            ? '<div style="font-size:10px;font-weight:700;color:#d97706;background:#fef3c7;border-radius:4px;padding:2px 6px;display:inline-block;margin-top:4px">⏳ En progreso</div>'
-            : '<div style="font-size:10px;color:#9ca3af;background:#f9fafb;border-radius:4px;padding:2px 6px;display:inline-block;margin-top:4px">Pendiente</div>') +
+          : '<div style="font-size:10px;color:#9ca3af;background:#f9fafb;border-radius:4px;padding:2px 6px;display:inline-block;margin-top:4px">Pendiente</div>') +
       '</div>' +
       '<div style="flex:1">' + targetBar + actualBar + '</div>' +
       '<div style="width:190px;flex-shrink:0;text-align:right">' + statsBlock + '</div>' +
     '</div>';
   });
-
   document.getElementById('q-chart').innerHTML = html;
 }
 
@@ -497,56 +429,36 @@ function buildClubPie() {
     '#0891b2','#be123c','#0ea5e9','#b45309','#6d28d9',
     '#065f46','#374151','#0f766e','#92400e','#c2410c'
   ];
-
   var active = clubs.filter(function(c){return c.v27 > 0;})
                     .slice().sort(function(a,b){return b.v27 - a.v27;});
   var total  = active.reduce(function(s,c){return s + c.v27;}, 0);
-
-  // Build SVG donut (r=90, hole r=46, cx=cy=100)
-  // viewBox expanded to -30 -30 260 260 to give room for two-line outer labels
   var cx = 100, cy = 100, R = 90, ri = 46;
-  var angle = -Math.PI / 2; // start from 12 o'clock
+  var angle = -Math.PI / 2;
   var paths = '';
   var legendLeft  = '';
   var legendRight = '';
-
   active.forEach(function(c, i) {
     var col  = palette[i % palette.length];
     var pct  = c.v27 / total;
     var span = pct * 2 * Math.PI;
     var end  = angle + span;
-
-    // Outer arc
     var x1o = cx + R  * Math.cos(angle), y1o = cy + R  * Math.sin(angle);
     var x2o = cx + R  * Math.cos(end),   y2o = cy + R  * Math.sin(end);
-    // Inner arc (reverse)
     var x1i = cx + ri * Math.cos(end),   y1i = cy + ri * Math.sin(end);
     var x2i = cx + ri * Math.cos(angle), y2i = cy + ri * Math.sin(angle);
     var large = span > Math.PI ? 1 : 0;
-
-    paths += '<path d="' +
-      'M' + x1o.toFixed(2) + ' ' + y1o.toFixed(2) +
+    paths += '<path d="M' + x1o.toFixed(2) + ' ' + y1o.toFixed(2) +
       ' A' + R  + ' ' + R  + ' 0 ' + large + ' 1 ' + x2o.toFixed(2) + ' ' + y2o.toFixed(2) +
       ' L' + x1i.toFixed(2) + ' ' + y1i.toFixed(2) +
       ' A' + ri + ' ' + ri + ' 0 ' + large + ' 0 ' + x2i.toFixed(2) + ' ' + y2i.toFixed(2) +
       ' Z" fill="' + col + '" stroke="white" stroke-width="1.5"/>';
-
-    // Label % + USD at midpoint angle, placed just outside the donut
     var mid = angle + span / 2;
     var lx  = cx + (R + 16) * Math.cos(mid);
     var ly  = cy + (R + 16) * Math.sin(mid);
-    if (pct > 0.04) { // only label if segment big enough
-      paths += '<text x="' + lx.toFixed(1) + '" y="' + (ly - 5).toFixed(1) + '"' +
-        ' text-anchor="middle" dominant-baseline="middle"' +
-        ' font-family="-apple-system,sans-serif" font-size="8.5" font-weight="700" fill="' + col + '">' +
-        (pct * 100).toFixed(1) + '%</text>';
-      paths += '<text x="' + lx.toFixed(1) + '" y="' + (ly + 5).toFixed(1) + '"' +
-        ' text-anchor="middle" dominant-baseline="middle"' +
-        ' font-family="-apple-system,sans-serif" font-size="7.5" fill="' + col + '">' +
-        fmt(c.v27) + '</text>';
+    if (pct > 0.04) {
+      paths += '<text x="' + lx.toFixed(1) + '" y="' + (ly - 5).toFixed(1) + '" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system,sans-serif" font-size="8.5" font-weight="700" fill="' + col + '">' + (pct * 100).toFixed(1) + '%</text>';
+      paths += '<text x="' + lx.toFixed(1) + '" y="' + (ly + 5).toFixed(1) + '" text-anchor="middle" dominant-baseline="middle" font-family="-apple-system,sans-serif" font-size="7.5" fill="' + col + '">' + fmt(c.v27) + '</text>';
     }
-
-    // Legend: split into two columns
     var item = '<div style="display:flex;align-items:center;gap:5px;margin-bottom:6px">' +
       '<div style="width:9px;height:9px;border-radius:2px;background:' + col + ';flex-shrink:0"></div>' +
       '<span style="font-size:11px;color:#374151;flex:1;white-space:nowrap">' + c.n + '</span>' +
@@ -555,16 +467,11 @@ function buildClubPie() {
     '</div>';
     if (i < Math.ceil(active.length / 2)) legendLeft  += item;
     else                                   legendRight += item;
-
     angle = end;
   });
-
-  // Center label
   paths += '<text x="' + cx + '" y="' + (cy-7) + '" text-anchor="middle" font-family="-apple-system,sans-serif" font-size="11" font-weight="700" fill="#1e293b">' + fmt(total) + '</text>';
   paths += '<text x="' + cx + '" y="' + (cy+9) + '" text-anchor="middle" font-family="-apple-system,sans-serif" font-size="9" fill="#9ca3af">Total v27</text>';
-
   var svg = '<svg viewBox="-30 -30 260 260" width="240" height="240">' + paths + '</svg>';
-
   document.getElementById('club-pie').innerHTML =
     '<div style="display:flex;gap:28px;align-items:center;flex-wrap:wrap">' +
       '<div style="flex-shrink:0">' + svg + '</div>' +
@@ -576,33 +483,22 @@ function buildClubPie() {
 }
 
 function buildDonuts() {
-  // Donut uses Mexico-only TARR target (EARR $1,491,769 + NARR $700,000)
-  // Colombia target ($443,956) is excluded — clubs array contains MX accounts only
   var MX_TARR = 2191769;
   var COMB_TARR = 2635815;
-
-  // ── Donut 1: Progreso hacia Target (revenue $) ─────────────────
-  var signedAmt  = clubs.filter(function(c){return c.s==='signed';})
-                        .reduce(function(s,c){return s+c.v27;},0);
-  var pipeAmt    = clubs.filter(function(c){return c.s==='pipeline';})
-                        .reduce(function(s,c){return s+c.v27;},0);
-  // Churn = ARR FY25/26 que no se renueva (Pachuca + Santos Laguna)
-  var churnAmt   = clubs.filter(function(c){return c.s==='citec'||c.s==='lost';})
-                        .reduce(function(s,c){return s+c.arr;},0);
+  var signedAmt  = clubs.filter(function(c){return c.s==='signed';}).reduce(function(s,c){return s+c.v27;},0);
+  var pipeAmt    = clubs.filter(function(c){return c.s==='pipeline';}).reduce(function(s,c){return s+c.v27;},0);
+  var churnAmt   = clubs.filter(function(c){return c.s==='citec'||c.s==='lost';}).reduce(function(s,c){return s+c.arr;},0);
   var gapAmt     = Math.max(0, MX_TARR - signedAmt - pipeAmt - churnAmt);
-
   var pS = (signedAmt / MX_TARR * 100);
   var pP = (pipeAmt   / MX_TARR * 100);
   var pC = (churnAmt  / MX_TARR * 100);
   var pG = (gapAmt    / MX_TARR * 100);
-
   var c1 = pS, c2 = c1+pP, c3 = c2+pC;
   var grad1 = 'conic-gradient(' +
     '#059669 0% ' + c1.toFixed(1) + '%,' +
     '#2563eb ' + c1.toFixed(1) + '% ' + c2.toFixed(1) + '%,' +
     '#dc2626 ' + c2.toFixed(1) + '% ' + c3.toFixed(1) + '%,' +
     '#e5e7eb ' + c3.toFixed(1) + '% 100%)';
-
   var legItems1 =
     '<div class="leg-item"><div class="leg-circ" style="background:#059669"></div>Closed Won ' + pS.toFixed(1) + '% · ' + fmt(signedAmt) + '</div>' +
     (pipeAmt  > 0 ? '<div class="leg-item"><div class="leg-circ" style="background:#2563eb"></div>Pipeline ' + pP.toFixed(1) + '% · ' + fmt(pipeAmt) + '</div>' : '') +
@@ -612,66 +508,51 @@ function buildDonuts() {
       'ℹ️ Calculado sobre el <strong style="color:#6b7280">target México: ' + fmt(MX_TARR) + '</strong> ' +
       '(EARR $1,491,769 + NARR $700,000). ' +
       'Churn = ARR FY25/26 no renovado: Pachuca $56,783 + Santos $9,103. ' +
-      'Colombia (' + fmt(COMB_TARR - MX_TARR) + ') no incluida en cuentas. ' +
+      'Colombia (' + fmt(COMB_TARR - MX_TARR) + ') no incluida. ' +
       'TARR combinado MX+Colombia: <strong style="color:#6b7280">' + fmt(COMB_TARR) + '</strong>.' +
     '</div>';
-
   document.getElementById('donut-progress').innerHTML =
     '<div class="sec-title">Progreso hacia Target Mexicano FY 26/27</div>' +
     '<div class="sec-sub">Cuentas México · target MX ' + fmt(MX_TARR) + '</div>' +
     '<div class="donut-wrap">' +
       '<div class="donut-disc" style="background:' + grad1 + '"></div>' +
-      '<div class="donut-ctr">' +
-        '<div class="dc-big" style="color:#059669">' + pS.toFixed(1) + '%</div>' +
-        '<div class="dc-sm">del target MX</div>' +
-      '</div>' +
+      '<div class="donut-ctr"><div class="dc-big" style="color:#059669">' + pS.toFixed(1) + '%</div><div class="dc-sm">del target MX</div></div>' +
     '</div>' +
     '<div class="leg-row">' + legItems1 + '</div>';
 
-  // ── Donut 2: Estado de Cuentas (conteo) ────────────────────────
   var total   = clubs.length;
   var nSigned = clubs.filter(function(c){return c.s==='signed';}).length;
   var nPipe   = clubs.filter(function(c){return c.s==='pipeline';}).length;
   var nCitec  = clubs.filter(function(c){return c.s==='citec';}).length;
   var nLost   = clubs.filter(function(c){return c.s==='lost';}).length;
   var nNoData = clubs.filter(function(c){return c.s==='no_data';}).length;
-
-  var nChurn = nCitec + nLost; // unified churn count
+  var nChurn = nCitec + nLost;
   var d1 = nSigned / total * 100;
   var d2 = d1 + nPipe  / total * 100;
   var d3 = d2 + nChurn / total * 100;
-  // nNoData fills to 100%
-
   var gradStop = '#059669 0% ' + d1.toFixed(1) + '%';
   if(nPipe  > 0) gradStop += ',#2563eb ' + d1.toFixed(1) + '% ' + d2.toFixed(1) + '%';
   if(nChurn > 0) gradStop += ',#dc2626 ' + d2.toFixed(1) + '% ' + d3.toFixed(1) + '%';
   if(nNoData> 0) gradStop += ',#d1d5db ' + d3.toFixed(1) + '% 100%';
   var grad2 = 'conic-gradient(' + gradStop + ')';
-
   var legItems2 =
     '<div class="leg-item"><div class="leg-circ" style="background:#059669"></div>Signed (' + nSigned + ')</div>' +
     (nPipe   > 0 ? '<div class="leg-item"><div class="leg-circ" style="background:#2563eb"></div>Open Pipeline (' + nPipe + ')</div>' : '') +
     (nCitec + nLost > 0 ? '<div class="leg-item"><div class="leg-circ" style="background:#dc2626"></div>Churn (' + (nCitec + nLost) + ')</div>' : '') +
     (nNoData > 0 ? '<div class="leg-item"><div class="leg-circ" style="background:#d1d5db"></div>Sin datos (' + nNoData + ')</div>' : '');
-
   document.getElementById('donut-status').innerHTML =
     '<div class="sec-title">Estado de Cuentas — Liga MX + SNM</div>' +
     '<div class="sec-sub">' + total + ' cuentas gestionadas activamente</div>' +
     '<div class="donut-wrap">' +
       '<div class="donut-disc" style="background:' + grad2 + '"></div>' +
-      '<div class="donut-ctr">' +
-        '<div class="dc-big" style="color:#1a202c">' + total + '</div>' +
-        '<div class="dc-sm">cuentas</div>' +
-      '</div>' +
+      '<div class="donut-ctr"><div class="dc-big" style="color:#1a202c">' + total + '</div><div class="dc-sm">cuentas</div></div>' +
     '</div>' +
     '<div class="leg-row">' + legItems2 + '</div>';
 }
 
 function buildComp() {
-  // For churn/lost clubs, FY26/27 bar shows arr (EARR at risk), not v27 (future opportunity)
   var isChurn = function(c){ return c.s === 'citec' || c.s === 'lost'; };
   var displayV27 = function(c){ return isChurn(c) ? c.arr : c.v27; };
-
   var MAX = Math.max.apply(null, clubs.map(function(c){ return Math.max(c.arr, displayV27(c)); }));
   var sorted = clubs.slice().sort(function(a,b){ return displayV27(b) - displayV27(a); });
   var html = '';
@@ -681,7 +562,7 @@ function buildComp() {
     var warr  = (c.arr / MAX * 100).toFixed(2);
     var col   = CLR[c.s] || CLR.no_data;
     var label27 = isChurn(c)
-      ? (c.arr ? '(' + fmt(c.arr) + ')' : '—')   // parentheses = EARR at risk
+      ? (c.arr ? '(' + fmt(c.arr) + ')' : '—')
       : (c.v27 ? fmt(c.v27) : '—');
     html += '<div class="comp-club">' +
       '<div class="comp-name">' + c.n + '</div>' +
@@ -690,17 +571,13 @@ function buildComp() {
           '<div style="height:11px;background:#f1f5f9;border-radius:3px;overflow:hidden">' +
             '<div style="width:' + warr + '%;height:100%;background:#94a3b8"></div>' +
           '</div>' +
-          '<span style="position:absolute;right:0;top:0;width:90px;text-align:right;font-size:10px;color:#9ca3af;line-height:11px">' +
-            (c.arr ? fmt(c.arr) : '—') +
-          '</span>' +
+          '<span style="position:absolute;right:0;top:0;width:90px;text-align:right;font-size:10px;color:#9ca3af;line-height:11px">' + (c.arr ? fmt(c.arr) : '—') + '</span>' +
         '</div>' +
         '<div style="position:relative;padding-right:96px">' +
           '<div style="height:14px;background:#f1f5f9;border-radius:3px;overflow:hidden">' +
             '<div style="width:' + w27 + '%;height:100%;background:' + col + '"></div>' +
           '</div>' +
-          '<span style="position:absolute;right:0;top:0;width:90px;text-align:right;font-size:10px;font-weight:700;color:' + col + ';line-height:14px">' +
-            label27 +
-          '</span>' +
+          '<span style="position:absolute;right:0;top:0;width:90px;text-align:right;font-size:10px;font-weight:700;color:' + col + ';line-height:14px">' + label27 + '</span>' +
         '</div>' +
       '</div>' +
     '</div>';
@@ -709,11 +586,8 @@ function buildComp() {
 }
 
 function buildNarr() {
-  // Q1 actuals total (Salesforce) — usado como total de referencia
-  var narrActual = 330025;
-
+  var narrActual = 390543;
   var allSigned = clubs.filter(function(c){return c.s==='signed';});
-  // Expansión: v27 > arr (NARR neto positivo)
   var expansion = allSigned.filter(function(c){return c.v27 > c.arr;})
     .map(function(c){return {n:c.n, narr:c.v27-c.arr, type:'expansion'};})
     .sort(function(a,b){return b.narr-a.narr;});
@@ -723,13 +597,11 @@ function buildNarr() {
     var w = Math.max(2, Math.round(c.narr / MAX * 100));
     html += '<div class="narr-row">' +
       '<div class="narr-name">' + c.n + '</div>' +
-      '<div class="narr-track">' +
-        '<div class="narr-fill" style="width:' + w + '%;background:#059669">' + fmt(c.narr) + '</div>' +
-      '</div>' +
+      '<div class="narr-track"><div class="narr-fill" style="width:' + w + '%;background:#059669">' + fmt(c.narr) + '</div></div>' +
     '</div>';
   });
   html += '<div style="margin-top:12px;padding-top:10px;border-top:2px solid #059669;display:flex;justify-content:space-between;font-size:12px;font-weight:700">' +
-    '<span style="color:#374151">Total NARR (Actuals Q1 · Salesforce)</span>' +
+    '<span style="color:#374151">Total NARR (YTD · Sep 2026)</span>' +
     '<span style="color:#059669">' + fmt(narrActual) + '</span>' +
   '</div>';
   document.getElementById('narr-bars').innerHTML = html;
@@ -737,18 +609,16 @@ function buildNarr() {
 
 function buildTools() {
   var families = [
-    {key:'Sportscode',           label:'Sportscode',     col:'#7c3aed', abbr:'SC'},
-    {key:'Wyscout',              label:'Wyscout',        col:'#0284c7', abbr:'WY'},
-    {key:'Statsbomb',            label:'Hudl IQ',        col:'#0891b2', abbr:'IQ'},
-    {key:'Replay',               label:'Replay HW',      col:'#059669', abbr:'RP'},
-    {key:'Wimu',                 label:'WIMU GPS',       col:'#dc2626', abbr:'WM'},
-    {key:'Hudl Focus',           label:'Hudl Focus',     col:'#ea580c', abbr:'HF'},
-    {key:'Hudl',                 label:'Hudl',           col:'#d97706', abbr:'H'},
-    {key:'ADI',                  label:'ADI',            col:'#4f46e5', abbr:'AD'},
+    {key:'Sportscode',           label:'Sportscode',      col:'#7c3aed', abbr:'SC'},
+    {key:'Wyscout',              label:'Wyscout',         col:'#0284c7', abbr:'WY'},
+    {key:'Statsbomb',            label:'Hudl IQ',         col:'#0891b2', abbr:'IQ'},
+    {key:'Replay',               label:'Replay HW',       col:'#059669', abbr:'RP'},
+    {key:'Wimu',                 label:'WIMU GPS',        col:'#dc2626', abbr:'WM'},
+    {key:'Hudl Focus',           label:'Hudl Focus',      col:'#ea580c', abbr:'HF'},
+    {key:'Hudl',                 label:'Hudl',            col:'#d97706', abbr:'H'},
+    {key:'ADI',                  label:'ADI',             col:'#4f46e5', abbr:'AD'},
     {key:'Professional Services',label:'Premier Services',col:'#6b7280', abbr:'PS'}
   ];
-
-  // FY 25/26 product families per club (Salesforce vía Dot · Abr 2025 – Mar 2026)
   var prods25 = {
     'SNM':       ['Hudl','Hudl Focus','Replay','Sportscode','Statsbomb','Wimu','Wyscout'],
     'Monterrey': ['Replay','Sportscode','Wyscout'],
@@ -769,8 +639,6 @@ function buildTools() {
     'Santos':    ['Wyscout'],
     'Atlas':     ['Wyscout']
   };
-
-  // FY 26/27 product families per club (Salesforce vía Dot · contratos activos Jul 2026)
   var prods27 = {
     'SNM':       ['Hudl','Hudl Focus','Replay','Sportscode','Statsbomb','Wimu','Wyscout'],
     'Monterrey': ['ADI','Hudl','Professional Services','Replay','Sportscode','Statsbomb','Wyscout'],
@@ -782,7 +650,7 @@ function buildTools() {
     'Cruz Azul': [],
     'Pachuca':   [],
     'Toluca':    ['Statsbomb','Wyscout'],
-    'San Luis':  [],
+    'San Luis':  ['Replay','Sportscode','Wyscout'],
     'Pumas':     ['Replay','Sportscode','Statsbomb','Wyscout'],
     'Necaxa':    ['Sportscode','Statsbomb','Wyscout'],
     'Querétaro': ['Statsbomb','Wyscout'],
@@ -791,20 +659,15 @@ function buildTools() {
     'Santos':    [],
     'Atlas':     []
   };
-
   var NFAM = families.length;
   var gridCols = '100px 28px repeat(' + NFAM + ',1fr) 120px';
-
-  // Header row
   var html = '<div style="display:grid;grid-template-columns:' + gridCols + ';gap:2px 5px;align-items:center;margin-bottom:8px;padding-bottom:8px;border-bottom:2px solid #f1f5f9">';
   html += '<div></div><div></div>';
   families.forEach(function(f) {
     html += '<div style="text-align:center;font-size:9px;font-weight:700;color:' + f.col + ';line-height:1.2">' + f.abbr + '</div>';
   });
-  html += '<div style="text-align:right;font-size:9px;font-weight:700;color:#9ca3af">ARR</div>';
-  html += '</div>';
+  html += '<div style="text-align:right;font-size:9px;font-weight:700;color:#9ca3af">ARR</div></div>';
 
-  // Clubs — solo signed
   clubs.filter(function(c){ return c.s === 'signed'; }).forEach(function(c) {
     var p25 = prods25[c.n] || [];
     var p27 = prods27[c.n] || [];
@@ -816,93 +679,56 @@ function buildTools() {
     var deltaSign = delta >= 0 ? '+' : '';
     var deltaPct = c.arr > 0 ? ' (' + deltaSign + Math.round(delta/c.arr*100) + '%)' : '';
 
-    // Row FY25/26
     html += '<div style="display:grid;grid-template-columns:' + gridCols + ';gap:2px 5px;align-items:center;margin-bottom:1px">';
-    // Club name (rowspan simulated: shown in 25/26 row only)
-    html += '<div style="display:flex;align-items:center;gap:5px">' +
-      '<div style="width:7px;height:7px;border-radius:50%;background:' + dotCol + ';flex-shrink:0"></div>' +
-      '<span style="font-size:11px;font-weight:700;color:#1a1a1a;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">' + c.n + '</span>' +
-    '</div>';
+    html += '<div style="display:flex;align-items:center;gap:5px"><div style="width:7px;height:7px;border-radius:50%;background:' + dotCol + ';flex-shrink:0"></div><span style="font-size:11px;font-weight:700;color:#1a1a1a;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">' + c.n + '</span></div>';
     html += '<div style="font-size:8px;font-weight:600;color:#9ca3af;text-align:center;white-space:nowrap">25/26</div>';
     families.forEach(function(f) {
       var has = p25.indexOf(f.key) !== -1;
-      if (has) {
-        html += '<div style="display:flex;justify-content:center">' +
-          '<div style="width:18px;height:18px;border-radius:4px;background:' + f.col + ';opacity:0.45"></div></div>';
-      } else {
-        html += '<div style="display:flex;justify-content:center">' +
-          (no25 ? '<div style="width:18px;height:18px;border-radius:4px;border:1px dashed #e5e7eb"></div>'
-                : '<div style="width:18px;height:18px;border-radius:4px;background:#f3f4f6"></div>') +
-          '</div>';
-      }
+      html += '<div style="display:flex;justify-content:center">' + (has
+        ? '<div style="width:18px;height:18px;border-radius:4px;background:' + f.col + ';opacity:0.45"></div>'
+        : (no25 ? '<div style="width:18px;height:18px;border-radius:4px;border:1px dashed #e5e7eb"></div>'
+                : '<div style="width:18px;height:18px;border-radius:4px;background:#f3f4f6"></div>')) + '</div>';
     });
-    html += '<div style="text-align:right;font-size:10px;color:#9ca3af">' + (c.arr ? fmt(c.arr) : '—') + '</div>';
-    html += '</div>';
+    html += '<div style="text-align:right;font-size:10px;color:#9ca3af">' + (c.arr ? fmt(c.arr) : '—') + '</div></div>';
 
-    // Row FY26/27
     html += '<div style="display:grid;grid-template-columns:' + gridCols + ';gap:2px 5px;align-items:center;margin-bottom:1px">';
-    html += '<div></div>';
-    html += '<div style="font-size:8px;font-weight:700;color:#FC3A52;text-align:center;white-space:nowrap">26/27</div>';
+    html += '<div></div><div style="font-size:8px;font-weight:700;color:#FC3A52;text-align:center;white-space:nowrap">26/27</div>';
     families.forEach(function(f) {
       var has25 = p25.indexOf(f.key) !== -1;
       var has27 = p27.indexOf(f.key) !== -1;
       if (has27) {
         var isNew = !has25;
-        html += '<div style="display:flex;justify-content:center;position:relative">' +
-          '<div style="width:18px;height:18px;border-radius:4px;background:' + f.col + ';' + (isNew ? 'box-shadow:0 0 0 2px #16a34a' : '') + '"></div>' +
-          (isNew ? '<div style="position:absolute;top:-3px;right:1px;font-size:7px;font-weight:800;color:#16a34a;line-height:1">+</div>' : '') +
-        '</div>';
+        html += '<div style="display:flex;justify-content:center;position:relative"><div style="width:18px;height:18px;border-radius:4px;background:' + f.col + ';' + (isNew ? 'box-shadow:0 0 0 2px #16a34a' : '') + '"></div>' + (isNew ? '<div style="position:absolute;top:-3px;right:1px;font-size:7px;font-weight:800;color:#16a34a;line-height:1">+</div>' : '') + '</div>';
       } else if (has25) {
-        // Lost
-        html += '<div style="display:flex;justify-content:center">' +
-          '<div style="width:18px;height:18px;border-radius:4px;border:1.5px solid #dc2626;opacity:0.4;position:relative">' +
-            '<div style="position:absolute;top:50%;left:0;right:0;height:1.5px;background:#dc2626;transform:rotate(-45deg)"></div>' +
-          '</div></div>';
+        html += '<div style="display:flex;justify-content:center"><div style="width:18px;height:18px;border-radius:4px;border:1.5px solid #dc2626;opacity:0.4;position:relative"><div style="position:absolute;top:50%;left:0;right:0;height:1.5px;background:#dc2626;transform:rotate(-45deg)"></div></div></div>';
       } else {
-        html += '<div style="display:flex;justify-content:center">' +
-          (no27 ? '<div style="width:18px;height:18px;border-radius:4px;border:1px dashed #e5e7eb"></div>'
-                : '<div style="width:18px;height:18px;border-radius:4px;background:#f3f4f6"></div>') +
-          '</div>';
+        html += '<div style="display:flex;justify-content:center">' + (no27
+          ? '<div style="width:18px;height:18px;border-radius:4px;border:1px dashed #e5e7eb"></div>'
+          : '<div style="width:18px;height:18px;border-radius:4px;background:#f3f4f6"></div>') + '</div>';
       }
     });
-    html += '<div style="text-align:right;font-size:10px;font-weight:700;color:#1a1a1a">' + (c.v27 ? fmt(c.v27) : '—') + '</div>';
-    html += '</div>';
+    html += '<div style="text-align:right;font-size:10px;font-weight:700;color:#1a1a1a">' + (c.v27 ? fmt(c.v27) : '—') + '</div></div>';
 
-    // Delta row
     html += '<div style="display:grid;grid-template-columns:100px 1fr;gap:0 5px;align-items:center;margin-bottom:10px;padding-bottom:10px;border-bottom:1px solid #f3f4f6">';
-    html += '<div></div>';
-    html += '<div style="display:flex;align-items:center;gap:8px;padding:3px 0">';
+    html += '<div></div><div style="display:flex;align-items:center;gap:8px;padding:3px 0">';
     if (c.arr > 0 || c.v27 > 0) {
       var maxDelta = 250000;
       var barW = Math.min(100, Math.abs(delta) / maxDelta * 100).toFixed(1);
-      html += '<div style="flex:1;height:5px;background:#f3f4f6;border-radius:3px;overflow:hidden">' +
-        '<div style="width:' + barW + '%;height:100%;background:' + deltaCol + ';border-radius:3px"></div>' +
-      '</div>';
-      html += '<span style="font-size:10px;font-weight:700;color:' + deltaCol + ';white-space:nowrap;min-width:100px;text-align:right">' +
-        deltaSign + fmt(delta) + deltaPct +
-      '</span>';
+      html += '<div style="flex:1;height:5px;background:#f3f4f6;border-radius:3px;overflow:hidden"><div style="width:' + barW + '%;height:100%;background:' + deltaCol + ';border-radius:3px"></div></div>';
+      html += '<span style="font-size:10px;font-weight:700;color:' + deltaCol + ';white-space:nowrap;min-width:100px;text-align:right">' + deltaSign + fmt(delta) + deltaPct + '</span>';
     } else {
       html += '<span style="font-size:10px;color:#d1d5db">Sin datos en ambos ejercicios</span>';
     }
     html += '</div></div>';
   });
 
-  // Legend
   html += '<div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:4px;padding-top:14px;border-top:1px solid #f1f5f9">';
   families.forEach(function(f) {
-    html += '<div style="display:flex;align-items:center;gap:5px">' +
-      '<div style="width:12px;height:12px;border-radius:3px;background:' + f.col + '"></div>' +
-      '<span style="font-size:10px;color:#4b5563;font-weight:600">' + f.abbr + ' = ' + f.label + '</span>' +
-    '</div>';
+    html += '<div style="display:flex;align-items:center;gap:5px"><div style="width:12px;height:12px;border-radius:3px;background:' + f.col + '"></div><span style="font-size:10px;color:#4b5563;font-weight:600">' + f.abbr + ' = ' + f.label + '</span></div>';
   });
-  html += '<div style="display:flex;align-items:center;gap:5px;margin-left:8px">' +
-    '<div style="width:12px;height:12px;border-radius:3px;border:1.5px solid #16a34a"></div>' +
-    '<span style="font-size:10px;color:#16a34a;font-weight:600">+ Nuevo en 26/27</span></div>';
-  html += '<div style="display:flex;align-items:center;gap:5px">' +
-    '<div style="width:12px;height:12px;border-radius:3px;border:1.5px solid #dc2626;opacity:0.5"></div>' +
-    '<span style="font-size:10px;color:#dc2626;font-weight:600">✕ No renovado</span></div>';
+  html += '<div style="display:flex;align-items:center;gap:5px;margin-left:8px"><div style="width:12px;height:12px;border-radius:3px;border:1.5px solid #16a34a"></div><span style="font-size:10px;color:#16a34a;font-weight:600">+ Nuevo en 26/27</span></div>';
+  html += '<div style="display:flex;align-items:center;gap:5px"><div style="width:12px;height:12px;border-radius:3px;border:1.5px solid #dc2626;opacity:0.5"></div><span style="font-size:10px;color:#dc2626;font-weight:600">✕ No renovado</span></div>';
   html += '</div>';
-
   document.getElementById('tools-matrix').innerHTML = html;
 }
 
@@ -917,17 +743,11 @@ function buildLeague() {
   var html = '';
   rows.forEach(function(r){
     var w = Math.max(2, Math.round(r.v / MAX * 100));
-    html += '<div class="narr-row">' +
-      '<div class="narr-name" style="width:110px;font-size:11px">' + r.n + '</div>' +
-      '<div class="narr-track">' +
-        '<div class="narr-fill" style="width:' + w + '%;background:' + r.col + '">' + fmt(r.v) + '</div>' +
-      '</div>' +
-    '</div>';
+    html += '<div class="narr-row"><div class="narr-name" style="width:110px;font-size:11px">' + r.n + '</div><div class="narr-track"><div class="narr-fill" style="width:' + w + '%;background:' + r.col + '">' + fmt(r.v) + '</div></div></div>';
   });
   document.getElementById('league-bars').innerHTML = html;
 }
 
-// Auto-login si la sesión ya estaba autenticada
 if (localStorage.getItem('gtm_auth') === '1') { unlock(); }
 </script>
 </body>

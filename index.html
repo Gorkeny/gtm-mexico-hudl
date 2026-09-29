@@ -255,7 +255,7 @@ document.getElementById('gtm-pw-input').addEventListener('keydown', function(e) 
 
 <div class="page-header">
 <h1>GTM Dashboard 26/27 Mexico</h1>
-<p>33 accounts · Hudl fiscal year · Snapshot: May 13, 2026</p>
+<p>33 accounts · Hudl fiscal year · Snapshot: Sep 29, 2026</p>
 <div class="header-info-row">
 <div class="header-left">
 <span class="si-label">Starting ARR 25/26</span>
@@ -287,19 +287,17 @@ document.getElementById('gtm-pw-input').addEventListener('keydown', function(e) 
 </div>
 <div class="target-indicator" style="background: linear-gradient(135deg, #059669 0%, #047857 100%);">
 <div class="ti-label">Closed Won YTD 2026/27</div>
-<div class="ti-value">$1,328,798 USD</div>
+<div class="ti-value">$1,396,340 USD</div>
 <div class="ti-breakdown">
-<span style="font-size:15px;font-weight:700;opacity:1;">60.6% of target</span><span class="ti-sep">·</span><span style="position:relative;">
-  <button class="cw-deals-btn" onclick="toggleCWDeals(event)" id="cw-deals-toggle">22 deals ▾</button>
+<span style="font-size:15px;font-weight:700;opacity:1;">63.7% of target</span><span class="ti-sep">·</span><span style="position:relative;">
+  <button class="cw-deals-btn" onclick="toggleCWDeals(event)" id="cw-deals-toggle">23 deals ▾</button>
   <div class="cw-deals-popup" id="cw-deals-popup">
     <a class="cw-deal-item" href="https://hudl.lightning.force.com/lightning/r/Opportunity/006UJ00000k03wJYAQ/view" target="_blank" rel="noopener">
       <span class="cw-deal-name">FY 26-27_SNM Services</span><span class="cw-deal-amount">$224,316</span>
     </a>
-
     <a class="cw-deal-item" href="https://hudl.lightning.force.com/lightning/r/Opportunity/006VY00000Ch4cYYAR/view" target="_blank" rel="noopener">
       <span class="cw-deal-name">Cancun Futbol Club</span><span class="cw-deal-amount">$44,145</span>
     </a>
-
     <a class="cw-deal-item" href="https://hudl.lightning.force.com/lightning/r/Opportunity/006VY00000G78pHYAR/view" target="_blank" rel="noopener">
       <span class="cw-deal-name">Club Universidad Nacional Pumas</span><span class="cw-deal-amount">$21,140</span>
     </a>
@@ -359,6 +357,9 @@ document.getElementById('gtm-pw-input').addEventListener('keydown', function(e) 
     </a>
     <a class="cw-deal-item" href="https://hudl.lightning.force.com/lightning/r/Opportunity/006UJ00000yTcfFYAS/view" target="_blank" rel="noopener">
       <span class="cw-deal-name">FY 26-27_Juan Manuel Chong Noriega (Cordobés FC)</span><span class="cw-deal-amount">$4,355</span>
+    </a>
+    <a class="cw-deal-item" href="https://hudl.lightning.force.com/lightning/r/Opportunity/006UJ00000s2RReYAM/view" target="_blank" rel="noopener">
+      <span class="cw-deal-name">FY 26-27_Rodrigo Escutia_MX_PACK_45 (San Luis)</span><span class="cw-deal-amount">$67,542</span>
     </a>
   </div>
 </span>
@@ -433,30 +434,29 @@ document.getElementById('gtm-pw-input').addEventListener('keydown', function(e) 
 <script>
 const SF_BASE = 'https://hudl.lightning.force.com/lightning/r/Account/';
 const PIPELINE_DATES = {
-'001d0000024lgcVAAQ': 'May 29, 2026', // Monterrey
-'0013w00002Rhm06AAB': 'May 26, 2026', // Juarez
-'0010V00002KSiJiQAL': 'Jun 30, 2026', // Cruz Azul
-'001d000002042v9AAA': 'May 29, 2026', // Tigres
-'001d0000022QA7TAAW': 'May 13, 2026', // América
-'001d000001u6YYiAAM': 'May 28, 2026', // Toluca
-'001d0000022QA82AAG': 'May 13, 2026', // Pachuca
-'0013w00002Rhlt0AAB': 'May 21, 2026', // León
-'0010V00002QIK1BQAX': 'Jun 05, 2026', // Chivas
-'001d00000203uM0AAI': 'Jun 05, 2026', // San Luis
-'001d0000024lxVkAAI': 'Jun 16, 2026', // Necaxa
-'0010V00002MwZtaQAF': 'May 29, 2026', // Pumas
-'0011L00002rOHA0QAO': 'Jun 16, 2026', // Cancún
-'001d000001y3RKuAAM': 'Jun 02, 2026', // Querétaro
-'0010V00002MwZtuQAF': 'Jun 05, 2026', // Xolos
+'001d0000024lgcVAAQ': 'Sep 29, 2026',
+'0013w00002Rhm06AAB': 'Sep 29, 2026',
+'0010V00002KSiJiQAL': 'Sep 29, 2026',
+'001d000002042v9AAA': 'Sep 29, 2026',
+'001d0000022QA7TAAW': 'Sep 29, 2026',
+'001d000001u6YYiAAM': 'Sep 29, 2026',
+'001d0000022QA82AAG': 'Sep 29, 2026',
+'0013w00002Rhlt0AAB': 'Sep 29, 2026',
+'0010V00002QIK1BQAX': 'Sep 29, 2026',
+'001d00000203uM0AAI': 'Sep 29, 2026',
+'001d0000024lxVkAAI': 'Sep 29, 2026',
+'0010V00002MwZtaQAF': 'Sep 29, 2026',
+'0011L00002rOHA0QAO': 'Sep 29, 2026',
+'001d000001y3RKuAAM': 'Sep 29, 2026',
+'0010V00002MwZtuQAF': 'Sep 29, 2026',
 };
 const WYSCOUT_TOTAL = 461743.72;
-const WYSCOUT_LIGA_MX_SNM = WYSCOUT_TOTAL * 0.8 / 18; // ~$20,521.94 (Liga MX 17 + SNM 1)
-const WYSCOUT_LIGA_EXPANSION = WYSCOUT_TOTAL * 0.2 / 15; // ~$6,156.58 (Liga Expansión 15)
+const WYSCOUT_LIGA_MX_SNM = WYSCOUT_TOTAL * 0.8 / 18;
+const WYSCOUT_LIGA_EXPANSION = WYSCOUT_TOTAL * 0.2 / 15;
 
-// pipelineData — actualizado desde Salesforce vía @Dot 27-ago-2026
-// Pachuca: deal $79,561 muerto en SF (solo Initial Interest $0) — removido
-// León: deal $22,915 stale en SF (solo Initial Interest $0) — removido
-// San Luis: Closed Lost (confirmed SF Aug 19 2026) — removido
+// pipelineData — actualizado desde Salesforce vía @Dot · Sep 29, 2026
+// San Luis: Closed Lost (SF Aug 19 2026) — removido del pipeline
+// León ($22,915): deal stale SF — removido
 const pipelineData = {
 '0011L00002rOHA0QAO': { total: 43623.01, opps: [
 { name: 'FY 26-27_Kevin Lacki_GTM_MX_PRICEBOOK', amount: 43623.01, closeDate: '2026-08-31', sfLink: 'https://hudl.lightning.force.com/lightning/r/Opportunity/006UJ00000vrsZJYAY/view' }
@@ -487,7 +487,8 @@ const pipelineData = {
 ]},
 };
 
-// Closed Won + Invoiced + Signed FY26/27
+// Closed Won + Invoiced + Signed FY26/27 — actualizado Sep 29, 2026
+// Añadido: San Luis FY 26-27_Rodrigo Escutia_MX_PACK_45 ($67,541.64) — confirmado Slack Jul 2026
 const closedWonData = {
 '0010V00002Mx9a5QAB': { total: 224315.95, signed: true, opps: [
 { name: 'FY 26-27_SNM Services', amount: 224315.95, closeDate: '2026-05-15', stage: 'Signed' }
@@ -536,6 +537,11 @@ const closedWonData = {
 ]},
 '001UJ00001MrqD0YAJ': { total: 4354.80, signed: true, opps: [
 { name: 'FY 26-27_Juan Manuel Chong Noriega', amount: 4354.80, closeDate: '2026-07-27', stage: 'Signed', sfLink: 'https://hudl.lightning.force.com/lightning/r/Opportunity/006UJ00000yTcfFYAS/view' }
+]},
+// NUEVO: Club Atlético de San Luis — FY 26-27_Rodrigo Escutia_MX_PACK_45
+// Confirmado Closed Won en Slack (#askdata-cp-sales vía Dot, Jul 2026)
+'001d00000203uM0AAI': { total: 67541.64, signed: true, opps: [
+{ name: 'FY 26-27_Rodrigo Escutia_MX_PACK_45', amount: 67541.64, closeDate: '2026-07-31', stage: 'Signed' }
 ]}
 };
 
@@ -577,7 +583,6 @@ const clubs = [
 { id:'001UJ00001MrqD0YAJ', name:'Cordobés FC', arr:null, abbr:'CDB', primary:'#1A1A6E', secondary:'#E8C84A', league:'Liga Premier' },
 ];
 
-// Escala global compartida: máximo entre todos los ARR y todos los pipelines
 const MAX_GLOBAL = Math.max(
 ...clubs.map(c => c.arr || 0),
 ...Object.values(pipelineData).map(p => p.total),
@@ -597,7 +602,7 @@ function badgeSVG(club) {
 const p = club.primary, s = club.secondary;
 return `<svg viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg">
 <rect width="56" height="56" rx="10" fill="${p}"/>
-<text x="28" y="33" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI*,sans-serif" font-weight="700" font-size="${club.abbr.length > 3 ? '11' : '13'}" fill="${s}">${club.abbr}</text>
+<text x="28" y="33" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif" font-weight="700" font-size="${club.abbr.length > 3 ? '11' : '13'}" fill="${s}">${club.abbr}</text>
 </svg>`;
 }
 
@@ -711,7 +716,7 @@ ${stampHtml}
 <div class="card-body">
 <div class="pipeline-label-row">
 <span class="arr-label">${isSigned ? 'Signed Contract' : 'Open Pipeline + CW'}</span>
-<span class="pipeline-date">Last updated: ${PIPELINE_DATES[club.id] || 'May 13, 2026'}</span>
+<span class="pipeline-date">Last updated: ${PIPELINE_DATES[club.id] || 'Sep 29, 2026'}</span>
 </div>
 ${combinedTotal > 0
 ? `<div class="pipeline-value">$${Math.round(combinedTotal).toLocaleString('en-US')}</div>
@@ -811,48 +816,44 @@ const cwPctSign = actualCWpct >= 0 ? '+' : '';
 const cwColor = actualCWpct > 20 ? '#065F46' : actualCWpct > 0 ? '#92400E' : '#991B1B';
 
 const cwEl = document.getElementById('metric-actual-cw');
-cwEl.textContent = cwPctSign + actualCWpct.toFixed(1) + '%';
-cwEl.style.color = cwColor;
-document.getElementById('metric-actual-cw-sub').textContent =
-'$' + totalCW.toLocaleString('en-US', {minimumFractionDigits:0, maximumFractionDigits:0}) + ' vs $' + totalArrAll.toLocaleString('en-US', {maximumFractionDigits:0});
-document.getElementById('metric-cw-total').textContent =
-'$' + Math.round(totalCW).toLocaleString('en-US');
-document.getElementById('metric-cw-clubs').textContent =
-cwClubs + (cwClubs === 1 ? ' club · Invoiced/CW' : ' clubes · Invoiced/CW');
+if (cwEl) { cwEl.textContent = cwPctSign + actualCWpct.toFixed(1) + '%'; cwEl.style.color = cwColor; }
+const cwSubEl = document.getElementById('metric-actual-cw-sub');
+if (cwSubEl) cwSubEl.textContent = '$' + totalCW.toLocaleString('en-US', {minimumFractionDigits:0, maximumFractionDigits:0}) + ' vs $' + totalArrAll.toLocaleString('en-US', {maximumFractionDigits:0});
+const cwTotalEl = document.getElementById('metric-cw-total');
+if (cwTotalEl) cwTotalEl.textContent = '$' + Math.round(totalCW).toLocaleString('en-US');
+const cwClubsEl = document.getElementById('metric-cw-clubs');
+if (cwClubsEl) cwClubsEl.textContent = cwClubs + (cwClubs === 1 ? ' club · Invoiced/CW' : ' clubes · Invoiced/CW');
 
 const growthEl = document.getElementById('metric-arr-growth');
-growthEl.textContent = arrGrowthSign + arrGrowth.toFixed(1) + '%';
-growthEl.style.color = arrGrowthColor;
-document.getElementById('metric-arr-growth-sub').textContent =
-'$' + totalArrAll.toLocaleString('en-US', {maximumFractionDigits:0}) + ' → $' + totalPipeline.toLocaleString('en-US', {maximumFractionDigits:0});
+if (growthEl) { growthEl.textContent = arrGrowthSign + arrGrowth.toFixed(1) + '%'; growthEl.style.color = arrGrowthColor; }
+const growthSubEl = document.getElementById('metric-arr-growth-sub');
+if (growthSubEl) growthSubEl.textContent = '$' + totalArrAll.toLocaleString('en-US', {maximumFractionDigits:0}) + ' → $' + totalPipeline.toLocaleString('en-US', {maximumFractionDigits:0});
 
-document.getElementById('metric-wyscout-ligamx').textContent =
-'$' + WYSCOUT_LIGA_MX_SNM.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
-document.getElementById('metric-wyscout-expansion').textContent =
-'$' + WYSCOUT_LIGA_EXPANSION.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
-document.getElementById('metric-pipeline').textContent =
-'$' + totalPipeline.toLocaleString('en-US', {minimumFractionDigits: 0, maximumFractionDigits: 0});
-document.getElementById('metric-pipeline-sub').textContent =
-clubsConPipeline + ' clubs with open pipeline';
+const wysMxEl = document.getElementById('metric-wyscout-ligamx');
+if (wysMxEl) wysMxEl.textContent = '$' + WYSCOUT_LIGA_MX_SNM.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+const wysExpEl = document.getElementById('metric-wyscout-expansion');
+if (wysExpEl) wysExpEl.textContent = '$' + WYSCOUT_LIGA_EXPANSION.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+const pipeEl = document.getElementById('metric-pipeline');
+if (pipeEl) pipeEl.textContent = '$' + totalPipeline.toLocaleString('en-US', {minimumFractionDigits: 0, maximumFractionDigits: 0});
+const pipeSubEl = document.getElementById('metric-pipeline-sub');
+if (pipeSubEl) pipeSubEl.textContent = clubsConPipeline + ' clubs with open pipeline';
 
 const roiEl = document.getElementById('metric-roi');
-roiEl.textContent = sign + roiGlobal.toFixed(1) + '%';
-roiEl.style.color = roiColor;
-document.getElementById('metric-roi-sub').textContent =
-'Base: ARR + Wyscout = $' + totalBase.toLocaleString('en-US', {maximumFractionDigits: 0});
+if (roiEl) { roiEl.textContent = sign + roiGlobal.toFixed(1) + '%'; roiEl.style.color = roiColor; }
+const roiSubEl = document.getElementById('metric-roi-sub');
+if (roiSubEl) roiSubEl.textContent = 'Base: ARR + Wyscout = $' + totalBase.toLocaleString('en-US', {maximumFractionDigits: 0});
 }
 
 const PROB_KEY = 'gtm-club-prob';
 const DEFAULT_PROBS = {
-  '001d000001u6YYiAAM': 75 // Toluca
+  '001d000001u6YYiAAM': 75
 };
-const CLOSED_LOST_CITEC = ['001d0000022QA82AAG', '0010V00002MwZtQQAV']; // Pachuca, Santos
-const CITEC_CONTINUE = []; // none
-const SICS_CLUBS = ['001d0000022QA82AAG', '0010V00002MwZtQQAV', '001d0000022QA74AAG']; // Pachuca, Santos, Puebla
-const CITEC_PACK_EXCLUDE = []; // none
-const HUDL_EXTRA_CLUBS = ['0010V00002KSiJiQAL', '0010V00002QIK1BQAX', '001d0000024lxVkAAI']; // Cruz Azul, Chivas, Necaxa
+const CLOSED_LOST_CITEC = ['001d0000022QA82AAG', '0010V00002MwZtQQAV'];
+const CITEC_CONTINUE = [];
+const SICS_CLUBS = ['001d0000022QA82AAG', '0010V00002MwZtQQAV', '001d0000022QA74AAG'];
+const CITEC_PACK_EXCLUDE = [];
+const HUDL_EXTRA_CLUBS = ['0010V00002KSiJiQAL', '0010V00002QIK1BQAX', '001d0000024lxVkAAI'];
 
-// ── URL hash sync ──────────────────────────────────────────────
 function probsToHash(probs) {
 const parts = [];
 clubs.forEach((club, i) => {
@@ -873,7 +874,6 @@ if (club && val !== undefined) probs[club.id] = parseInt(val);
 });
 return probs;
 }
-// ──────────────────────────────────────────────────────────────
 
 function loadProbs() {
     let stored = {};
@@ -918,14 +918,11 @@ if (prob > 49) commit += combined;
 if (prob > 74) worstCase += combined;
 });
 const fmt = v => '$' + v.toLocaleString('en-US', {minimumFractionDigits: 0, maximumFractionDigits: 0});
-const pct = v => totalArrAll > 0
-? (v / totalArrAll * 100).toFixed(1) + '% vs ARR FY25/26'
-: '—';
+const MEXICO_TARGET = 2191768.80;
+const vsTarget = v => (v / MEXICO_TARGET * 100).toFixed(1) + '%';
 document.getElementById('fc-best-val').textContent = fmt(bestCase);
 document.getElementById('fc-commit-val').textContent = fmt(commit);
 document.getElementById('fc-worst-val').textContent = fmt(worstCase);
-const MEXICO_TARGET = 2191768.80;
-const vsTarget = v => (v / MEXICO_TARGET * 100).toFixed(1) + '%';
 document.getElementById('fc-best-target').textContent = vsTarget(bestCase);
 document.getElementById('fc-commit-target').textContent = vsTarget(commit);
 document.getElementById('fc-worst-target').textContent = vsTarget(worstCase);
@@ -981,15 +978,12 @@ function toggleCWDeals(e) {
   popup.classList.remove('open');
   if (!isOpen) {
     var rect = btn.getBoundingClientRect();
-    var popupH = 420; // estimated max height
     var spaceAbove = rect.top;
     var spaceBelow = window.innerHeight - rect.bottom;
     if (spaceAbove > spaceBelow) {
-      // open upward
       popup.style.top = '';
       popup.style.bottom = (window.innerHeight - rect.top + 6) + 'px';
     } else {
-      // open downward
       popup.style.bottom = '';
       popup.style.top = (rect.bottom + 6) + 'px';
     }
