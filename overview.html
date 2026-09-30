@@ -24,16 +24,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 .hdr-link{color:rgba(255,255,255,.7);font-size:13px;text-decoration:none;border:1px solid rgba(255,255,255,.3);padding:9px 18px;border-radius:9px}
 .hdr-link:hover{background:rgba(255,255,255,.1);color:#fff}
 .wrap{padding:28px 40px 48px;max-width:1400px;margin:0 auto}
-.note{background:#fff5f5;border:1px solid #fca5a5;border-radius:10px;padding:12px 18px;font-size:12px;color:#7f1d1d;margin-bottom:20px;line-height:1.5}
-.kpi-row{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;margin-bottom:24px}
-.kpi{background:#fff;border-radius:14px;padding:20px 22px;box-shadow:0 1px 4px rgba(0,0,0,.07);border-top:4px solid #e5e7eb}
-.kpi.g{border-top-color:#059669}.kpi.b{border-top-color:#2563eb}
-.kpi.p{border-top-color:#7c3aed}.kpi.o{border-top-color:#d97706}.kpi.t{border-top-color:#0891b2}
-.kpi-lbl{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:#6b7280;margin-bottom:8px}
-.kpi-val{font-size:22px;font-weight:800;line-height:1}
-.kpi-sub{font-size:11px;color:#9ca3af;margin-top:5px}
-.kpi-d{font-size:12px;font-weight:700;margin-top:8px}
-.kpi-d.pos{color:#059669}.kpi-d.neg{color:#6b7280}
 .sec-title{font-size:14px;font-weight:700;color:#374151;margin-bottom:4px}
 .sec-sub{font-size:11px;color:#9ca3af;margin-bottom:18px}
 .card{background:#fff;border-radius:14px;padding:24px 28px;box-shadow:0 1px 4px rgba(0,0,0,.07);margin-bottom:24px}
@@ -56,33 +46,21 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 .leg-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
 .leg-item{display:flex;align-items:center;gap:5px;font-size:11px;color:#4b5563}
 .leg-circ{width:10px;height:10px;border-radius:50%;flex-shrink:0}
-.comp-table{width:100%}
 .comp-club{display:flex;align-items:center;gap:10px;margin-bottom:8px}
 .comp-name{font-size:12px;font-weight:600;color:#374151;width:90px;flex-shrink:0;text-align:right}
 .comp-bars{flex:1;display:flex;flex-direction:column;gap:3px}
-.comp-bar-row{display:flex;align-items:center;gap:6px}
-.comp-bar{height:13px;border-radius:3px;min-width:2px;transition:width .3s}
-.comp-val{font-size:10px;color:#6b7280;white-space:nowrap}
-.comp-status{width:8px;height:8px;border-radius:50%;flex-shrink:0}
-.comp-hdr{display:flex;gap:12px;margin-bottom:12px;font-size:11px;font-weight:600;color:#9ca3af}
-.comp-hdr-name{width:90px;text-align:right;flex-shrink:0}
 .comp-legend{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px;padding-top:14px;border-top:1px solid #f3f4f6}
 .narr-row{display:flex;align-items:center;gap:10px;margin-bottom:8px}
 .narr-name{font-size:12px;font-weight:600;color:#374151;width:90px;text-align:right;flex-shrink:0}
 .narr-track{flex:1;background:#f3f4f6;border-radius:3px;height:20px;overflow:hidden}
 .narr-fill{height:100%;border-radius:3px;display:flex;align-items:center;padding-left:8px;font-size:11px;font-weight:700;color:#fff}
 .tools-head{background:#f8fafc;border-bottom:1px solid #e5e7eb;padding:18px 28px;display:flex;align-items:center;justify-content:space-between;border-radius:14px 14px 0 0}
-.tools-body{padding:40px;text-align:center}
 .tools-badge{background:#fef3c7;color:#92400e;font-size:11px;font-weight:700;padding:3px 10px;border-radius:99px}
-.tools-pills{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:18px}
-.tool-pill{background:#f3f4f6;color:#374151;font-size:11px;font-weight:600;padding:5px 14px;border-radius:99px}
 .footer{text-align:center;font-size:11px;color:#9ca3af;padding-top:12px}
 @media(max-width:1100px){
-  .kpi-row{grid-template-columns:repeat(3,1fr)}
   .two-col,.donut-pair{grid-template-columns:1fr}
   .wrap,.hdr{padding:20px}
 }
-@media(max-width:640px){.kpi-row{grid-template-columns:repeat(2,1fr)}}
 </style>
 </head>
 <body>
@@ -109,6 +87,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
   </div>
 
   <div class="wrap">
+
+    <!-- KPI CARDS -->
     <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:24px">
       <div class="card" style="padding:22px;margin-bottom:0;border-top:4px solid #FC3A52">
         <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#FC3A52;margin-bottom:4px">EARR · Renovaciones</div>
@@ -168,7 +148,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
       </div>
     </div>
 
-    <!-- MARKET COMPARISON — valores actualizados Sep 2026 -->
+    <!-- MARKET COMPARISON — actualizado: Puebla CW Sep 30 2026 -->
     <div class="card">
       <div class="sec-title">Comparativa Global de Mercado — FY 25/26 vs FY 26/27</div>
       <div class="sec-sub">Revenue contratado con equipos mexicanos por ejercicio fiscal</div>
@@ -179,8 +159,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
       </div>
       <div class="mb-row">
         <div class="mb-lbl">Closed Won 26/27</div>
-        <div class="mb-track"><div class="mb-fill" style="width:63.7%;background:linear-gradient(90deg,#FC3A52,#d42e45)">$1,396,340</div></div>
-        <div class="mb-pct">63.7% del target</div>
+        <div class="mb-track"><div class="mb-fill" style="width:64.9%;background:linear-gradient(90deg,#FC3A52,#d42e45)">$1,421,994</div></div>
+        <div class="mb-pct">64.9% del target</div>
       </div>
       <div class="mb-row">
         <div class="mb-lbl">CW + Pipeline 26/27</div>
@@ -212,21 +192,24 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
       </div>
       <div id="q-chart"></div>
       <div style="margin-top:14px;padding-top:12px;border-top:1px solid #f3f4f6;font-size:11px;color:#6b7280;line-height:1.6">
-        ℹ️ Targets combinados MX + Colombia. Actuals YTD corresponden a cierre México (EARR Q1+Q2; NARR inc. Q2 Sep). Cruz Azul contabilizado en Q2. San Luis: Closed Lost (AG-2026).
+        ℹ️ Targets combinados MX + Colombia. Actuals YTD corresponden a cierre México (EARR Q1+Q2; NARR inc. Q2 Sep). Cruz Azul contabilizado en Q2. San Luis: Closed Lost (AG-2026). Puebla: Closed Won (Sep 2026).
       </div>
     </div>
 
+    <!-- DONUTS -->
     <div class="donut-pair" style="margin-bottom:24px">
       <div id="donut-progress" class="donut-card"></div>
       <div id="donut-status" class="donut-card"></div>
     </div>
 
+    <!-- CLUB PIE -->
     <div class="card" style="margin-bottom:24px">
       <div class="sec-title">Distribución de Inversión por Club — FY 26/27</div>
       <div class="sec-sub">% sobre el total contratado y en pipeline · clubes con valor > 0</div>
       <div id="club-pie"></div>
     </div>
 
+    <!-- CLUB COMPARISON -->
     <div class="card">
       <div class="sec-title">Comparativa por Club — ARR FY 25/26 vs FY 26/27</div>
       <div class="sec-sub">Ordenado por valor 26/27 · Gris = ARR anterior · Color = valor 26/27 según estado</div>
@@ -239,6 +222,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
       </div>
     </div>
 
+    <!-- TWO SMALL CHARTS -->
     <div class="two-col">
       <div class="card" style="margin-bottom:0">
         <div class="sec-title">NARR por Club (Signed únicamente)</div>
@@ -254,6 +238,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 
     <div style="height:24px"></div>
 
+    <!-- TOOLS MATRIX -->
     <div class="card" style="padding:0;overflow:hidden">
       <div class="tools-head">
         <div style="font-size:14px;font-weight:700;color:#374151">🔧 Stack de Herramientas por Club — FY 25/26</div>
@@ -270,6 +255,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 </div>
 
 <script>
+// ── AUTH ──────────────────────────────────────────────────
 function unlock() {
   document.getElementById('auth-overlay').style.display = 'none';
   document.getElementById('dash').style.display = 'block';
@@ -284,12 +270,13 @@ function auth() {
   }
 }
 
+// ── DATA ──────────────────────────────────────────────────
 var CLR = {signed:'#059669',pipeline:'#2563eb',citec:'#dc2626',lost:'#dc2626',no_data:'#d1d5db',arr:'#94a3b8'};
 
-// clubs array — actualizado Sep 2026
-// San Luis: s:'lost' (Closed Lost SF Aug 19 2026)
-// San Luis v27: 67542 (CW FY 26-27_Rodrigo Escutia — signed antes de Closed Lost del resto del pipeline)
-// Cancún: v27 actualizado a 87768 (CW $44,145 + pipeline $43,623)
+// clubs — actualizado Sep 2026
+// San Luis: s:'signed' conserva $67,542 CW Rodrigo Escutia (firmado antes de Closed Lost del pipeline AG-2026)
+// Cancún: CW $44,145 + pipeline $43,623 = $87,768
+// Puebla: Closed Won Sep 30 2026 · $25,654.30
 var clubs = [
   {n:'SNM',         arr:216792, v27:224316, s:'signed'},
   {n:'Monterrey',   arr:138041, v27:200283, s:'signed'},
@@ -308,7 +295,7 @@ var clubs = [
   {n:'Xolos',       arr:     0, v27: 29484, s:'signed'},
   {n:'Atlas',       arr:  7282, v27: 28815, s:'pipeline'},
   {n:'Santos',      arr:  9103, v27:     0, s:'lost'},
-  {n:'Puebla',      arr:     0, v27: 25654, s:'pipeline'},
+  {n:'Puebla',      arr:     0, v27: 25654, s:'signed'},
   {n:'Jaiva Brava', arr:     0, v27:  5023, s:'signed'},
   {n:'Liga Premier',arr:     0, v27:231962, s:'pipeline'},
   {n:'Cordobés FC', arr:     0, v27:  4355, s:'signed'}
@@ -316,6 +303,7 @@ var clubs = [
 
 function fmt(v) { return '$' + Math.round(v).toLocaleString('en-US'); }
 
+// ── RENDER ────────────────────────────────────────────────
 function render() {
   buildARR();
   buildDonuts();
@@ -327,14 +315,13 @@ function render() {
 }
 
 function buildARR() {
-  // Actuals YTD — Sep 29, 2026
-  // TARR = $1,396,340 (23 CW deals, incl. San Luis $67,542 + all original 22)
-  // EARR = total CW que es renovación de contratos FY25/26
-  // NARR = total CW que es nuevo ARR (expansión neta)
-  // Estimación: EARR = $1,005,797 (renovaciones puras) | NARR = $390,543 (nuevo neto)
+  // Actuals YTD — cierre Q2 Sep 30, 2026
+  // TARR = $1,421,994 (inc. Puebla CW Sep 30 2026 $25,654)
+  // EARR = renovaciones puras FY25/26 → FY26/27
+  // NARR = expansión neta: $390,543 prev + $25,654 Puebla = $416,197
   var earrA = 1005797;
-  var narrA = 390543;
-  var tarrA = 1396340;
+  var narrA = 416197;
+  var tarrA = 1421994;
 
   var FY_EARR = 1595069, FY_NARR = 1040746, FY_TARR = 2635815;
   var Q1_EARR = 1058008, Q1_NARR = 443305, Q1_TARR = 1501313;
@@ -357,10 +344,10 @@ function buildARR() {
   document.getElementById('tarr-pct-top').textContent = tarrPct + '% del FY target';
   document.getElementById('tarr-pct-q1').textContent = (tarrA / Q1_TARR * 100).toFixed(1) + '% del target Q1';
 
-  // Quarterly tracking — Q2 marcado como completado
+  // Quarterly tracking — Q1 y Q2 completados (Puebla CW cuenta en Q2)
   var quarters = [
-    { label:'Q1', period:'Abr – Jun', earrT:1058008, narrT: 443305, totalT:1501313, done:true,              earrA:852722, narrA:334935, totalA:1187657 },
-    { label:'Q2', period:'Jul – Sep', earrT: 189985, narrT: 148375, totalT: 338360, done:true,              earrA:153075, narrA: 55608, totalA: 208683 },
+    { label:'Q1', period:'Abr – Jun', earrT:1058008, narrT: 443305, totalT:1501313, done:true, earrA: 852722, narrA:334935, totalA:1187657 },
+    { label:'Q2', period:'Jul – Sep', earrT: 189985, narrT: 148375, totalT: 338360, done:true, earrA: 153075, narrA: 81262, totalA: 234337 },
     { label:'Q3', period:'Oct – Dic', earrT:  77528, narrT:  47761, totalT: 125289, done:false },
     { label:'Q4', period:'Ene – Mar', earrT: 269548, narrT: 401306, totalT: 670854, done:false }
   ];
@@ -523,23 +510,18 @@ function buildDonuts() {
   var total   = clubs.length;
   var nSigned = clubs.filter(function(c){return c.s==='signed';}).length;
   var nPipe   = clubs.filter(function(c){return c.s==='pipeline';}).length;
-  var nCitec  = clubs.filter(function(c){return c.s==='citec';}).length;
-  var nLost   = clubs.filter(function(c){return c.s==='lost';}).length;
-  var nNoData = clubs.filter(function(c){return c.s==='no_data';}).length;
-  var nChurn = nCitec + nLost;
+  var nChurn  = clubs.filter(function(c){return c.s==='citec'||c.s==='lost';}).length;
   var d1 = nSigned / total * 100;
   var d2 = d1 + nPipe  / total * 100;
   var d3 = d2 + nChurn / total * 100;
   var gradStop = '#059669 0% ' + d1.toFixed(1) + '%';
   if(nPipe  > 0) gradStop += ',#2563eb ' + d1.toFixed(1) + '% ' + d2.toFixed(1) + '%';
   if(nChurn > 0) gradStop += ',#dc2626 ' + d2.toFixed(1) + '% ' + d3.toFixed(1) + '%';
-  if(nNoData> 0) gradStop += ',#d1d5db ' + d3.toFixed(1) + '% 100%';
   var grad2 = 'conic-gradient(' + gradStop + ')';
   var legItems2 =
     '<div class="leg-item"><div class="leg-circ" style="background:#059669"></div>Signed (' + nSigned + ')</div>' +
-    (nPipe   > 0 ? '<div class="leg-item"><div class="leg-circ" style="background:#2563eb"></div>Open Pipeline (' + nPipe + ')</div>' : '') +
-    (nCitec + nLost > 0 ? '<div class="leg-item"><div class="leg-circ" style="background:#dc2626"></div>Churn (' + (nCitec + nLost) + ')</div>' : '') +
-    (nNoData > 0 ? '<div class="leg-item"><div class="leg-circ" style="background:#d1d5db"></div>Sin datos (' + nNoData + ')</div>' : '');
+    (nPipe  > 0 ? '<div class="leg-item"><div class="leg-circ" style="background:#2563eb"></div>Open Pipeline (' + nPipe + ')</div>' : '') +
+    (nChurn > 0 ? '<div class="leg-item"><div class="leg-circ" style="background:#dc2626"></div>Churn (' + nChurn + ')</div>' : '');
   document.getElementById('donut-status').innerHTML =
     '<div class="sec-title">Estado de Cuentas — Liga MX + SNM</div>' +
     '<div class="sec-sub">' + total + ' cuentas gestionadas activamente</div>' +
@@ -561,9 +543,7 @@ function buildComp() {
     var w27   = (val27 / MAX * 100).toFixed(2);
     var warr  = (c.arr / MAX * 100).toFixed(2);
     var col   = CLR[c.s] || CLR.no_data;
-    var label27 = isChurn(c)
-      ? (c.arr ? '(' + fmt(c.arr) + ')' : '—')
-      : (c.v27 ? fmt(c.v27) : '—');
+    var label27 = isChurn(c) ? (c.arr ? '(' + fmt(c.arr) + ')' : '—') : (c.v27 ? fmt(c.v27) : '—');
     html += '<div class="comp-club">' +
       '<div class="comp-name">' + c.n + '</div>' +
       '<div class="comp-bars">' +
@@ -586,10 +566,10 @@ function buildComp() {
 }
 
 function buildNarr() {
-  var narrActual = 390543;
+  var narrActual = 416197;
   var allSigned = clubs.filter(function(c){return c.s==='signed';});
   var expansion = allSigned.filter(function(c){return c.v27 > c.arr;})
-    .map(function(c){return {n:c.n, narr:c.v27-c.arr, type:'expansion'};})
+    .map(function(c){return {n:c.n, narr:c.v27-c.arr};})
     .sort(function(a,b){return b.narr-a.narr;});
   var MAX = Math.max.apply(null, expansion.map(function(c){return c.narr;}));
   var html = '';
@@ -635,29 +615,30 @@ function buildTools() {
     'Necaxa':    ['Sportscode','Wyscout'],
     'Querétaro': [],
     'Xolos':     [],
-    'León':      ['Replay','Sportscode'],
     'Santos':    ['Wyscout'],
     'Atlas':     ['Wyscout']
   };
   var prods27 = {
-    'SNM':       ['Hudl','Hudl Focus','Replay','Sportscode','Statsbomb','Wimu','Wyscout'],
-    'Monterrey': ['ADI','Hudl','Professional Services','Replay','Sportscode','Statsbomb','Wyscout'],
-    'Tigres':    ['ADI','Hudl','Hudl Focus','Professional Services','Replay','Sportscode','Statsbomb','Wyscout'],
-    'América':   ['ADI','Hudl','Professional Services','Sportscode','Statsbomb','Wyscout'],
-    'Juárez':    ['ADI','Hudl','Professional Services','Replay','Sportscode','Statsbomb','Wyscout'],
-    'Chivas':    ['ADI','Hudl','Hudl Focus','Professional Services','Replay','Sportscode','Statsbomb','Wyscout'],
-    'Cancún':    [],
-    'Cruz Azul': [],
-    'Pachuca':   [],
-    'Toluca':    ['Statsbomb','Wyscout'],
-    'San Luis':  ['Replay','Sportscode','Wyscout'],
-    'Pumas':     ['Replay','Sportscode','Statsbomb','Wyscout'],
-    'Necaxa':    ['Sportscode','Statsbomb','Wyscout'],
-    'Querétaro': ['Statsbomb','Wyscout'],
-    'Xolos':     ['Statsbomb','Wyscout'],
-    'León':      [],
-    'Santos':    [],
-    'Atlas':     []
+    'SNM':         ['Hudl','Hudl Focus','Replay','Sportscode','Statsbomb','Wimu','Wyscout'],
+    'Monterrey':   ['ADI','Hudl','Professional Services','Replay','Sportscode','Statsbomb','Wyscout'],
+    'Tigres':      ['ADI','Hudl','Hudl Focus','Professional Services','Replay','Sportscode','Statsbomb','Wyscout'],
+    'América':     ['ADI','Hudl','Professional Services','Sportscode','Statsbomb','Wyscout'],
+    'Juárez':      ['ADI','Hudl','Professional Services','Replay','Sportscode','Statsbomb','Wyscout'],
+    'Chivas':      ['ADI','Hudl','Hudl Focus','Professional Services','Replay','Sportscode','Statsbomb','Wyscout'],
+    'Cancún':      [],
+    'Cruz Azul':   [],
+    'Pachuca':     [],
+    'Toluca':      ['Statsbomb','Wyscout'],
+    'San Luis':    ['Replay','Sportscode','Wyscout'],
+    'Pumas':       ['Replay','Sportscode','Statsbomb','Wyscout'],
+    'Necaxa':      ['Sportscode','Statsbomb','Wyscout'],
+    'Querétaro':   ['Statsbomb','Wyscout'],
+    'Xolos':       ['Statsbomb','Wyscout'],
+    'Santos':      [],
+    'Atlas':       [],
+    'Puebla':      ['Wyscout'],
+    'Jaiva Brava': [],
+    'Cordobés FC': []
   };
   var NFAM = families.length;
   var gridCols = '100px 28px repeat(' + NFAM + ',1fr) 120px';
@@ -709,15 +690,13 @@ function buildTools() {
     });
     html += '<div style="text-align:right;font-size:10px;font-weight:700;color:#1a1a1a">' + (c.v27 ? fmt(c.v27) : '—') + '</div></div>';
 
-    html += '<div style="display:grid;grid-template-columns:100px 1fr;gap:0 5px;align-items:center;margin-bottom:10px;padding-bottom:10px;border-bottom:1px solid #f3f4f6">';
+    html += '<div style="display:grid;grid-template-columns:100px 1fr;gap:0 5px;align-items:center;margin-bottom:10px;padding-bottom:10px;border-border:1px solid #f3f4f6">';
     html += '<div></div><div style="display:flex;align-items:center;gap:8px;padding:3px 0">';
     if (c.arr > 0 || c.v27 > 0) {
       var maxDelta = 250000;
       var barW = Math.min(100, Math.abs(delta) / maxDelta * 100).toFixed(1);
       html += '<div style="flex:1;height:5px;background:#f3f4f6;border-radius:3px;overflow:hidden"><div style="width:' + barW + '%;height:100%;background:' + deltaCol + ';border-radius:3px"></div></div>';
       html += '<span style="font-size:10px;font-weight:700;color:' + deltaCol + ';white-space:nowrap;min-width:100px;text-align:right">' + deltaSign + fmt(delta) + deltaPct + '</span>';
-    } else {
-      html += '<span style="font-size:10px;color:#d1d5db">Sin datos en ambos ejercicios</span>';
     }
     html += '</div></div>';
   });
@@ -727,18 +706,19 @@ function buildTools() {
     html += '<div style="display:flex;align-items:center;gap:5px"><div style="width:12px;height:12px;border-radius:3px;background:' + f.col + '"></div><span style="font-size:10px;color:#4b5563;font-weight:600">' + f.abbr + ' = ' + f.label + '</span></div>';
   });
   html += '<div style="display:flex;align-items:center;gap:5px;margin-left:8px"><div style="width:12px;height:12px;border-radius:3px;border:1.5px solid #16a34a"></div><span style="font-size:10px;color:#16a34a;font-weight:600">+ Nuevo en 26/27</span></div>';
-  html += '<div style="display:flex;align-items:center;gap:5px"><div style="width:12px;height:12px;border-radius:3px;border:1.5px solid #dc2626;opacity:0.5"></div><span style="font-size:10px;color:#dc2626;font-weight:600">✕ No renovado</span></div>';
   html += '</div>';
   document.getElementById('tools-matrix').innerHTML = html;
 }
 
 function buildLeague() {
-  var lmx = clubs.filter(function(c){return c.n!=='SNM'&&c.s==='signed';}).reduce(function(s,c){return s+c.v27;},0);
+  var lmx = clubs.filter(function(c){return c.n!=='SNM'&&c.n!=='Cordobés FC'&&c.s==='signed';}).reduce(function(s,c){return s+c.v27;},0);
   var snm = clubs.filter(function(c){return c.n==='SNM';}).reduce(function(s,c){return s+c.v27;},0);
+  var cor = clubs.filter(function(c){return c.n==='Cordobés FC';}).reduce(function(s,c){return s+c.v27;},0);
   var rows = [
-    {n:'Liga MX', v:lmx, col:'#003087'},
-    {n:'SNM',     v:snm, col:'#059669'}
-  ];
+    {n:'Liga MX',     v:lmx, col:'#003087'},
+    {n:'SNM',         v:snm, col:'#059669'},
+    {n:'Cordobés FC', v:cor, col:'#7c3aed'}
+  ].filter(function(r){return r.v > 0;});
   var MAX = Math.max.apply(null, rows.map(function(r){return r.v;}));
   var html = '';
   rows.forEach(function(r){
@@ -748,6 +728,7 @@ function buildLeague() {
   document.getElementById('league-bars').innerHTML = html;
 }
 
+// Auto-login si sesión ya autenticada
 if (localStorage.getItem('gtm_auth') === '1') { unlock(); }
 </script>
 </body>
